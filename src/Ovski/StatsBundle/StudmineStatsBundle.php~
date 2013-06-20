@@ -1,0 +1,9 @@
+<?php
+
+namespace Studmine\StatsBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class StudmineStatsBundle extends Bundle
+{
+}

@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+  {{ parent() }}
+  <link rel="stylesheet" type="text/css" href="bundles/studminestats/css/style.css"/>
+{% endblock %}
+
+{% block body %}
+
+  {{ parent() }}
+
+  <p>{{ rien }}</p>
+
+{% endblock body %}
+  
+{% block javascripts %}
+    {{ parent() }}
+{% endblock javascripts %}

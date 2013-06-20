@@ -1,0 +1,4 @@
+studmine_stats:
+    resource: "@OvskiStatsBundle/Controller/"
+    type:     annotation
+    prefix:   /

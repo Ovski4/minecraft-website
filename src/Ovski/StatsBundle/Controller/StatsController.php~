@@ -1,0 +1,49 @@
+<?php
+
+namespace Studmine\StatsBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+
+class StatsController extends Controller
+{
+    /**
+     * List all kills
+     *
+     * @Route("/", name="_stats")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $kills = $em->getRepository('StudmineStatsBundle:PlayerKill')->findAll();
+        $stats = $em->getRepository('StudmineStatsBundle:PlayerStats')->findAll();
+        $players = $em->getRepository('StudmineStatsBundle:Player')->findAll();
+        $i=0;
+        //get player by pseudo
+        foreach($players as $killed)
+        {
+            $killedId = $killed->getId();
+            foreach($players as $killer)
+            {
+                $killerId = $killer->getId();
+                if ($killedId != $killerId)
+                {
+                    $count = $em->getRepository('StudmineStatsBundle:PlayerKill')->countKillsByPlayer($killedId, $killerId);
+                    $count = $count[0]; //BE CAREFUL
+                    $counts[$killerId] = $count;
+                }
+            }
+            $max = max($counts);
+            //todo: vérifier que y'a pas deux ou plus de fois le meme max (pas d'ennemi juré)'
+            $max=intval($max);
+            $killerId = array_search($max, $counts);
+            $killer = $em->getRepository('StudmineStatsBundle:Player')->findOneById($killerId)->getPseudo();
+            $killed = $em->getRepository('StudmineStatsBundle:Player')->findOneById($killedId)->getPseudo();
+            $enemies[$i] = array('killer' => $killer, 'killed' => $killed, 'count' => $max);
+            $i++;
+        }
+        return array('kills' => $kills, 'stats' => $stats, 'enemies' => $enemies);
+    }
+}

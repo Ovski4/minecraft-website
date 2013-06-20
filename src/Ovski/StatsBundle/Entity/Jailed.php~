@@ -1,0 +1,64 @@
+<?php
+
+namespace Studmine\StatsBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Jail
+ *
+ * @ORM\Table(name="jailed")
+ * @ORM\Entity(repositoryClass="Studmine\StatsBundle\Repository\JailzsRepository")
+ */
+class Jail
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", name="jailed_id")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $jailedId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Studmine\StatsBundle\Entity\Jail")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="jail_id", name="jail_id")
+     */
+    private $jail;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Studmine\StatsBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="user_id", name="jailed_user_id")
+     */
+    private $jailedUser;
+
+    /**
+     * @var long
+     *
+     * @ORM\Column(type="bigint", name="remaining_time")
+     */
+    private $remainingTime;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(type="datetime", name="starts_at")
+     */
+    private $startsAt;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(type="datetime", name="ends_at")
+     */
+    private $endsAt;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $active;
+
+}
