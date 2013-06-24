@@ -10,3 +10,5 @@ After
   Bundle registration FOSUSerBundle
   News and comments
   Forums
+
+--
