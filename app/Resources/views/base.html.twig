@@ -10,24 +10,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-            <div id="header-wrapper">
-                <header class="container">
-                    <h1>Pick and dig, then kick a pig</h1>
-                    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {'active': 'stats'} %} 
-                </header>
-                <div class="banner container">
-                    <img src="/bundles/ovskiwebsite/images/cube.jpg"/>
-                </div>  
-            </div>
-            <section id="main" class="container">
-                {% block body %}
+        <div id="header-wrapper">
+            <header class="container">
+                <h1>Pick and dig, then kick a pig</h1>
+                {% block menu %}
+                    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'stats'} %}
                 {% endblock %}
-            </section>
-            <footer>
-                <div class="content container">
-                    <p>To chop, pick an axe, not a pickaxe. I love english but sometimes this is just too much</p>
-                </div>
-            </footer>
+            </header>
+            <div class="banner container">
+                <img src="/bundles/ovskiwebsite/images/cube.jpg"/>
+            </div>  
+        </div>
+        <section id="main" class="container">
+            {% block body %}
+            {% endblock %}
+        </section>
+        <footer>
+            <div class="content container">
+                <p>To chop, pick an axe, not a pickaxe. I love english but sometimes this is just too much</p>
+            </div>
+        </footer>
     </body>
 </html>
 

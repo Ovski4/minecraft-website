@@ -9,12 +9,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class WebsiteController extends Controller
 {
     /**
-     * List all kills
+     * Homepage
      *
      * @Route("/", name="home")
      * @Template()
      */
     public function indexAction()
+    {
+        return array();
+    }
+    
+    /**
+     * Map page
+     *
+     * @Route("/map", name="map")
+     * @Template()
+     */
+    public function mapAction()
     {
         return array();
     }

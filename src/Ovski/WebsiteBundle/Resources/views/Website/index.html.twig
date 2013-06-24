@@ -1,8 +1,10 @@
 {% extends "::base.html.twig" %}
 
-{% block body %}
+{% block menu %}
+    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'home'} %}
+{% endblock %}
 
-  {{ parent() }}
+{% block body %}
 
   <p>
       Hello, this is the HOME of my website. As a home, feel cosy. You can <a>click on this fake link</a> or do some awesome others things

@@ -1,0 +1,13 @@
+/* 
+    Document   : map_page
+    Created on : 24 juin 2013, 22:04:54
+    Author     : baptiste <baptiste.bouchereau@gmail.com>
+    Description:
+        Css specific to the map page
+*/
+
+#main > iframe
+{
+    border: 10px solid #2e180a;
+}
+

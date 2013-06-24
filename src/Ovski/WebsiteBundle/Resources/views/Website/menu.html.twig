@@ -6,7 +6,7 @@
     <div class="navbar-inner">
         <ul class="nav">
             <li {% if active == 'home' %} class="current" {% endif %}>
-                <a href="#">home</a>
+                <a href="{{ path('home') }}">home</a>
             </li>
             <li {% if active == 'stats' %} class="current" {% endif %}>
                 <a href="#">stats</a>
@@ -18,7 +18,7 @@
                 <a href="#">contact</a>
             </li>
             <li {% if active == 'map' %} class="current" {% endif %}>
-                <a href="#">map</a>
+                <a href="{{ path('map') }}">map</a>
             </li>
             <li {% if active == 'server' %} class="current" {% endif %}>
                 <a href="#">server</a>
