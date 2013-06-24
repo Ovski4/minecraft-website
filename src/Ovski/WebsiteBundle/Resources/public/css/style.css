@@ -68,11 +68,11 @@ body, html
 
 #header-wrapper ul li
 {
-    -o-transition:.2s;
-    -ms-transition:.2s;
-    -moz-transition:.2s;
-    -webkit-transition:.2s;
-    transition:.2s;
+    -o-transition: background .2s;
+    -ms-transition: background .2s;
+    -moz-transition: background .2s;
+    -webkit-transition: background .2s;
+    transition: background .2s;
 }
 
 #header-wrapper ul li a
@@ -80,11 +80,11 @@ body, html
     color: #000;
     text-shadow: none;
     padding: 10px 15px 10px;
-    -o-transition:.4s;
-    -ms-transition:.4s;
-    -moz-transition:.4s;
-    -webkit-transition:.4s;
-    transition:.4s;
+    -o-transition: color .4s;
+    -ms-transition: color .4s;
+    -moz-transition: color .4s;
+    -webkit-transition: color .4s;
+    transition: color .4s;
 }
 
 /*hover*/
