@@ -3,11 +3,32 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/bootstrap.css") }}"/>
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+            <div id="header-wrapper">
+                <header class="container">
+                    <h1>Pick and dig, then kick a pig</h1>
+                    <nav>
+                        <ul>
+                            <li><a></a></li>
+                            <li><a></a></li>
+                            <li><a></a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <div class="banner container">
+                    <img src="/bundles/ovskiwebsite/images/cube.jpg"/>
+                </div>  
+            </div>
+            <section id="main" class="container">
+                {% block body %}
+                {% endblock %}
+            </section>
+            <footer>
+            </footer>
     </body>
 </html>

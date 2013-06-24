@@ -1,4 +1,9 @@
-studmine_stats:
-    resource: "@OvskiStatsBundle/Controller/"
+ovski_website:
+    resource: "@OvskiWebsiteBundle/Controller/"
     type:     annotation
     prefix:   /
+
+ovski_player_stats:
+    resource: "@OvskiPlayerStatsBundle/Controller/"
+    type:     annotation
+    prefix:   /stats

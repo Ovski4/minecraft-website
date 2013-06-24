@@ -7,4 +7,6 @@
 /vendor/
 /bin/
 /composer.phar
-/nbproject/private/
+/nbproject
+*~
+
