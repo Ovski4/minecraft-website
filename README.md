@@ -2,8 +2,11 @@ MineWeb
 ========================
 
 Before
-  StatsBundle -> entity StatsEntity
-  FactionBundle -> read json files, map into an entity
+  PlayerStatsBundle -> entity StatsEntity -> make controller and views
+  FactionStatsBundle -> read json files, map into an entity
 
 After
-Bundle registration FOSUSerBundle
+  Plugin registration
+  Bundle registration FOSUSerBundle
+  News and comments
+  Forums
