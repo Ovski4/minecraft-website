@@ -5,6 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/bootstrap.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/style.css") }}"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -12,13 +13,7 @@
             <div id="header-wrapper">
                 <header class="container">
                     <h1>Pick and dig, then kick a pig</h1>
-                    <nav>
-                        <ul>
-                            <li><a></a></li>
-                            <li><a></a></li>
-                            <li><a></a></li>
-                        </ul>
-                    </nav>
+                    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {'active': 'stats'} %} 
                 </header>
                 <div class="banner container">
                     <img src="/bundles/ovskiwebsite/images/cube.jpg"/>
@@ -29,6 +24,14 @@
                 {% endblock %}
             </section>
             <footer>
+                <div class="content container">
+                    <p>To chop, pick an axe, not a pickaxe. I love english but sometimes this is just too much</p>
+                </div>
             </footer>
     </body>
 </html>
+
+{% block javascripts %}
+    <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.0.min.js'></script>
+    <script type="text/javascript" src='/bundles/ovskiwebsite/js/bootstrap.js'></script>
+{% endblock javascripts %}

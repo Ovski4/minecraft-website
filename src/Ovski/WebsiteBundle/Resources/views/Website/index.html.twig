@@ -1,20 +1,11 @@
 {% extends "::base.html.twig" %}
 
-{% block stylesheets %}
-  {{ parent() }}
-  <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/style.css") }}"/>
-{% endblock %}
-
 {% block body %}
 
   {{ parent() }}
 
   <p>
-  
+      Hello, this is the HOME of my website. As a home, feel cosy. You can <a>click on this fake link</a> or do some awesome others things
   </p>
 
 {% endblock body %}
-  
-{% block javascripts %}
-    {{ parent() }}
-{% endblock javascripts %}

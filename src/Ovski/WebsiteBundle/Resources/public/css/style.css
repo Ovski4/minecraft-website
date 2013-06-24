@@ -1,49 +1,132 @@
+ /***********
+  * GENERAL *
+  ***********/
+
 body, html
 {
     margin: 0;
     padding: 0;
+    font-family: title;
 }
 
-/*HEADER*/
+ /*********
+  * FONTS *
+  *********/
+
+@font-face {
+  font-family: title;
+  src: url('../fonts/Merula Regular.otf');
+}
+
+ /**********
+  * HEADER *
+  **********/
 
 #header-wrapper
 {
-    height: 420px;
+    height: 460px;
     margin: 0 auto;
     background: url('../images/earth_header2.png') top no-repeat;
-    background-position-y: -160px;
+    background-position-y: -120px;
 }
 
 #header-wrapper > header
 {
-    height: 150px;
+    height: 190px;
+    color: #FFF;
 }
+
+#header-wrapper > header > h1
+{
+    font-size: 55px;
+    margin-top: 50px;
+    text-indent: 30px;
+    text-shadow: 0.1em 0.1em 0.2em black;
+}
+
+/*NAV*/
+
+#header-wrapper > header > .navbar
+{
+    font-size: 16px;
+    margin: 20px 100px 0 200px;
+}
+
+#header-wrapper > header .navbar-inner
+{
+    padding: 0;
+    box-shadow: 7px 6px 16px #000;
+    border: none;
+    border-radius: 0px;
+    background: #9ec864;
+}
+
+#header-wrapper ul
+{
+    margin: 0 0 0 45px;
+}
+
+#header-wrapper ul li a
+{
+    color: #000;
+    text-shadow: none;
+    padding: 10px 15px 10px;
+}
+
+/*hover*/
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li:hover { background: #52902b; }
+#header-wrapper ul li:hover a
+{
+    color: #FFF;
+}
+
+/*current*/
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.current { background: #382819; }
+#header-wrapper ul li.current a
+{
+    color: #FFF;
+}
+
+/*BANNER*/
 
 #header-wrapper > .banner
 {
     height: 270px;
-    position: relative;
 }
 
 #header-wrapper > .banner > img
 {
     border: 10px solid #2e180a;
     height: 250px;
-    width: 940px;
+    width: 920px;
 }
 
-/* MAIN-CONTENT*/
+ /****************
+  * MAIN-CONTENT *
+  ****************/
 
 #main
 {
     background: #FFF;
     min-height: 500px;
+    margin-top: 20px;
+    font-size: 13px;
 }
 
-/* FOOTER */
+ /**********
+  * FOOTER *
+  **********/
 
 body > footer
 {
     height: 500px;
+    text-align: center;
+    border-top: 5px solid #2e180a;
     background: url('../images/footer.png') bottom no-repeat;
+}
+
+body > footer .content
+{
+    color: #FFF;
+    padding-top: 20px;
 }
