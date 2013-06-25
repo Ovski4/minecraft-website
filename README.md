@@ -2,7 +2,9 @@ MineWeb
 ========================
 
 Before
-  PlayerStatsBundle -> entity StatsEntity -> make controller and views
+  Time played format
+  Plugins java to update -> stats entity has been removed.
+  Plugin java -> Add player on first join
   FactionStatsBundle -> read json files, map into an entity
 
 After

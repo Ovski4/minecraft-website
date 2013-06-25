@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+        {{ parent() }}
+        {# <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/map_page.css") }}"/> #}
+{% endblock %}
+
+{% block menu %}
+
+    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'null'} %}
+
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ player.pseudo|capitalize }}'s Stats</h2>
+
+    <ul>
+        <li>Kills : {{ player.kills }}</li>
+        <li>Prestige : {{ player.prestige }}</li>
+        <li>BrokenBlocks : {{ player.brokenBlocks }}</li>
+        <li>PlacedBlocks : {{ player.placedBlocks }}</li>
+        <li>Verbosity : {{ player.verbosity }}</li>
+        <li>Deaths by accident : {{ player.stupidDeaths }}</li>
+        <li>Pvp deaths : {{ player.pvpDeaths }}</li>
+        <li>Played time : {{ playedTime }} seconds</li>
+    </ul>
+
+    <a href="{{ path("stats") }}">Go back to the stats board</a>
+{% endblock %}

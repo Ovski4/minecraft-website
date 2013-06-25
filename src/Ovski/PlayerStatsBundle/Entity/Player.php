@@ -19,7 +19,7 @@ class Player
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $player_id;
+    private $id;
 
     /**
      * @var string
@@ -297,9 +297,9 @@ class Player
      * @param integer $playerId
      * @return Player
      */
-    public function setPlayerId($playerId)
+    public function setId($playerId)
     {
-        $this->player_id = $playerId;
+        $this->id = $playerId;
     
         return $this;
     }
@@ -309,9 +309,9 @@ class Player
      *
      * @return integer 
      */
-    public function getPlayerId()
+    public function getId()
     {
-        return $this->player_id;
+        return $this->id;
     }
 
     /**
