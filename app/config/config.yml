@@ -63,3 +63,15 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
     spool:     { type: memory }
+
+bazinga_faker:
+    orm: doctrine
+    entities:
+        Ovski\PlayerStatsBundle\Entity\Player:
+            number: 10
+            custom_formatters:
+                pseudo:   { method: firstname }
+        Ovski\PlayerStatsBundle\Entity\Note:
+            number: 10
+            custom_formatters:
+                value:   { method: randomNumber, parameters: [ -5, 5 ] }

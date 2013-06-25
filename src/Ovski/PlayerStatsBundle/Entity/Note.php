@@ -3,10 +3,13 @@
 namespace Ovski\PlayerStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Note
- *
+ * @UniqueEntity({"receiver_player_id", "donor_player"})
+ * @UniqueEntity("receiver_player_id")
+ * @UniqueEntity("donor_player_id")
  * @ORM\Table(name="note")
  * @ORM\Entity(repositoryClass="Ovski\PlayerStatsBundle\Repository\NoteRepository")
  */

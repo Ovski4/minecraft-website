@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Ovski\PlayerStatsBundle\OvskiPlayerStatsBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
+            new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
