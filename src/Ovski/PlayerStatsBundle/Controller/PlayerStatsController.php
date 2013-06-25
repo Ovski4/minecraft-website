@@ -16,7 +16,7 @@ class PlayerStatsController extends Controller
      */
     public function statsAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $players = $em->getRepository("OvskiPlayerStatsBundle:Player")->getAll();
 
         return array("players" => $players);
@@ -30,9 +30,13 @@ class PlayerStatsController extends Controller
      */
     public function statAction($pseudo)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $player = $em->getRepository("OvskiPlayerStatsBundle:Player")->findOneBy(array("pseudo" => $pseudo));
         
+        if (!$player) {
+            throw new \Exception(sprintf("What are you looking for? I have never heard of %s in my life.", $pseudo));
+        }
+
         $timePlayed  = $player->getPlayedTime();
         //do stuff
         $time = $timePlayed;

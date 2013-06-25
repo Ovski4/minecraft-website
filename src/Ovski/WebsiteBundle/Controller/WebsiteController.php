@@ -14,7 +14,7 @@ class WebsiteController extends Controller
      * @Route("/", name="home")
      * @Template()
      */
-    public function indexAction()
+    public function homeAction()
     {
         return array();
     }
