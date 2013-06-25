@@ -11,11 +11,17 @@ class PlayerStatsController extends Controller
     /**
      * List all kills
      *
-     * @Route("/", name="_stats")
+     * @Route("/", name="stats")
      * @Template()
      */
     public function indexAction()
     {
-        return array("rien" => "nothing");
+        $em = $this->getDoctrine()->getEntityManager();
+        $players = $em->getRepository("OvskiPlayerStatsBundle:Player")->getAll();
+
+        return array("players" => $players);
     }
+
+    //TODO
+        //Route -> /id -> specific stats
 }

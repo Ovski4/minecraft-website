@@ -1,14 +1,19 @@
 <?php
 
-namespace Ovski\PlayerPlayerStatsBundle\Entity;
+namespace Ovski\PlayerStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+//remove `kill` name (default: kill) (for testing purpose, I guess it's a bundle bug)
 
 /**
  * Kill
  *
- * @ORM\Table(name="kill")
+ * @ORM\Table(name="`kill`")
  * @ORM\Entity(repositoryClass="Ovski\PlayerStatsBundle\Repository\KillRepository")
+ * @UniqueEntity("killed_player_id")
+ * @UniqueEntity("killer_player_id")
  */
 class Kill
 {

@@ -1,18 +1,35 @@
 {% extends "::base.html.twig" %}
 
 {% block stylesheets %}
-  {{ parent() }}
-  <link rel="stylesheet" type="text/css" href="bundles/studminestats/css/style.css"/>
+        {{ parent() }}
+        {# <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/map_page.css") }}"/> #}
+{% endblock %}
+
+{% block menu %}
+
+    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'stats'} %}
+
 {% endblock %}
 
 {% block body %}
 
-  {{ parent() }}
+    <h2>Stats</h2>
 
-  <p>{{ rien }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Kills</th>
+            <tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.pseudo }}</td>
+                <td>{{ player.kills }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-{% endblock body %}
-  
-{% block javascripts %}
-    {{ parent() }}
-{% endblock javascripts %}
+{% endblock %}

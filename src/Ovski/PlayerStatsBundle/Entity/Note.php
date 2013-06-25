@@ -7,6 +7,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Note
+ *
  * @UniqueEntity({"receiver_player_id", "donor_player"})
  * @UniqueEntity("receiver_player_id")
  * @UniqueEntity("donor_player_id")
