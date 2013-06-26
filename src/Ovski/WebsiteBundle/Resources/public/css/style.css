@@ -26,8 +26,7 @@ body, html
 {
     height: 460px;
     margin: 0 auto;
-    background: url('../images/earth_header2.png') top no-repeat;
-    background-position-y: -120px;
+    background: url('../images/earth_header2.png') center -120px no-repeat;
 }
 
 #header-wrapper > header
