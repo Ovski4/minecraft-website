@@ -25,7 +25,7 @@
         <tbody>
         {% for player in players %}
             <tr>
-                <td><a href="{{ path('single_stat', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
+                <td><a href="{{ path('player_stat', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
                 <td>{{ player.kills }}</td>
             </tr>
         {% endfor %}
