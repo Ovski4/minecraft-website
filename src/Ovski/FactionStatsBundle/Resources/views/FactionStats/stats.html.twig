@@ -1,0 +1,18 @@
+{% extends "::base.html.twig" %}
+
+{% block stylesheets %}
+        {{ parent() }}
+        {# <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/map_page.css") }}"/> #}
+{% endblock %}
+
+{% block menu %}
+
+    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'stats'} %}
+
+{% endblock %}
+
+{% block body %}
+
+  ok
+
+{% endblock %}
