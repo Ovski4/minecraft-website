@@ -30,7 +30,7 @@ class Faction
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
     
@@ -80,6 +80,7 @@ class Faction
      *      )
      **/
     private $myEnemyFactions;
+
     /**
      * Constructor
      */
@@ -93,7 +94,12 @@ class Faction
         $this->enemyFactionsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
         $this->myEnemyFactions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Set id
      *
