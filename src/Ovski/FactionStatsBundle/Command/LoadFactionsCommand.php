@@ -32,6 +32,31 @@ EOT
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("this is it");
+        //retrieving factions from json files
+      
+        // MineServer/mstore/factions_faction@default/*
+        if ($handle = opendir($this->getFactionDirectory())) {
+            while (false !== ($entry = readdir($handle))) {
+                if ($entry != "." && $entry != "..") {
+                    echo "$entry\n";
+                }
+            }
+            closedir($handle);
+      }
+      
+        $m = $this->getContainer()->get('doctrine')->getManager();
+        $factions = $m->getRepository('OvskiFactionStatsBundle:Faction')->findAll();
+        
+        //updating existing factions
+        
+        //removing factions no longer existing
+
+        //adding new factions
+        
+        $output->writeln("gogole action : okkkkkaaaaaaaaaayyyyyyy");
+    }
+    
+    public function getFactionDirectory() {
+        return "/home/baptiste/MineProject/MineServer/mstore/factions_faction@default/";
     }
 }
