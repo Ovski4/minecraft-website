@@ -106,18 +106,26 @@ EOT
         }
         
         if(isset($factionJsonArray['relationWishes'])) {
-            foreach ($factionJsonArray['relationWishes'] as $factionId => $relation) {
+            foreach ($factionJsonArray['relationWishes'] as $factionId => $relationship) {
                 $factionWithRelationship = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                                    ->find($factionId);
                 ;
                 $output->writeln(sprintf("  %s and %s are %s",
                                $faction,
                                $factionWithRelationship,
-                               $relation)
+                               $relationship)
                               )
                 ;
-                $faction->removeRelationShip($factionWithRelationship);
-                $faction->addRelationShip($factionWithRelationship, $relation);
+                
+                $currentRelationship = $faction->getRelationShip($factionWithRelationship);
+                if($currentRelationship == 'NEUTRAL') {
+                    $faction->addRelationShip($factionWithRelationship, $relationship);
+                    $output->writeln("New relationship");
+                } elseif($currentRelationship != $relationship) {
+                    $faction->removeRelationShip($factionWithRelationship);
+                    $faction->addRelationShip($factionWithRelationship, $relationship);
+                    $output->writeln("Relationship changed");
+                }
             }
         }
         
