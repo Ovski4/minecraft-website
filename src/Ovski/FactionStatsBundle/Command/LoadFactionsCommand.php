@@ -18,7 +18,7 @@ use Ovski\FactionStatsBundle\Entity\Faction;
  * Load factions in database
  */
 class LoadFactionsCommand extends ContainerAwareCommand {
-    
+
     protected function configure()
     {
         $this
@@ -55,24 +55,7 @@ EOT
             closedir($handle);
             $manager->flush();
         }
-      
-     /*{
-  "name": "warlorders",
-  "description": "one lord to rule them all",
-  "createdAtMillis": 1373108603683,
-  "relationWishes": {
-    "de900964-5097-414c-b48c-826615f73538": "ENEMY"
-  }*/
-        
-        
-        /*
-        //updating existing factions
-        
-        //removing factions no longer existing
-
-        //adding new factions
-        */
-        $output->writeln("gogole action : okkkkkaaaaaaaaaayyyyyyy");
+        $output->writeln("Thats so smooth I'll brush my teeth for ever");
     }
     
     /**
@@ -133,7 +116,8 @@ EOT
                                $relation)
                               )
                 ;
-                $this->addRelationship($faction, $factionWithRelationship, $relation);
+                $faction->removeRelationShip($factionWithRelationship);
+                $faction->addRelationShip($factionWithRelationship, $relation);
             }
         }
         
@@ -185,22 +169,5 @@ EOT
             return false;
         }
         return true;
-    }
-    
-    public function addRelationship(Faction $faction, Faction $faction_with_relationship, $relation) {
-        switch ($relation) {
-            case "TRUCE":
-                $faction->addTruceFactionsWithMe($faction_with_relationship);
-                break;
-            case "ALLY":
-                $faction->addAllyFactionsWithMe($faction_with_relationship);
-                break;
-            case "ENEMY":
-                $faction->addEnemyFactionsWithMe($faction_with_relationship);
-                break;
-            default:
-                throw new \Exception(sprintf("Error : unknown relation '%s'", $relation));
-                break;
-        }
     }
 }

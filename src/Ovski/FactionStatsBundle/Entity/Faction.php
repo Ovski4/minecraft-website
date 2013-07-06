@@ -11,7 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Ovski\FactionStatsBundle\Repository\FactionRepository")
  */
 class Faction
-{
+{ 
+    public static $REMOVE_RELATIONSHIP_MAP = array(
+      'ENEMY'   => 'removeEnemyFaction',
+      'ALLY'    => 'removeAllyFaction',
+      'TRUCE'   => 'removeTruceFaction',
+    );
+
+    public static $ADD_RELATIONSHIP_MAP = array(
+      'ENEMY'   => 'addEnemyFaction',
+      'ALLY'    => 'addAllyFaction',
+      'TRUCE'   => 'addTruceFaction',
+    );
+
     /**
      * @var integer
      *
@@ -40,46 +52,39 @@ class Faction
     private $players;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Faction", mappedBy="myTruceFactions")
-     **/
-    private $truceFactionsWithMe;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Faction", inversedBy="truceFactionsWithMe")
+     * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
      * @ORM\JoinTable(name="faction_truce_relationships",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="truce_faction_id", referencedColumnName="id")}
-     *      )
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="truce_faction_id", referencedColumnName="id")
+     *      })
      **/
-    private $myTruceFactions;
- 
-     /**
-     * @ORM\ManyToMany(targetEntity="Faction", mappedBy="myAllyFactions")
-     **/
-    private $allyFactionsWithMe;
-
+    private $truceFactions;
+    
     /**
-     * @ORM\ManyToMany(targetEntity="Faction", inversedBy="allyFactionsWithMe")
+     * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
      * @ORM\JoinTable(name="faction_ally_relationships",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="ally_faction_id", referencedColumnName="id")}
-     *      )
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="ally_faction_id", referencedColumnName="id")
+     *      })
      **/
-    private $myAllyFactions;
-
+    private $allyFactions;
+    
     /**
-     * @ORM\ManyToMany(targetEntity="Faction", mappedBy="myEnemyFactions")
-     **/
-    private $enemyFactionsWithMe;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Faction", inversedBy="enemyFactionsWithMe")
+     * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
      * @ORM\JoinTable(name="faction_enemy_relationships",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="enemy_faction_id", referencedColumnName="id")}
-     *      )
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(name="enemy_faction_id", referencedColumnName="id")
+     *      })
      **/
-    private $myEnemyFactions;
+    private $enemyFactions;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Constructor
@@ -87,19 +92,11 @@ class Faction
     public function __construct()
     {
         $this->players = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->truceFactionsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myTruceFactions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->allyFactionsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myAllyFactions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->enemyFactionsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myEnemyFactions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->truceFactions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allyFactions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->enemyFactions = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
-    public function __toString()
-    {
-        return $this->getName();
-    }
-
+    
     /**
      * Set id
      *
@@ -203,200 +200,170 @@ class Faction
     }
 
     /**
-     * Add truceFactionsWithMe
+     * Add truceFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactionsWithMe
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactions
      * @return Faction
      */
-    public function addTruceFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $truceFactionsWithMe)
+    public function addTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $truceFactions)
     {
-        $this->truceFactionsWithMe[] = $truceFactionsWithMe;
+        $this->truceFactions[] = $truceFactions;
     
         return $this;
     }
 
     /**
-     * Remove truceFactionsWithMe
+     * Remove truceFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactionsWithMe
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactions
      */
-    public function removeTruceFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $truceFactionsWithMe)
+    public function removeTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $truceFactions)
     {
-        $this->truceFactionsWithMe->removeElement($truceFactionsWithMe);
+        $this->truceFactions->removeElement($truceFactions);
     }
 
     /**
-     * Get truceFactionsWithMe
+     * Get truceFactions
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getTruceFactionsWithMe()
+    public function getTruceFactions()
     {
-        return $this->truceFactionsWithMe;
+        return $this->truceFactions;
     }
 
     /**
-     * Add myTruceFactions
+     * Add allyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myTruceFactions
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactions
      * @return Faction
      */
-    public function addMyTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $myTruceFactions)
+    public function addAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $allyFactions)
     {
-        $this->myTruceFactions[] = $myTruceFactions;
+        $this->allyFactions[] = $allyFactions;
     
         return $this;
     }
 
     /**
-     * Remove myTruceFactions
+     * Remove allyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myTruceFactions
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactions
      */
-    public function removeMyTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $myTruceFactions)
+    public function removeAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $allyFactions)
     {
-        $this->myTruceFactions->removeElement($myTruceFactions);
+        $this->allyFactions->removeElement($allyFactions);
     }
 
     /**
-     * Get myTruceFactions
+     * Get allyFactions
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getMyTruceFactions()
+    public function getAllyFactions()
     {
-        return $this->myTruceFactions;
+        return $this->allyFactions;
     }
 
     /**
-     * Add allyFactionsWithMe
+     * Add enemyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactionsWithMe
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactions
      * @return Faction
      */
-    public function addAllyFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $allyFactionsWithMe)
+    public function addEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactions)
     {
-        $this->allyFactionsWithMe[] = $allyFactionsWithMe;
+        $this->enemyFactions[] = $enemyFactions;
     
         return $this;
     }
 
     /**
-     * Remove allyFactionsWithMe
+     * Remove enemyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactionsWithMe
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactions
      */
-    public function removeAllyFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $allyFactionsWithMe)
+    public function removeEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactions)
     {
-        $this->allyFactionsWithMe->removeElement($allyFactionsWithMe);
+        $this->enemyFactions->removeElement($enemyFactions);
     }
 
     /**
-     * Get allyFactionsWithMe
+     * Get enemyFactions
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getAllyFactionsWithMe()
+    public function getEnemyFactions()
     {
-        return $this->allyFactionsWithMe;
+        return $this->enemyFactions;
     }
-
-    /**
-     * Add myAllyFactions
-     *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myAllyFactions
-     * @return Faction
-     */
-    public function addMyAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $myAllyFactions)
-    {
-        $this->myAllyFactions[] = $myAllyFactions;
     
-        return $this;
-    }
-
     /**
-     * Remove myAllyFactions
+     * Check whether a faction is enemy or not
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myAllyFactions
+     * @return boolean
      */
-    public function removeMyAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $myAllyFactions)
+    public function isEnemy(Faction $faction)
     {
-        $this->myAllyFactions->removeElement($myAllyFactions);
+        if($this->enemyFactions->contains($faction)) {
+            return true;
+        }
+        return false;
     }
-
-    /**
-     * Get myAllyFactions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyAllyFactions()
-    {
-        return $this->myAllyFactions;
-    }
-
-    /**
-     * Add enemyFactionsWithMe
-     *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactionsWithMe
-     * @return Faction
-     */
-    public function addEnemyFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactionsWithMe)
-    {
-        $this->enemyFactionsWithMe[] = $enemyFactionsWithMe;
     
-        return $this;
+    /**
+     * Check whether a faction is truce or not
+     *
+     * @return boolean
+     */
+    public function isTruce(Faction $faction)
+    {
+        if($this->truceFactions->contains($faction)) {
+            return true;
+        }
+        return false;
     }
 
     /**
-     * Remove enemyFactionsWithMe
+     * Check whether a faction is ally or not
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactionsWithMe
+     * @return boolean
      */
-    public function removeEnemyFactionsWithMe(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactionsWithMe)
+    public function isAlly(Faction $faction)
     {
-        $this->enemyFactionsWithMe->removeElement($enemyFactionsWithMe);
+        if($this->allyFactions->contains($faction)) {
+            return true;
+        }
+        return false;
     }
-
-    /**
-     * Get enemyFactionsWithMe
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getEnemyFactionsWithMe()
-    {
-        return $this->enemyFactionsWithMe;
-    }
-
-    /**
-     * Add myEnemyFactions
-     *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myEnemyFactions
-     * @return Faction
-     */
-    public function addMyEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $myEnemyFactions)
-    {
-        $this->myEnemyFactions[] = $myEnemyFactions;
     
-        return $this;
+    /**
+     * Get the relationship with the given faction
+     * 
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $faction
+     * @return string
+     */
+    public function getRelationShip(Faction $faction) {
+        if($this->isAlly($faction)) {
+            return "ALLY";
+        } elseif($this->isTruce($faction))  {
+            return "TRUCE";
+        } elseif($this->isEnemy($faction)) {
+            return "ENEMY";
+        } else {
+            return "NEUTRAL";
+        }
+    }
+    
+    public function removeRelationShip(Faction $faction) {
+        if($this->getRelationShip($faction) != "NEUTRAL") {
+            $removeMethod = self::$REMOVE_RELATIONSHIP_MAP[$this->getRelationShip($faction)];
+            self::$removeMethod($faction);
+        }
     }
 
-    /**
-     * Remove myEnemyFactions
-     *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $myEnemyFactions
-     */
-    public function removeMyEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $myEnemyFactions)
-    {
-        $this->myEnemyFactions->removeElement($myEnemyFactions);
-    }
-
-    /**
-     * Get myEnemyFactions
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getMyEnemyFactions()
-    {
-        return $this->myEnemyFactions;
-    }
+    public function addRelationShip(Faction $faction, $relation) {
+        $addMethod = self::$ADD_RELATIONSHIP_MAP[$relation];
+        self::$addMethod($faction);
+    } 
 }
