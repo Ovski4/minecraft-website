@@ -54,8 +54,8 @@ class Faction
     private $createdAt;
     
     /**
-    * @ORM\OneToMany(targetEntity="Ovski\PlayerStatsBundle\Entity\Player", mappedBy="faction")
-    */
+     * @ORM\OneToMany(targetEntity="Ovski\PlayerStatsBundle\Entity\Player", mappedBy="faction")
+     */
     private $players;
 
     /**

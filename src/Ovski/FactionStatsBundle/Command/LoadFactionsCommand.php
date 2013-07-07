@@ -36,19 +36,39 @@ EOT
     {
         $manager = $this->getContainer()->get('doctrine')->getManager();
  
-        //Remove disbanded factions
+        //Remove disbanded factions (the file doesn't exist)
         $factions = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                             ->findAll();
         if($factions) {
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {
-                    $output->writeln(sprintf("<comment>%s</comment> has been removed", $faction->getName()));
+                    $output->writeln(sprintf("Faction <comment>%s</comment> has been removed", $faction->getName()));
+                    foreach ($faction->getPlayers() as $player) {
+                        $player->setRole(NULL);
+                        $player->setFaction(NULL);
+                        $manager->persist($player);
+                    }
                     $manager->remove($faction);
                 }
             }
             $manager->flush();
         }
 
+        /*Remove players who left (deleted files) WEIRD CASE, TO CHECK
+        $players = $manager->getRepository('OvskiPlayerStatsBundle:Player')
+                            ->findAll();
+        if($players) {
+            foreach($players as $player) {
+                if (!file_exists(sprintf("%s%s.json", $this->getPlayerDirectory(), $player->getPseudo())) && $player->getFaction() != NULL) {
+                    $output->writeln(sprintf("Player <comment>%s</comment> left his faction", $player->getPseudo()));
+                    $player->setFaction(NULL);
+                    $player->setRole(NULL);
+                    $manager->persist($player);
+                }
+            }
+            $manager->flush();
+        }*/
+        
         //Add new factions and update current ones
         $handleFactions = opendir($this->getFactionDirectory());
         if ($handleFactions) {
@@ -122,19 +142,7 @@ EOT
                 $this->getFactionDirectory(),
                 $playerJsonArray['factionId']
             );
-            //the file doesn't exist -> set to NULL
-            if(!file_exists($playerFile)) {
-                if($player->getFaction()) {
-                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> isn't in <comment>%s</comment> faction as it doesn't exist anymore",
-                                             $player->getPseudo(),
-                                             $player->getFaction()
-                                    )
-                    );
-                    $player->setFaction(NULL);
-                    $player->setRole(NULL);
-                }
-            //file exists and there's already a faction
-            } elseif ($player->getFaction() != NULL) {
+            if (file_exists($playerFile) && $player->getFaction() != NULL) {
                 //check if the new and current faction arent the same
                 if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
                     $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
@@ -148,21 +156,25 @@ EOT
                     $player->setFaction($faction);
                 }
                 //check if the new and current role arent the same
-                if($player->getRole() != $playerJsonArray['role']) {
+                if($player->getRole() != NULL && $player->getRole() != $playerJsonArray['role']) {
                     $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed role from <comment>%s</comment> to <comment>%s</comment>)",
                                              $player->getPseudo(),
                                              $player->getRole(),
                                              $playerJsonArray['role']
                                     )
                     );
-                    $player->setRole($playerJsonArray['role']);
+                    if (isset($playerJsonArray['role'])) {
+                        $player->setRole($playerJsonArray['role']);
+                    }   
                 }
             //file exists and there is no faction set yet
-            } elseif ($player->getFaction() == NULL) {
+            } elseif (file_exists($playerFile) && $player->getFaction() == NULL) {
                 $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                                            ->find($playerJsonArray['factionId']);
                 $player->setFaction($faction);
-                $player->setRole($playerJsonArray['role']);
+                if (isset($playerJsonArray['role'])) {
+                    $player->setRole($playerJsonArray['role']);
+                }
                 $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
                                          $player->getPseudo(),
                                          $faction->getName()

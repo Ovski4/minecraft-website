@@ -22,8 +22,8 @@ class Player
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\FactionStatsBundle\Entity\Faction", inversedBy="players")
-     * @ORM\JoinColumn(name="faction_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Ovski\FactionStatsBundle\Entity\Faction", inversedBy="players", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="faction_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $faction;
     
