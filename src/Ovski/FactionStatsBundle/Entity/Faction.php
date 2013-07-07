@@ -53,7 +53,7 @@ class Faction
 
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_truce_relationships",
+     * @ORM\JoinTable(name="faction_truce_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="truce_faction_id", referencedColumnName="id")
@@ -63,7 +63,7 @@ class Faction
     
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_ally_relationships",
+     * @ORM\JoinTable(name="faction_ally_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="ally_faction_id", referencedColumnName="id")
@@ -73,7 +73,7 @@ class Faction
     
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_enemy_relationships",
+     * @ORM\JoinTable(name="faction_enemy_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="enemy_faction_id", referencedColumnName="id")
