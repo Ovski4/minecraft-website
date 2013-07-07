@@ -13,6 +13,23 @@
 
 {% block body %}
 
-  ok
+    <h2>Factions stats</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>created at</th>
+            <tr>
+        </thead>
+        <tbody>
+        {% for faction in factions %}
+            <tr>
+                <td><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></td>
+                <td>{{ faction.createdAt }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
