@@ -53,7 +53,7 @@ EOT
         $handleFactions = opendir($this->getFactionDirectory());
         if ($handleFactions) {
             while (false !== ($file = readdir($handleFactions))) {
-                if ($this->isAllowed($file)) {
+                if ($this->isFactionAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
                     $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                                        ->find($this->getFactionIdFromJson($file))
@@ -74,13 +74,15 @@ EOT
         //Bind players to factions
         $handlePlayers = opendir($this->getPlayerDirectory());
         if ($handlePlayers) {
-            while (false !== ($file = readdir($handlePlayers)) && !strpos($file, "~")) {
-                $output->writeln(sprintf("<info>Handling %s</info>", $file));
-                $player = $manager->getRepository('OvskiPlayerStatsBundle:Player')
-                                   ->findOneByPseudo($this->getPlayerPseudoFromJson($file));
-                ;
-                if($player) {
-                    $this->updatePlayerFaction($player, $file, $manager, $output);
+            while (false !== ($file = readdir($handlePlayers))) {
+                if ($this->isPlayerAllowed($file)) {
+                    $output->writeln(sprintf("<info>Handling %s</info>", $file));
+                    $player = $manager->getRepository('OvskiPlayerStatsBundle:Player')
+                                       ->findOneByPseudo($this->getPlayerPseudoFromJson($file));
+                    ;
+                    if($player) {
+                        $this->updatePlayerFaction($player, $file, $manager, $output);
+                    }
                 }
             }
 
@@ -92,37 +94,75 @@ EOT
         $output->writeln("<info>Thats so smooth I'll brush my teeth for ever</info>");
     }
     
-    //TODO $player->setRole(NULL);
+    //TODO $player leave a faction -> what happened in the file?
     //DOCSTRING
     public function updatePlayerFaction(Player $player, $file, $manager, $output)
     {
         $playerJsonArray = $this->getPlayerArray($file);
-        $playerFile = sprintf(
-            "%s%s.json",
-            $this->getFactionDirectory(),
-            $playerJsonArray['factionId']
-        );
-        //the file doesn't exist -> set to NULL
-        if(!file_exists($playerFile)) {
-            if($player->getFaction()) {
+        //the player was kicked or left his faction
+        if (!isset($playerJsonArray['factionId'])) {
+            if ($player->getFaction()) {
+                $output->writeln(sprintf("\tPlayer <comment>%s</comment> left or was kicked of <comment>%s</comment> faction",
+                                                 $player->getPseudo(),
+                                                 $player->getFaction()
+                        )
+                );
                 $player->setFaction(NULL);
-                $output->writeln(sprintf("\tPlayer <comment>%s</comment> has been updated (faction set to null)", $player->getPseudo()));
+                $player->setRole(NULL);
             }
-        //file exists and there's already a faction
-        //-> we check if the new and current faction arent the same
-        } elseif ($player->getFaction() != NULL &&
-                  $player->getFaction()->getId() != $playerJsonArray['factionId']
-                 ) {
-            $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+        } else {
+            $playerFile = sprintf(
+                "%s%s.json",
+                $this->getFactionDirectory(),
+                $playerJsonArray['factionId']
+            );
+            //the file doesn't exist -> set to NULL
+            if(!file_exists($playerFile)) {
+                if($player->getFaction()) {
+                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> isn't in <comment>%s</comment> faction as it doesn't exist anymore",
+                                             $player->getPseudo(),
+                                             $player->getFaction()
+                                    )
+                    );
+                    $player->setFaction(NULL);
+                    $player->setRole(NULL);
+                }
+            //file exists and there's already a faction
+            } elseif ($player->getFaction() != NULL) {
+                //check if the new and current faction arent the same
+                if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
+                    $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                                        ->find($playerJsonArray['factionId']);
-            $player->setFaction($faction);
-            $output->writeln(sprintf("\tPlayer <comment>%s</comment> has been updated (changing faction)", $player->getPseudo()));
-        //file exists and there is no faction set yet
-        } elseif ($player->getFaction() == NULL) {
-            $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
-                                       ->find($playerJsonArray['factionId']);
-            $player->setFaction($faction);
-            $output->writeln(sprintf("\tPlayer <comment>%s</comment> has been updated (now in a faction)", $player->getPseudo()));
+                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed faction from <comment>%s</comment> to <comment>%s</comment>)",
+                                             $player->getPseudo(),
+                                             $player->getFaction()->getName(),
+                                             $faction->getName()
+                                    )
+                    );
+                    $player->setFaction($faction);
+                }
+                //check if the new and current role arent the same
+                if($player->getRole() != $playerJsonArray['role']) {
+                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed role from <comment>%s</comment> to <comment>%s</comment>)",
+                                             $player->getPseudo(),
+                                             $player->getRole(),
+                                             $playerJsonArray['role']
+                                    )
+                    );
+                    $player->setRole($playerJsonArray['role']);
+                }
+            //file exists and there is no faction set yet
+            } elseif ($player->getFaction() == NULL) {
+                $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                                           ->find($playerJsonArray['factionId']);
+                $player->setFaction($faction);
+                $player->setRole($playerJsonArray['role']);
+                $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
+                                         $player->getPseudo(),
+                                         $faction->getName()
+                                )
+                );
+            }
         }
         $manager->persist($player);
     }
@@ -207,6 +247,7 @@ EOT
         $faction = new Faction();
         $faction->setId($this->getFactionIdFromJson($file));
         $faction->setName($factionJsonArray['name']);
+        $faction->setCreatedAt($factionJsonArray['createdAtMillis']);
 
         if(isset($factionJsonArray['description'])) {
             $faction->setDescription($factionJsonArray['description']);
@@ -220,19 +261,38 @@ EOT
     }
 
     /**
-     * Check if a file is allowed in order to parse it
+     * Check if a faction file is allowed in order to parse it
      * Reject blacklisted and temp files
      * 
      * @param string $file
      * @return boolean
      */
-    public function isAllowed($file) {
+    public function isFactionAllowed($file) {
         $blackList = array(
             ".",
             "..",
             "f2eae440-908d-4ccd-a605-c2fc31e18261.json", //wilderness
             "af2fce2b-9a77-405c-94e9-2c3cf199eabc.json", //safezone
             "d95393a9-b860-4be2-86be-90b76b68d7d7.json"  //warzone
+        );
+
+        if (in_array($file, $blackList) || strpos($file, "~")) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Check if a player file is allowed in order to parse it
+     * Reject blacklisted and temp files
+     * 
+     * @param string $file
+     * @return boolean
+     */
+    public function isPlayerAllowed($file) {
+        $blackList = array(
+            ".",
+            ".."
         );
 
         if (in_array($file, $blackList) || strpos($file, "~")) {

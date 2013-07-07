@@ -27,14 +27,13 @@ class Player
      */
     private $faction;
     
-    
-    /*
+    /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
-    //private $role;
-    
+    private $role;
+
     /**
      * @var string
      *
@@ -336,5 +335,28 @@ class Player
     public function getFaction()
     {
         return $this->faction;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Player
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

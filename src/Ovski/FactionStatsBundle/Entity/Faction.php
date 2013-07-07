@@ -45,6 +45,13 @@ class Faction
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer", name="created_at")
+     */
+    private $createdAt;
     
     /**
     * @ORM\OneToMany(targetEntity="Ovski\PlayerStatsBundle\Entity\Player", mappedBy="faction")
@@ -164,6 +171,29 @@ class Faction
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param integer $createdAt
+     * @return Faction
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return integer 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     /**
@@ -365,5 +395,5 @@ class Faction
     public function addRelationShip(Faction $faction, $relation) {
         $addMethod = self::$ADD_RELATIONSHIP_MAP[$relation];
         self::$addMethod($faction);
-    } 
+    }
 }
