@@ -94,8 +94,14 @@ EOT
         $output->writeln("<info>Thats so smooth I'll brush my teeth for ever</info>");
     }
     
-    //TODO $player leave a faction -> what happened in the file?
-    //DOCSTRING
+    /**
+     * Update player data according to faction changes
+     * 
+     * @param \Ovski\PlayerStatsBundle\Entity\Player $player
+     * @param File $file
+     * @param type $manager
+     * @param type $output
+     */
     public function updatePlayerFaction(Player $player, $file, $manager, $output)
     {
         $playerJsonArray = $this->getPlayerArray($file);
