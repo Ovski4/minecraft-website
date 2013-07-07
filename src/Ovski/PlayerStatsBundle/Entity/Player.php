@@ -27,6 +27,14 @@ class Player
      */
     private $faction;
     
+    
+    /*
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    //private $role;
+    
     /**
      * @var string
      *

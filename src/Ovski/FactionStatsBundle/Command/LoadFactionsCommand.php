@@ -56,7 +56,7 @@ EOT
                 if ($this->isAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
                     $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
-                                       ->find($this->getFactionId($file))
+                                       ->find($this->getFactionIdFromJson($file))
                     ;
                     if (!$faction) {
                         $faction = $this->createFaction($file, $manager, $output);
@@ -77,7 +77,7 @@ EOT
             while (false !== ($file = readdir($handlePlayers)) && !strpos($file, "~")) {
                 $output->writeln(sprintf("<info>Handling %s</info>", $file));
                 $player = $manager->getRepository('OvskiPlayerStatsBundle:Player')
-                                   ->findOneByPseudo($this->getPlayerPseudo($file));
+                                   ->findOneByPseudo($this->getPlayerPseudoFromJson($file));
                 ;
                 if($player) {
                     $this->updatePlayerFaction($player, $file, $manager, $output);
@@ -91,71 +91,9 @@ EOT
         ///Well done captain
         $output->writeln("<info>Thats so smooth I'll brush my teeth for ever</info>");
     }
-
-    /**
-     * Get the directory where faction files are stored
-     * 
-     * @return string
-     */
-    public function getFactionDirectory() {
-        return "/home/baptiste/MineProject/MineServer/mstore/factions_faction@default/";
-    }
-
-    /**
-     * Get the directory where player files are stored
-     * 
-     * @return string
-     */
-    public function getPlayerDirectory() {
-        return "/home/baptiste/MineProject/MineServer/mstore/factions_uplayer@default/";
-    }
-
-    /**
-     * Get the faction id from the name of the json file
-     * 
-     * @param string $file
-     * @return string
-     */
-    public function getFactionId($file) {
-        $fileInfos = pathinfo($file);
-        return $fileInfos['filename'];
-    }
-
-    /**
-     * Get the player pseudo from the name of the json file
-     * 
-     * @param string $file
-     * @return string
-     */
-    public function getPlayerPseudo($file) {
-        $fileInfos = pathinfo($file);
-        return $fileInfos['filename'];
-    }
-
-    /**
-     * Get json faction file as an array
-     * 
-     * @param string $file
-     * @return array
-     */
-    public function getFactionArray($file) {
-        $fileAbsolutePath = sprintf("%s%s", $this->getFactionDirectory(), $file);
-        $json = file_get_contents($fileAbsolutePath);
-        return json_decode($json, true);
-    }
-
-    /**
-     * Get json player file as an array
-     * 
-     * @param string $file
-     * @return array
-     */
-    public function getPlayerArray($file) {
-        $fileAbsolutePath = sprintf("%s%s", $this->getPlayerDirectory(), $file);
-        $json = file_get_contents($fileAbsolutePath);
-        return json_decode($json, true);
-    }
     
+    //TODO $player->setRole(NULL);
+    //DOCSTRING
     public function updatePlayerFaction(Player $player, $file, $manager, $output)
     {
         $playerJsonArray = $this->getPlayerArray($file);
@@ -168,7 +106,7 @@ EOT
         if(!file_exists($playerFile)) {
             if($player->getFaction()) {
                 $player->setFaction(NULL);
-                $output->writeln(sprintf("\tPlayer %s has been updated (faction set to null)", $player->getPseudo()));
+                $output->writeln(sprintf("\tPlayer <comment>%s</comment> has been updated (faction set to null)", $player->getPseudo()));
             }
         //file exists and there's already a faction
         //-> we check if the new and current faction arent the same
@@ -267,7 +205,7 @@ EOT
  
         //create a new faction object
         $faction = new Faction();
-        $faction->setId($this->getFactionId($file));
+        $faction->setId($this->getFactionIdFromJson($file));
         $faction->setName($factionJsonArray['name']);
 
         if(isset($factionJsonArray['description'])) {
@@ -301,5 +239,69 @@ EOT
             return false;
         }
         return true;
+    }
+
+    /**
+     * Get the directory where faction files are stored
+     * 
+     * @return string
+     */
+    public function getFactionDirectory() {
+        return "/home/baptiste/MineProject/MineServer/mstore/factions_faction@default/";
+    }
+
+    /**
+     * Get the directory where player files are stored
+     * 
+     * @return string
+     */
+    public function getPlayerDirectory() {
+        return "/home/baptiste/MineProject/MineServer/mstore/factions_uplayer@default/";
+    }
+
+    /**
+     * Get the faction id from the name of the json file
+     * 
+     * @param string $file
+     * @return string
+     */
+    public function getFactionIdFromJson($file) {
+        $fileInfos = pathinfo($file);
+        return $fileInfos['filename'];
+    }
+
+    /**
+     * Get the player pseudo from the name of the json file
+     * 
+     * @param string $file
+     * @return string
+     */
+    public function getPlayerPseudoFromJson($file) {
+        $fileInfos = pathinfo($file);
+        return $fileInfos['filename'];
+    }
+
+    /**
+     * Get json faction file as an array
+     * 
+     * @param string $file
+     * @return array
+     */
+    public function getFactionArray($file) {
+        $fileAbsolutePath = sprintf("%s%s", $this->getFactionDirectory(), $file);
+        $json = file_get_contents($fileAbsolutePath);
+        return json_decode($json, true);
+    }
+
+    /**
+     * Get json player file as an array
+     * 
+     * @param string $file
+     * @return array
+     */
+    public function getPlayerArray($file) {
+        $fileAbsolutePath = sprintf("%s%s", $this->getPlayerDirectory(), $file);
+        $json = file_get_contents($fileAbsolutePath);
+        return json_decode($json, true);
     }
 }
