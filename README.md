@@ -2,6 +2,8 @@ MineWeb
 ========================
 
 Before
+  Resizable iframe (dynmap)
+  Look at static pages stuff
   Time played format
   Plugins java to update -> stats entity has been removed.
   Plugin java -> Add player on first join
