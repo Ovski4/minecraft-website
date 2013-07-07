@@ -43,31 +43,17 @@ EOT
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {
                     $output->writeln(sprintf("Faction <comment>%s</comment> has been removed", $faction->getName()));
+                    
                     foreach ($faction->getPlayers() as $player) {
                         $player->setRole(NULL);
                         $player->setFaction(NULL);
                         $manager->persist($player);
                     }
-                    $manager->remove($faction);
-                }
+                    $manager->remove($faction); 
+               }
             }
             $manager->flush();
         }
-
-        /*Remove players who left (deleted files) WEIRD CASE, TO CHECK
-        $players = $manager->getRepository('OvskiPlayerStatsBundle:Player')
-                            ->findAll();
-        if($players) {
-            foreach($players as $player) {
-                if (!file_exists(sprintf("%s%s.json", $this->getPlayerDirectory(), $player->getPseudo())) && $player->getFaction() != NULL) {
-                    $output->writeln(sprintf("Player <comment>%s</comment> left his faction", $player->getPseudo()));
-                    $player->setFaction(NULL);
-                    $player->setRole(NULL);
-                    $manager->persist($player);
-                }
-            }
-            $manager->flush();
-        }*/
         
         //Add new factions and update current ones
         $handleFactions = opendir($this->getFactionDirectory());
@@ -142,44 +128,48 @@ EOT
                 $this->getFactionDirectory(),
                 $playerJsonArray['factionId']
             );
-            if (file_exists($playerFile) && $player->getFaction() != NULL) {
-                //check if the new and current faction arent the same
-                if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
+            //the file doesn't exist -> already taken care of at the beginning of the execute function
+            if(file_exists($playerFile)) {
+                //there's already a faction
+                if ($player->getFaction() != NULL) {
+                    //check if the new and current faction arent the same
+                    if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
+                        $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                                           ->find($playerJsonArray['factionId']);
+                        $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed faction from <comment>%s</comment> to <comment>%s</comment>)",
+                                                 $player->getPseudo(),
+                                                 $player->getFaction()->getName(),
+                                                 $faction->getName()
+                                        )
+                        );
+                        $player->setFaction($faction);
+                    }
+                    //check if the new and current role arent the same
+                    if($player->getRole() != NULL && $player->getRole() != $playerJsonArray['role']) {
+                        $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed role from <comment>%s</comment> to <comment>%s</comment>)",
+                                                 $player->getPseudo(),
+                                                 $player->getRole(),
+                                                 $playerJsonArray['role']
+                                        )
+                        );
+                        if (isset($playerJsonArray['role'])) {
+                            $player->setRole($playerJsonArray['role']);
+                        }   
+                    }
+                //there is no faction set yet
+                } elseif ($player->getFaction() == NULL) {
                     $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
-                                       ->find($playerJsonArray['factionId']);
-                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed faction from <comment>%s</comment> to <comment>%s</comment>)",
+                                               ->find($playerJsonArray['factionId']);
+                    $player->setFaction($faction);
+                    if (isset($playerJsonArray['role'])) {
+                        $player->setRole($playerJsonArray['role']);
+                    }
+                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
                                              $player->getPseudo(),
-                                             $player->getFaction()->getName(),
                                              $faction->getName()
                                     )
                     );
-                    $player->setFaction($faction);
                 }
-                //check if the new and current role arent the same
-                if($player->getRole() != NULL && $player->getRole() != $playerJsonArray['role']) {
-                    $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed role from <comment>%s</comment> to <comment>%s</comment>)",
-                                             $player->getPseudo(),
-                                             $player->getRole(),
-                                             $playerJsonArray['role']
-                                    )
-                    );
-                    if (isset($playerJsonArray['role'])) {
-                        $player->setRole($playerJsonArray['role']);
-                    }   
-                }
-            //file exists and there is no faction set yet
-            } elseif (file_exists($playerFile) && $player->getFaction() == NULL) {
-                $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
-                                           ->find($playerJsonArray['factionId']);
-                $player->setFaction($faction);
-                if (isset($playerJsonArray['role'])) {
-                    $player->setRole($playerJsonArray['role']);
-                }
-                $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
-                                         $player->getPseudo(),
-                                         $faction->getName()
-                                )
-                );
             }
         }
         $manager->persist($player);
