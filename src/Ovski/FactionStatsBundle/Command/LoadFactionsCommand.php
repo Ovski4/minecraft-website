@@ -42,7 +42,7 @@ EOT
         if($factions) {
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {
-                    $output->writeln(sprintf("%s has been removed", $faction->getName()));
+                    $output->writeln(sprintf("<comment>%s</comment> has been removed", $faction->getName()));
                     $manager->remove($faction);
                 }
             }
