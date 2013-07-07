@@ -274,14 +274,23 @@ EOT
      * @return boolean
      */
     public function isFactionAllowed($file) {
-        $blackList = array(
+        /* asus blacklist
+           $blackList = array(
             ".",
             "..",
             "f2eae440-908d-4ccd-a605-c2fc31e18261.json", //wilderness
             "af2fce2b-9a77-405c-94e9-2c3cf199eabc.json", //safezone
             "d95393a9-b860-4be2-86be-90b76b68d7d7.json"  //warzone
-        );
+        );*/
 
+        $blackList = array(
+            ".",
+            "..",
+            "d289003a-ecc5-4545-b445-91853ef9b627.json", //wilderness
+            "387d1cb1-90fa-4369-a763-59531c1c4dc4.json", //safezone
+            "450441cf-4ea6-471f-bff6-b32e894633a5.json"  //warzone
+        );
+        
         if (in_array($file, $blackList) || strpos($file, "~")) {
             return false;
         }

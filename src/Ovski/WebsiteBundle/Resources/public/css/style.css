@@ -31,7 +31,7 @@ body, html
 
 #header-wrapper > header
 {
-    height: 190px;
+    height: 200px;
     color: #FFF;
 }
 
@@ -43,7 +43,7 @@ body, html
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
-/*NAV*/
+/*MENU*/
 
 #header-wrapper > header > .navbar
 {
@@ -99,6 +99,28 @@ body, html
 {
     color: #FFF;
 }
+
+/*children*/
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent ul
+{
+    display: none;
+}
+
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul
+{
+    box-shadow: 7px 6px 16px #000;
+    display: block;
+    position: absolute;
+    background: #9ec864;
+    margin: 0;
+    left: 30px;
+}
+
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li a { color: #000; }
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li:hover { background:  #52902b; }
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li:hover a { color: #FFF; }
+
+
 
 /*BANNER*/
 
