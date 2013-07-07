@@ -15,11 +15,24 @@ class Player
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", name="player_id")
+     * @ORM\Column(type="integer", name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ovski\FactionStatsBundle\Entity\Faction", inversedBy="players")
+     * @ORM\JoinColumn(name="faction_id", referencedColumnName="id", nullable=true)
+     */
+    private $faction;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=10, nullable=true)
+     */
+    private $role;
 
     /**
      * @var string
@@ -85,227 +98,7 @@ class Player
     private $prestige;
 
     /**
-     * Set brokenBlocks
-     *
-     * @param integer $brokenBlocks
-     * @return Stats
-     */
-    public function setBrokenBlocks($brokenBlocks)
-    {
-        $this->brokenBlocks = $brokenBlocks;
-    
-        return $this;
-    }
-
-    /**
-     * Get brokenBlocks
-     *
-     * @return integer 
-     */
-    public function getBrokenBlocks()
-    {
-        return $this->brokenBlocks;
-    }
-
-    /**
-     * Set placedBlocks
-     *
-     * @param integer $placedBlocks
-     * @return Stats
-     */
-    public function setPlacedBlocks($placedBlocks)
-    {
-        $this->placedBlocks = $placedBlocks;
-    
-        return $this;
-    }
-
-    /**
-     * Get placedBlocks
-     *
-     * @return integer 
-     */
-    public function getPlacedBlocks()
-    {
-        return $this->placedBlocks;
-    }
-
-    /**
-     * Set stupidDeaths
-     *
-     * @param integer $stupidDeaths
-     * @return Stats
-     */
-    public function setStupidDeaths($stupidDeaths)
-    {
-        $this->stupidDeaths = $stupidDeaths;
-    
-        return $this;
-    }
-
-    /**
-     * Get stupidDeaths
-     *
-     * @return integer 
-     */
-    public function getStupidDeaths()
-    {
-        return $this->stupidDeaths;
-    }
-
-    /**
-     * Set pvpDeaths
-     *
-     * @param integer $pvpDeaths
-     * @return Stats
-     */
-    public function setPvpDeaths($pvpDeaths)
-    {
-        $this->pvpDeaths = $pvpDeaths;
-    
-        return $this;
-    }
-
-    /**
-     * Get pvpDeaths
-     *
-     * @return integer 
-     */
-    public function getPvpDeaths()
-    {
-        return $this->pvpDeaths;
-    }
-
-    /**
-     * Set kills
-     *
-     * @param integer $kills
-     * @return Stats
-     */
-    public function setKills($kills)
-    {
-        $this->kills = $kills;
-    
-        return $this;
-    }
-
-    /**
-     * Get kills
-     *
-     * @return integer 
-     */
-    public function getKills()
-    {
-        return $this->kills;
-    }
-
-    /**
-     * Set playedTime
-     *
-     * @param integer $playedTime
-     * @return Stats
-     */
-    public function setPlayedTime($playedTime)
-    {
-        $this->playedTime = $playedTime;
-    
-        return $this;
-    }
-
-    /**
-     * Get playedTime
-     *
-     * @return integer 
-     */
-    public function getPlayedTime()
-    {
-        return $this->playedTime;
-    }
-
-    /**
-     * Set verbosity
-     *
-     * @param integer $verbosity
-     * @return Stats
-     */
-    public function setVerbosity($verbosity)
-    {
-        $this->verbosity = $verbosity;
-
-        return $this;
-    }
-
-    /**
-     * Get verbosity
-     *
-     * @return integer 
-     */
-    public function getVerbosity()
-    {
-        return $this->verbosity;
-    }
-
-    /**
-     * Set player
-     *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $player
-     * @return Stats
-     */
-    public function setPlayer(\Ovski\PlayerStatsBundle\Entity\Player $player)
-    {
-        $this->player = $player;
-    
-        return $this;
-    }
-
-    /**
-     * Get player
-     *
-     * @return \Ovski\PlayerStatsBundle\Entity\Player 
-     */
-    public function getPlayer()
-    {
-        return $this->player;
-    }
-
-    /**
-     * Set prestige
-     *
-     * @param integer $prestige
-     * @return Stats
-     */
-    public function setPrestige($prestige)
-    {
-        $this->prestige = $prestige;
-
-        return $this;
-    }
-
-    /**
-     * Get prestige
-     *
-     * @return integer 
-     */
-    public function getPrestige()
-    {
-        return $this->prestige;
-    }
-
-    /**
-     * Set player_id
-     *
-     * @param integer $playerId
-     * @return Player
-     */
-    public function setId($playerId)
-    {
-        $this->id = $playerId;
-    
-        return $this;
-    }
-
-    /**
-     * Get player_id
+     * Get id
      *
      * @return integer 
      */
@@ -337,4 +130,233 @@ class Player
         return $this->pseudo;
     }
 
+    /**
+     * Set brokenBlocks
+     *
+     * @param integer $brokenBlocks
+     * @return Player
+     */
+    public function setBrokenBlocks($brokenBlocks)
+    {
+        $this->brokenBlocks = $brokenBlocks;
+    
+        return $this;
+    }
+
+    /**
+     * Get brokenBlocks
+     *
+     * @return integer 
+     */
+    public function getBrokenBlocks()
+    {
+        return $this->brokenBlocks;
+    }
+
+    /**
+     * Set placedBlocks
+     *
+     * @param integer $placedBlocks
+     * @return Player
+     */
+    public function setPlacedBlocks($placedBlocks)
+    {
+        $this->placedBlocks = $placedBlocks;
+    
+        return $this;
+    }
+
+    /**
+     * Get placedBlocks
+     *
+     * @return integer 
+     */
+    public function getPlacedBlocks()
+    {
+        return $this->placedBlocks;
+    }
+
+    /**
+     * Set stupidDeaths
+     *
+     * @param integer $stupidDeaths
+     * @return Player
+     */
+    public function setStupidDeaths($stupidDeaths)
+    {
+        $this->stupidDeaths = $stupidDeaths;
+    
+        return $this;
+    }
+
+    /**
+     * Get stupidDeaths
+     *
+     * @return integer 
+     */
+    public function getStupidDeaths()
+    {
+        return $this->stupidDeaths;
+    }
+
+    /**
+     * Set pvpDeaths
+     *
+     * @param integer $pvpDeaths
+     * @return Player
+     */
+    public function setPvpDeaths($pvpDeaths)
+    {
+        $this->pvpDeaths = $pvpDeaths;
+    
+        return $this;
+    }
+
+    /**
+     * Get pvpDeaths
+     *
+     * @return integer 
+     */
+    public function getPvpDeaths()
+    {
+        return $this->pvpDeaths;
+    }
+
+    /**
+     * Set kills
+     *
+     * @param integer $kills
+     * @return Player
+     */
+    public function setKills($kills)
+    {
+        $this->kills = $kills;
+    
+        return $this;
+    }
+
+    /**
+     * Get kills
+     *
+     * @return integer 
+     */
+    public function getKills()
+    {
+        return $this->kills;
+    }
+
+    /**
+     * Set playedTime
+     *
+     * @param integer $playedTime
+     * @return Player
+     */
+    public function setPlayedTime($playedTime)
+    {
+        $this->playedTime = $playedTime;
+    
+        return $this;
+    }
+
+    /**
+     * Get playedTime
+     *
+     * @return integer 
+     */
+    public function getPlayedTime()
+    {
+        return $this->playedTime;
+    }
+
+    /**
+     * Set verbosity
+     *
+     * @param integer $verbosity
+     * @return Player
+     */
+    public function setVerbosity($verbosity)
+    {
+        $this->verbosity = $verbosity;
+    
+        return $this;
+    }
+
+    /**
+     * Get verbosity
+     *
+     * @return integer 
+     */
+    public function getVerbosity()
+    {
+        return $this->verbosity;
+    }
+
+    /**
+     * Set prestige
+     *
+     * @param integer $prestige
+     * @return Player
+     */
+    public function setPrestige($prestige)
+    {
+        $this->prestige = $prestige;
+    
+        return $this;
+    }
+
+    /**
+     * Get prestige
+     *
+     * @return integer 
+     */
+    public function getPrestige()
+    {
+        return $this->prestige;
+    }
+
+    /**
+     * Set faction
+     *
+     * @param \Ovski\FactionStatsBundle\Entity\Faction $faction
+     * @return Player
+     */
+    public function setFaction(\Ovski\FactionStatsBundle\Entity\Faction $faction = null)
+    {
+        $this->faction = $faction;
+    
+        return $this;
+    }
+
+    /**
+     * Get faction
+     *
+     * @return \Ovski\FactionStatsBundle\Entity\Faction 
+     */
+    public function getFaction()
+    {
+        return $this->faction;
+    }
+
+    /**
+     * Set role
+     *
+     * @param string $role
+     * @return Player
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return string 
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
 }

@@ -8,7 +8,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Note
  *
- * @UniqueEntity({"receiver_player_id", "donor_player"})
  * @UniqueEntity("receiver_player_id")
  * @UniqueEntity("donor_player_id")
  * @ORM\Table(name="note")
@@ -19,7 +18,7 @@ class Note
     /**
      * @var integer
      *
-     * @ORM\Column(name="note_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -34,13 +33,13 @@ class Note
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="player_id", name="receiver_player_id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="receiver_player_id")
      */
     private $receiverPlayer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="player_id", name="donor_player_id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="donor_player_id")
      */
     private $donorPlayer;
 

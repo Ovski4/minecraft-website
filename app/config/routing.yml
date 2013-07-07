@@ -6,4 +6,9 @@ ovski_website:
 ovski_player_stats:
     resource: "@OvskiPlayerStatsBundle/Controller/"
     type:     annotation
-    prefix:   /stats
+    prefix:   /
+
+ovski_faction_stats:
+    resource: "@OvskiFactionStatsBundle/Controller/"
+    type:     annotation
+    prefix:   /

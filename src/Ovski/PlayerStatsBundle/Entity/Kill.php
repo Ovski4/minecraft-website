@@ -20,7 +20,7 @@ class Kill
     /**
      * @var integer
      *
-     * @ORM\Column(name="kill_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -42,13 +42,13 @@ class Kill
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="player_id", name="killed_player_id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="killed_player_id")
      */
     private $killedPlayer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="player_id", name="killer_player_id")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="killer_player_id")
      */
     private $killerPlayer;
 

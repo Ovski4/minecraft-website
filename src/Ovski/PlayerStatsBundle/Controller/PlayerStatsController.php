@@ -9,9 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class PlayerStatsController extends Controller
 {
     /**
-     * List all players
+     * List all player stats
      *
-     * @Route("/players", name="players_stats")
+     * @Route("/stats/players", name="players_stats")
      * @Template()
      */
     public function statsAction()
@@ -23,9 +23,9 @@ class PlayerStatsController extends Controller
     }
 
     /**
-     * Stats of a given player 
+     * Give the stats of a player
      *
-     * @Route("/player/{pseudo}", name="player_stat")
+     * @Route("/stats/player/{pseudo}", name="player_stats")
      * @Template()
      */
     public function statAction($pseudo)

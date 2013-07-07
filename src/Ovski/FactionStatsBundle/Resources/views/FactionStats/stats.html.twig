@@ -13,20 +13,20 @@
 
 {% block body %}
 
-    <h2>Players stats</h2>
+    <h2>Factions stats</h2>
 
     <table>
         <thead>
             <tr>
-                <th>Pseudo</th>
-                <th>Kills</th>
+                <th>Name</th>
+                <th>created at</th>
             <tr>
         </thead>
         <tbody>
-        {% for player in players %}
+        {% for faction in factions %}
             <tr>
-                <td><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
-                <td>{{ player.kills }}</td>
+                <td><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></td>
+                <td>{{ faction.createdAt }}</td>
             </tr>
         {% endfor %}
         </tbody>
