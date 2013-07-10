@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\PlayerStatsBundle\Entity;
+namespace Ovski\MineStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Kill
  *
  * @ORM\Table(name="`kill`")
- * @ORM\Entity(repositoryClass="Ovski\PlayerStatsBundle\Repository\KillRepository")
+ * @ORM\Entity(repositoryClass="Ovski\MineStatsBundle\Repository\KillRepository")
  * @UniqueEntity("killed_player_id")
  * @UniqueEntity("killer_player_id")
  */
@@ -41,13 +41,13 @@ class Kill
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
+     * @ORM\ManyToOne(targetEntity="Ovski\MineStatsBundle\Entity\Player")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="killed_player_id")
      */
     private $killedPlayer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
+     * @ORM\ManyToOne(targetEntity="Ovski\MineStatsBundle\Entity\Player")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="killer_player_id")
      */
     private $killerPlayer;
@@ -111,10 +111,10 @@ class Kill
     /**
      * Set killedPlayer
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $killedPlayer
+     * @param \Ovski\MineStatsBundle\Entity\Player $killedPlayer
      * @return Kill
      */
-    public function setKilledPlayer(\Ovski\PlayerStatsBundle\Entity\Player $killedPlayer)
+    public function setKilledPlayer(\Ovski\MineStatsBundle\Entity\Player $killedPlayer)
     {
         $this->killedPlayer = $killedPlayer;
     
@@ -124,7 +124,7 @@ class Kill
     /**
      * Get killedPlayer
      *
-     * @return \Ovski\PlayerStatsBundle\Entity\Player 
+     * @return \Ovski\MineStatsBundle\Entity\Player 
      */
     public function getKilledPlayer()
     {
@@ -134,10 +134,10 @@ class Kill
     /**
      * Set killerPlayer
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $killerPlayer
+     * @param \Ovski\MineStatsBundle\Entity\Player $killerPlayer
      * @return Kill
      */
-    public function setKillerPlayer(\Ovski\PlayerStatsBundle\Entity\Player $killerPlayer)
+    public function setKillerPlayer(\Ovski\MineStatsBundle\Entity\Player $killerPlayer)
     {
         $this->killerPlayer = $killerPlayer;
     
@@ -147,7 +147,7 @@ class Kill
     /**
      * Get killerPlayer
      *
-     * @return \Ovski\PlayerStatsBundle\Entity\Player 
+     * @return \Ovski\MineStatsBundle\Entity\Player 
      */
     public function getKillerPlayer()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\FactionStatsBundle\Repository;
+namespace Ovski\MineStatsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

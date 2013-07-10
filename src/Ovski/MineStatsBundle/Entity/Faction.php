@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\FactionStatsBundle\Entity;
+namespace Ovski\MineStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Faction
  *
  * @ORM\Table(name="faction")
- * @ORM\Entity(repositoryClass="Ovski\FactionStatsBundle\Repository\FactionRepository")
+ * @ORM\Entity(repositoryClass="Ovski\MineStatsBundle\Repository\FactionRepository")
  */
 class Faction
 { 
@@ -54,7 +54,7 @@ class Faction
     private $createdAt;
     
     /**
-     * @ORM\OneToMany(targetEntity="Ovski\PlayerStatsBundle\Entity\Player", mappedBy="faction")
+     * @ORM\OneToMany(targetEntity="Ovski\MineStatsBundle\Entity\Player", mappedBy="faction")
      */
     private $players;
 
@@ -199,10 +199,10 @@ class Faction
     /**
      * Add players
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $players
+     * @param \Ovski\MineStatsBundle\Entity\Player $players
      * @return Faction
      */
-    public function addPlayer(\Ovski\PlayerStatsBundle\Entity\Player $players)
+    public function addPlayer(\Ovski\MineStatsBundle\Entity\Player $players)
     {
         $this->players[] = $players;
 
@@ -212,9 +212,9 @@ class Faction
     /**
      * Remove players
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $players
+     * @param \Ovski\MineStatsBundle\Entity\Player $players
      */
-    public function removePlayer(\Ovski\PlayerStatsBundle\Entity\Player $players)
+    public function removePlayer(\Ovski\MineStatsBundle\Entity\Player $players)
     {
         $this->players->removeElement($players);
     }
@@ -232,10 +232,10 @@ class Faction
     /**
      * Add truceFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $truceFactions
      * @return Faction
      */
-    public function addTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $truceFactions)
+    public function addTruceFaction(\Ovski\MineStatsBundle\Entity\Faction $truceFactions)
     {
         $this->truceFactions[] = $truceFactions;
 
@@ -245,9 +245,9 @@ class Faction
     /**
      * Remove truceFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $truceFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $truceFactions
      */
-    public function removeTruceFaction(\Ovski\FactionStatsBundle\Entity\Faction $truceFactions)
+    public function removeTruceFaction(\Ovski\MineStatsBundle\Entity\Faction $truceFactions)
     {
         $this->truceFactions->removeElement($truceFactions);
     }
@@ -265,10 +265,10 @@ class Faction
     /**
      * Add allyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $allyFactions
      * @return Faction
      */
-    public function addAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $allyFactions)
+    public function addAllyFaction(\Ovski\MineStatsBundle\Entity\Faction $allyFactions)
     {
         $this->allyFactions[] = $allyFactions;
 
@@ -278,9 +278,9 @@ class Faction
     /**
      * Remove allyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $allyFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $allyFactions
      */
-    public function removeAllyFaction(\Ovski\FactionStatsBundle\Entity\Faction $allyFactions)
+    public function removeAllyFaction(\Ovski\MineStatsBundle\Entity\Faction $allyFactions)
     {
         $this->allyFactions->removeElement($allyFactions);
     }
@@ -298,10 +298,10 @@ class Faction
     /**
      * Add enemyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $enemyFactions
      * @return Faction
      */
-    public function addEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactions)
+    public function addEnemyFaction(\Ovski\MineStatsBundle\Entity\Faction $enemyFactions)
     {
         $this->enemyFactions[] = $enemyFactions;
 
@@ -311,9 +311,9 @@ class Faction
     /**
      * Remove enemyFactions
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $enemyFactions
+     * @param \Ovski\MineStatsBundle\Entity\Faction $enemyFactions
      */
-    public function removeEnemyFaction(\Ovski\FactionStatsBundle\Entity\Faction $enemyFactions)
+    public function removeEnemyFaction(\Ovski\MineStatsBundle\Entity\Faction $enemyFactions)
     {
         $this->enemyFactions->removeElement($enemyFactions);
     }
@@ -370,7 +370,7 @@ class Faction
     /**
      * Get the relationship with the given faction
      * 
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $faction
+     * @param \Ovski\MineStatsBundle\Entity\Faction $faction
      * @return string
      */
     public function getRelationShip(Faction $faction) {

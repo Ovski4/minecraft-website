@@ -16,8 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Ovski\PlayerStatsBundle\OvskiPlayerStatsBundle(),
-            new Ovski\FactionStatsBundle\OvskiFactionStatsBundle(),
+            new Ovski\MineStatsBundle\OvskiMineStatsBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
             new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
         );

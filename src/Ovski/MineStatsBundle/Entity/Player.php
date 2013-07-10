@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\PlayerStatsBundle\Entity;
+namespace Ovski\MineStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Player
  *
  * @ORM\Table(name="player")
- * @ORM\Entity(repositoryClass="Ovski\PlayerStatsBundle\Repository\PlayerRepository")
+ * @ORM\Entity(repositoryClass="Ovski\MineStatsBundle\Repository\PlayerRepository")
  */
 class Player
 {
@@ -22,7 +22,7 @@ class Player
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\FactionStatsBundle\Entity\Faction", inversedBy="players", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Ovski\MineStatsBundle\Entity\Faction", inversedBy="players", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="faction_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $faction;
@@ -317,10 +317,10 @@ class Player
     /**
      * Set faction
      *
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $faction
+     * @param \Ovski\MineStatsBundle\Entity\Faction $faction
      * @return Player
      */
-    public function setFaction(\Ovski\FactionStatsBundle\Entity\Faction $faction = null)
+    public function setFaction(\Ovski\MineStatsBundle\Entity\Faction $faction = null)
     {
         $this->faction = $faction;
     
@@ -330,7 +330,7 @@ class Player
     /**
      * Get faction
      *
-     * @return \Ovski\FactionStatsBundle\Entity\Faction 
+     * @return \Ovski\MineStatsBundle\Entity\Faction 
      */
     public function getFaction()
     {

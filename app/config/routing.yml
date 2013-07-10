@@ -3,12 +3,7 @@ ovski_website:
     type:     annotation
     prefix:   /
 
-ovski_player_stats:
-    resource: "@OvskiPlayerStatsBundle/Controller/"
+ovski_mine_stats:
+    resource: "@OvskiMineStatsBundle/Controller/"
     type:     annotation
-    prefix:   /
-
-ovski_faction_stats:
-    resource: "@OvskiFactionStatsBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    prefix:   /stats

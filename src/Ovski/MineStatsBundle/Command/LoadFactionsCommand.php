@@ -7,13 +7,13 @@
  *
  */
 
-namespace Ovski\FactionStatsBundle\Command;
+namespace Ovski\MineStatsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Ovski\FactionStatsBundle\Entity\Faction;
-use Ovski\PlayerStatsBundle\Entity\Player;
+use Ovski\MineStatsBundle\Entity\Faction;
+use Ovski\MineStatsBundle\Entity\Player;
 
 /**
  * Load factions in database
@@ -37,7 +37,7 @@ EOT
         $manager = $this->getContainer()->get('doctrine')->getManager();
  
         //Remove disbanded factions (the json file doesn't exist)
-        $factions = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+        $factions = $manager->getRepository('OvskiMineStatsBundle:Faction')
                             ->findAll();
         //TODO, check if remove cascade for relationships (on faction delete)
         if($factions) {
@@ -62,7 +62,7 @@ EOT
             while (false !== ($file = readdir($handleFactions))) {
                 if ($this->isFactionAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
-                    $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                    $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
                                        ->find($this->getFactionIdFromJson($file))
                     ;
                     if (!$faction) {
@@ -84,7 +84,7 @@ EOT
             while (false !== ($file = readdir($handlePlayers))) {
                 if ($this->isPlayerAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
-                    $player = $manager->getRepository('OvskiPlayerStatsBundle:Player')
+                    $player = $manager->getRepository('OvskiMineStatsBundle:Player')
                                        ->findOneByPseudo($this->getPlayerPseudoFromJson($file));
                     ;
                     if($player) {
@@ -104,7 +104,7 @@ EOT
     /**
      * Update player data according to faction changes
      * 
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $player
+     * @param \Ovski\MineStatsBundle\Entity\Player $player
      * @param File $file
      * @param type $manager
      * @param type $output
@@ -135,7 +135,7 @@ EOT
                 if ($player->getFaction() != NULL) {
                     //check if the new and current faction arent the same
                     if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
-                        $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                        $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
                                            ->find($playerJsonArray['factionId']);
                         $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed faction from <comment>%s</comment> to <comment>%s</comment>)",
                                                  $player->getPseudo(),
@@ -159,7 +159,7 @@ EOT
                     }
                 //there is no faction set yet
                 } elseif ($player->getFaction() == NULL) {
-                    $faction = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                    $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
                                                ->find($playerJsonArray['factionId']);
                     $player->setFaction($faction);
                     if (isset($playerJsonArray['role'])) {
@@ -181,7 +181,7 @@ EOT
      * 
      * @param Faction $faction
      * @param string $file
-     * @return \Ovski\FactionStatsBundle\Entity\Faction
+     * @return \Ovski\MineStatsBundle\Entity\Faction
      */
     public function updateFaction(Faction $faction, $file, $manager, $output) {
         $factionJsonArray = $this->getFactionArray($file);
@@ -197,7 +197,7 @@ EOT
     /**
      * Update relationships for a faction
      * 
-     * @param \Ovski\FactionStatsBundle\Entity\Faction $faction
+     * @param \Ovski\MineStatsBundle\Entity\Faction $faction
      * @param array $relationships
      * @param $manager
      * @param $output
@@ -206,7 +206,7 @@ EOT
     {
         if(isset($relationships)) {
             foreach($relationships as $factionId => $relationship) {
-                $factionWithRelationship = $manager->getRepository('OvskiFactionStatsBundle:Faction')
+                $factionWithRelationship = $manager->getRepository('OvskiMineStatsBundle:Faction')
                                    ->find($factionId);
                 ;
                 //is the faction with relationship still exist
@@ -243,7 +243,7 @@ EOT
      * Create a faction object from a faction json file
      * 
      * @param string $file
-     * @return \Ovski\FactionStatsBundle\Entity\Faction
+     * @return \Ovski\MineStatsBundle\Entity\Faction
      */
     public function createFaction($file, $manager, $output) {
 

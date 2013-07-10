@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\PlayerStatsBundle\Entity;
+namespace Ovski\MineStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @UniqueEntity("receiver_player_id")
  * @UniqueEntity("donor_player_id")
  * @ORM\Table(name="note")
- * @ORM\Entity(repositoryClass="Ovski\PlayerStatsBundle\Repository\NoteRepository")
+ * @ORM\Entity(repositoryClass="Ovski\MineStatsBundle\Repository\NoteRepository")
  */
 class Note
 {
@@ -32,13 +32,13 @@ class Note
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
+     * @ORM\ManyToOne(targetEntity="Ovski\MineStatsBundle\Entity\Player")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="receiver_player_id")
      */
     private $receiverPlayer;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\PlayerStatsBundle\Entity\Player")
+     * @ORM\ManyToOne(targetEntity="Ovski\MineStatsBundle\Entity\Player")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="donor_player_id")
      */
     private $donorPlayer;
@@ -79,10 +79,10 @@ class Note
     /**
      * Set receiverPlayer
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $receiverPlayer
+     * @param \Ovski\MineStatsBundle\Entity\Player $receiverPlayer
      * @return Note
      */
-    public function setReceiverPlayer(\Ovski\PlayerStatsBundle\Entity\Player $receiverPlayer)
+    public function setReceiverPlayer(\Ovski\MineStatsBundle\Entity\Player $receiverPlayer)
     {
         $this->receiverPlayer = $receiverPlayer;
     
@@ -92,7 +92,7 @@ class Note
     /**
      * Get receiverPlayer
      *
-     * @return \Ovski\PlayerStatsBundle\Entity\Player 
+     * @return \Ovski\MineStatsBundle\Entity\Player 
      */
     public function getReceiverPlayer()
     {
@@ -102,10 +102,10 @@ class Note
     /**
      * Set donorPlayer
      *
-     * @param \Ovski\PlayerStatsBundle\Entity\Player $donorPlayer
+     * @param \Ovski\MineStatsBundle\Entity\Player $donorPlayer
      * @return Note
      */
-    public function setDonorPlayer(\Ovski\PlayerStatsBundle\Entity\Player $donorPlayer)
+    public function setDonorPlayer(\Ovski\MineStatsBundle\Entity\Player $donorPlayer)
     {
         $this->donorPlayer = $donorPlayer;
     
@@ -115,7 +115,7 @@ class Note
     /**
      * Get donorPlayer
      *
-     * @return \Ovski\PlayerStatsBundle\Entity\Player 
+     * @return \Ovski\MineStatsBundle\Entity\Player 
      */
     public function getDonorPlayer()
     {
