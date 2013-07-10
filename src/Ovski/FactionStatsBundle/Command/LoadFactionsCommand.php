@@ -261,7 +261,7 @@ EOT
             $faction->setDescription($factionJsonArray['description']);
         }
 
-        if(isset($factionJsonArray['description'])) {
+        if(isset($factionJsonArray['relationWishes'])) {
             $this->updateRelationships($faction, $factionJsonArray['relationWishes'], $manager, $output);
         }
 
