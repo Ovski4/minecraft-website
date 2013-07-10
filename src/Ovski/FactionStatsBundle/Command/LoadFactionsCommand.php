@@ -36,9 +36,10 @@ EOT
     {
         $manager = $this->getContainer()->get('doctrine')->getManager();
  
-        //Remove disbanded factions (the file doesn't exist)
+        //Remove disbanded factions (the json file doesn't exist)
         $factions = $manager->getRepository('OvskiFactionStatsBundle:Faction')
                             ->findAll();
+        //TODO, check if remove cascade for relationships (on faction delete)
         if($factions) {
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {

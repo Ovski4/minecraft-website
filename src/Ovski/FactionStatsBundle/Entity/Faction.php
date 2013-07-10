@@ -47,9 +47,9 @@ class Faction
     private $description;
 
     /**
-     * @var integer
+     * @var bigint
      *
-     * @ORM\Column(type="integer", name="created_at")
+     * @ORM\Column(type="bigint", name="created_at")
      */
     private $createdAt;
     
