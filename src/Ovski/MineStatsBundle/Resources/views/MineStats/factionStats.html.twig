@@ -13,6 +13,40 @@
 
 {% block body %}
 
-    ok
+    <h2>{{ faction.name|capitalize }}</h2>
+
+    <h3>Information</h3>
+    <ul>
+        <li>Created at : {{ faction.createdAt }}</li>
+        <li>Description : {{ faction.description }}</li>
+    </ul>
+    
+    <h3>Players</h3>
+    <ul>
+        {% for player in faction.players %}
+            <li><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h3>Truce</h3>
+    <ul>
+        {% for faction in faction.truceFactions %}
+            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Allies</h3>
+    <ul>
+        {% for faction in faction.allyFactions %}
+            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h3>Ennemies</h3>
+    <ul>
+        {% for faction in faction.enemyFactions %}
+            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

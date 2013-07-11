@@ -16,13 +16,13 @@ class LoadKillData extends AbstractFixture implements OrderedFixtureInterface
     {
         /* CREATE KILLS */
 
-        $kill1 = new Kill();
+        /*$kill1 = new Kill();
         $kill1->setDate();
         $kill1->setKilledPlayer();
         $kill1->setKillerPlayer();
         $manager->persist($kill1);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**

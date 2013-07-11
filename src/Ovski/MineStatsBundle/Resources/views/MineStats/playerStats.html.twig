@@ -16,6 +16,7 @@
     <h2>{{ player.pseudo|capitalize }}'s Stats</h2>
 
     <ul>
+        <li>Faction : <a href="{{ path('faction_stats', { name: player.faction }) }}">{{ player.faction }}</a></li>
         <li>Kills : {{ player.kills }}</li>
         <li>Prestige : {{ player.prestige }}</li>
         <li>BrokenBlocks : {{ player.brokenBlocks }}</li>

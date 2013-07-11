@@ -65,6 +65,17 @@ class LoadFactionData extends AbstractFixture implements OrderedFixtureInterface
         $hotrsFaction->setName("House of the rising sun");
         $manager->persist($hotrsFaction);
 
+        /* RELATIONSHIPS */
+        
+        $sandpeopleFaction->addAllyFaction($borntofactionnerFaction);
+        $borntofactionnerFaction->addAllyFaction($sandpeopleFaction);
+        $warlordsFaction->addTruceFaction($herbivoresFaction);
+        $herbivoresFaction->addTruceFaction($warlordsFaction);
+        $sandpeopleFaction->addEnemyFaction($warlordsFaction);
+        $borntofactionnerFaction->addTruceFaction($herbivoresFaction);
+        $herbivoresFaction->addTruceFaction($borntofactionnerFaction);
+        $hotrsFaction->addEnemyFaction($borntofactionnerFaction);
+        
         $this->addReference('sandpeople-faction', $sandpeopleFaction);
         $this->addReference('warlords-faction', $warlordsFaction);
         $this->addReference('herbivores-faction', $herbivoresFaction);
