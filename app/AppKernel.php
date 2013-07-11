@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Ovski\MineStatsBundle\OvskiMineStatsBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
             new Bazinga\Bundle\FakerBundle\BazingaFakerBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
