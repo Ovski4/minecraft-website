@@ -66,6 +66,12 @@ class LoadFactionData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($hotrsFaction);
 
         $this->addReference('sandpeople-faction', $sandpeopleFaction);
+        $this->addReference('warlords-faction', $warlordsFaction);
+        $this->addReference('herbivores-faction', $herbivoresFaction);
+        $this->addReference('motherofgod-faction', $motherofgodFaction);
+        $this->addReference('mwahahahahaha-faction', $mwahahahahaFaction);
+        $this->addReference('borntofactionner-faction', $borntofactionnerFaction);
+        $this->addReference('hotrs-faction', $hotrsFaction);
 
         $manager->flush();
     }

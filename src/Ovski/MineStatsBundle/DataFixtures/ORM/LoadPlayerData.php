@@ -16,17 +16,19 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
     {
         /* CREATE PLAYERS */
 
-        $ovskiPlayer = new Player();
-        $ovskiPlayer->setPseudo("ovski4");
-        $ovskiPlayer->setBrokenBlocks(0);
-        $ovskiPlayer->setKills(0);
-        $ovskiPlayer->setPlacedBlocks(0);
-        $ovskiPlayer->setPlayedTime(0);
-        $ovskiPlayer->setPrestige(0);
-        $ovskiPlayer->setPvpDeaths(0);
-        $ovskiPlayer->setStupidDeaths(0);
-        $ovskiPlayer->setVerbosity(0);
-        $manager->persist($ovskiPlayer);
+        $ovski4Player = new Player();
+        $ovski4Player->setPseudo("ovski4");
+        $ovski4Player->setBrokenBlocks(0);
+        $ovski4Player->setKills(0);
+        $ovski4Player->setPlacedBlocks(0);
+        $ovski4Player->setPlayedTime(0);
+        $ovski4Player->setPrestige(0);
+        $ovski4Player->setPvpDeaths(0);
+        $ovski4Player->setStupidDeaths(0);
+        $ovski4Player->setVerbosity(0);
+        $ovski4Player->setFaction($this->getReference("sandpeople-faction"));
+        $ovski4Player->setRole("OFFICER");
+        $manager->persist($ovski4Player);
 
         $napyDaWisePlayer = new Player();
         $napyDaWisePlayer->setPseudo("Napy Da Wise");
@@ -38,6 +40,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $napyDaWisePlayer->setPvpDeaths(0);
         $napyDaWisePlayer->setStupidDeaths(0);
         $napyDaWisePlayer->setVerbosity(0);
+        $napyDaWisePlayer->setFaction($this->getReference("sandpeople-faction"));
+        $napyDaWisePlayer->setRole("LEADER");
         $manager->persist($napyDaWisePlayer);
 
         $glapinePlayer = new Player();
@@ -50,6 +54,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $glapinePlayer->setPvpDeaths(0);
         $glapinePlayer->setStupidDeaths(0);
         $glapinePlayer->setVerbosity(0);
+        $glapinePlayer->setFaction($this->getReference("sandpeople-faction"));
+        $glapinePlayer->setRole("OFFICER");
         $manager->persist($glapinePlayer);
 
         $grosziznzinPlayer = new Player();
@@ -62,6 +68,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $grosziznzinPlayer->setPvpDeaths(0);
         $grosziznzinPlayer->setStupidDeaths(0);
         $grosziznzinPlayer->setVerbosity(0);
+        $grosziznzinPlayer->setFaction($this->getReference("sandpeople-faction"));
+        $grosziznzinPlayer->setRole("OFFICER");
         $manager->persist($grosziznzinPlayer);
 
         $summumluiPlayer = new Player();
@@ -74,6 +82,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $summumluiPlayer->setPvpDeaths(0);
         $summumluiPlayer->setStupidDeaths(0);
         $summumluiPlayer->setVerbosity(0);
+        $summumluiPlayer->setFaction($this->getReference("warlords-faction"));
+        $summumluiPlayer->setRole("LEADER");
         $manager->persist($summumluiPlayer);
 
         $jaylbralonPlayer = new Player();
@@ -86,6 +96,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $jaylbralonPlayer->setPvpDeaths(0);
         $jaylbralonPlayer->setStupidDeaths(0);
         $jaylbralonPlayer->setVerbosity(0);
+        $jaylbralonPlayer->setFaction($this->getReference("herbivores-faction"));
+        $jaylbralonPlayer->setRole("LEADER");
         $manager->persist($jaylbralonPlayer);
 
         $pedoPonyPlayer = new Player();
@@ -98,6 +110,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $pedoPonyPlayer->setPvpDeaths(0);
         $pedoPonyPlayer->setStupidDeaths(0);
         $pedoPonyPlayer->setVerbosity(0);
+        $pedoPonyPlayer->setFaction($this->getReference("mwahahahahaha-faction"));
+        $pedoPonyPlayer->setRole("LEADER");
         $manager->persist($pedoPonyPlayer);
 
         $fearhardcorePlayer = new Player();
@@ -110,6 +124,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $fearhardcorePlayer->setPvpDeaths(0);
         $fearhardcorePlayer->setStupidDeaths(0);
         $fearhardcorePlayer->setVerbosity(0);
+        $fearhardcorePlayer->setFaction($this->getReference("motherofgod-faction"));
+        $fearhardcorePlayer->setRole("LEADER");
         $manager->persist($fearhardcorePlayer);
 
         $laisorePlayer = new Player();
@@ -122,6 +138,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $laisorePlayer->setPvpDeaths(0);
         $laisorePlayer->setStupidDeaths(0);
         $laisorePlayer->setVerbosity(0);
+        $laisorePlayer->setFaction($this->getReference("borntofactionner-faction"));
+        $laisorePlayer->setRole("LEADER");
         $manager->persist($laisorePlayer);
         
         $pocralaPlayer = new Player();
@@ -134,6 +152,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $pocralaPlayer->setPvpDeaths(0);
         $pocralaPlayer->setStupidDeaths(0);
         $pocralaPlayer->setVerbosity(0);
+        $pocralaPlayer->setFaction($this->getReference("hotrs-faction"));
+        $pocralaPlayer->setRole("LEADER");
         $manager->persist($pocralaPlayer);
         
         $neoxerPlayer = new Player();
@@ -146,6 +166,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $neoxerPlayer->setPvpDeaths(0);
         $neoxerPlayer->setStupidDeaths(0);
         $neoxerPlayer->setVerbosity(0);
+        $neoxerPlayer->setFaction($this->getReference("warlords-faction"));
+        $neoxerPlayer->setRole("OFFICER");
         $manager->persist($neoxerPlayer);
         
         $rinyaPlayer = new Player();
@@ -158,6 +180,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $rinyaPlayer->setPvpDeaths(0);
         $rinyaPlayer->setStupidDeaths(0);
         $rinyaPlayer->setVerbosity(0);
+        $rinyaPlayer->setFaction($this->getReference("herbivores-faction"));
+        $rinyaPlayer->setRole("OFFICER");
         $manager->persist($rinyaPlayer);
         
         $mixcalPlayer = new Player();
@@ -170,6 +194,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $mixcalPlayer->setPvpDeaths(0);
         $mixcalPlayer->setStupidDeaths(0);
         $mixcalPlayer->setVerbosity(0);
+        $mixcalPlayer->setFaction($this->getReference("herbivores-faction"));
+        $mixcalPlayer->setRole("OFFICER");
         $manager->persist($mixcalPlayer);
         
         $tiriaPlayer = new Player();
@@ -182,6 +208,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $tiriaPlayer->setPvpDeaths(0);
         $tiriaPlayer->setStupidDeaths(0);
         $tiriaPlayer->setVerbosity(0);
+        $tiriaPlayer->setFaction($this->getReference("motherofgod-faction"));
+        $tiriaPlayer->setRole("OFFICER");
         $manager->persist($tiriaPlayer);
 
         $opakPlayer = new Player();
@@ -194,6 +222,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $opakPlayer->setPvpDeaths(0);
         $opakPlayer->setStupidDeaths(0);
         $opakPlayer->setVerbosity(0);
+        $opakPlayer->setFaction($this->getReference("motherofgod-faction"));
+        $opakPlayer->setRole("OFFICER");
         $manager->persist($opakPlayer);
 
         $rinerkPlayer = new Player();
@@ -206,6 +236,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $rinerkPlayer->setPvpDeaths(0);
         $rinerkPlayer->setStupidDeaths(0);
         $rinerkPlayer->setVerbosity(0);
+        $rinerkPlayer->setFaction($this->getReference("borntofactionner-faction"));
+        $rinerkPlayer->setRole("OFFICER");
         $manager->persist($rinerkPlayer);
 
         $batysPlayer = new Player();
@@ -218,6 +250,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $batysPlayer->setPvpDeaths(0);
         $batysPlayer->setStupidDeaths(0);
         $batysPlayer->setVerbosity(0);
+        $batysPlayer->setFaction($this->getReference("borntofactionner-faction"));
+        $batysPlayer->setRole("OFFICER");
         $manager->persist($batysPlayer);
 
         $pounetPlayer = new Player();
@@ -230,6 +264,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $pounetPlayer->setPvpDeaths(0);
         $pounetPlayer->setStupidDeaths(0);
         $pounetPlayer->setVerbosity(0);
+        $pounetPlayer->setFaction($this->getReference("hotrs-faction"));
+        $pounetPlayer->setRole("OFFICER");
         $manager->persist($pounetPlayer);
 
         $bisvilinPlayer = new Player();
@@ -242,6 +278,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $bisvilinPlayer->setPvpDeaths(0);
         $bisvilinPlayer->setStupidDeaths(0);
         $bisvilinPlayer->setVerbosity(0);
+        $bisvilinPlayer->setFaction($this->getReference("hotrs-faction"));
+        $bisvilinPlayer->setRole("OFFICER");
         $manager->persist($bisvilinPlayer);
         
         $rekilonPlayer = new Player();
@@ -254,6 +292,8 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $rekilonPlayer->setPvpDeaths(0);
         $rekilonPlayer->setStupidDeaths(0);
         $rekilonPlayer->setVerbosity(0);
+        $rekilonPlayer->setFaction($this->getReference("hotrs-faction"));
+        $rekilonPlayer->setRole("OFFICER");
         $manager->persist($rekilonPlayer);
         
         $subellePlayer = new Player();
@@ -327,6 +367,34 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $arnauyPlayer->setStupidDeaths(0);
         $arnauyPlayer->setVerbosity(0);
         $manager->persist($arnauyPlayer);
+        
+        $this->addReference('arnauy-player', $arnauyPlayer);
+        $this->addReference('ovski4-player', $ovski4Player);
+        $this->addReference('napydawise-player', $napyDaWisePlayer);
+        $this->addReference('grosziznzin-player', $glapinePlayer);
+        $this->addReference('glapine-player', $grosziznzinPlayer);
+        $this->addReference('symeon-player', $symeonPlayer);
+        $this->addReference('nobarxo-player', $nobarxoPlayer);
+        $this->addReference('transtax-player', $transtaxPlayer);
+        $this->addReference('zulnet-player', $zulnetPlayer);
+        $this->addReference('subelle-player', $subellePlayer);
+        $this->addReference('rekilon-player', $rekilonPlayer);
+        $this->addReference('bisvilin-player', $bisvilinPlayer);
+        $this->addReference('pounet-player', $pounetPlayer);
+        $this->addReference('batys-player', $batysPlayer);
+        $this->addReference('rinerk-player', $rinerkPlayer);
+        $this->addReference('opak-player', $opakPlayer);
+        $this->addReference('tiria-player', $tiriaPlayer);
+        $this->addReference('mixcal-player', $mixcalPlayer);
+        $this->addReference('rinya-player', $rinyaPlayer);
+        $this->addReference('neoxer-player', $neoxerPlayer);
+        $this->addReference('pocrala-player', $pocralaPlayer);
+        $this->addReference('laisore-player', $laisorePlayer);
+        $this->addReference('fearhardcore-player', $fearhardcorePlayer);
+        $this->addReference('pedopony-player', $pedoPonyPlayer);
+        $this->addReference('jaylbralon-player', $jaylbralonPlayer);
+        $this->addReference('summumlui-player', $summumluiPlayer);
+        
         $manager->flush();
     }
 
