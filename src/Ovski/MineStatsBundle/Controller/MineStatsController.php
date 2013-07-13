@@ -79,7 +79,7 @@ class MineStatsController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $factions = $manager->getRepository("OvskiMineStatsBundle:Faction")
                             ->findAll();
-        
+
         $pager = new Pagerfanta(new ArrayAdapter($factions));
         $pager->setMaxPerPage($this->container->getParameter('max_factions_per_page'));
 
@@ -115,7 +115,7 @@ class MineStatsController extends Controller
                        )
             );
         }
-        
+
         return array("faction" => $faction);
     }
 }

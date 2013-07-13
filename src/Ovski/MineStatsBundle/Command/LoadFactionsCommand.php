@@ -10,6 +10,7 @@
 namespace Ovski\MineStatsBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ovski\MineStatsBundle\Entity\Faction;
@@ -110,7 +111,7 @@ EOT
      * @param type $manager
      * @param type $output
      */
-    public function updatePlayerFaction(Player $player, $file, $manager, $output)
+    public function updatePlayerFaction(Player $player, $file, ObjectManager $manager, OutputInterface $output)
     {
         $playerJsonArray = $this->getPlayerArray($file);
         //the player was kicked or left his faction
@@ -200,7 +201,7 @@ EOT
      * @param string $file
      * @return \Ovski\MineStatsBundle\Entity\Faction
      */
-    public function updateFaction(Faction $faction, $file, $manager, $output) {
+    public function updateFaction(Faction $faction, $file, ObjectManager $manager, OutputInterface $output) {
         $factionJsonArray = $this->getFactionArray($file);
         $faction->setName($factionJsonArray['name']);
         if(isset($factionJsonArray['description'])) {
@@ -219,7 +220,7 @@ EOT
      * @param $manager
      * @param $output
      */
-    public function manageRelationships(Faction $faction, $relationships, $manager, $output)
+    public function manageRelationships(Faction $faction, $relationships, ObjectManager $manager, OutputInterface $output)
     {
         if(isset($relationships)) {
             foreach($relationships as $factionId => $relationship) {
@@ -262,7 +263,7 @@ EOT
      * @param string $file
      * @return \Ovski\MineStatsBundle\Entity\Faction
      */
-    public function createFaction($file, $manager, $output) {
+    public function createFaction($file, ObjectManager $manager, OutputInterface $output) {
 
         //retrieve data from json
         $fileAbsolutePath = sprintf("%s%s", $this->getFactionDirectory(), $file);
