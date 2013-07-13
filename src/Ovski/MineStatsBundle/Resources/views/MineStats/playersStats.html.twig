@@ -15,20 +15,26 @@
 
     <h2>Players stats</h2>
 
+    {% if pager.haveToPaginate %}
+        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+        {# {{ pagerfanta(pager, 'default', {'routeName': 'players_stats_paginated'}) }} #}
+    {% endif %}
+    
     <table>
         <thead>
             <tr>
-                <th>Pseudo</th>
+                <th colspan="2">Pseudo</th>
                 <th>Kills</th>
             <tr>
         </thead>
         <tbody>
-        {% for player in players %}
-            <tr>
-                <td><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
-                <td>{{ player.kills }}</td>
-            </tr>
-        {% endfor %}
+            {% for player in pager.currentPageResults %}
+                <tr>
+                    <td><img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px"></td>
+                    <td><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
+                    <td>{{ player.kills }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 

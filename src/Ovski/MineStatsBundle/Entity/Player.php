@@ -26,13 +26,20 @@ class Player
      * @ORM\JoinColumn(name="faction_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $faction;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=10, nullable=true)
      */
     private $role;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $power;
 
     /**
      * @var string
@@ -96,6 +103,11 @@ class Player
      * @ORM\Column(type="integer")
      */
     private $prestige;
+
+    public function __toString()
+    {
+        return $this->getPseudo();
+    }
 
     /**
      * Get id
@@ -358,5 +370,28 @@ class Player
     public function getRole()
     {
         return $this->role;
+    }
+
+    /**
+     * Set power
+     *
+     * @param float $power
+     * @return Player
+     */
+    public function setPower($power)
+    {
+        $this->power = $power;
+    
+        return $this;
+    }
+
+    /**
+     * Get power
+     *
+     * @return float 
+     */
+    public function getPower()
+    {
+        return $this->power;
     }
 }

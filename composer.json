@@ -21,7 +21,9 @@
         "willdurand/faker-bundle": "dev-master",
         "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/data-fixtures" : "dev-master",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "pagerfanta/pagerfanta": "dev-master",
+        "white-october/pagerfanta-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

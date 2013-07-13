@@ -2,24 +2,42 @@
 
 namespace Ovski\MineStatsBundle\Controller;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Pagerfanta;
 
 class MineStatsController extends Controller
 {
     /**
      * List all player stats
      *
-     * @Route("/players", name="players_stats")
-     * @Template()
+     * @Route("/players", name="players_stats", defaults={"page" = 1})
+     * @Route("/players/{page}", name="players_stats_paginated")
+     * @Template() 
      */
-    public function playersStatsAction()
+    public function playersStatsAction($page)
     {
         $em = $this->getDoctrine()->getManager();
         $players = $em->getRepository("OvskiMineStatsBundle:Player")->getAll();
 
-        return array("players" => $players);
+        $pager = new Pagerfanta(new ArrayAdapter($players));
+        $pager->setMaxPerPage($this->container->getParameter('max_players_per_page'));
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException(
+                sprintf("As awesome as this website can be, page \"%s\" was not found.",
+                        $page
+                       )
+            );
+        }
+
+        return array("pager" => $pager);
     }
 
     /**
@@ -31,10 +49,15 @@ class MineStatsController extends Controller
     public function playerStatsAction($pseudo)
     {
         $em = $this->getDoctrine()->getManager();
-        $player = $em->getRepository("OvskiMineStatsBundle:Player")->findOneBy(array("pseudo" => $pseudo));
-        
+        $player = $em->getRepository("OvskiMineStatsBundle:Player")
+                     ->findOneBy(array("pseudo" => $pseudo));
+
         if (!$player) {
-            throw new \Exception(sprintf("What are you looking for? I have never heard of %s in my life.", $pseudo));
+            throw $this->createNotFoundException(
+                sprintf("What are you looking for? I have never heard of %s in my life.",
+                        $pseudo
+                       )
+            );
         }
 
         $timePlayed  = $player->getPlayedTime();
@@ -47,15 +70,30 @@ class MineStatsController extends Controller
     /**
      * List all factions
      *
-     * @Route("/factions", name="factions_stats")
+     * @Route("/factions", name="factions_stats", defaults={"page" = 1})
+     * @Route("/factions/{page}", name="factions_stats_paginated") 
      * @Template()
      */
-    public function factionsStatsAction()
+    public function factionsStatsAction($page)
     {
         $manager = $this->getDoctrine()->getManager();
-        $factions = $manager->getRepository("OvskiMineStatsBundle:Faction")->findAll();
+        $factions = $manager->getRepository("OvskiMineStatsBundle:Faction")
+                            ->findAll();
+        
+        $pager = new Pagerfanta(new ArrayAdapter($factions));
+        $pager->setMaxPerPage($this->container->getParameter('max_factions_per_page'));
 
-        return array("factions" => $factions);
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException(
+                sprintf("As awesome as this website can be, page \"%s\" was not found.",
+                        $page
+                       )
+            );
+        }
+
+        return array("pager" => $pager);
     }
 
     /**
@@ -67,12 +105,17 @@ class MineStatsController extends Controller
     public function factionStatsAction($name)
     {
         $manager = $this->getDoctrine()->getManager();
-        $faction = $manager->getRepository("OvskiMineStatsBundle:Faction")->findOneBy(array("name" => $name));
+        $faction = $manager->getRepository("OvskiMineStatsBundle:Faction")
+                           ->findOneBy(array("name" => $name));
 
         if (!$faction) {
-            throw new \Exception(sprintf("What are you looking for? I have never heard of the %s faction in my life.", $pseudo));
+            throw $this->createNotFoundException(
+                sprintf("What are you looking for? I have never heard of the %s faction in my life.",
+                        $name
+                       )
+            );
         }
-
+        
         return array("faction" => $faction);
     }
 }

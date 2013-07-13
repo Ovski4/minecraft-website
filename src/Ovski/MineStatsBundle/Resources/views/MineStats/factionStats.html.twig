@@ -28,25 +28,31 @@
         {% endfor %}
     </ul>
     
-    <h3>Truce</h3>
-    <ul>
-        {% for faction in faction.truceFactions %}
-            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% if faction.truceFactions.first %}
+        <h3>Truce</h3>
+        <ul>
+            {% for faction in faction.truceFactions %}
+                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-    <h3>Allies</h3>
-    <ul>
-        {% for faction in faction.allyFactions %}
-            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% if faction.allyFactions.first %}
+        <h3>Allies</h3>
+        <ul>
+            {% for faction in faction.allyFactions %}
+                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
-    <h3>Ennemies</h3>
-    <ul>
-        {% for faction in faction.enemyFactions %}
-            <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
-        {% endfor %}
-    </ul>
+    {% if faction.enemyFactions.first %}
+        <h3>Ennemies</h3>
+        <ul>
+            {% for faction in faction.enemyFactions %}
+                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
 {% endblock %}

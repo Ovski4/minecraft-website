@@ -31,7 +31,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($ovski4Player);
 
         $napyDaWisePlayer = new Player();
-        $napyDaWisePlayer->setPseudo("Napy Da Wise");
+        $napyDaWisePlayer->setPseudo("napydawise");
         $napyDaWisePlayer->setBrokenBlocks(0);
         $napyDaWisePlayer->setKills(0);
         $napyDaWisePlayer->setPlacedBlocks(0);
@@ -281,7 +281,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $bisvilinPlayer->setFaction($this->getReference("hotrs-faction"));
         $bisvilinPlayer->setRole("OFFICER");
         $manager->persist($bisvilinPlayer);
-        
+
         $rekilonPlayer = new Player();
         $rekilonPlayer->setPseudo("rekilon");
         $rekilonPlayer->setBrokenBlocks(0);
@@ -295,7 +295,48 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $rekilonPlayer->setFaction($this->getReference("hotrs-faction"));
         $rekilonPlayer->setRole("OFFICER");
         $manager->persist($rekilonPlayer);
-        
+
+        $CallOfBurgerPlayer = new Player();
+        $CallOfBurgerPlayer->setPseudo("CallOfBurger");
+        $CallOfBurgerPlayer->setBrokenBlocks(0);
+        $CallOfBurgerPlayer->setKills(0);
+        $CallOfBurgerPlayer->setPlacedBlocks(0);
+        $CallOfBurgerPlayer->setPlayedTime(0);
+        $CallOfBurgerPlayer->setPrestige(0);
+        $CallOfBurgerPlayer->setPvpDeaths(0);
+        $CallOfBurgerPlayer->setStupidDeaths(0);
+        $CallOfBurgerPlayer->setVerbosity(0);
+        $CallOfBurgerPlayer->setFaction($this->getReference("hotrs-faction"));
+        $manager->persist($CallOfBurgerPlayer);
+
+        $NoixDePecanPlayer = new Player();
+        $NoixDePecanPlayer->setPseudo("NoixDePecan");
+        $NoixDePecanPlayer->setBrokenBlocks(0);
+        $NoixDePecanPlayer->setKills(0);
+        $NoixDePecanPlayer->setPlacedBlocks(0);
+        $NoixDePecanPlayer->setPlayedTime(0);
+        $NoixDePecanPlayer->setPrestige(0);
+        $NoixDePecanPlayer->setPvpDeaths(0);
+        $NoixDePecanPlayer->setStupidDeaths(0);
+        $NoixDePecanPlayer->setVerbosity(0);
+        $NoixDePecanPlayer->setFaction($this->getReference("hotrs-faction"));
+        $NoixDePecanPlayer->setRole("OFFICER");
+        $manager->persist($NoixDePecanPlayer);
+
+        $AleksPlayer = new Player();
+        $AleksPlayer->setPseudo("Aleks");
+        $AleksPlayer->setBrokenBlocks(0);
+        $AleksPlayer->setKills(0);
+        $AleksPlayer->setPlacedBlocks(0);
+        $AleksPlayer->setPlayedTime(0);
+        $AleksPlayer->setPrestige(0);
+        $AleksPlayer->setPvpDeaths(0);
+        $AleksPlayer->setStupidDeaths(0);
+        $AleksPlayer->setVerbosity(0);
+        $AleksPlayer->setFaction($this->getReference("hotrs-faction"));
+        $AleksPlayer->setRole("OFFICER");
+        $manager->persist($AleksPlayer);
+
         $subellePlayer = new Player();
         $subellePlayer->setPseudo("subelle");
         $subellePlayer->setBrokenBlocks(0);
@@ -344,17 +385,17 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $nobarxoPlayer->setVerbosity(0);
         $manager->persist($nobarxoPlayer);
         
-        $symeonPlayer = new Player();
-        $symeonPlayer->setPseudo("symeon");
-        $symeonPlayer->setBrokenBlocks(0);
-        $symeonPlayer->setKills(0);
-        $symeonPlayer->setPlacedBlocks(0);
-        $symeonPlayer->setPlayedTime(0);
-        $symeonPlayer->setPrestige(0);
-        $symeonPlayer->setPvpDeaths(0);
-        $symeonPlayer->setStupidDeaths(0);
-        $symeonPlayer->setVerbosity(0);
-        $manager->persist($symeonPlayer);
+        $factemiusPlayer = new Player();
+        $factemiusPlayer->setPseudo("factemius");
+        $factemiusPlayer->setBrokenBlocks(0);
+        $factemiusPlayer->setKills(0);
+        $factemiusPlayer->setPlacedBlocks(0);
+        $factemiusPlayer->setPlayedTime(0);
+        $factemiusPlayer->setPrestige(0);
+        $factemiusPlayer->setPvpDeaths(0);
+        $factemiusPlayer->setStupidDeaths(0);
+        $factemiusPlayer->setVerbosity(0);
+        $manager->persist($factemiusPlayer);
         
         $arnauyPlayer = new Player();
         $arnauyPlayer->setPseudo("arnauy");
@@ -367,13 +408,91 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $arnauyPlayer->setStupidDeaths(0);
         $arnauyPlayer->setVerbosity(0);
         $manager->persist($arnauyPlayer);
-        
+
+        $furaigonPlayer = new Player();
+        $furaigonPlayer->setPseudo("furaigon");
+        $furaigonPlayer->setBrokenBlocks(0);
+        $furaigonPlayer->setKills(0);
+        $furaigonPlayer->setPlacedBlocks(0);
+        $furaigonPlayer->setPlayedTime(0);
+        $furaigonPlayer->setPrestige(0);
+        $furaigonPlayer->setPvpDeaths(0);
+        $furaigonPlayer->setStupidDeaths(0);
+        $furaigonPlayer->setVerbosity(0);
+        $manager->persist($furaigonPlayer);
+
+        $xX3l3m3ntPlayer = new Player();
+        $xX3l3m3ntPlayer->setPseudo("xX3l3m3nt");
+        $xX3l3m3ntPlayer->setBrokenBlocks(0);
+        $xX3l3m3ntPlayer->setKills(0);
+        $xX3l3m3ntPlayer->setPlacedBlocks(0);
+        $xX3l3m3ntPlayer->setPlayedTime(0);
+        $xX3l3m3ntPlayer->setPrestige(0);
+        $xX3l3m3ntPlayer->setPvpDeaths(0);
+        $xX3l3m3ntPlayer->setStupidDeaths(0);
+        $xX3l3m3ntPlayer->setVerbosity(0);
+        $manager->persist($xX3l3m3ntPlayer);
+
+        $TheLordackPlayer = new Player();
+        $TheLordackPlayer->setPseudo("TheLordack");
+        $TheLordackPlayer->setBrokenBlocks(0);
+        $TheLordackPlayer->setKills(0);
+        $TheLordackPlayer->setPlacedBlocks(0);
+        $TheLordackPlayer->setPlayedTime(0);
+        $TheLordackPlayer->setPrestige(0);
+        $TheLordackPlayer->setPvpDeaths(0);
+        $TheLordackPlayer->setStupidDeaths(0);
+        $TheLordackPlayer->setVerbosity(0);
+        $manager->persist($TheLordackPlayer);
+
+        $emile_1000Player = new Player();
+        $emile_1000Player->setPseudo("emile_1000");
+        $emile_1000Player->setBrokenBlocks(0);
+        $emile_1000Player->setKills(0);
+        $emile_1000Player->setPlacedBlocks(0);
+        $emile_1000Player->setPlayedTime(0);
+        $emile_1000Player->setPrestige(0);
+        $emile_1000Player->setPvpDeaths(0);
+        $emile_1000Player->setStupidDeaths(0);
+        $emile_1000Player->setVerbosity(0);
+        $manager->persist($emile_1000Player);
+
+        $C4MagPlayer = new Player();
+        $C4MagPlayer->setPseudo("C4Mag");
+        $C4MagPlayer->setBrokenBlocks(0);
+        $C4MagPlayer->setKills(0);
+        $C4MagPlayer->setPlacedBlocks(0);
+        $C4MagPlayer->setPlayedTime(0);
+        $C4MagPlayer->setPrestige(0);
+        $C4MagPlayer->setPvpDeaths(0);
+        $C4MagPlayer->setStupidDeaths(0);
+        $C4MagPlayer->setVerbosity(0);
+        $manager->persist($C4MagPlayer);
+ 
+        $RazmaboutePlayer = new Player();
+        $RazmaboutePlayer->setPseudo("Razmaboute");
+        $RazmaboutePlayer->setBrokenBlocks(0);
+        $RazmaboutePlayer->setKills(0);
+        $RazmaboutePlayer->setPlacedBlocks(0);
+        $RazmaboutePlayer->setPlayedTime(0);
+        $RazmaboutePlayer->setPrestige(0);
+        $RazmaboutePlayer->setPvpDeaths(0);
+        $RazmaboutePlayer->setStupidDeaths(0);
+        $RazmaboutePlayer->setVerbosity(0);
+        $manager->persist($RazmaboutePlayer);
+ 
+        $this->addReference('razmaboute-player', $RazmaboutePlayer);
+        $this->addReference('c4mag-player', $C4MagPlayer);
+        $this->addReference('emile_1000-player', $emile_1000Player);
+        $this->addReference('xx3l3m3nt-player', $xX3l3m3ntPlayer);
+        $this->addReference('thelordack-player', $TheLordackPlayer);
+        $this->addReference('furaigon-player', $furaigonPlayer);
         $this->addReference('arnauy-player', $arnauyPlayer);
         $this->addReference('ovski4-player', $ovski4Player);
         $this->addReference('napydawise-player', $napyDaWisePlayer);
         $this->addReference('grosziznzin-player', $glapinePlayer);
         $this->addReference('glapine-player', $grosziznzinPlayer);
-        $this->addReference('symeon-player', $symeonPlayer);
+        $this->addReference('factemius-player', $factemiusPlayer);
         $this->addReference('nobarxo-player', $nobarxoPlayer);
         $this->addReference('transtax-player', $transtaxPlayer);
         $this->addReference('zulnet-player', $zulnetPlayer);
@@ -394,6 +513,9 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('pedopony-player', $pedoPonyPlayer);
         $this->addReference('jaylbralon-player', $jaylbralonPlayer);
         $this->addReference('summumlui-player', $summumluiPlayer);
+        $this->addReference('callofburger-player', $CallOfBurgerPlayer);
+        $this->addReference('noixdepecan-player', $NoixDePecanPlayer);
+        $this->addReference('aleks-player', $AleksPlayer);
         
         $manager->flush();
     }

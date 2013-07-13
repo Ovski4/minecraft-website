@@ -48,6 +48,7 @@ EOT
                     foreach ($faction->getPlayers() as $player) {
                         $player->setRole(NULL);
                         $player->setFaction(NULL);
+                        $player->setPower(NULL);
                         $manager->persist($player);
                     }
                     $manager->remove($faction); 
@@ -122,6 +123,7 @@ EOT
                 );
                 $player->setFaction(NULL);
                 $player->setRole(NULL);
+                $player->setPower(NULL);
             }
         } else {
             $playerFile = sprintf(
@@ -155,7 +157,19 @@ EOT
                         );
                         if (isset($playerJsonArray['role'])) {
                             $player->setRole($playerJsonArray['role']);
-                        }   
+                        }
+                    }
+                    //check if the new and current power arent the same
+                    if($player->getPower() != NULL && $player->getPower() != $playerJsonArray['power']) {
+                        $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed power from <comment>%s</comment> to <comment>%s</comment>)",
+                                                 $player->getPseudo(),
+                                                 $player->getPower(),
+                                                 $playerJsonArray['power']
+                                        )
+                        );
+                        if (isset($playerJsonArray['power'])) {
+                            $player->setRole($playerJsonArray['power']);
+                        }
                     }
                 //there is no faction set yet
                 } elseif ($player->getFaction() == NULL) {
@@ -164,6 +178,9 @@ EOT
                     $player->setFaction($faction);
                     if (isset($playerJsonArray['role'])) {
                         $player->setRole($playerJsonArray['role']);
+                    }
+                    if (isset($playerJsonArray['power'])) {
+                        $player->setPower($playerJsonArray['power']);
                     }
                     $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
                                              $player->getPseudo(),
@@ -190,19 +207,19 @@ EOT
             $faction->setDescription($factionJsonArray['description']);
         }
         if(isset($factionJsonArray['relationWishes'])) {
-            $this->updateRelationships($faction, $factionJsonArray['relationWishes'], $manager, $output);    
+            $this->manageRelationships($faction, $factionJsonArray['relationWishes'], $manager, $output);    
         }
     }
 
     /**
-     * Update relationships for a faction
+     * Manage (create/update) relationships for a faction
      * 
      * @param \Ovski\MineStatsBundle\Entity\Faction $faction
      * @param array $relationships
      * @param $manager
      * @param $output
      */
-    public function updateRelationships(Faction $faction, $relationships, $manager, $output)
+    public function manageRelationships(Faction $faction, $relationships, $manager, $output)
     {
         if(isset($relationships)) {
             foreach($relationships as $factionId => $relationship) {
@@ -221,7 +238,7 @@ EOT
                                 $factionWithRelationship
                                 )
                             )
-                    ;
+                        ;
                     } elseif($currentRelationship != $relationship) {
                         $faction->removeRelationShip($factionWithRelationship);
                         $faction->addRelationShip($factionWithRelationship, $relationship);
@@ -232,7 +249,7 @@ EOT
                                 $factionWithRelationship
                                 )
                             )
-                    ;
+                        ;
                     }
                 }
             }
@@ -263,7 +280,7 @@ EOT
         }
 
         if(isset($factionJsonArray['relationWishes'])) {
-            $this->updateRelationships($faction, $factionJsonArray['relationWishes'], $manager, $output);
+            $this->manageRelationships($faction, $factionJsonArray['relationWishes'], $manager, $output);
         }
 
         return $faction;

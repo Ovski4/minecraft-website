@@ -23,7 +23,7 @@
             <tr>
         </thead>
         <tbody>
-        {% for faction in factions %}
+        {% for faction in pager.currentPageResults %}
             <tr>
                 <td><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></td>
                 <td>{{ faction.createdAt }}</td>

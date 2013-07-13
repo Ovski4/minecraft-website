@@ -385,6 +385,11 @@ class Faction
         }
     }
 
+    /**
+     * Remove the relationship with the given faction
+     * 
+     * @param \Ovski\MineStatsBundle\Entity\Faction $faction
+     */
     public function removeRelationShip(Faction $faction) {
         if($this->getRelationShip($faction) != "NEUTRAL") {
             $removeMethod = self::$REMOVE_RELATIONSHIP_MAP[$this->getRelationShip($faction)];
@@ -392,8 +397,49 @@ class Faction
         }
     }
 
+    /**
+     * Add a relationship with the given faction
+     * 
+     * @param \Ovski\MineStatsBundle\Entity\Faction $faction
+     * @param string : $relation [TRUCE, ALLY, ENEMY]
+     */
     public function addRelationShip(Faction $faction, $relation) {
         $addMethod = self::$ADD_RELATIONSHIP_MAP[$relation];
         self::$addMethod($faction);
+    }
+
+    /**
+     * Get the number of players in a faction
+     * 
+     * @return int
+     */
+    public function getPlayerNumber()
+    {
+        return count($this->getPlayers);
+    }
+
+    /**
+     * Get max power a faction can pretend to
+     * 
+     * @return int
+     */
+    public function getMaxPower()
+    {
+        return $this->getPlayerNumber()*10;
+    }
+
+    /**
+     * Get the power of a faction
+     * 
+     * @return int
+     */
+    public function getPower()
+    {
+        $power = 0;
+        foreach ($this->getPlayers() as $player) {
+            $power = $power + $player->getPower();
+        }
+
+        return $power;
     }
 }
