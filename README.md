@@ -10,7 +10,6 @@ First
   * Plugins java to update -> stats entity has been removed.
   * Plugin java -> Add player on first join
   * Check on battlelog to find nice stats ideas
-  * FactionStatsBundle -> read json files, map into an entity
 
 After
   * Plugin registration
