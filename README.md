@@ -2,6 +2,7 @@ MineWeb
 =======
 
 First
+  * add weapon entity
   * slugify factions
   * Resizable iframe (dynmap)
   * Look at static pages stuff
