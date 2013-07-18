@@ -28,6 +28,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $ovski4Player->setVerbosity(0);
         $ovski4Player->setFaction($this->getReference("sandpeople-faction"));
         $ovski4Player->setRole("OFFICER");
+        $ovski4Player->setPower(2.25);
         $manager->persist($ovski4Player);
 
         $napyDaWisePlayer = new Player();

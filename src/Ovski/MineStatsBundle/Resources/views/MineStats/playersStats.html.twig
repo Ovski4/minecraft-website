@@ -13,23 +13,35 @@
     {% if pager.haveToPaginate %}
         {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
     {% endif %}
-    
-    <table>
-        <thead>
-            <tr>
-                <th colspan="2">Pseudo</th>
-                <th>Kills</th>
-            <tr>
-        </thead>
-        <tbody>
-            {% for player in pager.currentPageResults %}
-                <tr>
-                    <td><img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px"></td>
-                    <td><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></td>
-                    <td>{{ player.kills }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row-fluid">
+        <div class="span2"></div>
+        <div class="span4"><i class="icon-male"></i> Players</div>
+        <div class="span2"><i class="icon-screenshot"></i> Kills</div>
+        <div class="span4"><i class="icon-group"></i> Faction</div>
+    </div>
+    <ul>
+        {% for player in pager.currentPageResults %}
+            <li class="player-row">
+                <div class="row-fluid">
+                    <div class="span2"><img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px"></div>
+                    <div class="span4"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
+                    <div class="span2">{{ player.kills }}</div>
+                    <div class="span4">
+                        {% if player.faction %}
+                            <span>{{ player.faction }}
+                                {% if player.role %}
+                                    - {{ player.role | capitalize }}
+                                {% else %}
+                                    - Member
+                                {% endif %}
+                            </span>
+                        {% else %}
+                            <span class="loner">whitout faction</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

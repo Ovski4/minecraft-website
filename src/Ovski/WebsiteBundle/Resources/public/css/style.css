@@ -148,12 +148,26 @@ body, html
     font-size: 13px;
 }
 
+/* Players Stats page */
+
+.player-row
+{
+    list-style: none;
+    margin: 10px 0;
+}
+
+.player-row .loner
+{
+    font-style: italic;
+}
+
  /**********
   * FOOTER *
   **********/
 
 body > footer
 {
+    margin-top: 50px;
     height: 500px;
     text-align: center;
     border-top: 5px solid #2e180a;

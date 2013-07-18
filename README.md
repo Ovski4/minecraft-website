@@ -10,6 +10,7 @@ First
   * Plugins java to update -> stats entity has been removed.
   * Plugin java -> Add player on first join
   * Check on battlelog to find nice stats ideas
+  * Check if assets are ok
 
 After
   * Plugin registration
