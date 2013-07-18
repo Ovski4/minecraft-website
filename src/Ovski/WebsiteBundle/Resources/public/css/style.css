@@ -7,7 +7,19 @@ body, html
     margin: 0;
     padding: 0;
     font-family: title;
-    background: #f6fba6; /*#f6fba6*/
+    background: #f1dfbf; /*#f6fba6 d6b274 efd7ad */
+}
+
+a
+{
+    color: #74B729;
+}
+
+a:hover
+{
+    color: #382819;
+    text-decoration: none;
+    font-weight: bold;
 }
 
  /*********
@@ -88,7 +100,7 @@ body, html
 }
 
 /*hover*/
-#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li:hover { background: #52902b; }
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li:hover { background: #74b73f; }
 #header-wrapper ul li:hover a
 {
     color: #FFF;
@@ -118,7 +130,7 @@ body, html
 }
 
 #header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li a { color: #000; }
-#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li:hover { background:  #52902b; }
+#header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li:hover { background:  #74b73f; }
 #header-wrapper > header > .navbar > .navbar-inner > ul.nav > li.parent:hover ul li:hover a { color: #FFF; }
 
 
@@ -145,7 +157,7 @@ body, html
 {
     min-height: 500px;
     margin-top: 10px;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 #main h2
@@ -166,7 +178,8 @@ body, html
 .pagination ul li
 {
     display: inline-block;
-    margin-left: 5px;  
+    margin-left: 5px;
+    line-height: 28px;
 }
 
 .pagination ul li a
@@ -174,6 +187,7 @@ body, html
     border: none;
     background: #9ec864;
     color: #000;
+    line-height: 25px;
 }
 
 .pagination ul li:first-child a
@@ -189,7 +203,8 @@ body, html
 
 .pagination ul li:hover a
 {
-    background: #52902b;
+    font-weight: normal;
+    background: #74b73f;
     color: #fff;
 }
 
@@ -204,6 +219,12 @@ body, html
 
 /* Players Stats page */
 
+header.player-list-head > div
+{
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .player-list
 {
     margin: 0;
@@ -212,9 +233,34 @@ body, html
 .player-list > li
 {
     list-style: none;
-    padding: 10px 0;
     border-top: 1px dashed #382819;
     line-height: 30px;
+}
+
+.player-list > li > div.row-fluid:hover
+{
+    background: #74B729;
+}
+
+.player-list > li > div.row-fluid:hover a
+{
+    color: #fff;
+}
+
+.player-list > li > div.row-fluid:hover a:hover
+{
+    color: #382819;
+}
+
+.player-list > li > div.row-fluid > div
+{
+    height: 50px;
+    line-height: 50px;
+}
+
+.player-list > li > div.row-fluid > div:first-child
+{
+    text-align: center;
 }
 
 .player-list > li:first-child
@@ -225,6 +271,14 @@ body, html
 .player-list > li .loner
 {
     font-style: italic;
+}
+
+.player-list span a,
+.player-list div a
+{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
 }
 
  /**********
