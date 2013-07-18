@@ -8,7 +8,7 @@
 
 {% block body %}
 
-    <h2>Players stats</h2>
+    <h2><i class="icon-bar-chart"></i> Players stats</h2>
 
     {% if pager.haveToPaginate %}
         {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
@@ -17,26 +17,32 @@
         <div class="span2"></div>
         <div class="span4"><i class="icon-male"></i> Players</div>
         <div class="span2"><i class="icon-screenshot"></i> Kills</div>
-        <div class="span4"><i class="icon-group"></i> Faction</div>
+        <div class="span3"><i class="icon-group"></i> Faction</div>
+        <div class="span1"><i class="icon-user"></i> Role</div>
     </div>
-    <ul>
+    <ul class="player-list">
         {% for player in pager.currentPageResults %}
-            <li class="player-row">
+            <li>
                 <div class="row-fluid">
                     <div class="span2"><img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px"></div>
                     <div class="span4"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
                     <div class="span2">{{ player.kills }}</div>
-                    <div class="span4">
+                    <div class="span3">
                         {% if player.faction %}
-                            <span>{{ player.faction }}
-                                {% if player.role %}
-                                    - {{ player.role | capitalize }}
-                                {% else %}
-                                    - Member
-                                {% endif %}
+                            <span>
+                                <a href="{{ path('faction_stats', { name: player.faction }) }}">{{ player.faction }}</a>
                             </span>
                         {% else %}
                             <span class="loner">whitout faction</span>
+                        {% endif %}
+                    </div>
+                    <div class="span1">
+                        {% if player.role %}
+                            {{ player.role | capitalize }}
+                        {% elseif player.faction %}
+                            Member
+                        {% else %}
+                            /
                         {% endif %}
                     </div>
                 </div>

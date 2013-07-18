@@ -7,6 +7,7 @@ body, html
     margin: 0;
     padding: 0;
     font-family: title;
+    background: #f6fba6; /*#f6fba6*/
 }
 
  /*********
@@ -142,21 +143,86 @@ body, html
 
 #main
 {
-    background: #FFF;
     min-height: 500px;
     margin-top: 10px;
     font-size: 13px;
 }
 
-/* Players Stats page */
-
-.player-row
+#main h2
 {
-    list-style: none;
-    margin: 10px 0;
+    color: #382819;
+    margin: 20px 0 0px 0;
+    text-align: center;
 }
 
-.player-row .loner
+/* Pagination */
+
+.pagination ul
+{
+    box-shadow: none;
+    border-radius: 0px;
+}
+
+.pagination ul li
+{
+    display: inline-block;
+    margin-left: 5px;  
+}
+
+.pagination ul li a
+{
+    border: none;
+    background: #9ec864;
+    color: #000;
+}
+
+.pagination ul li:first-child a
+{
+    border: none;
+}
+
+.pagination ul li:first-child a,
+.pagination ul li:last-child a
+{
+    border-radius: 0px;
+}
+
+.pagination ul li:hover a
+{
+    background: #52902b;
+    color: #fff;
+}
+
+.pagination ul .active a,
+.pagination ul .disabled a,
+.pagination ul .active:hover a,
+.pagination ul .disabled:hover a
+{
+    background: #382819;
+    color: #fff;
+}
+
+/* Players Stats page */
+
+.player-list
+{
+    margin: 0;
+}
+
+.player-list > li
+{
+    list-style: none;
+    padding: 10px 0;
+    border-top: 1px dashed #382819;
+    line-height: 30px;
+}
+
+.player-list > li:first-child
+{
+    border-top: 3px solid #382819;
+}
+
+.player-list > li .loner
 {
     font-style: italic;
 }
