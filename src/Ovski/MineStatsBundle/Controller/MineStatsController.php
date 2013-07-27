@@ -3,10 +3,11 @@
 namespace Ovski\MineStatsBundle\Controller;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Pagerfanta\Exception\NotValidCurrentPageException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Pagerfanta;
 
@@ -17,13 +18,23 @@ class MineStatsController extends Controller
      *
      * @Route("/players", name="players_stats", defaults={"page" = 1})
      * @Route("/players/{page}", name="players_stats_paginated")
-     * @Template() 
+     * @Template()
      */
-    public function playersStatsAction($page)
+    public function playersStatsAction(Request $request, $page)
     {
-        $em = $this->getDoctrine()->getManager();
-        $players = $em->getRepository("OvskiMineStatsBundle:Player")->getAll();
+        /*$players = array();
 
+        $filterManager = $this->get('player_filter_manager');
+        $filterForm = $filterManager->createForm();
+
+        if ($request->query->has($filterForm->getName())) {
+            $filterForm->bind($request);
+            $players = $filterManager->filter();
+        } else {*/
+            $em = $this->getDoctrine()->getManager();
+            $players = $em->getRepository("OvskiMineStatsBundle:Player")->getAll();
+        //}
+        
         $pager = new Pagerfanta(new ArrayAdapter($players));
         $pager->setMaxPerPage($this->container->getParameter('max_players_per_page'));
 
@@ -37,7 +48,10 @@ class MineStatsController extends Controller
             );
         }
 
-        return array("pager" => $pager);
+        return array(
+            "pager"       => $pager,
+            //"filter_form" => $filterForm->createView()
+        );
     }
 
     /**

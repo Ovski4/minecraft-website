@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Ovski\MineStatsBundle\OvskiMineStatsBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle()
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
