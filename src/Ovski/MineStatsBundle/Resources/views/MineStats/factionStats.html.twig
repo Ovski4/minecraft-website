@@ -13,10 +13,10 @@
         <h2>{{ faction.name|capitalize }}</h2>
 
         <h3>Information</h3>
-        <ul>
-            <li>Created at : {{ faction.createdAt | date("m/d/Y") }}</li>
-            <li>Description : {{ faction.description }}</li>
-            <li>Power : {{ faction.power }}</li>
+        <ul class="stat-list">
+            <li><i class="icon-time"></i> Created at : {{ faction.createdAt | date("m/d/Y") }}</li>
+            <li><i class="icon-pencil"></i> Description : {{ faction.description }}</li>
+            <li><i class="icon-bolt"></i> Power : {{ faction.power }}</li>
         </ul>
 
         <h3>Players</h3>

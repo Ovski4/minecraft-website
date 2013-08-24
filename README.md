@@ -2,9 +2,9 @@ MineWeb
 =======
 
 First
+  * contact page -> swiftMailerBundle
+  * Put Tools class in a toolbundle
   * add weapon entity
-  * Resizable iframe (dynmap)
-  * Look at static pages stuff
   * Plugins java to update -> stats entity has been removed.
   * Plugin java -> Add player on first join
   * Check on battlelog to find nice stats ideas
@@ -17,5 +17,6 @@ After
   * Forum bundle to do (As simple as jeuxvideo.com)
   * News and comments
   * Forums
-
+  * Resizable iframe (dynmap)
+  * Look at static pages stuff
 --
