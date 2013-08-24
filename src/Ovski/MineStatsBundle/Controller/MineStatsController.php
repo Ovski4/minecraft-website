@@ -69,8 +69,8 @@ class MineStatsController extends Controller
         if (!$player) {
             throw $this->createNotFoundException(
                 sprintf("What are you looking for? I have never heard of %s in my life.",
-                        $pseudo
-                       )
+                    $pseudo
+                )
             );
         }
 
@@ -94,6 +94,16 @@ class MineStatsController extends Controller
         $factions = $manager->getRepository("OvskiMineStatsBundle:Faction")
                             ->findAll();
 
+        /*Get power for each faction*/
+        $factionsPowers = array();
+        foreach ($factions as $faction) {
+            $factionPower = 0;
+            foreach ($faction->getPlayers() as $player) {
+                $factionPower = $factionPower + $player->getPower();
+            }
+            $factionsPowers[$faction->getName()] = $factionPower;
+        }
+
         $pager = new Pagerfanta(new ArrayAdapter($factions));
         $pager->setMaxPerPage($this->container->getParameter('max_factions_per_page'));
 
@@ -102,12 +112,15 @@ class MineStatsController extends Controller
         } catch (NotValidCurrentPageException $e) {
             throw new NotFoundHttpException(
                 sprintf("As awesome as this website can be, page \"%s\" was not found.",
-                        $page
-                       )
+                    $page
+                )
             );
         }
 
-        return array("pager" => $pager);
+        return array(
+            "pager" => $pager,
+            "powers" => $factionsPowers
+        );
     }
 
     /**

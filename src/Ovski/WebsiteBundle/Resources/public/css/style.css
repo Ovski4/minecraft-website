@@ -7,12 +7,12 @@ body, html
     margin: 0;
     padding: 0;
     font-family: title;
-    background: #fff; /*#f6fba6 d6b274 efd7ad */
+    background: #fff;
 }
 
 a
 {
-    color: #74B729;
+    /*color: #74B729;*/
 }
 
 a:hover
@@ -20,6 +20,11 @@ a:hover
     color: #382819;
     text-decoration: none;
     font-weight: bold;
+}
+
+.content
+{
+    margin: 20px 0;
 }
 
  /*********
@@ -163,11 +168,16 @@ a:hover
 #main h2
 {
     color: #382819;
-    margin: 20px 0 0px 0;
+    margin: 20px 0;
     text-align: center;
 }
 
 /* Pagination */
+
+.pagination
+{
+    margin: 0;
+}
 
 .pagination ul
 {
@@ -219,62 +229,57 @@ a:hover
 
 /* Players Stats page */
 
-header.player-list-head > div
+header.stat-list-head > div
 {
     font-weight: bold;
     font-size: 18px;
 }
 
-.player-list
+.stat-list
 {
     margin: 0;
 }
 
-.player-list > li
+.stat-list > li
 {
     list-style: none;
     border-top: 1px dashed #382819;
     line-height: 30px;
 }
 
-.player-list > li > div.row-fluid:hover
+.stat-list > li > div.row-fluid:hover
 {
     background: #74B729;
 }
 
-.player-list > li > div.row-fluid:hover a
+.stat-list > li > div.row-fluid:hover a
 {
     color: #fff;
 }
 
-.player-list > li > div.row-fluid:hover a:hover
+.stat-list > li > div.row-fluid:hover a:hover
 {
     color: #382819;
 }
 
-.player-list > li > div.row-fluid > div
+.stat-list > li > div.row-fluid > div
 {
     height: 50px;
     line-height: 50px;
 }
 
-.player-list > li > div.row-fluid > div:first-child
-{
-    text-align: center;
-}
-
-.player-list > li:first-child
+.stat-list > li:first-child
 {
     border-top: 3px solid #382819;
 }
 
-.player-list > li .loner
+.stat-list > li .loner
 {
     font-style: italic;
 }
 
-.player-list span a,
-.player-list div a
+.stat-list span a,
+.stat-list div a
 {
     display: inline-block;
     width: 100%;
@@ -297,5 +302,4 @@ body > footer
 body > footer .content
 {
     color: #FFF;
-    padding-top: 20px;
 }

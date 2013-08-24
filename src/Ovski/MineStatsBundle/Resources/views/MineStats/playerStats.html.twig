@@ -11,7 +11,7 @@
     <h2>{{ player.pseudo|capitalize }}'s Stats</h2>
 
     <ul>
-        {% if player.faction %} 
+        {% if player.faction %}
             <li>Faction : <a href="{{ path('faction_stats', { name: player.faction }) }}">{{ player.faction }}</a></li>
         {% else %}
             <li>Faction : {{ player }} is a loner
@@ -19,6 +19,13 @@
                 
         <li>Kills : {{ player.kills }}</li>
         <li>Prestige : {{ player.prestige }}</li>
+        <li>Power :
+            {% if player.power %}
+                {{ player.power }}
+            {% else %}
+                0
+            {% endif %}
+        </li>
         <li>BrokenBlocks : {{ player.brokenBlocks }}</li>
         <li>PlacedBlocks : {{ player.placedBlocks }}</li>
         <li>Verbosity : {{ player.verbosity }}</li>

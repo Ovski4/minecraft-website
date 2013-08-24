@@ -8,23 +8,35 @@
 
 {% block body %}
 
-    <h2>Factions stats</h2>
+    <h2><i class="icon-bar-chart"></i> Factions stats</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>created at</th>
-            <tr>
-        </thead>
-        <tbody>
-        {% for faction in pager.currentPageResults %}
-            <tr>
-                <td><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></td>
-                <td>{{ faction.createdAt }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% if pager.haveToPaginate %}
+        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+    {% endif %}
+
+    <div class="row-fluid content">
+        <header class="stat-list-head row-fluid">
+            <div class="span4"><i class="icon-group"></i> Faction</div>
+            <div class="span2"><i class="icon-male"></i> Player number</div>
+            <div class="span2"><i class="icon-trophy"></i> Power</div>
+            <div class="faction span4"><i class="icon-group"></i> Created at</div>
+        </header>
+        <ul class="stat-list row-fluid">
+            {% for faction in pager.currentPageResults %}
+                <li>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <a href="{{ path('faction_stats', { name: faction }) }}">
+                                {{ faction }}
+                            </a>
+                        </div>
+                        <div class="span2">{{ faction.players|length }}</div>
+                        <div class="span2">{{ powers[faction.name] }}</div>
+                        <div class="faction span4">{{ faction.createdAt }}</div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

@@ -13,16 +13,16 @@
         {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
     {% endif %}
 
-    <div class="row-fluid">
-        <div class="span9">
-            <header class="player-list-head row-fluid">
+    <div class="row-fluid content">
+        <div class="span12">
+            <header class="stat-list-head row-fluid">
                 <div class="offset1 span2"><i class="icon-male"></i> Player</div>
                 <div class="span2"><i class="icon-screenshot"></i> Kills</div>
                 {# <div class="span2"><i class="icon-trophy"></i> Rank</div> #}
                 <div class="faction span4"><i class="icon-group"></i> Faction</div>
                 <div class="span2"><i class="icon-user"></i> Role</div>
             </header>
-            <ul class="player-list row-fluid">
+            <ul class="stat-list row-fluid">
                 {% for player in pager.currentPageResults %}
                     <li>
                         <div class="row-fluid">
@@ -53,9 +53,9 @@
                 {% endfor %}
             </ul>
         </div>
-        <div class="span3">
+        {#<div class="span3">
             Filter Player
-        </div>
+        </div>#}
     </div>
 
     {% if pager.haveToPaginate %}
