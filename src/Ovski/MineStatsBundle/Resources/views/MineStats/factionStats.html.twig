@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
 
+{% block title %}{{ faction | capitalize }} stats | MineWeb{% endblock %}
+
 {% block menu %}
 
     {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'null'} %}
