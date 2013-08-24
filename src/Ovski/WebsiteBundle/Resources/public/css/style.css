@@ -22,9 +22,15 @@ a:hover
     font-weight: bold;
 }
 
+h2
+{
+    font-size: 31px;
+}
+
 .content
 {
-    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
  /*********
@@ -160,7 +166,7 @@ a:hover
 
 #main
 {
-    min-height: 500px;
+    min-height: 430px;
     margin-top: 10px;
     font-size: 14px;
 }
@@ -227,7 +233,7 @@ a:hover
     color: #fff;
 }
 
-/* Players Stats page */
+/* Players/Factions Stats page */
 
 header.stat-list-head > div
 {
@@ -235,55 +241,86 @@ header.stat-list-head > div
     font-size: 18px;
 }
 
-.stat-list
+.stats-list
 {
     margin: 0;
 }
 
-.stat-list > li
+.stats-list > li
 {
     list-style: none;
     border-top: 1px dashed #382819;
     line-height: 30px;
 }
 
-.stat-list > li > div.row-fluid:hover
+.stats-list > li > div.row-fluid:hover
 {
     background: #74B729;
 }
 
-.stat-list > li > div.row-fluid:hover a
+.stats-list > li > div.row-fluid:hover a
 {
     color: #fff;
 }
 
-.stat-list > li > div.row-fluid:hover a:hover
+.stats-list > li > div.row-fluid:hover a:hover
 {
     color: #382819;
 }
 
-.stat-list > li > div.row-fluid > div
+.stats-list > li > div.row-fluid > div
 {
     height: 50px;
     line-height: 50px;
 }
 
-.stat-list > li:first-child
+.stats-list > li:first-child
 {
     border-top: 3px solid #382819;
 }
 
-.stat-list > li .loner
+.stats-list > li .loner
 {
     font-style: italic;
 }
 
-.stat-list span a,
-.stat-list div a
+.stats-list span a,
+.stats-list div a
 {
     display: inline-block;
     width: 100%;
     height: 100%;
+}
+
+/* Factions stats page */
+
+.factions-stats .stats-list div > div:first-child,
+.factions-stats .stat-list-head > div:first-child
+{
+    text-indent: 10px;
+}
+
+
+
+
+/* Player/Faction Stats page */
+
+.stat-list
+{
+    font-size: 16px;
+}
+
+
+.stat-list > li
+{
+    list-style: none;
+    height: 30px;
+    line-height: 30px;
+}
+
+.player-stats h2 img
+{
+    vertical-align: top;
 }
 
  /**********

@@ -7,59 +7,62 @@
 {% endblock %}
 
 {% block body %}
-    <h2><i class="icon-bar-chart"></i> Players stats</h2>
+    <div class="players-stats">
+        <h2><i class="icon-bar-chart"></i> Players stats</h2>
 
-    {% if pager.haveToPaginate %}
-        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
-    {% endif %}
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+        {% endif %}
 
-    <div class="row-fluid content">
-        <div class="span12">
-            <header class="stat-list-head row-fluid">
-                <div class="offset1 span2"><i class="icon-male"></i> Player</div>
-                <div class="span2"><i class="icon-screenshot"></i> Kills</div>
-                {# <div class="span2"><i class="icon-trophy"></i> Rank</div> #}
-                <div class="faction span4"><i class="icon-group"></i> Faction</div>
-                <div class="span2"><i class="icon-user"></i> Role</div>
-            </header>
-            <ul class="stat-list row-fluid">
-                {% for player in pager.currentPageResults %}
-                    <li>
-                        <div class="row-fluid">
-                            <div class="span1"><img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px"></div>
-                            <div class="span2"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
-                            <div class="span2">{{ player.kills }}</div>
-                            {# <div class="span2">{{ loop.index+((pager.currentPage-1)*pager.maxPerPage) }}</div> #}
-                            <div class="faction span4">
-                                {% if player.faction %}
-                                    <span>
-                                        <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
-                                    </span>
-                                {% else %}
-                                    <span class="loner">whitout faction</span>
-                                {% endif %}
+        <div class="row-fluid content">
+            <div class="span12">
+                <header class="stat-list-head row-fluid">
+                    <div class="offset1 span2"><i class="icon-male"></i> Player</div>
+                    <div class="span2"><i class="icon-screenshot"></i> Kills</div>
+                    {# <div class="span2"><i class="icon-trophy"></i> Rank</div> #}
+                    <div class="faction span4"><i class="icon-group"></i> Faction</div>
+                    <div class="span2"><i class="icon-user"></i> Role</div>
+                </header>
+                <ul class="stats-list row-fluid">
+                    {% for player in pager.currentPageResults %}
+                        <li>
+                            <div class="row-fluid">
+                                <div class="span1">
+                                    <img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px">
+                                </div>
+                                <div class="span2"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
+                                <div class="span2">{{ player.kills }}</div>
+                                {# <div class="span2">{{ loop.index+((pager.currentPage-1)*pager.maxPerPage) }}</div> #}
+                                <div class="faction span4">
+                                    {% if player.faction %}
+                                        <span>
+                                            <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
+                                        </span>
+                                    {% else %}
+                                        <span class="loner">whitout faction</span>
+                                    {% endif %}
+                                </div>
+                                <div class="span2">
+                                    {% if player.role %}
+                                        {{ player.role | capitalize }}
+                                    {% elseif player.faction %}
+                                        Member
+                                    {% else %}
+                                        /
+                                    {% endif %}
+                                </div>
                             </div>
-                            <div class="span2">
-                                {% if player.role %}
-                                    {{ player.role | capitalize }}
-                                {% elseif player.faction %}
-                                    Member
-                                {% else %}
-                                    /
-                                {% endif %}
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {#<div class="span3">
+                Filter Player
+            </div>#}
         </div>
-        {#<div class="span3">
-            Filter Player
-        </div>#}
+
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+        {% endif %}
     </div>
-
-    {% if pager.haveToPaginate %}
-        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
-    {% endif %}
-
 {% endblock %}

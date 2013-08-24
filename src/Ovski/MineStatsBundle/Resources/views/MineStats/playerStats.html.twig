@@ -7,32 +7,47 @@
 {% endblock %}
 
 {% block body %}
+    <div class="player-stats content">
+        <h2>
+            <i class="icon-bar-chart"></i>
+            <span>{{ player.pseudo|capitalize }}'s Stats</span>
+            <img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px">
+        </h2>
 
-    <h2>{{ player.pseudo|capitalize }}'s Stats</h2>
-
-    <ul>
-        {% if player.faction %}
-            <li>Faction : <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a></li>
-        {% else %}
-            <li>Faction : {{ player }} is a loner
-        {% endif %}
-                
-        <li>Kills : {{ player.kills }}</li>
-        <li>Prestige : {{ player.prestige }}</li>
-        <li>Power :
-            {% if player.power %}
-                {{ player.power }}
+        <ul class="stat-list">
+            {% if player.faction %}
+                <li>
+                    <i class="icon-group"></i> Faction :
+                    <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">
+                        {{ player.faction }}
+                    </a>
+                </li>
             {% else %}
-                0
+                <li><i class="icon-group"></i> Faction : {{ player }} is a loner
             {% endif %}
-        </li>
-        <li>BrokenBlocks : {{ player.brokenBlocks }}</li>
-        <li>PlacedBlocks : {{ player.placedBlocks }}</li>
-        <li>Verbosity : {{ player.verbosity }}</li>
-        <li>Deaths by accident : {{ player.stupidDeaths }}</li>
-        <li>Pvp deaths : {{ player.pvpDeaths }}</li>
-        <li>Played time : {{ playedTime }} seconds</li>
-    </ul>
 
-    <a href="{{ path("players_stats") }}">Go back to the stats board</a>
+            <li>
+                <i class="icon-screenshot"></i> Kills : {{ player.kills }}
+            </li>
+            <li>
+                <i class="icon-heart"></i> Prestige : {{ player.prestige }}
+            </li>
+            <li>
+                <i class="icon-bolt"></i> Power :
+                {% if player.power %}
+                    {{ player.power }}
+                {% else %}
+                    0
+                {% endif %}
+            </li>
+            <li>
+                <i class="icon-legal"></i> BrokenBlocks : {{ player.brokenBlocks }}
+            </li>
+            <li><i class="icon-wrench"></i> PlacedBlocks : {{ player.placedBlocks }}</li>
+            <li><i class="icon-comments"></i> Verbosity : {{ player.verbosity }}</li>
+            <li><i class="icon-warning-sign"></i> Deaths by accident : {{ player.stupidDeaths }}</li>
+            <li><i class="icon-remove-sign"></i> Pvp deaths : {{ player.pvpDeaths }}</li>
+            <li><i class="icon-time"></i> Played time : {{ playedTime }} seconds</li>
+        </ul>
+    </div>
 {% endblock %}

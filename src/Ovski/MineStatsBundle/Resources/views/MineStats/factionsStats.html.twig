@@ -7,36 +7,36 @@
 {% endblock %}
 
 {% block body %}
+    <div class="factions-stats content">
+        <h2><i class="icon-bar-chart"></i> Factions stats</h2>
 
-    <h2><i class="icon-bar-chart"></i> Factions stats</h2>
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+        {% endif %}
 
-    {% if pager.haveToPaginate %}
-        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
-    {% endif %}
-
-    <div class="row-fluid content">
-        <header class="stat-list-head row-fluid">
-            <div class="span4"><i class="icon-group"></i> Faction</div>
-            <div class="span2"><i class="icon-male"></i> Player number</div>
-            <div class="span2"><i class="icon-trophy"></i> Power</div>
-            <div class="faction span4"><i class="icon-group"></i> Created at</div>
-        </header>
-        <ul class="stat-list row-fluid">
-            {% for faction in pager.currentPageResults %}
-                <li>
-                    <div class="row-fluid">
-                        <div class="span4">
-                            <a href="{{ path('faction_stats', { slug: faction.slug }) }}">
-                                {{ faction }}
-                            </a>
+        <div class="row-fluid">
+            <header class="stat-list-head row-fluid">
+                <div class="span4"><i class="icon-group"></i> Faction</div>
+                <div class="span2"><i class="icon-male"></i> Players</div>
+                <div class="span2"><i class="icon-trophy"></i> Power</div>
+                <div class="faction span4"><i class="icon-group"></i> Created at</div>
+            </header>
+            <ul class="stats-list row-fluid">
+                {% for faction in pager.currentPageResults %}
+                    <li>
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <a href="{{ path('faction_stats', { slug: faction.slug }) }}">
+                                    {{ faction }}
+                                </a>
+                            </div>
+                            <div class="span2">{{ faction.players|length }}</div>
+                            <div class="span2">{{ faction.power }}</div>
+                            <div class="faction span4">{{ faction.createdAt }}</div>
                         </div>
-                        <div class="span2">{{ faction.players|length }}</div>
-                        <div class="span2">{{ faction.power }}</div>
-                        <div class="faction span4">{{ faction.createdAt }}</div>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-
 {% endblock %}

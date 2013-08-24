@@ -43,6 +43,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $napyDaWisePlayer->setVerbosity(256);
         $napyDaWisePlayer->setFaction($this->getReference("sandpeople-faction"));
         $napyDaWisePlayer->setRole("LEADER");
+        $napyDaWisePlayer->setPower(5.2);
         $manager->persist($napyDaWisePlayer);
 
         $glapinePlayer = new Player();
@@ -57,6 +58,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $glapinePlayer->setVerbosity(125);
         $glapinePlayer->setFaction($this->getReference("sandpeople-faction"));
         $glapinePlayer->setRole("OFFICER");
+        $glapinePlayer->setPower(0.5);
         $manager->persist($glapinePlayer);
 
         $grosziznzinPlayer = new Player();
@@ -336,6 +338,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $AleksPlayer->setVerbosity(0);
         $AleksPlayer->setFaction($this->getReference("hotrs-faction"));
         $AleksPlayer->setRole("OFFICER");
+        $AleksPlayer->setPower(7.8);
         $manager->persist($AleksPlayer);
 
         $subellePlayer = new Player();

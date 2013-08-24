@@ -11,7 +11,6 @@ First
   * Check on battlelog to find nice stats ideas
   * Check if assets are ok
   * Edit the titles
-  * Add power to faction single view
   * check if remove cascade for relationships (on faction delete) (command load factions)
 
 After
