@@ -94,16 +94,6 @@ class MineStatsController extends Controller
         $factions = $manager->getRepository("OvskiMineStatsBundle:Faction")
                             ->findAll();
 
-        /*Get power for each faction*/
-        $factionsPowers = array();
-        foreach ($factions as $faction) {
-            $factionPower = 0;
-            foreach ($faction->getPlayers() as $player) {
-                $factionPower = $factionPower + $player->getPower();
-            }
-            $factionsPowers[$faction->getName()] = $factionPower;
-        }
-
         $pager = new Pagerfanta(new ArrayAdapter($factions));
         $pager->setMaxPerPage($this->container->getParameter('max_factions_per_page'));
 
@@ -117,28 +107,25 @@ class MineStatsController extends Controller
             );
         }
 
-        return array(
-            "pager" => $pager,
-            "powers" => $factionsPowers
-        );
+        return array("pager" => $pager);
     }
 
     /**
      * Give the stats of a faction
      *
-     * @Route("/faction/{name}", name="faction_stats")
+     * @Route("/faction/{slug}", name="faction_stats")
      * @Template()
      */
-    public function factionStatsAction($name)
+    public function factionStatsAction($slug)
     {
         $manager = $this->getDoctrine()->getManager();
         $faction = $manager->getRepository("OvskiMineStatsBundle:Faction")
-                           ->findOneBy(array("name" => $name));
+                           ->findOneBy(array("slug" => $slug));
 
         if (!$faction) {
             throw $this->createNotFoundException(
                 sprintf("What are you looking for? I have never heard of the %s faction in my life.",
-                        $name
+                        $slug
                        )
             );
         }

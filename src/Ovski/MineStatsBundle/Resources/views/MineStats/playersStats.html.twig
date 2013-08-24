@@ -33,7 +33,7 @@
                             <div class="faction span4">
                                 {% if player.faction %}
                                     <span>
-                                        <a href="{{ path('faction_stats', { name: player.faction }) }}">{{ player.faction }}</a>
+                                        <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
                                     </span>
                                 {% else %}
                                     <span class="loner">whitout faction</span>

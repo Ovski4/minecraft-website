@@ -3,7 +3,6 @@ MineWeb
 
 First
   * add weapon entity
-  * slugify factions
   * Resizable iframe (dynmap)
   * Look at static pages stuff
   * Time played format
@@ -13,6 +12,7 @@ First
   * Check if assets are ok
   * Edit the titles
   * Add power to faction single view
+  * check if remove cascade for relationships (on faction delete) (command load factions)
 
 After
   * Plugin registration

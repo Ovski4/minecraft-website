@@ -54,6 +54,11 @@ class Faction
     private $createdAt;
     
     /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     */
+    private $slug;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Ovski\MineStatsBundle\Entity\Player", mappedBy="faction")
      */
     private $players;
@@ -148,6 +153,29 @@ class Faction
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Faction
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

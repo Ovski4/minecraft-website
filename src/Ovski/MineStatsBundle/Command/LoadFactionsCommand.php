@@ -15,6 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ovski\MineStatsBundle\Entity\Faction;
 use Ovski\MineStatsBundle\Entity\Player;
+use Ovski\MineStatsBundle\Tools\Utils;
 
 /**
  * Load factions in database
@@ -40,7 +41,6 @@ EOT
         //Remove disbanded factions (the json file doesn't exist)
         $factions = $manager->getRepository('OvskiMineStatsBundle:Faction')
                             ->findAll();
-        //TODO, check if remove cascade for relationships (on faction delete)
         if($factions) {
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {
@@ -161,7 +161,7 @@ EOT
                         }
                     }
                     //check if the new and current power arent the same
-                    if($player->getPower() != NULL && $player->getPower() != $playerJsonArray['power']) {
+                    if($player->getPower() != $playerJsonArray['power']) {
                         $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed power from <comment>%s</comment> to <comment>%s</comment>)",
                                                  $player->getPseudo(),
                                                  $player->getPower(),
@@ -169,7 +169,7 @@ EOT
                                         )
                         );
                         if (isset($playerJsonArray['power'])) {
-                            $player->setRole($playerJsonArray['power']);
+                            $player->setPower($playerJsonArray['power']);
                         }
                     }
                 //there is no faction set yet
@@ -182,6 +182,8 @@ EOT
                     }
                     if (isset($playerJsonArray['power'])) {
                         $player->setPower($playerJsonArray['power']);
+                    } else {
+                        $player->setPower(0);
                     }
                     $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
                                              $player->getPseudo(),
@@ -274,6 +276,7 @@ EOT
         $faction = new Faction();
         $faction->setId($this->getFactionIdFromJson($file));
         $faction->setName($factionJsonArray['name']);
+        $faction->setSlug(Utils::slugify($factionJsonArray['name']));
         $faction->setCreatedAt($factionJsonArray['createdAtMillis']);
 
         if(isset($factionJsonArray['description'])) {

@@ -12,7 +12,7 @@
 
     <ul>
         {% if player.faction %}
-            <li>Faction : <a href="{{ path('faction_stats', { name: player.faction }) }}">{{ player.faction }}</a></li>
+            <li>Faction : <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a></li>
         {% else %}
             <li>Faction : {{ player }} is a loner
         {% endif %}

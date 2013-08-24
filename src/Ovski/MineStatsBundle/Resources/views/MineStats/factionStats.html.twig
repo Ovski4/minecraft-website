@@ -27,7 +27,7 @@
         <h3>Truce</h3>
         <ul>
             {% for faction in faction.truceFactions %}
-                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+                <li><a href="{{ path('faction_stats', { slug: faction.slug }) }}">{{ faction.name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -36,7 +36,7 @@
         <h3>Allies</h3>
         <ul>
             {% for faction in faction.allyFactions %}
-                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+                <li><a href="{{ path('faction_stats', { slug: faction.slug }) }}">{{ faction.name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -45,7 +45,7 @@
         <h3>Ennemies</h3>
         <ul>
             {% for faction in faction.enemyFactions %}
-                <li><a href="{{ path('faction_stats', { name: faction.name }) }}">{{ faction.name }}</a></li>
+                <li><a href="{{ path('faction_stats', { slug: faction.slug }) }}">{{ faction.name }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
