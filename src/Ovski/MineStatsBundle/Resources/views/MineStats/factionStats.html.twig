@@ -14,7 +14,7 @@
 
         <h3>Information</h3>
         <ul>
-            <li>Created at : {{ faction.createdAt }}</li>
+            <li>Created at : {{ faction.createdAt | date("m/d/Y") }}</li>
             <li>Description : {{ faction.description }}</li>
             <li>Power : {{ faction.power }}</li>
         </ul>

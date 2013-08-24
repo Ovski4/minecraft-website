@@ -110,6 +110,25 @@ class Player
     }
 
     /**
+     * Get the played time formatted in a string
+     *
+     * @return string 
+     */
+    public function getFormattedPlayedTime()
+    {
+        $timeinSeconds = $this->getPlayedTime();
+        $days = $timeinSeconds / 86400;
+        $hours = $timeinSeconds % 86400 / 3600;
+        $minutes = $timeinSeconds % 3600 / 60;
+        $seconds = $timeinSeconds % 60;
+        
+        return sprintf("%d day(s), %d hour(s), %d minute(s) and %d second(s)",
+            $days, $hours, $minutes, $seconds
+        );
+    }
+            
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -279,7 +298,7 @@ class Player
     {
         return $this->playedTime;
     }
-
+    
     /**
      * Set verbosity
      *

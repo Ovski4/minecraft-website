@@ -49,7 +49,7 @@
             <li><i class="icon-comments"></i> Verbosity : {{ player.verbosity }}</li>
             <li><i class="icon-warning-sign"></i> Deaths by accident : {{ player.stupidDeaths }}</li>
             <li><i class="icon-remove-sign"></i> Pvp deaths : {{ player.pvpDeaths }}</li>
-            <li><i class="icon-time"></i> Played time : {{ playedTime }} seconds</li>
+            <li><i class="icon-time"></i> Played time : {{ player.formattedPlayedTime }}</li>
         </ul>
     </div>
 {% endblock %}

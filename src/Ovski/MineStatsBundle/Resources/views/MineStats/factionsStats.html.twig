@@ -34,7 +34,7 @@
                             </div>
                             <div class="span2">{{ faction.players|length }}</div>
                             <div class="span2">{{ faction.power }}</div>
-                            <div class="faction span4">{{ faction.createdAt }}</div>
+                            <div class="faction span4">{{ faction.createdAt | date("m/d/Y") }}</div>
                         </div>
                     </li>
                 {% endfor %}
