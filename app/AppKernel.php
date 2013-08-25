@@ -19,7 +19,9 @@ class AppKernel extends Kernel
             new Ovski\MineStatsBundle\OvskiMineStatsBundle(),
             new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle()
+            new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

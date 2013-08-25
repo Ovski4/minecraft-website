@@ -11,7 +11,7 @@ class WebsitePagesController extends Controller
     /**
      * Homepage
      *
-     * @Route("/", name="home")
+     * @Route("/home", name="home")
      * @Template()
      */
     public function homeAction()

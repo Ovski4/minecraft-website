@@ -1,9 +1,16 @@
+root:
+    pattern: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: home
+        permanent: true
+
 ovski_website:
     resource: "@OvskiWebsiteBundle/Controller/"
     type:     annotation
-    prefix:   /{_locale}/
+    prefix:   /
 
 ovski_mine_stats:
     resource: "@OvskiMineStatsBundle/Controller/"
     type:     annotation
-    prefix:   /{_locale}/stats
+    prefix:   /statistics

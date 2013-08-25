@@ -1,14 +1,14 @@
-# messages.fr.yml
-Home: Accueil
-Dynmap: Carte dynamique
-Hello, this is the home page of my website.: Salut, voici la page d'accueil de mon site
+Dynmap: 'Carte dynamique'
 
-#menu
-home: accueil
-server: serveur
-forum: forum
-about us: à propos
-players: joueurs
-factions: factions
+'Hello, this is the home page of my website':
+    '': 'Salut, voici la page d''accueil de mon site'
+
+Home: Accueil
+'about us': 'à propos'
 contact: contact
+factions: factions
+forum: forum
+home: accueil
 map: carte
+players: joueurs
+server: serveur

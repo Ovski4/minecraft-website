@@ -1,0 +1,17 @@
+# Desc: /statistics/faction/{slug}
+faction_stats: '/statistiques/faction/{slug}'
+
+# Desc: /statistics/factions
+factions_stats: /statistiques/factions
+
+# Desc: /statistics/factions/{page}
+factions_stats_paginated: '/statistiques/factions/{page}'
+
+# Desc: /statistics/player/{pseudo}
+player_stats: '/statistiques/joueur/{pseudo}'
+
+# Desc: /statistics/players
+players_stats: /statistiques/joueurs
+
+# Desc: /statistics/players/{page}
+players_stats_paginated: '/statistiques/joueurs/{page}'
