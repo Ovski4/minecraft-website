@@ -49,8 +49,10 @@
         {% endfor %}
     </ul>
 
-    {% if pager.haveToPaginate %}
-        {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+    {% if pager.currentPageResults|length >= 10 %}
+        {% if pager.haveToPaginate %}
+            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+        {% endif %}
     {% endif %}
 
 {% endblock %}
