@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\MineStatsBundle\Tools;
+namespace Ovski\ToolsBundle\Tools;
 
 /**
  * 

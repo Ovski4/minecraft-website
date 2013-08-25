@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ovski\MineStatsBundle\Entity\Faction;
 use Ovski\MineStatsBundle\Entity\Player;
-use Ovski\MineStatsBundle\Tools\Utils;
+use Ovski\ToolsBundle\Tools\Utils;
 
 /**
  * Load factions in database

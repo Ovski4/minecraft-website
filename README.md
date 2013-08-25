@@ -2,8 +2,9 @@ MineWeb
 =======
 
 First
+  * translation
+  * user bundle
   * contact page -> swiftMailerBundle
-  * Put Tools class in a toolbundle
   * add weapon entity
   * Plugins java to update -> stats entity has been removed.
   * Plugin java -> Add player on first join

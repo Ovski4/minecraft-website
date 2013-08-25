@@ -6,7 +6,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ovski\MineStatsBundle\Entity\Faction;
-use Ovski\MineStatsBundle\Tools\Utils;
+use Ovski\ToolsBundle\Tools\Utils;
 
 class LoadFactionData extends AbstractFixture implements OrderedFixtureInterface
 {
