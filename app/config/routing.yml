@@ -1,9 +1,9 @@
 ovski_website:
     resource: "@OvskiWebsiteBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /{_locale}/
 
 ovski_mine_stats:
     resource: "@OvskiMineStatsBundle/Controller/"
     type:     annotation
-    prefix:   /stats
+    prefix:   /{_locale}/stats

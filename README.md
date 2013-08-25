@@ -2,7 +2,9 @@ MineWeb
 =======
 
 First
+  * add layout.html.twig which extends base to avoid changing menu everywhere
   * translation
+  * local has to be in the url
   * user bundle
   * contact page -> swiftMailerBundle
   * add weapon entity

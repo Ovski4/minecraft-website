@@ -1,9 +1,11 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Home | MineWeb{% endblock %}
+{% block title %}
+    {% trans %}Home{% endtrans %} | MineWeb
+{% endblock %}
 
 {% block menu %}
-    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'home'} %}
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {active: 'home'} %}
 {% endblock %}
 
 {% block body %}
