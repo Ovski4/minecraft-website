@@ -13,6 +13,18 @@
     <body>
         <div id="header-wrapper">
             <header class="container">
+                <ul class="lang-menu">
+                    <li class="flag-fr">
+                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">
+                            Français
+                        </a>
+                    </li>
+                    <li class="flag-en">
+                        <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">
+                            English
+                        </a>
+                    </li>
+                </ul>
                 <h1>Pick and dig, then kick a pig</h1>
                 {% block menu %}
                     {% include "OvskiWebsiteBundle::menu.html.twig" with {active: 'home'} %}

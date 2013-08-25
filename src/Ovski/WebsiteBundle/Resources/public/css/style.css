@@ -67,7 +67,7 @@ h2
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
-/*MENU*/
+/*Menu*/
 
 #header-wrapper > header > .navbar
 {
@@ -109,6 +109,43 @@ h2
     -webkit-transition: color .4s;
     transition: color .4s;
 }
+
+/*languages*/
+#header-wrapper .lang-menu
+{
+    position: relative;
+}
+
+#header-wrapper .lang-menu > li
+{
+    text-indent: 100000px;
+    height: 30px;
+    width: 30px;
+    list-style-type: none;
+    position: absolute;
+    top: 115px;
+}
+
+#header-wrapper .lang-menu > li > a
+{
+    padding: 0;
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+
+#header-wrapper .flag-en
+{
+    background: url('../images/flag-en.png');
+    left: 100px;
+}
+
+#header-wrapper .flag-fr
+{
+    background: url('../images/flag-fr.png');
+    left: 60px;
+}
+
 
 /*hover*/
 #header-wrapper > header > .navbar > .navbar-inner > ul.nav > li:hover { background: #74b73f; }
