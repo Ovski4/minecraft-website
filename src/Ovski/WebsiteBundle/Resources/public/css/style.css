@@ -7,12 +7,12 @@ body, html
     margin: 0;
     padding: 0;
     font-family: title;
-    background: #f1dfbf; /*#f6fba6 d6b274 efd7ad */
+    background: #fff;
 }
 
 a
 {
-    color: #74B729;
+    /*color: #74B729;*/
 }
 
 a:hover
@@ -20,6 +20,17 @@ a:hover
     color: #382819;
     text-decoration: none;
     font-weight: bold;
+}
+
+h2
+{
+    font-size: 31px;
+}
+
+.content
+{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
  /*********
@@ -155,7 +166,7 @@ a:hover
 
 #main
 {
-    min-height: 500px;
+    min-height: 430px;
     margin-top: 10px;
     font-size: 14px;
 }
@@ -163,11 +174,16 @@ a:hover
 #main h2
 {
     color: #382819;
-    margin: 20px 0 0px 0;
+    margin: 20px 0;
     text-align: center;
 }
 
 /* Pagination */
+
+.pagination
+{
+    margin: 0;
+}
 
 .pagination ul
 {
@@ -217,68 +233,91 @@ a:hover
     color: #fff;
 }
 
-/* Players Stats page */
+/* Players/Factions Stats page */
 
-header.player-list-head > div
+header.stat-list-head > div
 {
     font-weight: bold;
     font-size: 18px;
 }
 
-.player-list
+.stats-list
 {
     margin: 0;
 }
 
-.player-list > li
+.stats-list > li
 {
     list-style: none;
     border-top: 1px dashed #382819;
     line-height: 30px;
 }
 
-.player-list > li > div.row-fluid:hover
+.stats-list > li > div.row-fluid:hover
 {
     background: #74B729;
 }
 
-.player-list > li > div.row-fluid:hover a
+.stats-list > li > div.row-fluid:hover a
 {
     color: #fff;
 }
 
-.player-list > li > div.row-fluid:hover a:hover
+.stats-list > li > div.row-fluid:hover a:hover
 {
     color: #382819;
 }
 
-.player-list > li > div.row-fluid > div
+.stats-list > li > div.row-fluid > div
 {
     height: 50px;
     line-height: 50px;
 }
 
-.player-list > li > div.row-fluid > div:first-child
-{
-    text-align: center;
-}
-
-.player-list > li:first-child
+.stats-list > li:first-child
 {
     border-top: 3px solid #382819;
 }
 
-.player-list > li .loner
+.stats-list > li .loner
 {
     font-style: italic;
 }
 
-.player-list span a,
-.player-list div a
+.stats-list span a,
+.stats-list div a
 {
     display: inline-block;
     width: 100%;
     height: 100%;
+}
+
+/* Factions stats page */
+
+.factions-stats .stats-list div > div:first-child,
+.factions-stats .stat-list-head > div:first-child
+{
+    text-indent: 10px;
+}
+
+/* Player/Faction Stats page */
+
+.stat-list
+{
+    font-size: 16px;
+}
+
+
+.stat-list > li
+{
+    list-style: none;
+    height: 30px;
+    line-height: 30px;
+}
+
+.player-stats h2 img
+{
+    vertical-align: top;
 }
 
  /**********
@@ -297,5 +336,4 @@ body > footer
 body > footer .content
 {
     color: #FFF;
-    padding-top: 20px;
 }

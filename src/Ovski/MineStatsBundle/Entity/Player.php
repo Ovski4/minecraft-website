@@ -110,6 +110,24 @@ class Player
     }
 
     /**
+     * Get the played time formatted in a string
+     *
+     * @return string 
+     */
+    public function getFormattedPlayedTime()
+    {
+        $timeinSeconds = $this->getPlayedTime();
+        $hours = $timeinSeconds / 3600;
+        $minutes = $timeinSeconds % 3600 / 60;
+        $seconds = $timeinSeconds % 60;
+        
+        return sprintf("%dh - %dm - %ds",
+            $hours, $minutes, $seconds
+        );
+    }
+            
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -279,7 +297,7 @@ class Player
     {
         return $this->playedTime;
     }
-
+    
     /**
      * Set verbosity
      *

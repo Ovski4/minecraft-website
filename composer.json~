@@ -1,4 +1,4 @@
-{
+re{
     "name": "symfony/framework-standard-edition",
     "license": "MIT",
     "type": "project",
@@ -23,8 +23,7 @@
         "doctrine/data-fixtures" : "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "pagerfanta/pagerfanta": "dev-master",
-        "white-october/pagerfanta-bundle": "dev-master",
-        "idci/filter-form-bundle": "dev-master"
+        "white-october/pagerfanta-bundle": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

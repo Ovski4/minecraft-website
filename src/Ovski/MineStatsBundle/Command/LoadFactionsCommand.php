@@ -15,6 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Ovski\MineStatsBundle\Entity\Faction;
 use Ovski\MineStatsBundle\Entity\Player;
+use Ovski\ToolsBundle\Tools\Utils;
 
 /**
  * Load factions in database
@@ -40,7 +41,6 @@ EOT
         //Remove disbanded factions (the json file doesn't exist)
         $factions = $manager->getRepository('OvskiMineStatsBundle:Faction')
                             ->findAll();
-        //TODO, check if remove cascade for relationships (on faction delete)
         if($factions) {
             foreach($factions as $faction) {
                 if (!file_exists(sprintf("%s%s.json", $this->getFactionDirectory(), $faction->getId()))) {
@@ -161,7 +161,7 @@ EOT
                         }
                     }
                     //check if the new and current power arent the same
-                    if($player->getPower() != NULL && $player->getPower() != $playerJsonArray['power']) {
+                    if($player->getPower() != $playerJsonArray['power']) {
                         $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed power from <comment>%s</comment> to <comment>%s</comment>)",
                                                  $player->getPseudo(),
                                                  $player->getPower(),
@@ -169,7 +169,7 @@ EOT
                                         )
                         );
                         if (isset($playerJsonArray['power'])) {
-                            $player->setRole($playerJsonArray['power']);
+                            $player->setPower($playerJsonArray['power']);
                         }
                     }
                 //there is no faction set yet
@@ -182,6 +182,8 @@ EOT
                     }
                     if (isset($playerJsonArray['power'])) {
                         $player->setPower($playerJsonArray['power']);
+                    } else {
+                        $player->setPower(0);
                     }
                     $output->writeln(sprintf("\tPlayer <comment>%s</comment> joined %s",
                                              $player->getPseudo(),
@@ -274,6 +276,7 @@ EOT
         $faction = new Faction();
         $faction->setId($this->getFactionIdFromJson($file));
         $faction->setName($factionJsonArray['name']);
+        $faction->setSlug(Utils::slugify($factionJsonArray['name']));
         $faction->setCreatedAt($factionJsonArray['createdAtMillis']);
 
         if(isset($factionJsonArray['description'])) {
@@ -295,22 +298,24 @@ EOT
      * @return boolean
      */
     public function isFactionAllowed($file) {
-        /* asus blacklist
-           $blackList = array(
+        // asus blacklist
+        $blackList = array(
             ".",
             "..",
             "f2eae440-908d-4ccd-a605-c2fc31e18261.json", //wilderness
             "af2fce2b-9a77-405c-94e9-2c3cf199eabc.json", //safezone
             "d95393a9-b860-4be2-86be-90b76b68d7d7.json"  //warzone
-        );*/
+        );
 
+        /*
+        //Bluebob blacklist
         $blackList = array(
             ".",
             "..",
             "d289003a-ecc5-4545-b445-91853ef9b627.json", //wilderness
             "387d1cb1-90fa-4369-a763-59531c1c4dc4.json", //safezone
             "450441cf-4ea6-471f-bff6-b32e894633a5.json"  //warzone
-        );
+        );*/
         
         if (in_array($file, $blackList) || strpos($file, "~")) {
             return false;
