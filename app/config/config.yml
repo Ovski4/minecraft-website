@@ -93,3 +93,8 @@ jms_i18n_routing:
     default_locale: en
     locales: [en, fr]
     strategy: custom
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Ovski\MinecraftUserBundle\Entity\User

@@ -4,9 +4,9 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/bootstrap.css") }}"/>
-            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/css/style.css") }}"/>
-            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiwebsite/font-awesome/css/font-awesome.min.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/bootstrap.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/style.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/font-awesome/css/font-awesome.min.css") }}"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -27,11 +27,11 @@
                 </ul>
                 <h1>Pick and dig, then kick a pig</h1>
                 {% block menu %}
-                    {% include "OvskiWebsiteBundle::menu.html.twig" with {active: 'home'} %}
+                    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
                 {% endblock %}
             </header>
             <div class="banner container">
-                <img src="/bundles/ovskiwebsite/images/cube.jpg"/>
+                <img src="/bundles/ovskiminecraftwebsite/images/cube.jpg"/>
             </div>  
         </div>
         <section id="main" class="container">

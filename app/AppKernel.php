@@ -8,20 +8,22 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
+            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Ovski\MinecraftStatsBundle\OvskiMinecraftStatsBundle(),
+            new Ovski\MinecraftUserBundle\OvskiMinecraftUserBundle(),
+            new Ovski\MinecraftWebsiteBundle\OvskiMinecraftWebsiteBundle(),
+            //new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle(),
+            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
+            new JMS\TranslationBundle\JMSTranslationBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new Symfony\Bundle\TwigBundle\TwigBundle(),
             new Symfony\Bundle\MonologBundle\MonologBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
-            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Ovski\MineStatsBundle\OvskiMineStatsBundle(),
-            new Ovski\WebsiteBundle\OvskiWebsiteBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle(),
-            new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
-            new JMS\TranslationBundle\JMSTranslationBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -2,6 +2,7 @@ MineWeb
 =======
 
 First
+  * refactor every Mine to Minecraft
   * user bundle
   * contact page -> swiftMailerBundle
   * add weapon entity
@@ -13,10 +14,8 @@ First
 
 After
   * Plugin registration
-  * Bundle registration FOSUSerBundle
   * Forum bundle to do (As simple as jeuxvideo.com)
   * News and comments
-  * Forums
   * Resizable iframe (dynmap)
   * Look at static pages stuff
 --
