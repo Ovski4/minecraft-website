@@ -3,9 +3,7 @@
 {% block title %}{{ faction | capitalize }} stats | MineWeb{% endblock %}
 
 {% block menu %}
-
-    {% include "OvskiWebsiteBundle:Website:menu.html.twig" with {active: 'null'} %}
-
+    {% include "OvskiWebsiteBundle::menu.html.twig" with {active: 'null'} %}
 {% endblock %}
 
 {% block body %}
