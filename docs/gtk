@@ -1,0 +1,7 @@
+Tags : HTACCESS / URLREWRITING / PHPBB
+  Problème URL pour le forum phpbb
+  - Souhaite url /forum pour accèder à /forum/index.php
+    Pour cela -> dans le htaccess situé dans /forum, ajout : DirectoryIndex index.php index.html index.htm
+  - problème, l'url rewriting est mis en place avant cela, du coup erreur au niveau de la ligne 41 du htaccess situé dans /web
+  => condition juste avant -> faire l'url rewriting si seulement le dossier n'existe pas.
+  Zeubi j'ai compris que la moitié de ce que j'ai fais mais ca marche. A approfondir.
