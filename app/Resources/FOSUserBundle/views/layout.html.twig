@@ -1,0 +1,15 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {% trans %}Test{% endtrans %} | MineWeb
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'null'} %}
+{% endblock %}
+
+{% block body %}
+
+  {% block fos_user_content %}{% endblock %}
+
+{% endblock %}
