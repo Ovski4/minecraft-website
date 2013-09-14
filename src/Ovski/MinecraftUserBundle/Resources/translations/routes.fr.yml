@@ -1,0 +1,41 @@
+# Desc: /profile/change-password
+fos_user_change_password: /profil/changer-mot-de-passe
+
+# Desc: /profile/edit
+fos_user_profile_edit: /profil/editer
+
+# Desc: /profile/
+fos_user_profile_show: /profil
+
+# Desc: /register/check-email
+fos_user_registration_check_email: /inscription/verifier-email
+
+# Desc: /register/confirm/{token}
+fos_user_registration_confirm: '/inscription/confirm/{token}'
+
+# Desc: /register/confirmed
+fos_user_registration_confirmed: /inscription/confirme
+
+# Desc: /register/
+fos_user_registration_register: /inscription
+
+# Desc: /resetting/check-email
+fos_user_resetting_check_email: /reinitialisation/verifier-email
+
+# Desc: /resetting/request
+fos_user_resetting_request: /reinitialisation/requete
+
+# Desc: /resetting/reset/{token}
+fos_user_resetting_reset: '/reinitialisation/reinitialiser/{token}'
+
+# Desc: /resetting/send-email
+fos_user_resetting_send_email: /reinitialisation/envoyer-mail
+
+# Desc: /login_check
+fos_user_security_check: /connexion/verification
+
+# Desc: /login
+fos_user_security_login: /connexion
+
+# Desc: /logout
+fos_user_security_logout: /deconnexion
