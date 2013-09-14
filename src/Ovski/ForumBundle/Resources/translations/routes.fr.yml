@@ -1,0 +1,5 @@
+# Desc: /forum/categories/list
+categories_list: /forum/categories/liste
+
+# Desc: /forum/category/{name}
+category: '/forum/categorie/{name}'

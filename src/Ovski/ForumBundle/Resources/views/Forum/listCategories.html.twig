@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Forum {{ parent() }}{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'null'} %}
+{% endblock %}
+
+{% block body %}
+    <div class="player-stats content">
+        <h2>Forum</h2>
+        <ul class="category-list">
+            {% for category in categories %}
+                <li>
+                    <a href="{{ path('category', { name: category.name }) }}">
+                        {{ category.name }}
+                    </a>
+                </li>
+            {% else %}
+                There are no categories
+            {% endfor %}
+    </div>
+{% endblock %}

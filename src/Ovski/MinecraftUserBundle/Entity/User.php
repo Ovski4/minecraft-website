@@ -18,6 +18,16 @@ class User extends BaseUser
      */
     protected $id;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Topic", mappedBy="author")
+     */
+    private $topics;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="author")
+     */
+    private $posts;
+
     public function __construct()
     {
         parent::__construct();
