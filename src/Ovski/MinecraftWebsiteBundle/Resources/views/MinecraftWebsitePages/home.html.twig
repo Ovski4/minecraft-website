@@ -1,7 +1,8 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-    {% trans %}Home{% endtrans %} | MineWeb
+    {% trans %}Home{% endtrans %}
+    {{ parent() }}
 {% endblock %}
 
 {% block menu %}

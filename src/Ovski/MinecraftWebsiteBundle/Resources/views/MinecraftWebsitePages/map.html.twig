@@ -1,6 +1,9 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}{% trans %}Dynmap{% endtrans %} | MineWeb{% endblock %}
+{% block title %}
+    {% trans %}Dynmap{% endtrans %}
+    {{ parent() }}
+{% endblock %}
 
 {% block stylesheets %}
         {{ parent() }}

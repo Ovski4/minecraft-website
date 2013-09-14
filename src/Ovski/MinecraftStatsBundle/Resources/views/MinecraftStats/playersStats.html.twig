@@ -1,6 +1,9 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Players stats | MineWeb{% endblock %}
+{% block title %}
+    Players stats
+    {{ parent() }}
+{% endblock %}
 
 {% block menu %}
     {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'stats'} %}
