@@ -1,0 +1,3 @@
+[submodule "src/plugin/Claroline/ForumBundle"]
+	path = src/plugin/Claroline/ForumBundle
+	url = https://github.com/claroline/ForumBundle.git
