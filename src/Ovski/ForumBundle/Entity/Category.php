@@ -60,24 +60,11 @@ class Category
     {
         $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
-    /**
-     * Set id
-     *
-     * @param string $id
-     * @return Category
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    
-        return $this;
-    }
 
     /**
      * Get id
      *
-     * @return string 
+     * @return integer 
      */
     public function getId()
     {
@@ -131,6 +118,29 @@ class Category
     }
 
     /**
+     * Set language
+     *
+     * @param string $language
+     * @return Category
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return string 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
      * Add topics
      *
      * @param \Ovski\ForumBundle\Entity\Topic $topics
@@ -161,28 +171,5 @@ class Category
     public function getTopics()
     {
         return $this->topics;
-    }
-
-    /**
-     * Set language
-     *
-     * @param string $language
-     * @return Category
-     */
-    public function setLanguage($language)
-    {
-        $this->language = $language;
-    
-        return $this;
-    }
-
-    /**
-     * Get language
-     *
-     * @return string 
-     */
-    public function getLanguage()
-    {
-        return $this->language;
     }
 }

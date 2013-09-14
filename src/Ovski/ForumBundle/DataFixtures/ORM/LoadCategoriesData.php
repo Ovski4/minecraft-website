@@ -6,7 +6,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ovski\ForumBundle\Entity\Category;
-use Ovski\ToolsBundle\Tools\Utils;
 
 class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -15,7 +14,7 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function load(ObjectManager $manager)
     {
-        /* CREATE FACTIONS */
+        /* CREATE CATEGORIES */
 
         $presentationCategorie = new Category();
         $presentationCategorie->setName("Presentation");
@@ -28,7 +27,10 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
         $presentationCategory->setDescription("Come here present yourself");
         $presentationCategory->setLanguage("en");
         $manager->persist($presentationCategory);
-        
+
+        $this->addReference('presentation-fr', $presentationCategorie);
+        $this->addReference('presentation-en', $presentationCategory);
+
         $manager->flush();
     }
 
@@ -37,6 +39,6 @@ class LoadCategoriesData extends AbstractFixture implements OrderedFixtureInterf
      */
     public function getOrder()
     {
-        return 5;
+        return 6;
     }
 }

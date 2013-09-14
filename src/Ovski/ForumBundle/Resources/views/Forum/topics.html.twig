@@ -1,0 +1,29 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Forum - {{ category.name }}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'forum'} %}
+{% endblock %}
+
+{% block body %}
+    <div class="player-stats content">
+        <h2>{{ category.name }}</h2>
+        {% if category.topics is not empty %}
+        <ul class="topic-list">
+            {% for topic in category.topics %}
+                <li>
+                    <a href="{{ path('posts', { name: category.name, title: topic.title }) }}">
+                        {{ topic.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+                There are no topics in this category
+        {% endif %}
+    </div>
+{% endblock %}

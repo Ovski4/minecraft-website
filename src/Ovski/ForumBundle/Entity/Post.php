@@ -24,16 +24,9 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\ForumBundle\Entity\Topic", inversedBy="posts", cascade={"persist", "remove"})
@@ -43,7 +36,7 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="posts", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="faction_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
 
@@ -55,22 +48,9 @@ class Post
     private $createdAt;
 
     /**
-     * Set id
-     *
-     * @param string $id
-     * @return Post
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    
-        return $this;
-    }
-
-    /**
      * Get id
      *
-     * @return string 
+     * @return integer 
      */
     public function getId()
     {
@@ -78,49 +58,26 @@ class Post
     }
 
     /**
-     * Set name
+     * Set content
      *
-     * @param string $name
+     * @param string $content
      * @return Post
      */
-    public function setName($name)
+    public function setContent($content)
     {
-        $this->name = $name;
+        $this->content = $content;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get content
      *
      * @return string 
      */
-    public function getName()
+    public function getContent()
     {
-        return $this->name;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return Post
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
+        return $this->content;
     }
 
     /**

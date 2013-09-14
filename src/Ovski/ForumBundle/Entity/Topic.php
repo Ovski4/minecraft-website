@@ -7,7 +7,13 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Topic
  *
- * @ORM\Table(name="forum_topic")
+ * @ORM\Table(name="forum_topic",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(
+ *             name="name_language_association_idx",
+ *             columns={"title", "category_id"})
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="Ovski\ForumBundle\Repository\TopicRepository")
  */
 class Topic
@@ -26,14 +32,7 @@ class Topic
      *
      * @ORM\Column(type="string", length=255, unique=true)
      */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
+    private $title;
 
     /**
      * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="topic")
@@ -48,9 +47,10 @@ class Topic
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="topics", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="faction_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
+
     /**
      * Constructor
      */
@@ -60,22 +60,9 @@ class Topic
     }
     
     /**
-     * Set id
-     *
-     * @param string $id
-     * @return Topic
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    
-        return $this;
-    }
-
-    /**
      * Get id
      *
-     * @return string 
+     * @return integer 
      */
     public function getId()
     {
@@ -83,26 +70,26 @@ class Topic
     }
 
     /**
-     * Set name
+     * Set title
      *
-     * @param string $name
+     * @param string $title
      * @return Topic
      */
-    public function setName($name)
+    public function setTitle($title)
     {
-        $this->name = $name;
+        $this->title = $title;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
 
     /**

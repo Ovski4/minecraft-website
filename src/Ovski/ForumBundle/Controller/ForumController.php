@@ -11,17 +11,17 @@ class ForumController extends Controller
     /**
      * List all categories
      *
-     * @Route("/categories/list", name="categories_list")
+     * @Route("/", name="categories")
      * @Template()
      */
-    public function listCategoriesAction()
+    public function categoriesAction()
     {
         $locale = $this->getRequest()->getLocale();
 
         $entityManager = $this->getDoctrine()->getManager();
         $categories = $entityManager
             ->getRepository("OvskiForumBundle:Category")
-            ->findBy("language", $locale)
+            ->findBy(array("language" => $locale))
         ;
 
         return array('categories' => $categories);
@@ -30,17 +30,55 @@ class ForumController extends Controller
     /**
      * List all topics of a category
      *
-     * @Route("/category/{name}", name="category")
+     * @Route("/{name}", name="topics")
      * @Template()
      */
-    public function categoryAction($name)
+    public function topicsAction($name)
     {
+        $locale = $this->getRequest()->getLocale();
         $entityManager = $this->getDoctrine()->getManager();
+
         $category = $entityManager
             ->getRepository("OvskiForumBundle:Category")
-            ->findBy(array('name' => $name))
+            ->findOneBy(array('name' => $name, 'language' => $locale))
         ;
 
         return array('category' => $category);
+    }
+
+    /**
+     * List all posts of a topic
+     *
+     * @Route("/{name}/{title}", name="posts")
+     * @Template()
+     */
+    public function postsAction($name, $title)
+    {
+        $locale = $this->getRequest()->getLocale();
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $category = $entityManager
+            ->getRepository("OvskiForumBundle:Category")
+            ->findOneBy(array('name' => $name, 'language' => $locale))
+        ;
+
+        if (!$category) {
+            return $this->redirect($this->generateUrl(
+                'categories'
+            ));
+        }
+
+        $topic = $entityManager
+            ->getRepository("OvskiForumBundle:Topic")
+            ->findOneBy(array('category' => $category, 'title' => $title))
+        ;
+
+        if (!$topic) {
+            return $this->redirect($this->generateUrl(
+                'topics', array("name" => $category->getName())
+            ));
+        }
+
+        return array('topic' => $topic);
     }
 }

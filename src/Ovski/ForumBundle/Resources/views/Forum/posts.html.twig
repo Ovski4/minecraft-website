@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    Forum - {{ topic.title }}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'forum'} %}
+{% endblock %}
+
+{% block body %}
+    <div class="player-stats content">
+        <h2>{{ topic.title }}</h2>
+        {% if topic.posts is not empty %}
+        <ul class="posts-list">
+            {% for post in topic.posts %}
+                <li>
+                    {{ post.message }}
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+                There are no post in this topic
+        {% endif %}
+    </div>
+{% endblock %}
