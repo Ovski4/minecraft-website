@@ -1,9 +1,9 @@
 <?php
 
-namespace Ovski\MinecraftStatsBundle;
+namespace Ovski\ForumBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class OvskiMinecraftStatsBundle extends Bundle
+class OvskiForumBundle extends Bundle
 {
 }

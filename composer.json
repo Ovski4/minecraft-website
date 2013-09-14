@@ -24,7 +24,6 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "pagerfanta/pagerfanta": "dev-master",
         "white-october/pagerfanta-bundle": "dev-master",
-        "idci/filter-form-bundle": "dev-master",
         "jms/i18n-routing-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "dev-master"
     },

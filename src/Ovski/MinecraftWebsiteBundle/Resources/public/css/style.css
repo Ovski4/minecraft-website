@@ -118,7 +118,7 @@ h2
 
 #header-wrapper .lang-menu > li
 {
-    text-indent: 100000px;
+    text-indent: -100000px;
     height: 35px;
     width: 35px;
     list-style-type: none;

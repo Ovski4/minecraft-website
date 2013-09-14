@@ -28,7 +28,9 @@
                         <li>
                             <div class="row-fluid">
                                 <div class="span1">
-                                    <img src="https://minotar.net/avatar/{{ player.pseudo }}" width="30px" height="30px">
+                                    <img src="/bundles/ovskiminecraftwebsite/images/minehead.png"{#https://minotar.net/avatar/{{ player.pseudo }}#}
+                                        width="30px" height="30px"
+                                    >
                                 </div>
                                 <div class="span2"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
                                 <div class="span2">{{ player.kills }}</div>
@@ -39,7 +41,7 @@
                                             <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
                                         </span>
                                     {% else %}
-                                        <span class="loner">whitout faction</span>
+                                        <span class="loner">without faction</span>
                                     {% endif %}
                                 </div>
                                 <div class="span2">

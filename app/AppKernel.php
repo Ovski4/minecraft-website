@@ -10,10 +10,10 @@ class AppKernel extends Kernel
         $bundles = array(
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            //new Ovski\ForumBundle\OvskiForumBundle(),
             new Ovski\MinecraftStatsBundle\OvskiMinecraftStatsBundle(),
             new Ovski\MinecraftUserBundle\OvskiMinecraftUserBundle(),
             new Ovski\MinecraftWebsiteBundle\OvskiMinecraftWebsiteBundle(),
-            //new IDCI\Bundle\FilterFormBundle\IDCIFilterFormBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
