@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @UniqueEntity("receiver_player_id")
  * @UniqueEntity("donor_player_id")
- * @ORM\Table(name="note")
+ * @ORM\Table(name="minecraft_note")
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\NoteRepository")
  */
 class Note

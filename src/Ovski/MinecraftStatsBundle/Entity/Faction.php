@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Faction
  *
- * @ORM\Table(name="faction")
+ * @ORM\Table(name="minecraft_faction")
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\FactionRepository")
  */
 class Faction
@@ -42,7 +42,7 @@ class Faction
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -65,7 +65,7 @@ class Faction
 
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_truce_relationship",
+     * @ORM\JoinTable(name="minecraft_faction_truce_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="truce_faction_id", referencedColumnName="id")
@@ -75,7 +75,7 @@ class Faction
     
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_ally_relationship",
+     * @ORM\JoinTable(name="minecraft_faction_ally_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="ally_faction_id", referencedColumnName="id")
@@ -85,7 +85,7 @@ class Faction
     
     /**
      * @ORM\ManyToMany(targetEntity="Faction", cascade={"persist"})
-     * @ORM\JoinTable(name="faction_enemy_relationship",
+     * @ORM\JoinTable(name="minecraft_faction_enemy_relationship",
      *      joinColumns={@ORM\JoinColumn(name="faction_id", referencedColumnName="id")},
      *      inverseJoinColumns={
      *          @ORM\JoinColumn(name="enemy_faction_id", referencedColumnName="id")

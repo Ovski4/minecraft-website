@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * Kill
  *
- * @ORM\Table(name="`kill`")
+ * @ORM\Table(name="minecraft_kill")
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\KillRepository")
  * @UniqueEntity("killed_player_id")
  * @UniqueEntity("killer_player_id")

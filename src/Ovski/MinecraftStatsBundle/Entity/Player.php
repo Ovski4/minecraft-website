@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Player
  *
- * @ORM\Table(name="player")
+ * @ORM\Table(name="minecraft_player")
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\PlayerRepository")
  */
 class Player
