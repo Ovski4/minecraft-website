@@ -33,6 +33,28 @@ h2
     margin-bottom: 20px;
 }
 
+input[type="submit"]
+{
+    background: #382819;
+    color: #fff;
+    font-weight: bold;
+    font-family: title;
+    border: none;
+    padding: 7px 20px;
+    -o-transition: background .2s;
+    -ms-transition: background .2s;
+    -moz-transition: background .2s;
+    -webkit-transition: background .2s;
+    transition: background .2s;
+}
+
+input[type="submit"]:hover
+{
+    background: #74b73f;
+}
+    
+
+
  /*********
   * FONTS *
   *********/
@@ -72,8 +94,11 @@ h2
 #header-wrapper > header > .navbar
 {
     font-size: 16px;
-    margin: 20px 100px 0 200px;
+    margin: 20px;
 }
+
+#header-wrapper > header > .navbar.logout { margin: 20px 0 0 20px; }
+#header-wrapper > header > .navbar.login { margin: 20px 0 0 50px; }
 
 #header-wrapper > header .navbar-inner
 {
@@ -84,10 +109,12 @@ h2
     background: #9ec864;
 }
 
-#header-wrapper ul
-{
-    margin: 0 0 0 45px;
-}
+#header-wrapper .en .navbar-inner.span8 ul { margin: 0 0 0 40px; }
+#header-wrapper .en .navbar-inner.span2 ul { margin: 0 0 0 32px; }
+#header-wrapper .en .navbar-inner.span3 ul { margin: 0 0 0 35px; }
+#header-wrapper .fr .navbar-inner.span8 ul { margin: 0 0 0 30px; }
+#header-wrapper .fr .navbar-inner.span2 ul { margin: 0 0 0 15px; }
+#header-wrapper .fr .navbar-inner.span3 ul { margin: 0 0 0 12px; }
 
 #header-wrapper ul li
 {
@@ -123,7 +150,8 @@ h2
     width: 35px;
     list-style-type: none;
     position: absolute;
-    top: 115px;
+    /*top: 115px;*/
+    top: 50px;
 }
 
 #header-wrapper .lang-menu > li > a
@@ -137,13 +165,13 @@ h2
 #header-wrapper .flag-en
 {
     background: url('../images/flag-en.png') no-repeat;
-    left: 100px;
+    left: 760px/*100px*/;
 }
 
 #header-wrapper .flag-fr
 {
     background: url('../images/flag-fr.png') no-repeat;
-    left: 60px;
+    left: 720px/*60px*/;
 }
 
 #header-wrapper .flag-en:hover { background: url('../images/flag-en-hover.png') no-repeat; }
@@ -358,6 +386,23 @@ header.stat-list-head > div
 .player-stats h2 img
 {
     vertical-align: top;
+}
+
+/* Login page */
+
+.login-form div
+{
+    width: 100%;
+}
+
+.login-form div > input[type="submit"]
+{
+    margin: 15px 65px;
+}
+
+.login-form label.remember-me
+{
+    display: inline-block;
 }
 
  /**********

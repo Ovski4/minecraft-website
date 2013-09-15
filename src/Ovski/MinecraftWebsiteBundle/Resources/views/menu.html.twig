@@ -2,8 +2,14 @@
   {% set active = null %}
 {% endif %}
 
-<div class="navbar">
-    <div class="navbar-inner">
+<div class="navbar {{ app.request.locale }} 
+     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        logout
+     {% else %}
+        login
+     {% endif%}
+">
+    <div class="navbar-inner span8">
         <ul class="nav">
             <li {% if active == 'home' %} class="current" {% endif %}>
                 <a href="{{ path('home') }}">
@@ -52,4 +58,30 @@
             </li>
         </ul>
     </div>
+    {% if app.user is not null and is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+        <div class="navbar-inner span3">
+            <ul class="nav">
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}" title="{% trans %}Log{% endtrans %}">
+                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('fos_user_security_logout') }}" title="{% trans %}Profile{% endtrans %}">
+                        {% trans %}Profile{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% else %}
+        <div class="navbar-inner span2">
+            <ul class="nav">
+                <li>
+                    <a href="{{ path('fos_user_security_login') }}" title="{% trans %}Log in{% endtrans %}">
+                        {% trans %}Log in{% endtrans %}
+                    </a>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
 </div>
