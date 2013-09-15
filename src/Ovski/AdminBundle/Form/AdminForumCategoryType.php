@@ -17,7 +17,9 @@ class AdminForumCategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('language')
+            ->add('language', 'choice', array(
+                'choices' => array('fr' => 'fr', 'en' => 'en')
+            ))
         ;
     }
     
