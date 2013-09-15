@@ -20,6 +20,11 @@ ovski_forum:
     type:     annotation
     prefix:   /forum
 
+ovski_admin:
+    resource: "@OvskiAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 
