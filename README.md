@@ -2,8 +2,12 @@ MineWeb
 =======
 
 First
-  * slugify categories names & topics titles
-  * user bundle -> css
+  * améliorer l'interface admin
+  * réfléchir à clean le controller
+  * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
+  * pagination forum
+  * Enregistrer -> inscription trad
+  * check all fosuserbundle actions / test/ bugs
   * contact page -> swiftMailerBundle
   * add weapon entity
   * add filters
