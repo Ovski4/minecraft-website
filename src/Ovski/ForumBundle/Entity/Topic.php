@@ -35,6 +35,13 @@ class Topic
     private $title;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="topic")
      */
     private $posts;
@@ -58,7 +65,7 @@ class Topic
     {
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
@@ -93,26 +100,26 @@ class Topic
     }
 
     /**
-     * Set description
+     * Set updatedAt
      *
-     * @param string $description
+     * @param \DateTime $updatedAt
      * @return Topic
      */
-    public function setDescription($description)
+    public function setUpdatedAt($updatedAt)
     {
-        $this->description = $description;
+        $this->updatedAt = $updatedAt;
     
         return $this;
     }
 
     /**
-     * Get description
+     * Get updatedAt
      *
-     * @return string 
+     * @return \DateTime 
      */
-    public function getDescription()
+    public function getUpdatedAt()
     {
-        return $this->description;
+        return $this->updatedAt;
     }
 
     /**

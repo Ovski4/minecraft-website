@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="player-stats content">
-        <h2>{{ category.name }}</h2>
+        <h2>Forum - {{ category.name }}</h2>
         {% if category.topics is not empty %}
         <ul class="topic-list">
             {% for topic in category.topics %}
@@ -19,6 +19,9 @@
                     <a href="{{ path('posts', { name: category.name, title: topic.title }) }}">
                         {{ topic.title }}
                     </a>
+                    <span>{{ topic.author }}</span>
+                    <span>nombre de messages : {{ topic.posts | length}}</span>
+                    <span>dernier message: --- todo ---</span>
                 </li>
             {% endfor %}
         </ul>
