@@ -48,6 +48,11 @@ class ForumController extends Controller
             ->getRepository("OvskiForumBundle:Category")
             ->findOneBy(array('slug' => $categorySlug, 'language' => $locale))
         ;
+        
+        $topics = $entityManager
+            ->getRepository("OvskiForumBundle:Topic")
+            ->findBy(array('category' => $category), array('updatedAt' => 'desc'))
+        ;
 
         if (!$category) {
             return $this->redirect($this->generateUrl(
@@ -55,7 +60,11 @@ class ForumController extends Controller
             ));
         }
 
-        return array('category' => $category);
+        return array(
+            'category_name' => $category->getName(),
+            'category_slug' => $category->getSlug(),
+            'topics' => $topics
+        );
     }
 
     /**
@@ -222,12 +231,10 @@ class ForumController extends Controller
                 ->getUser()
             ; 
 
-            $post
-                ->setAuthor($user)
-                ->setTopic($topic)
-            ;
-
+            $post->setAuthor($user)->setTopic($topic);
+            $topic->setUpdatedAt(new \DateTime());
             $entityManager->persist($post);
+            $entityManager->persist($topic);
             $entityManager->flush();
 
             return $this->redirect($this->generateUrl(

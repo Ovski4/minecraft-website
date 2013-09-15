@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-    Forum - {{ category.name }}
+    Forum - {{ category_name }}
     {{ parent() }}
 {% endblock %}
 
@@ -11,24 +11,36 @@
 
 {% block body %}
     <div class="player-stats content">
-        <h2>Forum - {{ category.name }}</h2>
-        {% if category.topics is not empty %}
-        <ul class="topic-list">
-            {% for topic in category.topics %}
-                <li>
-                    <a href="{{ path('topic', { categorySlug: category.slug, topicSlug: topic.slug }) }}">
-                        {{ topic.title }}
-                    </a>
-                    <span>{{ topic.author }}</span>
-                    <span>nombre de messages : {{ topic.posts | length}}</span>
-                    <span>dernier message: --- todo ---</span>
-                </li>
-            {% endfor %}
-        </ul>
+        <h2>Forum - {{ category_name }}</h2>
+        {% if topics is not empty %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Author</th>
+                    <th>Nb</th>
+                    <th>Last post</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for topic in topics %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
+                                {{ topic.title }}
+                            </a>
+                        </td>
+                        <td>{{ topic.author }}</td>
+                        <td>{{ topic.posts | length}}</td>
+                        <td>{{ topic.updatedAt | date("d/m/Y h\\hi") }}</td>    
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
         {% else %}
                 There are no topics in this category
         {% endif %}
-        <a href="{{ path('topic_new', { categorySlug: category.slug }) }}">Create a topic</a>
+        <a href="{{ path('topic_new', { categorySlug: category_slug }) }}">Create a topic</a>
         <a href="{{ path('forum') }}">Go back to the forums list</a>
     </div>
 {% endblock %}
