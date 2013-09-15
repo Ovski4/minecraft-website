@@ -1,8 +1,20 @@
-# Desc: /forum/categories/list
-categories: /forum/categories/liste
+# Desc: /forum/categories/all
+forum: /forum/categories/toutes
 
-# Desc: /forum/category/{name}
-topics: '/forum/categorie/{name}'
+# Desc: /forum/category/{categorySlug}
+category: '/forum/categorie/{categorySlug}'
 
-# Desc: /forum/category/{name}/{title}
-posts: '/forum/categorie/{name}/{title}'
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}
+topic: '/forum/categorie/{categorySlug}/sujet/{topicSlug}'
+
+# Desc: /forum/category/{categorySlug}/new-topic
+topic_create: '/forum/categorie/{categorySlug}/nouveau-sujet'
+
+# Desc: /forum/category/{categorySlug}/new-topic
+topic_new: '/forum/categorie/{categorySlug}/nouveau-sujet'
+
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
+post_create: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'
+
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
+post_new: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'

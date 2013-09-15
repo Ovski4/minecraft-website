@@ -16,7 +16,7 @@
         <ul class="topic-list">
             {% for topic in category.topics %}
                 <li>
-                    <a href="{{ path('posts', { name: category.name, title: topic.title }) }}">
+                    <a href="{{ path('topic', { categorySlug: category.slug, topicSlug: topic.slug }) }}">
                         {{ topic.title }}
                     </a>
                     <span>{{ topic.author }}</span>
@@ -28,5 +28,7 @@
         {% else %}
                 There are no topics in this category
         {% endif %}
+        <a href="{{ path('topic_new', { categorySlug: category.slug }) }}">Create a topic</a>
+        <a href="{{ path('forum') }}">Go back to the forums list</a>
     </div>
 {% endblock %}

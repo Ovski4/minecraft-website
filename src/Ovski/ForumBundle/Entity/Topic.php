@@ -3,6 +3,7 @@
 namespace Ovski\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\ToolsBundle\Tools\Utils;
 
 /**
  * Topic
@@ -11,10 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(
  *             name="name_language_association_idx",
- *             columns={"title", "category_id"})
+ *             columns={"title", "category_id"}),
+ *         @ORM\UniqueConstraint(
+ *             name="slug_language_association_idx",
+ *             columns={"slug", "category_id"})
  *     }
  * )
  * @ORM\Entity(repositoryClass="Ovski\ForumBundle\Repository\TopicRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Topic
 {
@@ -30,9 +35,16 @@ class Topic
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @var \DateTime
@@ -42,7 +54,7 @@ class Topic
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="topic", cascade={"persist", "remove"})
      */
     private $posts;
 
@@ -57,6 +69,16 @@ class Topic
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
+
+    /**
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
+     */
+    public function update()
+    {
+        $this->setSlug(Utils::slugify($this->getTitle()));
+        $this->setUpdatedAt(new \DateTime('now'));
+    }
 
     /**
      * Constructor
@@ -100,6 +122,29 @@ class Topic
     }
 
     /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Topic
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Set updatedAt
      *
      * @param \DateTime $updatedAt
@@ -136,6 +181,30 @@ class Topic
     }
 
     /**
+     * Set the first post on topic creation
+     *
+     * @param \Ovski\ForumBundle\Entity\Post $post
+     * @return Topic
+     */
+    public function setPost(\Ovski\ForumBundle\Entity\Post $post)
+    {
+        $posts = $this->getPosts();
+        $posts[0] = $post;
+   
+        return $this;
+    }
+
+    /**
+     * Get the first post on topic creation
+     *
+     * @return \Ovski\ForumBundle\Entity\Post $post
+     */
+    public function getPost()
+    {
+        return $this->posts[0];
+    }
+    
+    /**
      * Remove posts
      *
      * @param \Ovski\ForumBundle\Entity\Post $posts
@@ -164,7 +233,7 @@ class Topic
     public function setCategory(\Ovski\ForumBundle\Entity\Category $category = null)
     {
         $this->category = $category;
-    
+
         return $this;
     }
 

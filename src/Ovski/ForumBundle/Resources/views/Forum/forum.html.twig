@@ -13,7 +13,7 @@
         <ul class="category-list">
             {% for category in categories %}
                 <li>
-                    <a href="{{ path('topics', { name: category.name }) }}">
+                    <a href="{{ path('category', { categorySlug: category.slug }) }}">
                         {{ category.name }}
                     </a>
                     <span>{{ category.description }}</span>

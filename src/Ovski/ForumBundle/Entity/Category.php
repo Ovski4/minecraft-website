@@ -3,6 +3,7 @@
 namespace Ovski\ForumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\ToolsBundle\Tools\Utils;
 
 /**
  * Category
@@ -11,10 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  *     uniqueConstraints={
  *         @ORM\UniqueConstraint(
  *             name="name_language_association_idx",
- *             columns={"name", "language"})
+ *             columns={"name", "language"}),
+ *         @ORM\UniqueConstraint(
+ *             name="slug_language_association_idx",
+ *             columns={"slug", "language"}),
+ * 
  *     }
  * )
  * @ORM\Entity(repositoryClass="Ovski\ForumBundle\Repository\CategoryRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Category
 { 
@@ -37,6 +43,13 @@ class Category
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
@@ -54,13 +67,22 @@ class Category
     private $language;
 
     /**
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
+     */
+    public function updateSlug()
+    {
+        $this->setSlug(Utils::slugify($this->getName()));
+    }
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -92,6 +114,29 @@ class Category
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Category
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

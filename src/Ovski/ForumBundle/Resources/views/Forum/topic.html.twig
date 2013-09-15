@@ -16,12 +16,14 @@
         <ul class="posts-list">
             {% for post in topic.posts %}
                 <li>
-                    {{ post.message }}
+                    {{ post.content }}
                 </li>
             {% endfor %}
         </ul>
         {% else %}
                 There are no post in this topic
         {% endif %}
+        <a href="{{ path('post_new', { categorySlug: topic.category.slug, topicSlug: topic.slug }) }}">Add a new post</a>
+        <a href="{{ path('category', { categorySlug: topic.category.slug }) }}">Go back to the topic list</a>
     </div>
 {% endblock %}
