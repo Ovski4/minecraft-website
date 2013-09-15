@@ -10,8 +10,8 @@
 {% if error %}
     <div>{{ error|trans }}</div>
 {% endif %}
-    <h2>{{ 'security.login.submit'|trans }}</h2>
-    <div class="offset4 span4 login-form">
+    <div class="login-form fos-user-form">
+        <h2>{{ 'security.login.submit'|trans }}</h2>
         <form action="{{ path("fos_user_security_check") }}" method="post">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
@@ -24,11 +24,13 @@
             <label class="remember-me" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
 
-            <div>
+            <div class="submit">
                 <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
             </div>
-            <div>
+            <div class="related-links">
                 <a href={{ path("fos_user_resetting_request") }}>Forgot your password?</a>
+                |
+                <a href={{ path("fos_user_registration_register") }}>Need an account?</a>
             </div>
         </form>
     </div>

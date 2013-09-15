@@ -13,47 +13,47 @@
         <ul class="nav">
             <li {% if active == 'home' %} class="current" {% endif %}>
                 <a href="{{ path('home') }}">
-                    {% trans %}home{% endtrans %}
+                    {% trans %}Home{% endtrans %}
                 </a>
             </li>
             <li class="parent{% if active == 'stats' %} current{% endif %}">
-                <a>stats</a>
+                <a>Stats</a>
                 <ul class="nav">
                     <li>
                         <a href="{{ path('players_stats') }}">
-                            {% trans %}players{% endtrans %}
+                            {% trans %}Players{% endtrans %}
                         </a>
                     </li>
                     <li>
                         <a href="{{ path('factions_stats') }}">
-                            {% trans %}factions{% endtrans %}
+                            {% trans %}Factions{% endtrans %}
                         </a>
                     </li>
                 </ul>
             </li>
             <li {% if active == 'about' %} class="current" {% endif %}>
                 <a href="#">
-                    {% trans %}about us{% endtrans %}
+                    {% trans %}About us{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'contact' %} class="current" {% endif %}>
                 <a href="#">
-                    {% trans %}contact{% endtrans %}
+                    {% trans %}Contact{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'map' %} class="current" {% endif %}>
                 <a href="{{ path('map') }}">
-                    {% trans %}map{% endtrans %}
+                    {% trans %}Map{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'server' %} class="current" {% endif %}>
                 <a href="#">
-                    {% trans %}server{% endtrans %}
+                    {% trans %}Server{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'forum' %} class="current" {% endif %}>
                 <a href="{{ path('categories') }}">
-                    {% trans %}forum{% endtrans %}
+                    {% trans %}Forum{% endtrans %}
                 </a>
             </li>
         </ul>
@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ path('fos_user_security_logout') }}" title="{% trans %}Profile{% endtrans %}">
+                    <a href="{{ path('fos_user_profile_show') }}" title="{% trans %}Profile{% endtrans %}">
                         {% trans %}Profile{% endtrans %}
                     </a>
                 </li>
