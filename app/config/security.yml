@@ -4,18 +4,14 @@ security:
         FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
-        ROLE_USER: ROLE_USER
-        ROLE_ADMIN: ROLE_ADMIN
-        # ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
-        ROLE_SUPER_ADMIN: ROLE_ADMIN
+        ROLE_USER:
+        ROLE_MODERATOR: ROLE_USER
+        ROLE_ADMIN: [ROLE_USER, ROLE_MODERATOR]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_MODERATOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
         fos_userbundle:
             id: fos_user.user_provider.username
-        in_memory:
-            memory:
-                users:
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         main:

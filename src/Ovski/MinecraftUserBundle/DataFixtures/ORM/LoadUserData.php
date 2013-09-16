@@ -49,13 +49,21 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $glapine->setEmail('glapine@glapine.fr');
         $glapine->setPlainPassword('glapine');
         $glapine->setEnabled(true);
+        $glapine->addRole("ROLE_MODERATOR");
         $userManager->updateUser($glapine);
+
+        $jaylbralon = $userManager->createUser();
+        $jaylbralon->setUsername('jaylbralon');
+        $jaylbralon->setEmail('jaylbralon@jaylbralon.fr');
+        $jaylbralon->setPlainPassword('jaylbralon');
+        $jaylbralon->setEnabled(true);
+        $userManager->updateUser($jaylbralon);
 
         $baptiste = $userManager->createUser();
         $baptiste->setUsername('baptiste');
         $baptiste->setEmail('baptiste@baptiste.fr');
         $baptiste->setPlainPassword('baptiste');
-        $baptiste->setSuperAdmin(true);
+        $baptiste->addRole("ROLE_ADMIN");
         $baptiste->setEnabled(true);
         $userManager->updateUser($baptiste);
 
