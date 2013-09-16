@@ -2,6 +2,14 @@ MineWeb
 =======
 
 First
+  * clean forum bundle en entier avant d'aller trop loin
+  * onglet en fonction des langues dans le fichier de conf
+  * supprimer admin bundle et mettre dans le forum (pas de dependance) + service pour le form
+  * views power same icon
+  * pouvoir set enable false/true en admin
+  * trouver comment ajouter un role de moderateur avec fosuserbundle et créer les actions impliqué dans ce role
+  * recherche full text forum
+  * pouvoir fermer un topic (attribute -> boolean open?)
   * améliorer l'interface admin
   * réfléchir à clean le controller
   * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
@@ -17,6 +25,7 @@ First
   * Check if assets are ok
   * check if remove cascade for relationships (on faction delete) (command load factions)
   * check translation in each templates
+  * mettre @auhor et licence gpl sur les classes
 
 After
   * Plugin registration
