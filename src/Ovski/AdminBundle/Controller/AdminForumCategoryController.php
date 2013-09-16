@@ -45,7 +45,7 @@ class AdminForumCategoryController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Category();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCategoryForm($entity);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -69,12 +69,15 @@ class AdminForumCategoryController extends Controller
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createCreateForm(Category $entity)
+    private function createCategoryForm(Category $entity)
     {
-        $form = $this->createForm(new AdminForumCategoryType(), $entity, array(
-            'action' => $this->generateUrl('admin_forum_category_create'),
-            'method' => 'POST',
-        ));
+        $form = $this->createForm(
+            new AdminForumCategoryType($this->container->getParameter('admin_forum')),
+            $entity, array(
+                'action' => $this->generateUrl('admin_forum_category_create'),
+                'method' => 'POST',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Create'));
 
@@ -91,7 +94,7 @@ class AdminForumCategoryController extends Controller
     public function newAction()
     {
         $entity = new Category();
-        $form   = $this->createCreateForm($entity);
+        $form   = $this->createCategoryForm($entity);
 
         return array(
             'entity' => $entity,

@@ -1,13 +1,6 @@
 <?php
 
-/**
- * 
- * @author:  Baptiste BOUCHEREAU <baptiste.bouchereau@idci-consulting.fr>
- * @license: GPL
- *
- */
-
-namespace Ovski\MinecraftStatsBundle\DependencyInjection;
+namespace Ovski\AdminBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -19,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class OvskiMinecraftStatsExtension extends Extension
+class OvskiAdminExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -32,6 +25,6 @@ class OvskiMinecraftStatsExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('mineStatsConfiguration', $config);
+        $container->setParameter('admin_forum', $config);
     }
 }

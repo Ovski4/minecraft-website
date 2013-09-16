@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class AdminForumCategoryType extends AbstractType
 {
+    private $locales;
+
+    public function __construct($locales = null)
+    {
+        $this->locales = $locales;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -17,10 +24,21 @@ class AdminForumCategoryType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('language', 'choice', array(
-                'choices' => array('fr' => 'fr', 'en' => 'en')
-            ))
         ;
+
+        if (count($this->locales["locales"]) == 1) {
+            $builder->add('language', 'hidden', array(
+                'data' => $this->locales["locales"][0],
+            ));
+        } else {
+            $languages = array();
+            foreach ($this->locales["locales"] as $locale) {
+                $languages[$locale] = $locale;
+            }
+            $builder->add('language', 'choice', array(
+                'choices' => $languages
+            ));
+        }
     }
     
     /**

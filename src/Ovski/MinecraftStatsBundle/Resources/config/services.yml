@@ -1,4 +1,0 @@
-services:
-    player_filter_manager:
-        class: Ovski\MineStatsBundle\Form\FilterManager\PlayerFilterManager
-        arguments: [@service_container]
