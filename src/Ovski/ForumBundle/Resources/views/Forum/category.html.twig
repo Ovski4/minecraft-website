@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="player-stats content">
+    <div class="forum-category content">
         <h2>Forum - {{ category_name }}</h2>
         {% if topics is not empty %}
-        <table>
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Subject</th>
                     <th>Author</th>
-                    <th>Nb</th>
+                    <th>Posts</th>
                     <th>Last post</th>
                 </tr>
             </thead>
@@ -32,7 +32,7 @@
                         </td>
                         <td>{{ topic.author }}</td>
                         <td>{{ topic.posts | length}}</td>
-                        <td>{{ topic.updatedAt | date("d/m/Y h\\hi") }}</td>    
+                        <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>    
                     </tr>
                 {% endfor %}
             </tbody>

@@ -10,6 +10,11 @@ body, html
     background: #fff;
 }
 
+.container
+{
+    width: 1024px;
+}
+
 a
 {
     color: rgb(69, 168, 30);
@@ -57,8 +62,16 @@ input[type="submit"]:hover
 {
     background: #74b73f;
 }
-    
 
+ul
+{
+    margin: 0;
+}
+    
+li
+{
+    list-style-type: none;
+}
 
  /*********
   * FONTS *
@@ -153,7 +166,6 @@ input[type="submit"]:hover
     text-indent: -100000px;
     height: 35px;
     width: 35px;
-    list-style-type: none;
     position: absolute;
     /*top: 115px;*/
     top: 50px;
@@ -230,7 +242,7 @@ input[type="submit"]:hover
 {
     border: 10px solid #2e180a;
     height: 250px;
-    width: 920px;
+    width: 1004px;
 }
 
  /****************
@@ -321,7 +333,6 @@ header.stat-list-head > div
 
 .stats-list > li
 {
-    list-style: none;
     border-top: 1px dashed #382819;
     line-height: 30px;
 }
@@ -383,7 +394,6 @@ header.stat-list-head > div
 
 .stat-list > li
 {
-    list-style: none;
     height: 30px;
     line-height: 30px;
 }
@@ -447,6 +457,31 @@ header.stat-list-head > div
 .fos_user_resetting_request #username
 {
     width: 215px;
+}
+
+/* FORUM PAGES */
+
+/* Forum page */
+
+.forum ul li
+{
+    border-top: 1px dashed #382819;
+    padding: 10px 0;
+}
+
+/* Forum category page */
+
+.forum-category table
+{
+    width: 100%;
+}
+
+forum-category
+
+.forum ul li > div
+{
+    text-indent: 20px;
+    font-style: italic;
 }
 
  /**********

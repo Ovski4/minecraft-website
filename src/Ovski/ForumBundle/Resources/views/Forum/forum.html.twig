@@ -1,22 +1,23 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}Forum {{ parent() }}{% endblock %}
+{% block title %}Forums {{ parent() }}{% endblock %}
 
 {% block menu %}
     {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'forum'} %}
 {% endblock %}
 
 {% block body %}
-    <div class="player-stats content">
-        <h2>Forum</h2>
+    <div class="forum content">
+        <h2>Forums</h2>
         {% if categories %}
         <ul class="category-list">
             {% for category in categories %}
                 <li>
+                    <i class="icon-chevron-right"></i>
                     <a href="{{ path('category', { categorySlug: category.slug }) }}">
                         {{ category.name }}
                     </a>
-                    <span>{{ category.description }}</span>
+                    <div>{{ category.description }}</div>
                 </li>
             {% endfor %}
         </ul>

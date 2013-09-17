@@ -184,7 +184,7 @@ class ForumController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newPostAction()
+    public function newPostAction(Request $request)
     {
         $form = $this
             ->createForm(new PostType())
@@ -192,7 +192,8 @@ class ForumController extends Controller
         ;
 
         return array(
-            'form'   => $form->createView(),
+            'form'    => $form->createView(),
+            'referer' => $request->headers->get('referer')
         );
     }
 
