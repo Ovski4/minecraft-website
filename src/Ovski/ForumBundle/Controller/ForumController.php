@@ -27,7 +27,7 @@ class ForumController extends Controller
         $entityManager = $this->getDoctrine()->getManager();
         $categories = $entityManager
             ->getRepository("OvskiForumBundle:Category")
-            ->findBy(array("language" => $locale))
+            ->findAllCategoriesSlugsNamesDescriptionsByLocale($locale)
         ;
 
         return array('categories' => $categories);
