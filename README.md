@@ -2,6 +2,8 @@ MineWeb
 =======
 
 First
+  * inclure la vue pour créer un post avec les dix derniers messages
+  * inclure creation topic fin de la liste des topics
   * clean forum bundle en entier avant d'aller trop loin
   * onglet en fonction des langues dans le fichier de conf
   * supprimer admin bundle et mettre dans le forum (pas de dependance) + service pour le form
