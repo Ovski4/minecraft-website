@@ -3,20 +3,16 @@ MineWeb
 
 First
   * inclure la vue pour créer un post avec les dix derniers messages
-  * inclure creation topic fin de la liste des topics
-  * clean forum bundle en entier avant d'aller trop loin
   * onglet en fonction des langues dans le fichier de conf
-  * supprimer admin bundle et mettre dans le forum (pas de dependance) + service pour le form
-  * views power same icon
+  * supprimer admin bundle et mettre dans le forum (pas de dependance)
   * pouvoir set enable false/true en admin
   * trouver comment ajouter un role de moderateur avec fosuserbundle et créer les actions impliqué dans ce role
   * recherche full text forum
   * pouvoir fermer un topic (attribute -> boolean open?)
   * améliorer l'interface admin
-  * réfléchir à clean le controller
   * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
   * pagination forum
-  * Enregistrer -> inscription trad
+  * traduire tout
   * check all fosuserbundle actions / test/ bugs
   * contact page -> swiftMailerBundle
   * add weapon entity
