@@ -31,7 +31,7 @@
                             </a>
                         </td>
                         <td>{{ topic.author }}</td>
-                        <td>{{ topic.posts | length}}</td>
+                        <td>{{ topic.numPosts}}</td>
                         <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>    
                     </tr>
                 {% endfor %}
@@ -40,7 +40,8 @@
         {% else %}
                 There are no topics in this category
         {% endif %}
-        <a href="{{ path('topic_new', { categorySlug: category_slug }) }}">Create a topic</a>
-        <a href="{{ path('forum') }}">Go back to the forums list</a>
+        
+        <h3>Create a new topic</h3>
+        {{ form(form) }}
     </div>
 {% endblock %}

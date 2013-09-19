@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
-    public function findAllCategoriesSlugsNamesDescriptionsByLocaleQueryBuilder($locale)
+    public function getCategoriesQueryBuilder($locale)
     {
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('c.slug', 'c.name', 'c.description')
@@ -21,17 +21,51 @@ class CategoryRepository extends EntityRepository
         return $qb;
     }
 
-    public function findAllCategoriesSlugsNamesDescriptionsByLocaleQuery($locale)
+    public function getCategoriesQuery($locale)
     {
-        $qb = $this->findAllCategoriesSlugsNamesDescriptionsByLocaleQueryBuilder($locale);
+        $qb = $this->getCategoriesQueryBuilder($locale);
 
         return is_null($qb) ? $qb : $qb->getQuery();
     }
 
-    public function findAllCategoriesSlugsNamesDescriptionsByLocale($locale)
+    public function getCategories($locale)
     {
-        $q = $this->findAllCategoriesSlugsNamesDescriptionsByLocaleQuery($locale);
+        $q = $this->getCategoriesQuery($locale);
 
         return is_null($q) ? array() : $q->getResult();
+    }
+
+    public function getCategoryIdQueryBuilder($locale, $slug)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('c.id')
+           ->from('OvskiForumBundle:Category', 'c')
+           ->where('c.slug = :slug')
+           ->setParameter('slug', $slug)
+           ->andWhere('c.language = :locale')
+           ->setParameter('locale', $locale)
+        ;
+
+        return $qb;
+    }
+
+    public function getCategoryIdQuery($locale, $slug)
+    {
+        $qb = $this->getCategoryIdQueryBuilder($locale, $slug);
+
+        return is_null($qb) ? $qb : $qb->getQuery();
+    }
+
+    public function getCategoryId($locale, $slug)
+    {
+        $q = $this->getCategoryIdQuery($locale, $slug);
+
+        if (is_null($q)) {
+            return null;
+        } else {
+            $arraySingleResult = $q->getSingleResult();
+
+            return $arraySingleResult["id"];
+        }
     }
 }

@@ -42,6 +42,13 @@ class Topic
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=40)
+     */
+    private $numPosts;
+    
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
@@ -78,6 +85,7 @@ class Topic
     {
         $this->setSlug(Utils::slugify($this->getTitle()));
         $this->setUpdatedAt(new \DateTime('now'));
+        $this->numPosts++;
     }
 
     /**
@@ -86,7 +94,33 @@ class Topic
     public function __construct()
     {
         $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numPosts = 0;
     }
+
+    /**
+     * Set the first post on topic creation
+     *
+     * @param \Ovski\ForumBundle\Entity\Post $post
+     * @return Topic
+     */
+    public function setPost(\Ovski\ForumBundle\Entity\Post $post)
+    {
+        $posts = $this->getPosts();
+        $posts[0] = $post;
+   
+        return $this;
+    }
+
+    /**
+     * Get the first post on topic creation
+     *
+     * @return \Ovski\ForumBundle\Entity\Post $post
+     */
+    public function getPost()
+    {
+        return $this->posts[0];
+    }
+
 
     /**
      * Get id
@@ -119,6 +153,29 @@ class Topic
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set numPosts
+     *
+     * @param string $numPosts
+     * @return Topic
+     */
+    public function setNumPosts($numPosts)
+    {
+        $this->numPosts = $numPosts;
+    
+        return $this;
+    }
+
+    /**
+     * Get numPosts
+     *
+     * @return string 
+     */
+    public function getNumPosts()
+    {
+        return $this->numPosts;
     }
 
     /**
@@ -181,30 +238,6 @@ class Topic
     }
 
     /**
-     * Set the first post on topic creation
-     *
-     * @param \Ovski\ForumBundle\Entity\Post $post
-     * @return Topic
-     */
-    public function setPost(\Ovski\ForumBundle\Entity\Post $post)
-    {
-        $posts = $this->getPosts();
-        $posts[0] = $post;
-   
-        return $this;
-    }
-
-    /**
-     * Get the first post on topic creation
-     *
-     * @return \Ovski\ForumBundle\Entity\Post $post
-     */
-    public function getPost()
-    {
-        return $this->posts[0];
-    }
-    
-    /**
      * Remove posts
      *
      * @param \Ovski\ForumBundle\Entity\Post $posts
@@ -233,7 +266,7 @@ class Topic
     public function setCategory(\Ovski\ForumBundle\Entity\Category $category = null)
     {
         $this->category = $category;
-
+    
         return $this;
     }
 

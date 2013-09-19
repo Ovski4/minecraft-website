@@ -1,0 +1,4 @@
+services:
+    ovski.manager.forum:
+        class: Ovski\ForumBundle\Service\ForumManager
+        arguments: [@doctrine.orm.entity_manager, @security.context]

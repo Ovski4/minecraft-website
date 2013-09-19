@@ -23,12 +23,7 @@ class ForumController extends Controller
     public function forumAction()
     {
         $locale = $this->getRequest()->getLocale();
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $categories = $entityManager
-            ->getRepository("OvskiForumBundle:Category")
-            ->findAllCategoriesSlugsNamesDescriptionsByLocale($locale)
-        ;
+        $categories = $this->get('ovski.manager.forum')->getCategories($locale);
 
         return array('categories' => $categories);
     }
@@ -39,30 +34,43 @@ class ForumController extends Controller
      * @Route("/category/{categorySlug}", name="category")
      * @Template()
      */
-    public function categoryAction($categorySlug)
+    public function categoryAction(Request $request, $categorySlug)
     {
-        $locale = $this->getRequest()->getLocale();
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $category = $entityManager
-            ->getRepository("OvskiForumBundle:Category")
-            ->findOneBy(array('slug' => $categorySlug, 'language' => $locale))
-        ;
-        
-        $topics = $entityManager
-            ->getRepository("OvskiForumBundle:Topic")
-            ->findBy(array('category' => $category), array('updatedAt' => 'desc'))
-        ;
-
-        if (!$category) {
-            return $this->redirect($this->generateUrl(
-                'forum'
-            ));
+        $locale = $request->getLocale();
+        $category = $this->get('ovski.manager.forum')->getCategory($locale, $categorySlug);
+        if (!isset($category)) {
+            return $this->redirect($this->generateUrl('forum'));
         }
 
+        /* Create a new topic */
+        if ($request->isMethod('POST')) {
+            if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
+                throw new AccessDeniedException();
+            }
+
+            $form = $this->createForm(new TopicType());
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $topic = $this->get('ovski.manager.forum')->handleTopicData($form->getData(), $category);
+                //var_dump($topic); die;
+                return $this->redirect($this->generateUrl(
+                    'topic',
+                    array(
+                        "categorySlug" => $categorySlug,
+                        "topicSlug" => $topic->getSlug()
+                    )
+                ));
+            }
+        }
+ 
+        $form = $this->createForm(new TopicType());
+        $topics = $this->get('ovski.manager.forum')->getTopics($category);
+
         return array(
+            'form'   => $form->createView(),
             'category_name' => $category->getName(),
-            'category_slug' => $category->getSlug(),
+            'category_slug' => $categorySlug,
             'topics' => $topics
         );
     }
@@ -73,108 +81,24 @@ class ForumController extends Controller
      * @Route("/category/{categorySlug}/topic/{topicSlug}", name="topic")
      * @Template()
      */
-    public function topicAction($categorySlug, $topicSlug)
+    public function topicAction(Request $request, $categorySlug, $topicSlug)
     {
-        $locale = $this->getRequest()->getLocale();
-        $entityManager = $this->getDoctrine()->getManager();
+        $locale = $request->getLocale();
 
-        $category = $entityManager
-            ->getRepository("OvskiForumBundle:Category")
-            ->findOneBy(array('slug' => $categorySlug, 'language' => $locale))
-        ;
-
-        if (!$category) {
-            return $this->redirect($this->generateUrl(
-                'forum'
-            ));
+        $categoryId = $this->get('ovski.manager.forum')->getCategoryId($locale, $categorySlug);
+        if (!$categoryId) {
+            return $this->redirect($this->generateUrl('forum'));
         }
 
-        $topic = $entityManager
-            ->getRepository("OvskiForumBundle:Topic")
-            ->findOneBy(array('category' => $category, 'slug' => $topicSlug))
-        ;
+        $topic = $this->get('ovski.manager.forum')->getTopic($categoryId, $topicSlug);
 
         if (!$topic) {
             return $this->redirect($this->generateUrl(
-                'category', array("categorySlug" => $category->getSlug())
+                'category', array("categorySlug" => $categorySlug)
             ));
         }
 
         return array('topic' => $topic);
-    }
-
-    /**
-     * Displays a form to create a new Topic.
-     *
-     * @Route("/category/{categorySlug}/new-topic", name="topic_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newTopicAction()
-    {
-        $form = $this->createForm(new TopicType());
-
-        return array(
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a new Topic entity.
-     *
-     * @Route("/category/{categorySlug}/new-topic", name="topic_create")
-     * @Method("POST")
-     * @Template("OvskiForumBundle:Topic:newTopic.html.twig")
-     */
-    public function createTopicAction(Request $request, $categorySlug)
-    {
-        if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
-            throw new AccessDeniedException();
-        }
-
-        $form = $this->createForm(new TopicType());
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $topic = $form->getData();
-            $locale = $this->getRequest()->getLocale();
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $category = $entityManager
-                ->getRepository("OvskiForumBundle:Category")
-                ->findOneBy(array('slug' => $categorySlug, 'language' => $locale))
-            ;
-
-            $user = $this
-                ->container
-                ->get('security.context')
-                ->getToken()
-                ->getUser()
-            ; 
-
-            $topic
-                ->setCategory($category)
-                ->setAuthor($user)
-                ->getPost()
-                ->setAuthor($user)
-                ->setTopic($topic)
-            ;
-
-            $entityManager->persist($topic);
-            $entityManager->flush();
-
-            return $this->redirect($this->generateUrl(
-                'topic',
-                array(
-                    "categorySlug" => $categorySlug,
-                    "topicSlug" => $topic->getSlug()
-                )
-            ));
-        }
-
-        return array(
-            'form'   => $form->createView(),
-        );
     }
 
     /**
@@ -218,31 +142,13 @@ class ForumController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-
-            $topic = $entityManager
-                ->getRepository("OvskiForumBundle:Topic")
-                ->findOneBy(array('slug' => $topicSlug))
-            ;
-
-            $user = $this
-                ->container
-                ->get('security.context')
-                ->getToken()
-                ->getUser()
-            ; 
-
-            $post->setAuthor($user)->setTopic($topic);
-            $topic->setUpdatedAt(new \DateTime());
-            $entityManager->persist($post);
-            $entityManager->persist($topic);
-            $entityManager->flush();
+            $this->get('ovski.manager.forum')->handlePostData($post, $topicSlug);
 
             return $this->redirect($this->generateUrl(
                 'topic',
                 array(
                     "categorySlug" => $categorySlug,
-                    "topicSlug" => $topic->getSlug()
+                    "topicSlug" => $topicSlug
                 )
             ));
         }

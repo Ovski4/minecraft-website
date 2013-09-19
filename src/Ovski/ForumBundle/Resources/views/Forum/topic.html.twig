@@ -10,16 +10,26 @@
 {% endblock %}
 
 {% block body %}
-    <div class="player-stats content">
+    <div class="forum-topic content">
         <h2>{{ topic.title }}</h2>
         {% if topic.posts is not empty %}
-        <ul class="posts-list">
-            {% for post in topic.posts %}
-                <li>
-                    {{ post.content }}
-                </li>
-            {% endfor %}
-        </ul>
+        <section>
+            <ul class="posts-list">
+                {% for post in topic.posts %}
+                    <li>
+                        <article>
+                            <header>
+                                <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
+                            </header>
+                            <div>
+                                {{ post.content }}
+                            </div>
+
+                        </article>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
         {% else %}
                 There are no post in this topic
         {% endif %}
