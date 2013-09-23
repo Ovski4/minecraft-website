@@ -99,6 +99,15 @@ fos_user:
     firewall_name: main
     user_class: Ovski\MinecraftUserBundle\Entity\User
 
+fm_bbcode:
+    #emoticon:
+    #    resource: "@OvskiForumBundle/Resources/config/emoticons.yml"
+    filter_sets:
+        my_default_filter:
+            hooks: [ emoticon ]
+            filters: [ default ]
+            whitelist: [ b, i ]
+
 #to put in the bundle config after
 ovski_forum:
     locales: [fr, en]

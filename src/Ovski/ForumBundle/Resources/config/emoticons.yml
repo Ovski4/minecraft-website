@@ -1,0 +1,7 @@
+#emoticons:
+#    my_emoticon:
+#        url:   %fm_bbcode.emoticon.path%/angry.png
+#        html:  <img src="%fm_bbcode.emoticon.path%/angry.png" alt="">
+#        xHtml: <img src="%fm_bbcode.emoticon.path%/angry.png" alt="">
+#        smilies:
+#            - ":my_emoticon:"

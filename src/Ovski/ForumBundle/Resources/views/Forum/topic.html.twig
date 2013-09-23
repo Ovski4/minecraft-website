@@ -22,7 +22,7 @@
                                 <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
                             </header>
                             <div>
-                                {{ post.content | nl2br }}
+                                {{ post.content | nl2br | bbcode_filter('my_default_filter') }}
                             </div>
                         </article>
                     </li>
