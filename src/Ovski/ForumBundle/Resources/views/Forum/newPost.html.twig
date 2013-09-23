@@ -1,15 +1,39 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Post creation</h1>
+{% block body %}
+    <div class="forum-topic content">
+        <h1><span>Topic :</span> {{ topic_title }}</h1>
 
-    {{ form(form) }}
+        {% if posts is not empty %}
+        <h2>The last 
+            {% if posts|length > 1 %}
+                {{ posts|length }} posts
+            {% else %}
+                post
+            {% endif %}
+            on this topic
+        </h2>
+        <section>
+            <ul class="posts-list">
+                {% for post in posts|reverse %}
+                    <li>
+                        <article>
+                            <header>
+                                <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
+                            </header>
+                            <div>
+                                {{ post.content | nl2br }}
+                            </div>
+                        </article>
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+            
+        <h2 id="form">Answer on this topic</h2>
+        {{ form(form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ referer }}">
-                Go back to the topic
-            </a>
-        </li>
-    </ul>
+        <br /><a href="#">Back to the list</a>
+    </div>
 {% endblock %}

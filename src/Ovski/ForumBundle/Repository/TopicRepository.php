@@ -65,4 +65,37 @@ class TopicRepository extends EntityRepository
         return is_null($q) ? array() : $q->getSingleResult();
     }
 
+    public function getTopicIdQueryBuilder($categoryId, $slug)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb->select('t.id')
+           ->from('OvskiForumBundle:Topic', 't')
+           ->where('t.slug = :slug')
+           ->setParameter('slug', $slug)
+           ->andWhere('t.category = :categoryId')
+           ->setParameter('categoryId', $categoryId)
+        ;
+
+        return $qb;
+    }
+
+    public function getTopicIdQuery($categoryId, $slug)
+    {
+        $qb = $this->getTopicIdQueryBuilder($categoryId, $slug);
+
+        return is_null($qb) ? $qb : $qb->getQuery();
+    }
+
+    public function getTopicId($categoryId, $slug)
+    {
+        $q = $this->getTopicIdQuery($categoryId, $slug);
+
+        if (is_null($q)) {
+            return null;
+        } else {
+            $arraySingleResult = $q->getSingleResult();
+
+            return $arraySingleResult["id"];
+        }
+    }
 }

@@ -25,7 +25,8 @@
         "pagerfanta/pagerfanta": "dev-master",
         "white-october/pagerfanta-bundle": "dev-master",
         "jms/i18n-routing-bundle": "dev-master",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "helios-ag/fm-bbcode-bundle": "6.2"
     },
     "scripts": {
         "post-install-cmd": [

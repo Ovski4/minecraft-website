@@ -100,5 +100,7 @@ fos_user:
     user_class: Ovski\MinecraftUserBundle\Entity\User
 
 #to put in the bundle config after
-ovski_admin:
+ovski_forum:
     locales: [fr, en]
+    max_per_pages:
+        create_post: 10

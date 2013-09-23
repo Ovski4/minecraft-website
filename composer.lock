@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "783d2e58f89e8636abcd7310c8bbeb33",
+    "hash": "fdc2c366d5b6ea932f6357a0ab68d3bb",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -724,12 +724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "1ee84a86a5e82420c6459705110b1804dd9063b8"
+                "reference": "85ef11b6d68e640d306574b87302c9f335b80ef2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/1ee84a86a5e82420c6459705110b1804dd9063b8",
-                "reference": "1ee84a86a5e82420c6459705110b1804dd9063b8",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/85ef11b6d68e640d306574b87302c9f335b80ef2",
+                "reference": "85ef11b6d68e640d306574b87302c9f335b80ef2",
                 "shasum": ""
             },
             "require": {
@@ -784,7 +784,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2013-09-16 22:05:58"
+            "time": "2013-09-19 10:03:47"
         },
         {
             "name": "fzaninotto/faker",
@@ -831,6 +831,68 @@
                 "fixtures"
             ],
             "time": "2013-06-09 17:55:57"
+        },
+        {
+            "name": "helios-ag/fm-bbcode-bundle",
+            "version": "6.2",
+            "target-dir": "FM/BbcodeBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/helios-ag/FMBbCodeBundle.git",
+                "reference": "3f503cc4870af3adc77d22a2068c1bbc4dff59eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/helios-ag/FMBbCodeBundle/zipball/3f503cc4870af3adc77d22a2068c1bbc4dff59eb",
+                "reference": "3f503cc4870af3adc77d22a2068c1bbc4dff59eb",
+                "shasum": ""
+            },
+            "require": {
+                "mjohnson/decoda": "6.*",
+                "php": ">=5.3.2",
+                "sensio/distribution-bundle": "~2.1",
+                "symfony/assetic-bundle": "~2.0",
+                "symfony/config": "~2.0",
+                "symfony/console": "~2.0",
+                "symfony/dependency-injection": "~2.0",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/http-foundation": "~2.1",
+                "symfony/http-kernel": "~2.0",
+                "symfony/process": "~2.0",
+                "symfony/templating": "~2.0",
+                "symfony/twig-bundle": "~2.0",
+                "symfony/yaml": "~2.0"
+            },
+            "require-dev": {
+                "symfony/symfony": "~2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FM\\BbcodeBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Albert Ganiev",
+                    "email": "helios.ag@gmail.com"
+                }
+            ],
+            "description": "Symfony FMBbCodeBundle",
+            "homepage": "https://github.com/helios-ag/FMBbCodeBundle",
+            "keywords": [
+                "bbcode"
+            ],
+            "time": "2013-07-28 04:43:04"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1144,6 +1206,52 @@
                 "minification"
             ],
             "time": "2013-07-19 00:03:27"
+        },
+        {
+            "name": "mjohnson/decoda",
+            "version": "6.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/milesj/decoda.git",
+                "reference": "2890ba822dcafc6ad0c5c106700dad905fbb24f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/milesj/decoda/zipball/2890ba822dcafc6ad0c5c106700dad905fbb24f3",
+                "reference": "2890ba822dcafc6ad0c5c106700dad905fbb24f3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Decoda": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Miles Johnson",
+                    "homepage": "http://milesj.me"
+                }
+            ],
+            "description": "A lightweight lexical string parser for BBCode styled markup.",
+            "homepage": "http://milesj.me/code/php/decoda",
+            "keywords": [
+                "HOOK",
+                "bbcode",
+                "decoda",
+                "filter",
+                "markup",
+                "parser"
+            ],
+            "time": "2013-08-11 20:00:55"
         },
         {
             "name": "monolog/monolog",

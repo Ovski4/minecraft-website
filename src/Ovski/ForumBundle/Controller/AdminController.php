@@ -1,6 +1,6 @@
 <?php
 
-namespace Ovski\AdminBundle\Controller;
+namespace Ovski\ForumBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -8,14 +8,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\ForumBundle\Entity\Category;
-use Ovski\AdminBundle\Form\AdminForumCategoryType;
+use Ovski\AdminBundle\Form\CategoryType;
 
 /**
  * Category controller.
  *
- * @Route("/forum-category")
+ * @Route("/admin")
  */
-class AdminForumCategoryController extends Controller
+class AdminController extends Controller
 {
     /**
      * Lists all Category entities.
@@ -72,7 +72,7 @@ class AdminForumCategoryController extends Controller
     private function createCategoryForm(Category $entity)
     {
         $form = $this->createForm(
-            new AdminForumCategoryType($this->container->getParameter('admin_forum')),
+            new CategoryType($this->container->getParameter('ovski_forum')),
             $entity, array(
                 'action' => $this->generateUrl('admin_forum_category_create'),
                 'method' => 'POST',

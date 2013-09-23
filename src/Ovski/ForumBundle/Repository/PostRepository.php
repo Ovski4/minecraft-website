@@ -12,4 +12,32 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+    public function getLastPostsQueryBuilder($topicId, $numPosts)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb
+            ->select('p')
+            ->from('OvskiForumBundle:Post', 'p')
+            ->where('p.topic = :topicId')
+            ->setParameter('topicId', $topicId)
+            ->setMaxResults($numPosts)
+            ->orderBy('p.createdAt', 'DESC')
+        ;
+
+        return $qb;
+    }
+
+    public function getLastPostsQuery($topicId, $numPosts)
+    {
+        $qb = $this->getLastPostsQueryBuilder($topicId, $numPosts);
+
+        return is_null($qb) ? $qb : $qb->getQuery();
+    }
+
+    public function getLastPosts($topicId, $numPosts)
+    {
+        $q = $this->getLastPostsQuery($topicId, $numPosts);
+
+        return is_null($q) ? array() : $q->getResult();
+    }
 }

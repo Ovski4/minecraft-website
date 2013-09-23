@@ -4,7 +4,7 @@ MineWeb
 First
   * inclure la vue pour créer un post avec les dix derniers messages
   * onglet en fonction des langues dans le fichier de conf
-  * supprimer admin bundle et mettre dans le forum (pas de dependance)
+  * renommer fonction dans admincontroller du forumbundle
   * pouvoir set enable false/true en admin
   * trouver comment ajouter un role de moderateur avec fosuserbundle et créer les actions impliqué dans ce role
   * recherche full text forum

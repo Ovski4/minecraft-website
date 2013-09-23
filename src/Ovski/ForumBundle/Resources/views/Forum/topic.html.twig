@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="forum-topic content">
-        <h2>{{ topic.title }}</h2>
+        <h2><span>Topic :</span> {{ topic.title }}</h2>
         {% if topic.posts is not empty %}
         <section>
             <ul class="posts-list">
@@ -22,9 +22,8 @@
                                 <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
                             </header>
                             <div>
-                                {{ post.content }}
+                                {{ post.content | nl2br }}
                             </div>
-
                         </article>
                     </li>
                 {% endfor %}
@@ -33,7 +32,7 @@
         {% else %}
                 There are no post in this topic
         {% endif %}
-        <a href="{{ path('post_new', { categorySlug: topic.category.slug, topicSlug: topic.slug }) }}">Add a new post</a>
+        <a href="{{ path('post_new', { categorySlug: topic.category.slug, topicSlug: topic.slug }) }}#form">Add a new post</a>
         <a href="{{ path('category', { categorySlug: topic.category.slug }) }}">Go back to the topic list</a>
     </div>
 {% endblock %}

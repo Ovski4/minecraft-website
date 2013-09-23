@@ -15,6 +15,16 @@ use Ovski\ForumBundle\Form\PostType;
 class ForumController extends Controller
 {
     /**
+     * Redirect to forumAction
+     *
+     * @Route("/")
+     */
+    public function baseAction()
+    {
+        return $this->redirect($this->generateUrl('forum'));
+    }
+
+    /**
      * List all categories
      *
      * @Route("/categories/all", name="forum")
@@ -108,16 +118,29 @@ class ForumController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newPostAction(Request $request)
+    public function newPostAction(Request $request, $categorySlug, $topicSlug)
     {
+        $locale = $request->getLocale();
+        $forumManager = $this->get('ovski.manager.forum');
+        $maxParams = $this->container->getParameter('ovski_forum.max_per_pages');
+        $maxPosts = $maxParams['create_post'];
+
+        // list 'x' last posts
+        $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
+        $topic = $forumManager->getTopic($categoryId, $topicSlug);
+        $posts = $forumManager->getLastPosts($topic->getId(), $maxPosts);
+
+        // create the form to create a post
         $form = $this
             ->createForm(new PostType())
             ->add('submit', 'submit')
         ;
 
         return array(
-            'form'    => $form->createView(),
-            'referer' => $request->headers->get('referer')
+            'form'       => $form->createView(),
+            'referer'    => $request->headers->get('referer'),
+            'topic_title' => $topic->getTitle(),
+            'posts'      => $posts
         );
     }
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Ovski\AdminBundle\Form;
+namespace Ovski\ForumBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class AdminForumCategoryType extends AbstractType
+class CategoryType extends AbstractType
 {
     private $locales;
 

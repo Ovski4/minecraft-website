@@ -10,7 +10,6 @@ class AppKernel extends Kernel
         $bundles = array(
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new FOS\UserBundle\FOSUserBundle(),
-            new Ovski\AdminBundle\OvskiAdminBundle(),
             new Ovski\ForumBundle\OvskiForumBundle(),
             new Ovski\MinecraftStatsBundle\OvskiMinecraftStatsBundle(),
             new Ovski\MinecraftUserBundle\OvskiMinecraftUserBundle(),

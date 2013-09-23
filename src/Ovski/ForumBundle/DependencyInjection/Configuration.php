@@ -20,6 +20,26 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('ovski_forum');
 
+        $rootNode
+            ->children()
+                ->arrayNode('locales')
+                    ->beforeNormalization()
+                        ->ifString()
+                        ->then(function($v) { return preg_split('/\s*,\s*/', $v); })
+                    ->end()
+                    ->requiresAtLeastOneElement()
+                    ->prototype('scalar')->end()
+                ->end()
+                ->arrayNode('max_per_pages')
+                    ->children()
+                        ->integerNode('create_post')
+                            ->defaultValue('10')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }

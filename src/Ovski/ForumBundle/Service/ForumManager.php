@@ -93,9 +93,6 @@ class ForumManager
         return $post;
     }
 
-
-           
-    
     /* Repository shortcuts functions */
     
     public function getCategories($locale)
@@ -140,6 +137,24 @@ class ForumManager
             ->getEntityManager()
             ->getRepository("OvskiForumBundle:Topic")
             ->findOneBy(array('category' => $categoryId, 'slug' => $slug))
+        ;
+    }
+
+    public function getTopicId($categoryId, $slug)
+    {
+        return $this
+            ->getEntityManager()
+            ->getRepository("OvskiForumBundle:Topic")
+            ->getTopicId($categoryId, $slug);
+        ;
+    }
+
+    public function getLastPosts($topicId, $numPosts)
+    {
+        return $this
+            ->getEntityManager()
+            ->getRepository("OvskiForumBundle:Post")
+            ->getLastPosts($topicId, $numPosts);
         ;
     }
 }

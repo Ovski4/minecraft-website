@@ -16,7 +16,7 @@ class TopicType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('post', new PostType())
+            ->add('post', new PostType(), array('label' => false))
             ->add('submit', 'submit')
         ;
     }
