@@ -2,6 +2,7 @@ MineWeb
 =======
 
 First
+  * login -> probleme redicrection anglaise tout le temps
   * inclure la vue pour créer un post avec les dix derniers messages
   * onglet en fonction des langues dans le fichier de conf
   * renommer fonction dans admincontroller du forumbundle
