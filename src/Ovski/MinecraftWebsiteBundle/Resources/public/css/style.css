@@ -109,6 +109,13 @@ li
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
+/* Admin header */
+.admin #header-wrapper
+{
+    height: 230px;
+    background: url('../images/earth_header2.png') center -300px no-repeat;
+}
+
 /*Menu*/
 
 #header-wrapper > header > .navbar
@@ -545,3 +552,22 @@ body > footer .content
 {
     color: #FFF;
 }
+
+ /******************
+  * ADMINISTRATION *
+  ******************/
+ 
+ .admin table
+ {
+     width: 100%;
+ }
+ 
+.admin table tr th
+{
+    text-align: left;
+}
+ 
+ .admin table td
+ {
+     padding: 0 10px;
+ }

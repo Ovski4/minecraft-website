@@ -1,0 +1,25 @@
+{% if active is not defined %}
+  {% set active = null %}
+{% endif %}
+
+<div class="navbar">
+    <div class="navbar-inner span8">
+        <ul class="nav">
+            <li {% if active == 'forum' %} class="current" {% endif %}>
+                <a href="{{ path('forum') }}">
+                    {% trans %}Go back to the forum{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'categories' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_admin_list_categories') }}">
+                    {% trans %}Categories{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'users' %} class="current" {% endif %}>
+                <a href="#">
+                    {% trans %}Users{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

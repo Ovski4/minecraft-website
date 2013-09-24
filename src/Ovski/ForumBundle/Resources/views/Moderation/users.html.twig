@@ -1,0 +1,15 @@
+{% extends '::adminBase.html.twig' %}
+
+{% block menu %}
+    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'categories'} %}
+{% endblock %}
+
+{% block body %}
+
+    {% for user in users %}
+        <li>
+            {{ user }}
+        </li>
+    {% endfor %}
+
+{% endblock %}

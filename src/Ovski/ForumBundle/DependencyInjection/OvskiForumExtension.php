@@ -26,6 +26,7 @@ class OvskiForumExtension extends Extension
         $loader->load('services.yml');
 
         $container->setParameter('ovski_forum', $config);
+        $container->setParameter('ovski_forum.locales', $config['locales']);
         $container->setParameter('ovski_forum.max_per_pages', $config['max_per_pages']);
     }
 }

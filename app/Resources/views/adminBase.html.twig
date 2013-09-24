@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Admin | Mineweb{% endblock %}</title>
+        <title>{% block title %} | Mineweb{% endblock %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/bootstrap.css") }}"/>
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/style.css") }}"/>
@@ -10,11 +10,24 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body class="admin">
+        <div id="header-wrapper">
+            <header class="container">
+                <h1>Administration</h1>
+                {% block menu %}
+                    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'home'} %}
+                {% endblock %}
+            </header>
+        </div>
         <section id="main" class="container">
             {% block body %}
             {% endblock %}
         </section>
+        <footer>
+            <div class="content container">
+                <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
+            </div>
+        </footer>
     </body>
 </html>
 

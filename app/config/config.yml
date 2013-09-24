@@ -103,7 +103,7 @@ fm_bbcode:
     #emoticon:
     #    resource: "@OvskiForumBundle/Resources/config/emoticons.yml"
     filter_sets:
-        my_default_filter:
+        forum_filter:
             hooks: [ emoticon ]
             filters: [ default ]
             whitelist: [ b, i ]

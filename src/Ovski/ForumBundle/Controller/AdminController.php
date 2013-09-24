@@ -8,41 +8,50 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Ovski\ForumBundle\Entity\Category;
-use Ovski\AdminBundle\Form\CategoryType;
+use Ovski\ForumBundle\Form\CategoryType;
 
 /**
- * Category controller.
+ * Admin controller.
  *
- * @Route("/admin")
+ * @Route("/boss")
  */
 class AdminController extends Controller
 {
     /**
-     * Lists all Category entities.
+     * Redirect to listCategories
      *
-     * @Route("/", name="admin_forum_category")
+     * @Route("/")
+     */
+    public function adminAction()
+    {
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_admin_list_categories')
+        );
+    }
+
+    /**
+     * Lists all Categories.
+     *
+     * @Route("/categories", name="ovski_forum_admin_list_categories")
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function listCategoriesAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('OvskiForumBundle:Category')->findAll();
 
-        return array(
-            'entities' => $entities,
-        );
+        return array('entities' => $entities);
     }
 
     /**
      * Creates a new Category entity.
      *
-     * @Route("/", name="admin_forum_category_create")
+     * @Route("/category/create", name="ovski_forum_admin_category_create")
      * @Method("POST")
-     * @Template("OvskiAdminBundle:AdminForumCategory:new.html.twig")
+     * @Template("OvskiForumBundle:Admin:newCategory.html.twig")
      */
-    public function createAction(Request $request)
+    public function createCategoryAction(Request $request)
     {
         $entity = new Category();
         $form = $this->createCategoryForm($entity);
@@ -53,7 +62,11 @@ class AdminController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin_forum_category_show', array('id' => $entity->getId())));
+            return $this->redirect(
+                $this->generateUrl('ovski_forum_admin_category_show',
+                    array('id' => $entity->getId())
+                )
+            );
         }
 
         return array(
@@ -72,9 +85,9 @@ class AdminController extends Controller
     private function createCategoryForm(Category $entity)
     {
         $form = $this->createForm(
-            new CategoryType($this->container->getParameter('ovski_forum')),
+            new CategoryType($this->container->getParameter('ovski_forum.locales')),
             $entity, array(
-                'action' => $this->generateUrl('admin_forum_category_create'),
+                'action' => $this->generateUrl('ovski_forum_admin_category_create'),
                 'method' => 'POST',
             )
         );
@@ -87,11 +100,11 @@ class AdminController extends Controller
     /**
      * Displays a form to create a new Category entity.
      *
-     * @Route("/new", name="admin_forum_category_new")
+     * @Route("/category/new", name="ovski_forum_admin_category_new")
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newCategoryAction()
     {
         $entity = new Category();
         $form   = $this->createCategoryForm($entity);
@@ -105,14 +118,13 @@ class AdminController extends Controller
     /**
      * Finds and displays a Category entity.
      *
-     * @Route("/{id}", name="admin_forum_category_show")
+     * @Route("/category/{id}", name="ovski_forum_admin_category_show")
      * @Method("GET")
      * @Template()
      */
-    public function showAction($id)
+    public function showCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
-
         $entity = $em->getRepository('OvskiForumBundle:Category')->find($id);
 
         if (!$entity) {
@@ -130,11 +142,11 @@ class AdminController extends Controller
     /**
      * Displays a form to edit an existing Category entity.
      *
-     * @Route("/{id}/edit", name="admin_forum_category_edit")
+     * @Route("/category/{id}/edit", name="ovski_forum_admin_category_edit")
      * @Method("GET")
      * @Template()
      */
-    public function editAction($id)
+    public function editCategoryAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -163,10 +175,17 @@ class AdminController extends Controller
     */
     private function createEditForm(Category $entity)
     {
-        $form = $this->createForm(new AdminForumCategoryType(), $entity, array(
-            'action' => $this->generateUrl('admin_forum_category_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
+        $form = $this->createForm(
+            new CategoryType($this->container->getParameter('ovski_forum.locales')),
+            $entity,
+            array(
+                'action' => $this->generateUrl(
+                    'ovski_forum_admin_category_update',
+                    array('id' => $entity->getId())
+                ),
+                'method' => 'PUT',
+            )
+        );
 
         $form->add('submit', 'submit', array('label' => 'Update'));
 
@@ -175,11 +194,11 @@ class AdminController extends Controller
     /**
      * Edits an existing Category entity.
      *
-     * @Route("/{id}", name="admin_forum_category_update")
+     * @Route("/category/{id}", name="ovski_forum_admin_category_update")
      * @Method("PUT")
-     * @Template("OvskiAdminBundle:AdminForumCategory:edit.html.twig")
+     * @Template("OvskiForumBundle:Admin:editCategory.html.twig")
      */
-    public function updateAction(Request $request, $id)
+    public function updateCategoryAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -190,7 +209,7 @@ class AdminController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($entitety);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
@@ -209,7 +228,7 @@ class AdminController extends Controller
     /**
      * Deletes a Category entity.
      *
-     * @Route("/{id}", name="admin_forum_category_delete")
+     * @Route("/category/{id}", name="ovski_forum_admin_category_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -229,7 +248,7 @@ class AdminController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_forum_category'));
+        return $this->redirect($this->generateUrl('admin_forum_listcategories'));
     }
 
     /**
@@ -242,7 +261,7 @@ class AdminController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_forum_category_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('ovski_forum_admin_category_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

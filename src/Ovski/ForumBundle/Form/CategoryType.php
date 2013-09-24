@@ -26,13 +26,13 @@ class CategoryType extends AbstractType
             ->add('description')
         ;
 
-        if (count($this->locales["locales"]) == 1) {
+        if (count($this->locales) == 1) {
             $builder->add('language', 'hidden', array(
-                'data' => $this->locales["locales"][0],
+                'data' => $this->locales[0],
             ));
         } else {
             $languages = array();
-            foreach ($this->locales["locales"] as $locale) {
+            foreach ($this->locales as $locale) {
                 $languages[$locale] = $locale;
             }
             $builder->add('language', 'choice', array(

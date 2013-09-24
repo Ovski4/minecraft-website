@@ -2,8 +2,9 @@ MineWeb
 =======
 
 First
-  * login -> probleme redicrection anglaise tout le temps
-  * inclure la vue pour créer un post avec les dix derniers messages
+  * aminbase -> forumbundle (adminforumbase)
+  * layout websitebundl
+  * css forum dans le bundle
   * onglet en fonction des langues dans le fichier de conf
   * renommer fonction dans admincontroller du forumbundle
   * pouvoir set enable false/true en admin
@@ -34,3 +35,40 @@ After
   * Look at static pages stuff
   * Upgrade to bootsrap 3
 --
+
+Admin peut: assigner des modérateurs
+Moderateur peut: bloquer les gens, fermer les topics.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

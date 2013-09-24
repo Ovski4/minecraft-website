@@ -1,16 +1,15 @@
 {% extends '::adminBase.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
+    <h1>Category creation</h1>
 
-    {{ form(edit_form) }}
+    {{ form(form) }}
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('admin_forum_category') }}">
+        <a href="{{ path('ovski_forum_admin_list_categories') }}">
             Back to the list
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}
