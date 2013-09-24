@@ -11,12 +11,12 @@
                 </a>
             </li>
             <li {% if active == 'categories' %} class="current" {% endif %}>
-                <a href="{{ path('ovski_forum_admin_list_categories') }}">
+                <a href="{{ path('ovski_forum_administration_list_categories') }}">
                     {% trans %}Categories{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'users' %} class="current" {% endif %}>
-                <a href="#">
+                <a href="{{ path('ovski_forum_moderation_users') }}">
                     {% trans %}Users{% endtrans %}
                 </a>
             </li>

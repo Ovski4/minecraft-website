@@ -11,22 +11,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Moderation controller.
  *
- * @Route("/modo")
+ * @Route("/moderation")
  */
 class ModerationController extends Controller
 {
     /**
-     * @Route("/users")
+     * @Route("/users", name="ovski_forum_moderation_users")
      * @Template()
      */
     public function usersAction()
     {
-        $users = $this
+        $userRepository = $this
             ->getDoctrine()
-            ->getRepository("OvskiMinecraftUserBundle:User")
-            ->findAll()
-        ;
+            ->getRepository("OvskiMinecraftUserBundle:User");
 
-        return array('users' => $users);
+        return array(
+            'disabled_users' => $userRepository->getDisabledUsers(),
+            'enabled_users'  => $userRepository->getEnabledUsers()
+        );
     }
 }
