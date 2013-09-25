@@ -2,6 +2,7 @@ MineWeb
 =======
 
 First
+  * tester admin a false enable dans moderation et autres trucs udu genre
   * aminbase -> forumbundle (adminforumbase)
   * layout websitebundl
   * css forum dans le bundle

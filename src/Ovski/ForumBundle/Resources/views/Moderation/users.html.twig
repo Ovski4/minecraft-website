@@ -1,19 +1,24 @@
-{% extends '::adminBase.html.twig' %}
+{% extends '::moderationBase.html.twig' %}
 
 {% block menu %}
-    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'categories'} %}
+    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'users'} %}
 {% endblock %}
 
 {% block body %}
 
-    <div class="row-fluid">
+    <div class="row-fluid enable-form">
         <div class="span6">
             <h3>Disabled users</h3>
             <ul>
                 {% for user in disabled_users %}
-                    <li>
-                        {{ user }}
-                    </li>
+                    {% if (not user.hasRole("ROLE_MODERATOR")) and (not user.hasRole("ROLE_ADMIN")) %}
+                        <li>
+                            {{ user }}
+                            <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 1 }) }}">
+                                [enable]
+                            </a>
+                        </li>
+                    {% endif %}
                 {% else %}
                     No disabled users
                 {% endfor %}
@@ -23,9 +28,14 @@
             <h3>Enabled users</h3>
             <ul>
                 {% for user in enabled_users %}
-                    <li>
-                        {{ user }}
-                    </li>
+                    {% if (not user.hasRole("ROLE_MODERATOR")) and (not user.hasRole("ROLE_ADMIN")) %}
+                        <li>
+                            {{ user }}
+                            <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 0 }) }}">
+                                [disable]
+                            </a
+                        </li>
+                    {% endif %}
                 {% else %}
                    No enabled users
                 {% endfor %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} | Mineweb{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/bootstrap.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/style.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/font-awesome/css/font-awesome.min.css") }}"/>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="moderation">
+        <div id="header-wrapper">
+            <header class="container">
+                <h1>Moderation</h1>
+                {% block menu %}
+                    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'home'} %}
+                {% endblock %}
+            </header>
+        </div>
+        <section id="main" class="container">
+            {% block body %}
+            {% endblock %}
+        </section>
+        <footer>
+            <div class="content container">
+                <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
+            </div>
+        </footer>
+    </body>
+</html>
+
+{% block javascripts %}
+    <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.0.min.js'></script>
+    <script type="text/javascript" src="/bundles/ovskiwebsite/js/bootstrap.js"></script>
+{% endblock javascripts %}

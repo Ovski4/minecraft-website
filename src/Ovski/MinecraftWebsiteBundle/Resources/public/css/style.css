@@ -43,7 +43,7 @@ h2
     margin-bottom: 20px;
 }
 
-button,
+.forum button,
 input[type="submit"]
 {
     background: #382819;
@@ -59,7 +59,7 @@ input[type="submit"]
     transition: background .2s;
 }
 
-button:hover,
+.forum button:hover,
 input[type="submit"]:hover
 {
     background: #74b73f;
@@ -109,8 +109,9 @@ li
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
-/* Admin header */
-.admin #header-wrapper
+/* Admin & moderation header */
+.admin #header-wrapper,
+.moderation #header-wrapper
 {
     height: 230px;
     background: url('../images/earth_header2.png') center -300px no-repeat;
@@ -556,18 +557,27 @@ body > footer .content
  /******************
   * ADMINISTRATION *
   ******************/
- 
- .admin table
- {
-     width: 100%;
- }
+
+.admin table
+{
+    width: 100%;
+}
  
 .admin table tr th
 {
     text-align: left;
 }
  
- .admin table td
- {
-     padding: 0 10px;
- }
+.admin table td
+{
+    padding: 0 10px;
+}
+ 
+ /**************
+  * MODERATION *
+  **************/
+ 
+.moderation .enable-form ul li
+{
+    padding: 5px 10px;
+}
