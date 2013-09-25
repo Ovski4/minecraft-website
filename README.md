@@ -2,6 +2,8 @@ MineWeb
 =======
 
 First
+  * gérer tous les cas dans les url ou une entité n'est pas récupérée
+  * invalid csrf token when false login
   * tester admin a false enable dans moderation et autres trucs udu genre
   * aminbase -> forumbundle (adminforumbase)
   * layout websitebundl

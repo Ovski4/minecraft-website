@@ -11,14 +11,12 @@
             <h3>Disabled users</h3>
             <ul>
                 {% for user in disabled_users %}
-                    {% if (not user.hasRole("ROLE_MODERATOR")) and (not user.hasRole("ROLE_ADMIN")) %}
-                        <li>
-                            {{ user }}
-                            <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 1 }) }}">
-                                [enable]
-                            </a>
-                        </li>
-                    {% endif %}
+                    <li>
+                        {{ user }}
+                        <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 1 }) }}">
+                            [enable]
+                        </a>
+                    </li>
                 {% else %}
                     No disabled users
                 {% endfor %}
@@ -28,14 +26,12 @@
             <h3>Enabled users</h3>
             <ul>
                 {% for user in enabled_users %}
-                    {% if (not user.hasRole("ROLE_MODERATOR")) and (not user.hasRole("ROLE_ADMIN")) %}
-                        <li>
-                            {{ user }}
-                            <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 0 }) }}">
-                                [disable]
-                            </a
-                        </li>
-                    {% endif %}
+                    <li>
+                        {{ user }}
+                        <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 0 }) }}">
+                            [disable]
+                        </a
+                    </li>
                 {% else %}
                    No enabled users
                 {% endfor %}
