@@ -3,6 +3,7 @@
 namespace Ovski\ForumBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -20,7 +21,7 @@ class AdminController extends Controller
     /**
      * Redirect to listCategories
      *
-     * @Route("/")
+     * @Route("/", name="ovski_forum_administration")
      */
     public function adminAction()
     {
@@ -28,6 +29,10 @@ class AdminController extends Controller
             $this->generateUrl('ovski_forum_administration_list_categories')
         );
     }
+
+    /* ----------------------------*
+     *  CATEGORIES RELATED ACTIONS *
+     * ----------------------------*/
 
     /**
      * Lists all Categories.
@@ -157,7 +162,7 @@ class AdminController extends Controller
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createCategoryDeleteForm($id);
 
         return array(
             'entity'      => $entity,
@@ -208,7 +213,7 @@ class AdminController extends Controller
             throw $this->createNotFoundException('Unable to find Category entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        $deleteForm = $this->createCategoryDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -231,9 +236,9 @@ class AdminController extends Controller
      * @Route("/category/{id}", name="ovski_forum_administration_category_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteCategoryAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteCategoryForm($id);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -258,7 +263,7 @@ class AdminController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm($id)
+    private function createDeleteCategoryForm($id)
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('ovski_forum_administration_category_delete', array('id' => $id)))
@@ -266,5 +271,88 @@ class AdminController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+
+    /* -----------------------*
+     *  USERS RELATED ACTIONS *
+     * -----------------------*/
+
+    /**
+     * @Route("/promote", name="ovski_forum_administration_users")
+     * @Template()
+     */
+    public function usersAction()
+    {
+        $userRepository = $this
+            ->getDoctrine()
+            ->getRepository("OvskiMinecraftUserBundle:User")
+        ;
+
+        $users = $userRepository->findAll();
+        $moderatorUsers = $this->filterUsersModerator($users);
+        $enabledUsers = $this->filterUsersWithoutRole($userRepository->getEnabledUsers());
+
+        return array(
+            'users'      => $enabledUsers,
+            'moderators' => $moderatorUsers
+        );
+    }
+
+    /**
+     * @Route("/{id}/enable/{choice}", name="ovski_forum_moderation_promote")
+     * @Method("GET")
+     */
+    public function promoteAction($id, $choice)
+    {
+        //faire en sorte (id check) qu'un utilisateur disable ne puisse pas etre promu
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository("OvskiMinecraftUserBundle:User")->findOneById($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        if ($choice) {
+            // promote
+            if (!$user->isEnabled()) {
+                throw new AccessDeniedException();
+            }
+            $user->addRole("ROLE_MODERATOR");
+            $em->persist($user);
+        } else {
+            // demote
+            $user->removeRole("ROLE_MODERATOR");
+            $em->persist($user);
+        }
+        $em->flush();
+   
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_administration_users')
+        );
+    }
+
+    private function filterUsersWithoutRole($userArray)
+    {
+        $i = 0;
+        foreach ($userArray as $user) {
+            if ($user->hasRole("ROLE_MODERATOR") || $user->hasRole("ROLE_ADMIN") || $user->hasRole("ROLE_SUPER_ADMIN")) {
+                unset($userArray[$i]);
+            }
+            $i++;
+        }
+        return $userArray;
+    }
+
+    private function filterUsersModerator($userArray)
+    {
+        $i = 0;
+        foreach ($userArray as $user) {
+            if (!$user->hasRole("ROLE_MODERATOR")) {
+                unset($userArray[$i]);
+            }
+            $i++;
+        }
+        return $userArray;
     }
 }

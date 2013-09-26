@@ -12,36 +12,46 @@
 {% block body %}
     <div class="forum-category content">
         <h2>Forum - {{ category_name }}</h2>
-        {% if topics is not empty %}
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Subject</th>
-                    <th>Author</th>
-                    <th>Posts</th>
-                    <th>Last post</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for topic in topics %}
+        {% if pager.currentPageResults is not empty %}
+            {% if pager.haveToPaginate %}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+            {% endif %}
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td>
-                            <a href="{{ path('topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
-                                {{ topic.title }}
-                            </a>
-                        </td>
-                        <td>{{ topic.author }}</td>
-                        <td>{{ topic.numPosts }}</td>
-                        <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>    
+                        <th>Subject</th>
+                        <th>Author</th>
+                        <th>Posts</th>
+                        <th>Last post</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for topic in pager.currentPageResults %}
+                        <tr>
+                            <td>
+                                <a href="{{ path('topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
+                                    {{ topic.title }}
+                                </a>
+                            </td>
+                            <td>{{ topic.author }}</td>
+                            <td>{{ topic.numPosts }}</td>
+                            <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>    
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         {% else %}
                 There are no topics in this category
         {% endif %}
-        
+
+        {% if pager.currentPageResults|length >= 15 %}
+            {% if pager.haveToPaginate %}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+            {% endif %}
+        {% endif %}
+     
         <h3>Create a new topic</h3>
         {{ form(form) }}
+
     </div>
 {% endblock %}

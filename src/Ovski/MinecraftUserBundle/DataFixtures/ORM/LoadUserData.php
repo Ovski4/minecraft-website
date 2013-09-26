@@ -48,14 +48,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $glapine->setPlainPassword('glapine');
         $glapine->setEnabled(true);
         $glapine->addRole("ROLE_MODERATOR");
-        $userManager->updateUser($glapine);
+        $userManager->updateUser($glapine, false); //false to do not flush
 
         $jaylbralon = $userManager->createUser();
         $jaylbralon->setUsername('jaylbralon');
         $jaylbralon->setEmail('jaylbralon@jaylbralon.fr');
         $jaylbralon->setPlainPassword('jaylbralon');
         $jaylbralon->setEnabled(true);
-        $userManager->updateUser($jaylbralon);
+        $userManager->updateUser($jaylbralon, false);
 
         $baptiste = $userManager->createUser();
         $baptiste->setUsername('baptiste');
@@ -63,7 +63,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $baptiste->setPlainPassword('baptiste');
         $baptiste->addRole("ROLE_ADMIN");
         $baptiste->setEnabled(true);
-        $userManager->updateUser($baptiste);
+        $userManager->updateUser($baptiste, false);
 
         $this->addReference('baptiste', $baptiste);
         $this->addReference('glapine', $glapine);

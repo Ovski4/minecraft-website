@@ -11,38 +11,42 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        <div id="header-wrapper">
-            <header class="container">
-                <ul class="lang-menu">
-                    <li class="flag-fr">
-                        <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">
-                            Français
-                        </a>
-                    </li>
-                    <li class="flag-en">
-                        <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">
-                            English
-                        </a>
-                    </li>
-                </ul>
-                <h1>{#Pick and dig, then kick a pig#}Clash of Factions</h1>
-                {% block menu %}
-                    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
-                {% endblock %}
-            </header>
-            <div class="banner container">
-                <img src="/bundles/ovskiminecraftwebsite/images/cube.jpg"/>
-            </div>  
-        </div>
+        {% block header %}
+            <div id="header-wrapper">
+                <header class="container">
+                    <ul class="lang-menu">
+                        <li class="flag-fr">
+                            <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">
+                                Français
+                            </a>
+                        </li>
+                        <li class="flag-en">
+                            <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">
+                                English
+                            </a>
+                        </li>
+                    </ul>
+                    <h1>{#Pick and dig, then kick a pig#}Clash of Factions</h1>
+                    {% block menu %}
+                        {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
+                    {% endblock %}
+                </header>
+                <div class="banner container">
+                    <img src="/bundles/ovskiminecraftwebsite/images/cube.jpg"/>
+                </div>  
+            </div>
+        {% endblock %}
         <section id="main" class="container">
             {% block body %}
             {% endblock %}
         </section>
-        <footer>
-            <div class="content container">
-                <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
-            </div>
-        </footer>
+        {% block footer %}
+            <footer>
+                <div class="content container">
+                    <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
+                </div>
+            </footer>
+        {% endblock %}
     </body>
 </html>
 

@@ -16,6 +16,18 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ModerationController extends Controller
 {
     /**
+     * Redirect to usersAction
+     *
+     * @Route("/", name="ovski_forum_moderation")
+     */
+    public function adminAction()
+    {
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_moderation_users')
+        );
+    }
+
+    /**
      * @Route("/users", name="ovski_forum_moderation_users")
      * @Template()
      */

@@ -3,20 +3,29 @@
 {% endif %}
 
 <div class="navbar">
-    <div class="navbar-inner span8">
+    <div class="navbar-inner span5">
         <ul class="nav">
-            <li {% if active == 'forum' %} class="current" {% endif %}>
-                <a href="{{ path('forum') }}">
-                    {% trans %}Go back to the forum{% endtrans %}
+            <li>
+                <a href="{{ path('ovski_forum_moderation') }}">
+                    {% trans %}Moderation Panel{% endtrans %}
                 </a>
             </li>
+            <li>
+                <a href="{{ path('forum') }}">
+                    {% trans %}Forum{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="navbar-inner span5">
+        <ul class="nav">
             <li {% if active == 'categories' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_administration_list_categories') }}">
                     {% trans %}Categories{% endtrans %}
                 </a>
             </li>
             <li {% if active == 'users' %} class="current" {% endif %}>
-                <a href="{{ path('ovski_forum_moderation_users') }}">
+                <a href="{{ path('ovski_forum_administration_users') }}">
                     {% trans %}Users{% endtrans %}
                 </a>
             </li>

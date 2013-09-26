@@ -1,0 +1,20 @@
+{% if active is not defined %}
+  {% set active = null %}
+{% endif %}
+
+<div class="navbar">
+    <div class="navbar-inner span12">
+        <ul class="nav">
+            <li {% if active == 'forum' %} class="current" {% endif %}>
+                <a href="{{ path('forum') }}">
+                    {% trans %}Go back to the forum{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'users' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_moderation_users') }}">
+                    {% trans %}Users{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

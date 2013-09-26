@@ -1,7 +1,7 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}
-    Forum - {{ topic.title }}
+    Topic - {{ topic_title }}
     {{ parent() }}
 {% endblock %}
 
@@ -11,28 +11,38 @@
 
 {% block body %}
     <div class="forum-topic content">
-        <h2><span>Topic :</span> {{ topic.title }}</h2>
-        {% if topic.posts is not empty %}
-        <section>
-            <ul class="posts-list">
-                {% for post in topic.posts %}
-                    <li>
-                        <article>
-                            <header>
-                                <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
-                            </header>
-                            <div>
-                                {{ post.content | nl2br | bbcode_filter('forum_filter') }}
-                            </div>
-                        </article>
-                    </li>
-                {% endfor %}
-            </ul>
-        </section>
+        <h2><span>Topic :</span> {{ topic_title }}</h2>
+        {% if pager.currentPageResults is not empty %}
+            <section>
+                {% if pager.haveToPaginate %}
+                    {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
+                {% endif %}
+                <ul class="posts-list">
+                    {% for post in pager.currentPageResults %}
+                        <li>
+                            <article>
+                                <header>
+                                    <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
+                                </header>
+                                <div>
+                                    {{ post.content | nl2br | bbcode_filter('forum_filter') }}
+                                </div>
+                            </article>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </section>
         {% else %}
                 There are no post in this topic
         {% endif %}
-        <a href="{{ path('post_new', { categorySlug: topic.category.slug, topicSlug: topic.slug }) }}#form">Add a new post</a>
-        <a href="{{ path('category', { categorySlug: topic.category.slug }) }}">Go back to the topic list</a>
+
+        {% if pager.currentPageResults|length >= 3 %}
+            {% if pager.haveToPaginate %}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
+            {% endif %}
+        {% endif %}
+
+        <a href="{{ path('post_new', { categorySlug: category_slug, topicSlug: topic_slug }) }}#form">Add a new post</a>
+        <a href="{{ path('category', { categorySlug: category_slug }) }}">Go back to the topic list</a>
     </div>
 {% endblock %}

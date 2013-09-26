@@ -4,6 +4,7 @@ namespace Ovski\ForumBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -11,6 +12,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Ovski\ForumBundle\Entity\Post;
 use Ovski\ForumBundle\Form\TopicType;
 use Ovski\ForumBundle\Form\PostType;
+use Pagerfanta\Exception\NotValidCurrentPageException;
+use Pagerfanta\Adapter\ArrayAdapter;
+use Pagerfanta\Adapter\DoctrineCollectionAdapter;
+use Pagerfanta\Pagerfanta;
 
 class ForumController extends Controller
 {
@@ -41,10 +46,11 @@ class ForumController extends Controller
     /**
      * List all topics of a category
      *
-     * @Route("/category/{categorySlug}", name="category")
+     * @Route("/category/{categorySlug}", name="category", defaults={"page" = 1})
+     * @Route("/category/{categorySlug}/page/{page}", name="category_paginated")
      * @Template()
      */
-    public function categoryAction(Request $request, $categorySlug)
+    public function categoryAction(Request $request, $categorySlug, $page)
     {
         $locale = $request->getLocale();
         $category = $this->get('ovski.manager.forum')->getCategory($locale, $categorySlug);
@@ -63,7 +69,7 @@ class ForumController extends Controller
 
             if ($form->isValid()) {
                 $topic = $this->get('ovski.manager.forum')->handleTopicData($form->getData(), $category);
-                //var_dump($topic); die;
+
                 return $this->redirect($this->generateUrl(
                     'topic',
                     array(
@@ -75,26 +81,42 @@ class ForumController extends Controller
         }
  
         $form = $this->createForm(new TopicType());
-        $topics = $this->get('ovski.manager.forum')->getTopics($category);
 
+        // Topics pagination
+        $topics = $this->get('ovski.manager.forum')->getTopics($category);
+        $pager = new Pagerfanta(new ArrayAdapter($topics));
+        $pager->setMaxPerPage(
+            $this->container->getParameter('ovski_forum.max_per_pages')['topics']
+        );
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException(
+                sprintf("As awesome as this website can be, page \"%s\" was not found.",
+                    $page
+                )
+            );
+        }
+        
         return array(
-            'form'   => $form->createView(),
+            'form'          => $form->createView(),
             'category_name' => $category->getName(),
             'category_slug' => $categorySlug,
-            'topics' => $topics
+            'pager'         => $pager
         );
     }
 
     /**
      * List all posts of a topic
      *
-     * @Route("/category/{categorySlug}/topic/{topicSlug}", name="topic")
+     * @Route("/category/{categorySlug}/topic/{topicSlug}", name="topic", defaults={"page" = 1})
+     * @Route("/category/{categorySlug}/topic/{topicSlug}/page/{page}", name="topic_paginated")
      * @Template()
      */
-    public function topicAction(Request $request, $categorySlug, $topicSlug)
+    public function topicAction(Request $request, $categorySlug, $topicSlug, $page)
     {
         $locale = $request->getLocale();
-
         $categoryId = $this->get('ovski.manager.forum')->getCategoryId($locale, $categorySlug);
         if (!$categoryId) {
             return $this->redirect($this->generateUrl('forum'));
@@ -108,7 +130,28 @@ class ForumController extends Controller
             ));
         }
 
-        return array('topic' => $topic);
+        // Posts pagination
+        $pager = new Pagerfanta(new DoctrineCollectionAdapter($topic->getPosts()));
+        $pager->setMaxPerPage(
+            $this->container->getParameter('ovski_forum.max_per_pages')['posts']
+        );
+
+        try {
+            $pager->setCurrentPage($page);
+        } catch (NotValidCurrentPageException $e) {
+            throw new NotFoundHttpException(
+                sprintf("As awesome as this website can be, page \"%s\" was not found.",
+                    $page
+                )
+            );
+        }
+
+        return array(
+            'topic_title'   => $topic->getTitle(),
+            'topic_slug'    => $topicSlug,
+            'category_slug' => $categorySlug,
+            'pager'         => $pager
+        );
     }
 
     /**
@@ -122,8 +165,7 @@ class ForumController extends Controller
     {
         $locale = $request->getLocale();
         $forumManager = $this->get('ovski.manager.forum');
-        $maxParams = $this->container->getParameter('ovski_forum.max_per_pages');
-        $maxPosts = $maxParams['create_post'];
+        $maxPosts = $this->container->getParameter('ovski_forum.max_per_pages')['posts_on_post_creation'];
 
         // list 'x' last posts
         $categoryId = $forumManager->getCategoryId($locale, $categorySlug);

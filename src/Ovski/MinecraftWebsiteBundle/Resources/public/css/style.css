@@ -299,6 +299,7 @@ li
     background: #9ec864;
     color: #000;
     line-height: 25px;
+    padding: 5px 5px 0 5px;
 }
 
 .pagination ul li:first-child a
@@ -510,12 +511,16 @@ header.stat-list-head > div
 
 /* Forum topic page */
 
+.forum-topic .posts-list li
+{
+    margin: 15px 0;
+}
+
 .forum-topic article
 {
     background: #f9f9f9;
     border: 1px solid #ccc;
     padding: 20px;
-    margin-bottom: 20px;
 }
 
 .forum-topic article header

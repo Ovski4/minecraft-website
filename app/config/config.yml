@@ -112,4 +112,6 @@ fm_bbcode:
 ovski_forum:
     locales: [fr, en]
     max_per_pages:
-        create_post: 10
+        posts_on_post_creation: 10
+        topics: 4
+        posts: 10

@@ -11,23 +11,19 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body class="moderation">
-        <div id="header-wrapper">
+        {% block header %}
             <header class="container">
                 <h1>Moderation</h1>
                 {% block menu %}
-                    {% include "OvskiForumBundle:Admin:menu.html.twig" with {active: 'home'} %}
+                    {% include "OvskiForumBundle:Moderation:menu.html.twig" with {active: 'users'} %}
                 {% endblock %}
             </header>
-        </div>
+        {% endblock %}
         <section id="main" class="container">
             {% block body %}
             {% endblock %}
         </section>
-        <footer>
-            <div class="content container">
-                <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
-            </div>
-        </footer>
+        {% block footer %}{% endblock %}
     </body>
 </html>
 
