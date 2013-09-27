@@ -45,7 +45,14 @@ class Topic
      * @ORM\Column(type="string", length=40)
      */
     private $numPosts;
-    
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
     /**
      * @var string
      *
@@ -301,5 +308,28 @@ class Topic
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Topic
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

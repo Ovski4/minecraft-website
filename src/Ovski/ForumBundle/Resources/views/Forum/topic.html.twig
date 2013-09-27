@@ -15,7 +15,7 @@
         {% if pager.currentPageResults is not empty %}
             <section>
                 {% if pager.haveToPaginate %}
-                    {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
+                    {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
                 {% endif %}
                 <ul class="posts-list">
                     {% for post in pager.currentPageResults %}
@@ -38,11 +38,11 @@
 
         {% if pager.currentPageResults|length >= 3 %}
             {% if pager.haveToPaginate %}
-                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_topic_paginated', 'routeParams' : { 'categorySlug': category_slug, 'topicSlug': topic_slug } }) }}
             {% endif %}
         {% endif %}
 
-        <a href="{{ path('post_new', { categorySlug: category_slug, topicSlug: topic_slug }) }}#form">Add a new post</a>
-        <a href="{{ path('category', { categorySlug: category_slug }) }}">Go back to the topic list</a>
+        <a href="{{ path('ovski_forum_forum_post_new', { categorySlug: category_slug, topicSlug: topic_slug }) }}#form">Add a new post</a>
+        <a href="{{ path('ovski_forum_forum_category', { categorySlug: category_slug }) }}">Go back to the topic list</a>
     </div>
 {% endblock %}

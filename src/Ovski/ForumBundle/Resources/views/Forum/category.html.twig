@@ -14,7 +14,7 @@
         <h2>Forum - {{ category_name }}</h2>
         {% if pager.currentPageResults is not empty %}
             {% if pager.haveToPaginate %}
-                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
             {% endif %}
             <table class="table table-striped">
                 <thead>
@@ -29,7 +29,7 @@
                     {% for topic in pager.currentPageResults %}
                         <tr>
                             <td>
-                                <a href="{{ path('topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
+                                <a href="{{ path('ovski_forum_forum_topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
                                     {{ topic.title }}
                                 </a>
                             </td>
@@ -46,7 +46,7 @@
 
         {% if pager.currentPageResults|length >= 15 %}
             {% if pager.haveToPaginate %}
-                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
             {% endif %}
         {% endif %}
      

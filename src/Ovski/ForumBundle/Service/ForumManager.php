@@ -60,6 +60,7 @@ class ForumManager
             ->setAuthor($this->getUser())
             ->getPost()
             ->setTopic($topic)
+            ->setAuthor($this->getUser())
         ;
 
         $this->getEntityManager()->persist($topic);

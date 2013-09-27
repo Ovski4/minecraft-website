@@ -17,22 +17,27 @@ use Pagerfanta\Adapter\ArrayAdapter;
 use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Pagerfanta\Pagerfanta;
 
+/**
+ * Forum controller
+ * 
+ * This class contains every actions executable by users with role ROLE_USER
+ */
 class ForumController extends Controller
 {
     /**
      * Redirect to forumAction
      *
-     * @Route("/")
+     * @Route("/", name="ovski_forum_forum")
      */
     public function baseAction()
     {
-        return $this->redirect($this->generateUrl('forum'));
+        return $this->redirect($this->generateUrl('ovski_forum_forum_categories'));
     }
 
     /**
      * List all categories
      *
-     * @Route("/categories/all", name="forum")
+     * @Route("/categories/all", name="ovski_forum_forum_categories")
      * @Template()
      */
     public function forumAction()
@@ -46,8 +51,8 @@ class ForumController extends Controller
     /**
      * List all topics of a category
      *
-     * @Route("/category/{categorySlug}", name="category", defaults={"page" = 1})
-     * @Route("/category/{categorySlug}/page/{page}", name="category_paginated")
+     * @Route("/category/{categorySlug}", name="ovski_forum_forum_category", defaults={"page" = 1})
+     * @Route("/category/{categorySlug}/page/{page}", name="ovski_forum_forum_category_paginated")
      * @Template()
      */
     public function categoryAction(Request $request, $categorySlug, $page)
@@ -55,7 +60,7 @@ class ForumController extends Controller
         $locale = $request->getLocale();
         $category = $this->get('ovski.manager.forum')->getCategory($locale, $categorySlug);
         if (!isset($category)) {
-            return $this->redirect($this->generateUrl('forum'));
+            return $this->redirect($this->generateUrl('ovski_forum_forum'));
         }
 
         /* Create a new topic */
@@ -71,7 +76,7 @@ class ForumController extends Controller
                 $topic = $this->get('ovski.manager.forum')->handleTopicData($form->getData(), $category);
 
                 return $this->redirect($this->generateUrl(
-                    'topic',
+                    'ovski_forum_forum_topic',
                     array(
                         "categorySlug" => $categorySlug,
                         "topicSlug" => $topic->getSlug()
@@ -98,7 +103,7 @@ class ForumController extends Controller
                 )
             );
         }
-        
+
         return array(
             'form'          => $form->createView(),
             'category_name' => $category->getName(),
@@ -110,8 +115,8 @@ class ForumController extends Controller
     /**
      * List all posts of a topic
      *
-     * @Route("/category/{categorySlug}/topic/{topicSlug}", name="topic", defaults={"page" = 1})
-     * @Route("/category/{categorySlug}/topic/{topicSlug}/page/{page}", name="topic_paginated")
+     * @Route("/category/{categorySlug}/topic/{topicSlug}", name="ovski_forum_forum_topic", defaults={"page" = 1})
+     * @Route("/category/{categorySlug}/topic/{topicSlug}/page/{page}", name="ovski_forum_forum_topic_paginated")
      * @Template()
      */
     public function topicAction(Request $request, $categorySlug, $topicSlug, $page)
@@ -119,14 +124,14 @@ class ForumController extends Controller
         $locale = $request->getLocale();
         $categoryId = $this->get('ovski.manager.forum')->getCategoryId($locale, $categorySlug);
         if (!$categoryId) {
-            return $this->redirect($this->generateUrl('forum'));
+            return $this->redirect($this->generateUrl('ovski_forum_forum'));
         }
 
         $topic = $this->get('ovski.manager.forum')->getTopic($categoryId, $topicSlug);
 
         if (!$topic) {
             return $this->redirect($this->generateUrl(
-                'category', array("categorySlug" => $categorySlug)
+                'ovski_forum_forum_category', array("categorySlug" => $categorySlug)
             ));
         }
 
@@ -157,7 +162,7 @@ class ForumController extends Controller
     /**
      * Displays a form to create a new Post.
      *
-     * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="post_new")
+     * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="ovski_forum_forum_post_new")
      * @Method("GET")
      * @Template()
      */
@@ -189,7 +194,7 @@ class ForumController extends Controller
     /**
      * Creates a new Post entity.
      *
-     * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="post_create")
+     * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="ovski_forum_forum_post_create")
      * @Method("POST")
      * @Template("OvskiForumBundle:Topic:newPost.html.twig")
      */
@@ -210,7 +215,7 @@ class ForumController extends Controller
             $this->get('ovski.manager.forum')->handlePostData($post, $topicSlug);
 
             return $this->redirect($this->generateUrl(
-                'topic',
+                'ovski_forum_forum_topic',
                 array(
                     "categorySlug" => $categorySlug,
                     "topicSlug" => $topicSlug

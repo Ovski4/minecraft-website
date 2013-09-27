@@ -9,7 +9,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Moderation controller.
+ * Moderation controller
+ * 
+ * This class contains every actions executable by users with role ROLE_MODERATOR
  *
  * @Route("/moderation")
  */
@@ -47,7 +49,7 @@ class ModerationController extends Controller
     }
 
     /**
-     * @Route("/{id}/enable/{choice}", name="ovski_forum_moderation_enable")
+     * @Route("/user/{id}/enable/{choice}", name="ovski_forum_moderation_enable")
      * @Method("GET")
      */
     public function enableAction($id, $choice)
@@ -59,7 +61,7 @@ class ModerationController extends Controller
             throw $this->createNotFoundException();
         }
 
-        if ($user->hasRole("ROLE_ADMIN") || $user->hasRole("ROLE_MODERATOR") || $user->hasRole("ROLE_SUPER_ADMIN")) {
+        if ($user->hasRole("ROLE_MODERATOR")) {
             throw new AccessDeniedException();
         } else {
             $user->setEnabled($choice);
@@ -76,11 +78,32 @@ class ModerationController extends Controller
     {
         $i = 0;
         foreach ($userArray as $user) {
-            if ($user->hasRole("ROLE_MODERATOR") || $user->hasRole("ROLE_ADMIN") || $user->hasRole("ROLE_SUPER_ADMIN")) {
+            if ($user->hasRole("ROLE_MODERATOR")) {
                 unset($userArray[$i]);
             }
             $i++;
         }
         return $userArray;
+    }
+
+    /**
+     * Close a topic
+     *
+     * @Route("/category/{categorySlug}/topic/{id}/close", name="ovski_forum_moderation_topic_close")
+     */
+    public function closeTopicAction()
+    {
+        
+    }
+
+    /**
+     * Hide and remove access to a topic
+     * The topic is not deleted
+     *
+     * @Route("/category/{categorySlug}/topic/{id}/hide", name="ovski_forum_moderation_topic_hide")
+     */
+    public function hideTopicAction()
+    {
+        
     }
 }

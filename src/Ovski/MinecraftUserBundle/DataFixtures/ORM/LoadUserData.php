@@ -61,8 +61,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $baptiste->setUsername('baptiste');
         $baptiste->setEmail('baptiste@baptiste.fr');
         $baptiste->setPlainPassword('baptiste');
-        $baptiste->addRole("ROLE_ADMIN");
         $baptiste->setEnabled(true);
+        $this->addAdminRoles($baptiste);
         $userManager->updateUser($baptiste, false);
 
         $this->addReference('baptiste', $baptiste);
@@ -77,5 +77,14 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function getOrder()
     {
         return 5;
+    }
+
+    /**
+     * Get the roles to set for an admin
+     */
+    private function addAdminRoles($user)
+    {
+        $user->addRole("ROLE_ADMIN");
+        $user->addRole("ROLE_MODERATOR");
     }
 }

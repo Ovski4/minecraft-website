@@ -14,6 +14,8 @@ use Ovski\ForumBundle\Form\CategoryType;
 /**
  * Admin controller.
  *
+ * This class contains every actions executable by users with role ROLE_ADMIN
+ * 
  * @Route("/administration")
  */
 class AdminController extends Controller
@@ -354,5 +356,17 @@ class AdminController extends Controller
             $i++;
         }
         return $userArray;
+    }
+
+    /**
+     * Delete a topic
+     *
+     * @Route("/category/{categorySlug}/topic/{id}/delete", name="ovski_forum_moderation_topic_delete")
+     * @Template()
+     */
+    public function deleteTopicAction()
+    {
+        // retrieve each hidden topic
+        // control if id is not of a hidden
     }
 }
