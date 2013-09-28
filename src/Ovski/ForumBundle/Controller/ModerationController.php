@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Moderation controller
@@ -71,11 +70,15 @@ class ModerationController extends Controller
         $user = $em->getRepository("OvskiMinecraftUserBundle:User")->findOneById($id);
 
         if (!$user) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException(
+                sprintf("Unable to find user with id %s", $id)
+            );
         }
 
         if ($user->hasRole("ROLE_MODERATOR")) {
-            throw new AccessDeniedException();
+            throw new \Exception(
+                sprintf("You can't disable %s user as he is a moderator", $user)
+            );
         } else {
             $user->setEnabled($choice);
             $em->persist($user);
@@ -119,7 +122,9 @@ class ModerationController extends Controller
         $topic = $em->getRepository("OvskiForumBundle:Topic")->findOneById($id);
 
         if (!$topic) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException(
+                sprintf("Unable to find topic with id %s", $id)
+            );
         }
 
         $topic->setStatus($status);
@@ -192,7 +197,9 @@ class ModerationController extends Controller
         $post = $em->getRepository("OvskiForumBundle:Post")->findOneById($id);
 
         if (!$post) {
-            throw $this->createNotFoundException();
+            throw $this->createNotFoundException(
+                sprintf("Unable to find topic with id %s", $id)
+            );
         }
 
         if ($post->isAuthorized()) {

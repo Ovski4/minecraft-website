@@ -2,20 +2,16 @@ MineWeb
 =======
 
 First
-  * changer toutes les routes avec categorySlug en categoy_slug etc
+  * ajouter un système de news
+  * gerer traduction backoffice
+  * gérer espace utilisateur perso
+  * permettre au leader d'ajouter du texte?
   * gérer les erreurs fosuser
   * systeme anti-flood
-  * create view without editTopicStatusForm.html
-  * mettre des exceptions avec messages excplicite (check tous les controllers)
   * texte sur l'interface admin pour dir a quoi sert chaque page'
-  * gérer tous les cas dans les url ou une entité n'est pas récupérée
+  * gérer toutes les url fausse (404 au lieu de 500)
   * invalid csrf token when false login
-  * tester admin a false enable dans moderation et autres trucs udu genre
-  * css forum dans le bundle
-  * onglet en fonction des langues dans le fichier de conf
-  * renommer fonction dans admincontroller du forumbundle
   * recherche full text forum
-  * pouvoir fermer un topic (attribute -> boolean open?)
   * améliorer l'interface admin
   * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
   * traduire tout

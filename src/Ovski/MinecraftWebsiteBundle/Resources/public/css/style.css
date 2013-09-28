@@ -46,7 +46,7 @@ h2
     margin-bottom: 20px;
 }
 
-.forum button,
+button,
 input[type="submit"]
 {
     background: #382819;
@@ -62,7 +62,7 @@ input[type="submit"]
     transition: background .2s;
 }
 
-.forum button:hover,
+button:hover,
 input[type="submit"]:hover
 {
     background: #74b73f;
@@ -495,6 +495,11 @@ header.stat-list-head > div
     width: 100%;
 }
 
+.forum-category table button
+{
+    padding: 0 20px;
+}
+
 .forum ul li > div
 {
     text-indent: 20px;
@@ -546,9 +551,10 @@ header.stat-list-head > div
 
 .forum-topic article form button
 {
+    padding: 0 20px;
     position: absolute;
     margin: 0;
-    top: 12px;
+    top: 15px;
     right: 20px;
 }
 

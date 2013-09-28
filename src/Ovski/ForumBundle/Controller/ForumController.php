@@ -24,7 +24,7 @@ use Pagerfanta\Pagerfanta;
 class ForumController extends Controller
 {
     /**
-     * Redirect to forumAction
+     * Redirects to ovski_forum_forum_categories
      *
      * @Route("/", name="ovski_forum_forum")
      */
@@ -34,7 +34,7 @@ class ForumController extends Controller
     }
 
     /**
-     * List all categories
+     * Lists all categories
      *
      * @Route("/categories/all", name="ovski_forum_forum_categories")
      * @Template()
@@ -48,7 +48,7 @@ class ForumController extends Controller
     }
 
     /**
-     * List all topics of a category
+     * Lists all topics of a category
      *
      * @Route("/category/{categorySlug}", name="ovski_forum_forum_category", defaults={"page" = 1})
      * @Route("/category/{categorySlug}/page/{page}", name="ovski_forum_forum_category_paginated")
@@ -87,7 +87,7 @@ class ForumController extends Controller
         $form = $this->createForm(new TopicType());
 
         // Topics pagination
-        $topics = $this->get('ovski.manager.forum')->getTopics($category);
+        $topics = $this->get('ovski.manager.forum')->getTopics($category->getId());
         $pager = new Pagerfanta(new ArrayAdapter($topics));
         $pager->setMaxPerPage(
             $this->container->getParameter('ovski_forum.max_per_pages')['topics']
@@ -97,9 +97,7 @@ class ForumController extends Controller
             $pager->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
             throw new NotFoundHttpException(
-                sprintf("As awesome as this website can be, page \"%s\" was not found.",
-                    $page
-                )
+                sprintf("The page \"%s\" was not found.", $page)
             );
         }
 
@@ -112,7 +110,7 @@ class ForumController extends Controller
     }
 
     /**
-     * List all posts of a topic
+     * Lists authorized posts of a topic
      *
      * @Route("/category/{categorySlug}/topic/{topicSlug}", name="ovski_forum_forum_topic", defaults={"page" = 1})
      * @Route("/category/{categorySlug}/topic/{topicSlug}/page/{page}", name="ovski_forum_forum_topic_paginated")
@@ -147,9 +145,7 @@ class ForumController extends Controller
             $pager->setCurrentPage($page);
         } catch (NotValidCurrentPageException $e) {
             throw new NotFoundHttpException(
-                sprintf("As awesome as this website can be, page \"%s\" was not found.",
-                    $page
-                )
+                sprintf("The page \"%s\" was not found.", $page)
             );
         }
 
@@ -163,7 +159,7 @@ class ForumController extends Controller
     }
 
     /**
-     * Displays a form to create a new Post.
+     * Displays a form to create a new post
      *
      * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="ovski_forum_forum_post_new")
      * @Method("GET")
@@ -198,7 +194,7 @@ class ForumController extends Controller
     }
 
     /**
-     * Creates a new Post entity.
+     * Creates a new post
      *
      * @Route("/category/{categorySlug}/topic/{topicSlug}/new-post", name="ovski_forum_forum_post_create")
      * @Method("POST")
