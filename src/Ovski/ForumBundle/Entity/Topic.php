@@ -73,16 +73,26 @@ class Topic
     private $posts;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\ForumBundle\Entity\Category", inversedBy="topics", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Ovski\ForumBundle\Entity\Category", inversedBy="topics")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="topics", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="topics")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->numPosts = 0;
+        $this->status = "open";
+    }
 
     /**
      * @ORM\PreUpdate()
@@ -92,16 +102,32 @@ class Topic
     {
         $this->setSlug(Utils::slugify($this->getTitle()));
         $this->setUpdatedAt(new \DateTime('now'));
+    }
+
+    /**
+     * Increment numPosts
+     */
+    public function incrementNumPosts()
+    {
         $this->numPosts++;
     }
 
     /**
-     * Constructor
+     * Decrement numPosts
      */
-    public function __construct()
+    public function decrementNumPosts()
     {
-        $this->posts = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->numPosts = 0;
+        $this->numPosts--;
+    }
+
+    /**
+     * Check if a topic is closed
+     * 
+     * @return boolean
+     */
+    public function isClosed()
+    {
+        return $this->status == "closed" ? true : false;
     }
 
     /**

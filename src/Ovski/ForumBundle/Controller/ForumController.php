@@ -14,7 +14,6 @@ use Ovski\ForumBundle\Form\TopicType;
 use Ovski\ForumBundle\Form\PostType;
 use Pagerfanta\Exception\NotValidCurrentPageException;
 use Pagerfanta\Adapter\ArrayAdapter;
-use Pagerfanta\Adapter\DoctrineCollectionAdapter;
 use Pagerfanta\Pagerfanta;
 
 /**
@@ -60,7 +59,7 @@ class ForumController extends Controller
         $locale = $request->getLocale();
         $category = $this->get('ovski.manager.forum')->getCategory($locale, $categorySlug);
         if (!isset($category)) {
-            return $this->redirect($this->generateUrl('ovski_forum_forum'));
+            return $this->redirect($this->generateUrl('ovski_forum_forum_categories'));
         }
 
         /* Create a new topic */
@@ -84,7 +83,7 @@ class ForumController extends Controller
                 ));
             }
         }
- 
+
         $form = $this->createForm(new TopicType());
 
         // Topics pagination
@@ -121,13 +120,14 @@ class ForumController extends Controller
      */
     public function topicAction(Request $request, $categorySlug, $topicSlug, $page)
     {
+        $forumManager = $this->get('ovski.manager.forum');
         $locale = $request->getLocale();
-        $categoryId = $this->get('ovski.manager.forum')->getCategoryId($locale, $categorySlug);
+        $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
         if (!$categoryId) {
             return $this->redirect($this->generateUrl('ovski_forum_forum'));
         }
 
-        $topic = $this->get('ovski.manager.forum')->getTopic($categoryId, $topicSlug);
+        $topic = $forumManager->getTopic($categoryId, $topicSlug);
 
         if (!$topic) {
             return $this->redirect($this->generateUrl(
@@ -135,8 +135,10 @@ class ForumController extends Controller
             ));
         }
 
+        $posts = $forumManager->getPostsByStatus($topic->getId(), "authorized");
+
         // Posts pagination
-        $pager = new Pagerfanta(new DoctrineCollectionAdapter($topic->getPosts()));
+        $pager = new Pagerfanta(new ArrayAdapter($posts));
         $pager->setMaxPerPage(
             $this->container->getParameter('ovski_forum.max_per_pages')['posts']
         );
@@ -153,6 +155,7 @@ class ForumController extends Controller
 
         return array(
             'topic_title'   => $topic->getTitle(),
+            'topic_closed'  => $topic->isClosed(),
             'topic_slug'    => $topicSlug,
             'category_slug' => $categorySlug,
             'pager'         => $pager
@@ -167,7 +170,7 @@ class ForumController extends Controller
      * @Template()
      */
     public function newPostAction(Request $request, $categorySlug, $topicSlug)
-    {
+    {       
         $locale = $request->getLocale();
         $forumManager = $this->get('ovski.manager.forum');
         $maxPosts = $this->container->getParameter('ovski_forum.max_per_pages')['posts_on_post_creation'];
@@ -175,6 +178,9 @@ class ForumController extends Controller
         // list 'x' last posts
         $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
         $topic = $forumManager->getTopic($categoryId, $topicSlug);
+        if ($topic->isClosed() && false === $this->get('security.context')->isGranted('ROLE_MODERATOR')) {
+            throw new AccessDeniedException();
+        }
         $posts = $forumManager->getLastPosts($topic->getId(), $maxPosts);
 
         // create the form to create a post
@@ -184,10 +190,10 @@ class ForumController extends Controller
         ;
 
         return array(
-            'form'       => $form->createView(),
-            'referer'    => $request->headers->get('referer'),
+            'form'        => $form->createView(),
+            'referer'     => $request->headers->get('referer'),
             'topic_title' => $topic->getTitle(),
-            'posts'      => $posts
+            'posts'       => $posts
         );
     }
 
@@ -204,6 +210,15 @@ class ForumController extends Controller
             throw new AccessDeniedException();
         }
 
+        $forumManager = $this->get('ovski.manager.forum');
+        $locale = $request->getLocale();
+        $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
+        $topic = $forumManager->getTopic($categoryId, $topicSlug);
+
+        if ($topic->isClosed() && false === $this->get('security.context')->isGranted('ROLE_MODERATOR')) {
+            throw new AccessDeniedException();
+        }
+
         $post = new Post();
         $form = $this
             ->createForm(new PostType(), $post)
@@ -212,7 +227,7 @@ class ForumController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->get('ovski.manager.forum')->handlePostData($post, $topicSlug);
+            $forumManager->handlePostData($post, $topic);
 
             return $this->redirect($this->generateUrl(
                 'ovski_forum_forum_topic',

@@ -2,6 +2,10 @@ MineWeb
 =======
 
 First
+  * changer toutes les routes avec categorySlug en categoy_slug etc
+  * gérer les erreurs fosuser
+  * systeme anti-flood
+  * create view without editTopicStatusForm.html
   * mettre des exceptions avec messages excplicite (check tous les controllers)
   * texte sur l'interface admin pour dir a quoi sert chaque page'
   * gérer tous les cas dans les url ou une entité n'est pas récupérée
@@ -29,6 +33,7 @@ First
 
 After
   * Plugin registration
+  * forum -> protection language moderators (en mod shouldn't see fr topics ...)
   * Forum bundle to do (As simple as jeuxvideo.com) -> cascade entities
   * News and comments
   * Resizable iframe (dynmap)

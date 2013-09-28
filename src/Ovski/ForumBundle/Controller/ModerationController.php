@@ -17,6 +17,15 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class ModerationController extends Controller
 {
+    public static $TOPIC_STATUS_LABEL_MAP = array(
+      'closed' => 'close',
+      'open'   => 'open',
+    );
+
+    /* -----------------------*
+     *  USERS RELATED ACTIONS *
+     * -----------------------*/
+
     /**
      * Redirect to usersAction
      *
@@ -39,8 +48,12 @@ class ModerationController extends Controller
             ->getDoctrine()
             ->getRepository("OvskiMinecraftUserBundle:User");
 
-        $disabledUsers = $this->filterUsersWithoutRole($userRepository->getDisabledUsers());
-        $enabledUsers  = $this->filterUsersWithoutRole($userRepository->getEnabledUsers());
+        $disabledUsers = $this->filterUsersWithoutRole(
+            $userRepository->findBy(array('enabled' => 0))
+        );
+        $enabledUsers  = $this->filterUsersWithoutRole(
+            $userRepository->findBy(array('enabled' => 1))
+        );
 
         return array(
             'disabled_users' => $disabledUsers,
@@ -86,24 +99,155 @@ class ModerationController extends Controller
         return $userArray;
     }
 
+    /* ------------------------*
+     *  TOPICS RELATED ACTIONS *
+     * ------------------------*/
+
     /**
-     * Close a topic
-     *
-     * @Route("/category/{categorySlug}/topic/{id}/close", name="ovski_forum_moderation_topic_close")
+     * Edit the status of a topic
+     * 
+     * When created, a topic is always open.
+     * When closed a topic is still visible but only moderators can add posts
+     * When hidden, a topic is not visible. Admins can deleted one permanently
+     * 
+     * @Method("PUT")
+     * @Route("/forum/moderation/category/{categorySlug}/topic/{id}/{status}", name="ovski_forum_moderation_topic_edit_status")
      */
-    public function closeTopicAction()
+    public function editTopicStatusAction($id, $categorySlug, $status)
     {
-        
+        $em = $this->getDoctrine()->getManager();
+        $topic = $em->getRepository("OvskiForumBundle:Topic")->findOneById($id);
+
+        if (!$topic) {
+            throw $this->createNotFoundException();
+        }
+
+        $topic->setStatus($status);
+        $em->persist($topic);
+        $em->flush();
+
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_forum_category',
+                array('categorySlug' => $categorySlug)
+            )
+        );
     }
 
     /**
-     * Hide and remove access to a topic
-     * The topic is not deleted
-     *
-     * @Route("/category/{categorySlug}/topic/{id}/hide", name="ovski_forum_moderation_topic_hide")
+     * Render a closeTopicForm
      */
-    public function hideTopicAction()
+    public function editTopicStatusFormAction($id, $categorySlug, $status)
     {
-        
+        return $this->render(
+            'OvskiForumBundle::form.html.twig',
+            array('form' => $this
+                ->createEditTopicStatusForm($id, $categorySlug, $status)
+                ->createView()
+            )
+        );
+    }
+
+    /**
+     * Creates a form to delete a Topic entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditTopicStatusForm($id, $categorySlug, $status)
+    {
+        $qb = $this->createFormBuilder()
+            ->setAction(
+                $this->generateUrl('ovski_forum_moderation_topic_edit_status', array(
+                    'id'           => $id,
+                    'categorySlug' => $categorySlug,
+                    'status'       => $status
+                ))
+            )
+            ->setMethod('PUT')
+        ;
+
+        $label = self::$TOPIC_STATUS_LABEL_MAP[$status];
+        $qb->add('submit', 'submit', array('label' => $label));
+
+        return $qb->getForm();
+    }
+
+    /* -----------------------*
+     *  POSTS RELATED ACTIONS *
+     * -----------------------*/
+
+    /**
+     * Unauthorize a post
+     * 
+     * When created, a topic is always authorized.
+     * When unauthorized a topic is not visible and ready to be deleted by admins
+     *
+     * @Method("PUT")
+     * @Route("/category/{categorySlug}/topic/{topicSlug}/post/{id}/remove", name="ovski_forum_moderation_post_unauthorize")
+     */
+    public function unauthorizePostAction($id, $categorySlug, $topicSlug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository("OvskiForumBundle:Post")->findOneById($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
+        if ($post->isAuthorized()) {
+            $post->setStatus("unauthorized");
+            $post->getTopic()->decrementNumPosts();
+            $em->persist($post);
+            $em->flush();
+        }
+
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_forum_topic',
+                array(
+                    'categorySlug' => $categorySlug,
+                    'topicSlug'    => $topicSlug
+                )
+            )
+        );
+    }
+
+    /**
+     * Render a unauthorizePostForm
+     */
+    public function unauthorizePostFormAction($id, $categorySlug, $topicSlug)
+    {
+        return $this->render(
+            'OvskiForumBundle::form.html.twig',
+            array('form' => $this
+                ->createUnauthorizePostForm($id, $categorySlug, $topicSlug)
+                ->createView()
+            )
+        );
+    }
+
+    /**
+     * Creates a form to unauthorize a Post entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createUnauthorizePostForm($id, $categorySlug, $topicSlug)
+    {
+        $qb = $this->createFormBuilder()
+            ->setAction(
+                $this->generateUrl('ovski_forum_moderation_post_unauthorize', array(
+                    'id'           => $id,
+                    'categorySlug' => $categorySlug,
+                    'topicSlug'    => $topicSlug
+                ))
+            )
+            ->setMethod('PUT')
+        ;
+
+        $qb->add('submit', 'submit', array('label' => 'remove'));
+
+        return $qb->getForm();
     }
 }

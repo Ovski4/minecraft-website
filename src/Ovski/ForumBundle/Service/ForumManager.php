@@ -76,15 +76,9 @@ class ForumManager
      * @param Post $post
      * @param Topic $topic
      */
-    public function handlePostData($post, $topicSlug)
+    public function handlePostData($post, $topic)
     {
         $em = $this->getEntityManager();
-
-        $topic = $em
-            ->getRepository("OvskiForumBundle:Topic")
-            ->findOneBy(array('slug' => $topicSlug))
-        ;
-
         $post->setAuthor($this->getUser())->setTopic($topic);
         $topic->setUpdatedAt(new \DateTime());
         $em->persist($post);
@@ -119,7 +113,7 @@ class ForumManager
         return $this
             ->getEntityManager()
             ->getRepository("OvskiForumBundle:Category")
-            ->getCategoryId($locale, $slug);
+            ->getCategoryId($locale, $slug)
         ;
     }
 
@@ -146,7 +140,7 @@ class ForumManager
         return $this
             ->getEntityManager()
             ->getRepository("OvskiForumBundle:Topic")
-            ->getTopicId($categoryId, $slug);
+            ->getTopicId($categoryId, $slug)
         ;
     }
 
@@ -155,7 +149,17 @@ class ForumManager
         return $this
             ->getEntityManager()
             ->getRepository("OvskiForumBundle:Post")
-            ->getLastPosts($topicId, $numPosts);
+            ->getLastPosts($topicId, $numPosts)
         ;
     }
+
+    public function getPostsByStatus($topicId, $status)
+    {
+        return $this
+            ->getEntityManager()
+            ->getRepository("OvskiForumBundle:Post")
+            ->getPostsByStatus($topicId, $status)
+        ;
+    }
+    
 }

@@ -1,0 +1,31 @@
+{% extends '::adminBase.html.twig' %}
+
+{% block body %}
+    <h1>Unauthorized post list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Topic</th>
+                <th>Post</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.topic.title }}</td>
+                    <td>{{ post.content | bbcode_filter('forum_filter') }}</td>
+                    <td>
+                        {{ render(controller('OvskiForumBundle:Admin:deletePostForm', {'id': post.id})) }}
+                        {{ render(controller('OvskiForumBundle:Admin:authorizedPostForm', {'id': post.id})) }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
+

@@ -88,7 +88,7 @@ bazinga_faker:
             custom_formatters:
                 value:   { method: randomNumber, parameters: [ -5, 5 ] }
 
-#php app/console translation:extract fr --enable-extractor=jms_i18n_routing --bundle=OvskiMineStatsBundle --output-format=yml
+#pac translation:extract fr --enable-extractor=jms_i18n_routing --bundle=OvskiMineStatsBundle --output-format=yml
 jms_i18n_routing:
     default_locale: en
     locales: [en, fr]

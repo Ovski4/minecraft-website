@@ -1,20 +1,71 @@
+# Desc: /forum/
+ovski_forum_forum: /forum/
+
 # Desc: /forum/categories/all
-forum: /forum/categories/toutes
+ovski_forum_forum_categories: /forum/categories/toutes
 
 # Desc: /forum/category/{categorySlug}
-category: '/forum/categorie/{categorySlug}'
+ovski_forum_forum_category: '/forum/categorie/{categorySlug}'
+
+# Desc: /forum/category/{categorySlug}/page/{page}
+ovski_forum_forum_category_paginated: '/forum/categorie/{categorySlug}/page/{page}'
+
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
+ovski_forum_forum_post_create: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'
+
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
+ovski_forum_forum_post_new: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'
 
 # Desc: /forum/category/{categorySlug}/topic/{topicSlug}
-topic: '/forum/categorie/{categorySlug}/sujet/{topicSlug}'
+ovski_forum_forum_topic: '/forum/categorie/{categorySlug}/sujet/{topicSlug}'
 
-# Desc: /forum/category/{categorySlug}/new-topic
-topic_create: '/forum/categorie/{categorySlug}/nouveau-sujet'
+# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/page/{page}
+ovski_forum_forum_topic_paginated: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/page/{page}'
 
-# Desc: /forum/category/{categorySlug}/new-topic
-topic_new: '/forum/categorie/{categorySlug}/nouveau-sujet'
+# Desc: /forum/administration/
+ovski_forum_administration: /forum/administration/
 
-# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
-post_create: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'
+# Desc: /forum/administration/category/create
+ovski_forum_administration_category_create: /forum/administration/categorie/creer
 
-# Desc: /forum/category/{categorySlug}/topic/{topicSlug}/new-post
-post_new: '/forum/categorie/{categorySlug}/sujet/{topicSlug}/nouveau-message'
+# Desc: /forum/administration/category/{id}/delete
+ovski_forum_administration_category_delete: '/forum/administration/categorie/{id}/supprimer'
+
+# Desc: /forum/administration/category/{id}/edit
+ovski_forum_administration_category_edit: '/forum/administration/categorie/{id}/editer'
+
+# Desc: /forum/administration/category/new
+ovski_forum_administration_category_new: /forum/administration/categorie/nouvelle
+
+# Desc: /forum/administration/category/{id}
+ovski_forum_administration_category_show: '/forum/administration/categorie/{id}'
+
+# Desc: /forum/administration/category/{id}
+ovski_forum_administration_category_update: '/forum/administration/categorie/{id}'
+
+# Desc: /forum/administration/categories
+ovski_forum_administration_list_categories: /forum/administration/categories
+
+# Desc: /forum/administration/topic/{id}/delete
+ovski_forum_administration_topic_delete: '/forum/administration/sujet/{id}/supprimer'
+
+# Desc: /forum/administration/users
+ovski_forum_administration_users: /forum/administration/utilisateurs
+
+# Desc: /forum/moderation/
+ovski_forum_moderation: /forum/moderation/
+
+# Desc: /forum/moderation/user/{id}/enable/{choice}
+ovski_forum_moderation_enable: '/forum/moderation/utilisateur/{id}/autoriser/{choice}'
+
+# Desc: /forum/administration/{id}/promote/{choice}
+ovski_forum_moderation_promote: '/forum/administration/{id}/promouvoir/{choice}'
+
+# Desc: /forum/moderation/category/{categorySlug}/topic/{id}/close
+ovski_forum_moderation_topic_close: '/forum/moderation/categorie/{categorySlug}/sujet/{id}/fermer'
+
+# Desc: /forum/moderation/category/{categorySlug}/topic/{id}/hide
+ovski_forum_moderation_topic_hide: '/forum/moderation/categorie/{categorySlug}/sujet/{id}/cacher'
+
+# Desc: /forum/moderation/users
+ovski_forum_moderation_users: /forum/moderation/utilisateurs

@@ -42,13 +42,21 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         /* CREATE USERS */
 
+        $baptiste = $userManager->createUser();
+        $baptiste->setUsername('baptiste');
+        $baptiste->setEmail('baptiste@baptiste.fr');
+        $baptiste->setPlainPassword('baptiste');
+        $baptiste->setEnabled(true);
+        $this->addAdminRoles($baptiste);
+        $userManager->updateUser($baptiste, false); //false to do not flush
+
         $glapine = $userManager->createUser();
         $glapine->setUsername('glapine');
         $glapine->setEmail('glapine@glapine.fr');
         $glapine->setPlainPassword('glapine');
         $glapine->setEnabled(true);
         $glapine->addRole("ROLE_MODERATOR");
-        $userManager->updateUser($glapine, false); //false to do not flush
+        $userManager->updateUser($glapine, false);
 
         $jaylbralon = $userManager->createUser();
         $jaylbralon->setUsername('jaylbralon');
@@ -57,13 +65,27 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $jaylbralon->setEnabled(true);
         $userManager->updateUser($jaylbralon, false);
 
-        $baptiste = $userManager->createUser();
-        $baptiste->setUsername('baptiste');
-        $baptiste->setEmail('baptiste@baptiste.fr');
-        $baptiste->setPlainPassword('baptiste');
-        $baptiste->setEnabled(true);
-        $this->addAdminRoles($baptiste);
-        $userManager->updateUser($baptiste, false);
+        $grosziznzin = $userManager->createUser();
+        $grosziznzin->setUsername('grosziznzin');
+        $grosziznzin->setEmail('grosziznzin@grosziznzin.fr');
+        $grosziznzin->setPlainPassword('grosziznzin');
+        $grosziznzin->setEnabled(true);
+        $userManager->updateUser($grosziznzin, false);
+
+        $napy = $userManager->createUser();
+        $napy->setUsername('napy');
+        $napy->setEmail('napy@napy.fr');
+        $napy->setPlainPassword('napy');
+        $napy->setEnabled(true);
+        $userManager->updateUser($napy, false);
+
+        $ovski4 = $userManager->createUser();
+        $ovski4->setUsername('ovski4');
+        $ovski4->setEmail('ovski4@ovski4.fr');
+        $ovski4->setPlainPassword('ovski4');
+        $ovski4->setEnabled(true);
+        $this->addAdminRoles($ovski4);
+        $userManager->updateUser($ovski4, false);
 
         $this->addReference('baptiste', $baptiste);
         $this->addReference('glapine', $glapine);

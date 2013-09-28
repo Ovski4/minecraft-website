@@ -1,0 +1,26 @@
+{% extends '::adminBase.html.twig' %}
+
+{% block body %}
+    <h1>Closed topic list</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for topic in topics %}
+                <tr>
+                    <td>{{ topic.id }}</td>
+                    <td>{{ topic.title }}</td>
+                    <td>{{ render(controller('OvskiForumBundle:Admin:deleteTopicForm', {'id': topic.id})) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
+

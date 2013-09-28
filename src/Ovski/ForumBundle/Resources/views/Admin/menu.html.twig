@@ -26,7 +26,17 @@
             </li>
             <li {% if active == 'users' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_administration_users') }}">
-                    {% trans %}Users{% endtrans %}
+                    {% trans %}Moderators{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'topics' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_administration_list_closed_topics') }}">
+                    {% trans %}Closed topics{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'posts' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_administration_list_unauthorized_posts') }}">
+                    {% trans %}Unauthorized posts{% endtrans %}
                 </a>
             </li>
         </ul>

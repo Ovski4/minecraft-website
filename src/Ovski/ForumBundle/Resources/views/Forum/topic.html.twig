@@ -22,10 +22,21 @@
                         <li>
                             <article>
                                 <header>
-                                    <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
+                                    <span>
+                                        <a{% if post.author.hasRole("ROLE_MODERATOR") %} class="moderator"{% endif %}>
+                                            {{ post.author }}
+                                        </a>
+                                        -
+                                        {{ post.createdAt | date("d/m/Y H\\hi") }}
+                                    </span>
+                                    <span class="pull-right">
+                                        {% if is_granted("ROLE_MODERATOR") %}
+                                            {{ render(controller('OvskiForumBundle:Moderation:unauthorizePostForm', {'id': post.id, 'categorySlug': category_slug, 'topicSlug': topic_slug })) }}
+                                        {% endif %}
+                                    </span>
                                 </header>
                                 <div>
-                                    {{ post.content | nl2br | bbcode_filter('forum_filter') }}
+                                    {{ post.content | bbcode_filter('forum_filter') }}
                                 </div>
                             </article>
                         </li>
@@ -42,7 +53,11 @@
             {% endif %}
         {% endif %}
 
-        <a href="{{ path('ovski_forum_forum_post_new', { categorySlug: category_slug, topicSlug: topic_slug }) }}#form">Add a new post</a>
+        {% if not topic_closed or app.user.hasRole("ROLE_MODERATOR") %}
+            <a href="{{ path('ovski_forum_forum_post_new', { categorySlug: category_slug, topicSlug: topic_slug }) }}#form">Add a new post</a>
+        {% else %}
+            {% trans %}This topic is closed{% endtrans %}
+        {% endif %}
         <a href="{{ path('ovski_forum_forum_category', { categorySlug: category_slug }) }}">Go back to the topic list</a>
     </div>
 {% endblock %}

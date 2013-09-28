@@ -7,9 +7,16 @@
         <ul class="nav">
             <li {% if active == 'forum' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_forum') }}">
-                    {% trans %}Go back to the forum{% endtrans %}
+                    {% trans %}Forum{% endtrans %}
                 </a>
             </li>
+            {% if is_granted("ROLE_ADMIN") %}
+                <li {% if active == 'forum' %} class="current" {% endif %}>
+                    <a href="{{ path('ovski_forum_administration') }}">
+                        {% trans %}Administration Panel{% endtrans %}
+                    </a>
+                </li>
+            {% endif %}
             <li {% if active == 'users' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_moderation_users') }}">
                     {% trans %}Users{% endtrans %}

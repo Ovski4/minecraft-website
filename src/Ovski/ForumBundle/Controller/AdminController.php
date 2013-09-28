@@ -3,6 +3,7 @@
 namespace Ovski\ForumBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -198,6 +199,7 @@ class AdminController extends Controller
 
         return $form;
     }
+
     /**
      * Edits an existing Category entity.
      *
@@ -235,7 +237,7 @@ class AdminController extends Controller
     /**
      * Deletes a Category entity.
      *
-     * @Route("/category/{id}", name="ovski_forum_administration_category_delete")
+     * @Route("/category/{id}/delete", name="ovski_forum_administration_category_delete")
      * @Method("DELETE")
      */
     public function deleteCategoryAction(Request $request, $id)
@@ -280,7 +282,7 @@ class AdminController extends Controller
      * -----------------------*/
 
     /**
-     * @Route("/promote", name="ovski_forum_administration_users")
+     * @Route("/users", name="ovski_forum_administration_users")
      * @Template()
      */
     public function usersAction()
@@ -301,13 +303,11 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/{id}/enable/{choice}", name="ovski_forum_moderation_promote")
+     * @Route("/{id}/promote/{choice}", name="ovski_forum_moderation_promote")
      * @Method("GET")
      */
     public function promoteAction($id, $choice)
     {
-        //faire en sorte (id check) qu'un utilisateur disable ne puisse pas etre promu
-
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository("OvskiMinecraftUserBundle:User")->findOneById($id);
 
@@ -324,6 +324,9 @@ class AdminController extends Controller
             $em->persist($user);
         } else {
             // demote
+            if ($user->hasRole("ROLE_ADMIN")) {
+                throw new AccessDeniedException();
+            }
             $user->removeRole("ROLE_MODERATOR");
             $em->persist($user);
         }
@@ -350,7 +353,7 @@ class AdminController extends Controller
     {
         $i = 0;
         foreach ($userArray as $user) {
-            if (!$user->hasRole("ROLE_MODERATOR")) {
+            if (!$user->hasRole("ROLE_MODERATOR") || $user->hasRole("ROLE_ADMIN")) {
                 unset($userArray[$i]);
             }
             $i++;
@@ -358,15 +361,225 @@ class AdminController extends Controller
         return $userArray;
     }
 
+    /* ------------------------*
+     *  TOPICS RELATED ACTIONS *
+     * ------------------------*/
+
+    /**
+     * Get all closed topics
+     *
+     * @Route("/topics/closed", name="ovski_forum_administration_list_closed_topics")
+     * @Template()
+     */
+    public function closedTopicsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $hiddenTopics = $em
+            ->getRepository("OvskiForumBundle:Topic")
+            ->findBy(array('status' => 'closed'))
+        ;
+
+        return array('topics' => $hiddenTopics);
+    }
+    
     /**
      * Delete a topic
      *
-     * @Route("/category/{categorySlug}/topic/{id}/delete", name="ovski_forum_moderation_topic_delete")
+     * @Route("/topic/{id}/delete", name="ovski_forum_administration_topic_delete")
+     * @Method("DELETE")
      * @Template()
      */
-    public function deleteTopicAction()
+    public function deleteTopicAction(Request $request, $id)
     {
-        // retrieve each hidden topic
-        // control if id is not of a hidden
+        $form = $this->createDeleteTopicForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $topic = $em->getRepository('OvskiForumBundle:Topic')->find($id);
+
+            if (!$topic) {
+                throw $this->createNotFoundException('Unable to find Topic entity.');
+            }
+
+            if (!$topic->isClosed()) {
+                throw new \Exception("Only closed topics can be deleted");
+            }
+
+            $em->remove($topic);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('ovski_forum_administration_list_closed_topics'));
+    }
+
+    /**
+     * Render a deleteTopicForm
+     *
+     * @Template()
+     */
+    public function deleteTopicFormAction($id)
+    {
+        return array('form' => $this->createDeleteTopicForm(
+            $id)->createView()
+        );
+    }
+
+    /**
+     * Creates a form to delete a Topic entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteTopicForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('ovski_forum_administration_topic_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
+    }
+
+    /* ------------------------*
+     *  POSTS RELATED ACTIONS *
+     * ------------------------*/
+
+    /**
+     * Get all unauthorized posts
+     *
+     * @Route("/posts/unauthorized", name="ovski_forum_administration_list_unauthorized_posts")
+     * @Template()
+     */
+    public function unauthorizedPostsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $unauthorizedPosts = $em
+            ->getRepository("OvskiForumBundle:Post")
+            ->findBy(array('status' => 'unauthorized'))
+        ;
+
+        return array('posts' => $unauthorizedPosts);
+    }
+    
+    /**
+     * Delete a topic
+     *
+     * @Route("/post/{id}/delete", name="ovski_forum_administration_post_delete")
+     * @Method("DELETE")
+     * @Template()
+     */
+    public function deletePostAction(Request $request, $id)
+    {
+        $form = $this->createDeletePostForm($id);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $post = $em->getRepository('OvskiForumBundle:Post')->find($id);
+
+            if (!$post) {
+                throw $this->createNotFoundException('Unable to find Post.');
+            }
+
+            if ($post->isAuthorized()) {
+                throw new \Exception("Only unauthorized posts can be deleted");
+            }
+
+            $em->remove($post);
+            $em->flush();
+        }
+
+        return $this->redirect($this->generateUrl('ovski_forum_administration_list_unauthorized_posts'));
+    }
+
+    /**
+     * Render a deletePostForm
+     */
+    public function deletePostFormAction($id)
+    {
+        return $this->render(
+            'OvskiForumBundle::form.html.twig',
+            array('form' => $this->createDeletePostForm($id)->createView())
+        );
+    }
+
+    /**
+     * Creates a form to delete a Post entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeletePostForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('ovski_forum_administration_post_delete', array('id' => $id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->getForm()
+        ;
+    }
+
+    /**
+     * Authorize a post
+     * 
+     * @Method("PUT")
+     * @Route("/post/{id}/authorize", name="ovski_forum_moderation_post_authorize")
+     */
+    public function authorizedPostAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository("OvskiForumBundle:Post")->findOneById($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
+        if (!$post->isAuthorized()) {
+            $post->setStatus("authorized");
+            $post->getTopic()->incrementNumPosts();
+            $em->persist($post);
+            $em->flush();
+        }
+
+        return $this->redirect(
+            $this->generateUrl('ovski_forum_administration_list_unauthorized_posts')
+        );
+    }
+
+    /**
+     * Render a authorizePostForm
+     */
+    public function authorizedPostFormAction($id)
+    {
+        return $this->render(
+                'OvskiForumBundle::form.html.twig',
+                array('form' => $this->createAuthorizedPostForm($id)->createView())
+        );
+    }
+
+    /**
+     * Creates a form to unauthorize a Post entity by id.
+     *
+     * @param mixed $id The entity id
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createAuthorizedPostForm($id)
+    {
+        $qb = $this->createFormBuilder()
+            ->setAction(
+                $this->generateUrl('ovski_forum_moderation_post_authorize', array(
+                    'id'           => $id
+                ))
+            )
+            ->setMethod('PUT')
+        ;
+
+        $qb->add('submit', 'submit', array('label' => 'authorize'));
+
+        return $qb->getForm();
     }
 }
