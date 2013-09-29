@@ -4,6 +4,7 @@ namespace Ovski\MinecraftUserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Ovski\ToolsBundle\Tools\Hashids;
 
 /**
  * @ORM\Entity(repositoryClass="Ovski\MinecraftUserBundle\Repository\UserRepository")
@@ -98,7 +99,9 @@ class User extends BaseUser
             $this->getUsername(),
             $time->getTimestamp()
         );
-        $this->serverKey = md5($stringToEncode);
+
+        $hashids = new Hashids($stringToEncode);
+        $this->serverKey = $hashids->encrypt(1, 2, 5);
 
         return $this;
     }
@@ -322,7 +325,10 @@ class User extends BaseUser
     public function setPlayer(\Ovski\MinecraftStatsBundle\Entity\Player $player = null)
     {
         $this->player = $player;
-    
+        if (!$this->getPlayer()->getUser()) {
+            $this->getPlayer()->setUser($this);
+        }
+
         return $this;
     }
 

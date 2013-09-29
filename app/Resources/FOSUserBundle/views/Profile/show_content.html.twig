@@ -20,4 +20,9 @@
             {{ 'profile.show.undefined_description'|trans }}
         {% endif %}
     </p>
+    <p>
+        {% if not user.player %}
+            {{ 'profile.show.server_key'|trans }}: {{ user.serverKey }}
+        {% endif %}
+    </p>
 </div>

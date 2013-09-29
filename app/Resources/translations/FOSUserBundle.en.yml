@@ -33,6 +33,7 @@ profile:
         undefined_age: Undefined age
         description: Personal description
         undefined_description: Undefined description
+        server_key: Server key
     edit:
         submit: Update
     flash:

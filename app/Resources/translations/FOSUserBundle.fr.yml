@@ -33,6 +33,7 @@ profile:
         undefined_age: Age non renseigné
         description: Description personnelle
         undefined_description: Description non renseigné
+        server_key: Clé server
     edit:
         submit: Mettre à jour
     flash:

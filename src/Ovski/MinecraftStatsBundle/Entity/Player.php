@@ -428,6 +428,9 @@ class Player
     public function setUser(\Ovski\MinecraftUserBundle\Entity\User $user)
     {
         $this->user = $user;
+        if (!$this->getUser()->getPlayer()) {
+            $this->getUser()->setPlayer($this);
+        }
     
         return $this;
     }
