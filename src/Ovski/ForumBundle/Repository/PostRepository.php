@@ -40,4 +40,33 @@ class PostRepository extends EntityRepository
 
         return is_null($q) ? array() : $q->getResult();
     }
+
+    public function getPostsByStatusQueryBuilder($topicId, $status)
+    {
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $qb
+            ->select('p')
+            ->from('OvskiForumBundle:Post', 'p')
+            ->where('p.topic = :topicId')
+            ->setParameter('topicId', $topicId)
+            ->andWhere('p.status = :status')
+            ->setParameter('status', $status)
+        ;
+
+        return $qb;
+    }
+
+    public function getPostsByStatusQuery($topicId, $status)
+    {
+        $qb = $this->getPostsByStatusQueryBuilder($topicId, $status);
+
+        return is_null($qb) ? $qb : $qb->getQuery();
+    }
+
+    public function getPostsByStatus($topicId, $status)
+    {
+        $q = $this->getPostsByStatusQuery($topicId, $status);
+
+        return is_null($q) ? array() : $q->getResult();
+    }
 }

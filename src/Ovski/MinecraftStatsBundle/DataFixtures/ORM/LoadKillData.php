@@ -16,7 +16,7 @@ class LoadKillData extends AbstractFixture implements OrderedFixtureInterface
     {
         /* CREATE KILLS */
 
-        $kill1 = new Kill();
+        /*$kill1 = new Kill();
         $kill1->setDate(new \DateTime());
         $kill1->setKilledPlayer($this->getReference('fearhardcore-player'));
         $kill1->setKillerPlayer($this->getReference('pedopony-player'));
@@ -72,7 +72,7 @@ class LoadKillData extends AbstractFixture implements OrderedFixtureInterface
         $kill8->setWeapon(125);
         $manager->persist($kill8);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**
@@ -80,6 +80,6 @@ class LoadKillData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 }

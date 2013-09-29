@@ -26,6 +26,13 @@ profile:
     show:
         username: Username
         email: Email
+        last_login: Last login
+        country: Country
+        member_since: Member for
+        age: %age% years old
+        undefined_age: Undefined age
+        description: Personal description
+        undefined_description: Undefined description
     edit:
         submit: Update
     flash:

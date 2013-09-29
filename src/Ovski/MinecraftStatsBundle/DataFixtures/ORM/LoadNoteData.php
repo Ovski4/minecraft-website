@@ -16,7 +16,7 @@ class LoadNoteData extends AbstractFixture implements OrderedFixtureInterface
     {
         /* CREATE NOTES */
 
-        $note1 = new Note();
+        /*$note1 = new Note();
         $note1->setDonorPlayer($this->getReference('fearhardcore-player'));
         $note1->setReceiverPlayer($this->getReference('pedopony-player'));
         $note1->setValue(-5);
@@ -28,7 +28,7 @@ class LoadNoteData extends AbstractFixture implements OrderedFixtureInterface
         $note2->setValue(-4);
         $manager->persist($note2);
 
-        $manager->flush();
+        $manager->flush();*/
     }
 
     /**
@@ -36,6 +36,6 @@ class LoadNoteData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 4;
     }
 }

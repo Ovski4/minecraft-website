@@ -1,0 +1,6 @@
+services:
+    ovski.minecraftuser.registration.form.type:
+        class: Ovski\MinecraftUserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ovski_minecraftuser_registration }

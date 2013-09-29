@@ -28,6 +28,12 @@ class Player
     private $faction;
 
     /**
+     * @ORM\OneToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="player", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=10, nullable=true)
@@ -411,5 +417,28 @@ class Player
     public function getPower()
     {
         return $this->power;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \Ovski\MinecraftUserBundle\Entity\User $user
+     * @return Player
+     */
+    public function setUser(\Ovski\MinecraftUserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+    
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \Ovski\MinecraftUserBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

@@ -55,7 +55,7 @@ class Category
     private $description;
      
     /**
-     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Topic", mappedBy="category")
+     * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Topic", mappedBy="category", cascade={"remove"})
      */
     private $topics;
 

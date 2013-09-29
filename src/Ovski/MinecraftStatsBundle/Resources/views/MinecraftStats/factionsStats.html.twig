@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="factions-stats content">
-        <h2><i class="icon-bar-chart"></i> Factions stats</h2>
+        <h2><i class="icon-bar-chart"></i> {% trans %}Factions stats{% endtrans %}</h2>
 
         {% if pager.haveToPaginate %}
             {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
@@ -19,10 +19,22 @@
 
         <div class="row-fluid">
             <header class="stat-list-head row-fluid">
-                <div class="span4"><i class="icon-group"></i> Faction</div>
-                <div class="span2"><i class="icon-male"></i> Players</div>
-                <div class="span2"><i class="icon-bolt"></i> Power</div>
-                <div class="faction span4"><i class="icon-group"></i> Created at</div>
+                <div class="span4">
+                    <i class="icon-group"></i>
+                    {% trans %}Faction{% endtrans %}
+                </div>
+                <div class="span2">
+                    <i class="icon-male"></i>
+                    {% trans %}Players{% endtrans %}
+                </div>
+                <div class="span2">
+                    <i class="icon-bolt"></i>
+                    {% trans %}Power{% endtrans %}
+                </div>
+                <div class="faction span4">
+                    <i class="icon-group"></i>
+                    {% trans %}Created at{% endtrans %}
+                </div>
             </header>
             <ul class="stats-list row-fluid">
                 {% for faction in pager.currentPageResults %}

@@ -1,0 +1,23 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>{{ 'profile.show.last_login'|trans }}: {{ user.lastLogin | date("d/m/Y H\\hi") }}</p>
+    <p>{{ 'profile.show.member_since'|trans }}: {{ user.createdAt | date("d/m/Y H\\hi") }}</p>
+    <p>
+        {% if user.age %}
+            {{ 'profile.show.age'|trans({'%age%': user.age}) }}
+        {% else %}
+            {{ 'profile.show.undefined_age'|trans }}
+        {% endif %}
+    </p>
+    <p>
+        {% if user.description %}
+            {{ 'profile.show.description'|trans }}
+            {{ user.description | bbcode_filter('forum_filter') }}
+        {% else %}
+            {{ 'profile.show.undefined_description'|trans }}
+        {% endif %}
+    </p>
+</div>

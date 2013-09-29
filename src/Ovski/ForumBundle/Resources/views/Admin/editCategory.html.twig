@@ -1,12 +1,12 @@
 {% extends '::adminBase.html.twig' %}
 
 {% block body %}
-    <h1>Category edit</h1>
+    <h1>{% trans %}Category edit{% endtrans %}</h1>
 
     {{ form(edit_form) }}
     {{ form(delete_form) }}
 
     <a href="{{ path('ovski_forum_administration_list_categories') }}">
-        Back to the list
+        {% trans %}Go back to the category list{% endtrans %}
     </a>
 {% endblock %}

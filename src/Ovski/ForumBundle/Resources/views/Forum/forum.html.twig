@@ -8,13 +8,13 @@
 
 {% block body %}
     <div class="forum content">
-        <h2>Forums</h2>
+        <h2>{% trans %}Forums{% endtrans %}</h2>
         {% if categories %}
         <ul class="category-list">
             {% for category in categories %}
                 <li>
                     <i class="icon-chevron-right"></i>
-                    <a href="{{ path('category', { categorySlug: category.slug }) }}">
+                    <a href="{{ path('ovski_forum_forum_category', { categorySlug: category.slug }) }}">
                         {{ category.name }}
                     </a>
                     <div>{{ category.description }}</div>
@@ -22,7 +22,7 @@
             {% endfor %}
         </ul>
         {% else %}
-            There are no categories
+            {% trans %}There are no categories{% endtrans %}
         {% endif %}
     </div>
 {% endblock %}

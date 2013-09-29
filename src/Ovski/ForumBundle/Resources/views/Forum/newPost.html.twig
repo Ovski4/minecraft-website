@@ -2,16 +2,16 @@
 
 {% block body %}
     <div class="forum-topic content">
-        <h1><span>Topic :</span> {{ topic_title }}</h1>
+        <h1><span>{% trans %}Topic :{% endtrans %}</span> {{ topic_title }}</h1>
 
         {% if posts is not empty %}
-        <h2>The last 
+        <h2>{% trans %}The last{% endtrans %}
             {% if posts|length > 1 %}
-                {{ posts|length }} posts
+                {{ posts|length }} {% trans %}posts{% endtrans %}
             {% else %}
-                post
+                {% trans %}post{% endtrans %}
             {% endif %}
-            on this topic
+            {% trans %}on this topic{% endtrans %}
         </h2>
         <section>
             <ul class="posts-list">
@@ -22,7 +22,7 @@
                                 <a>{{ post.author }}</a> - {{ post.createdAt | date("d/m/Y H\\hi") }}
                             </header>
                             <div>
-                                {{ post.content | nl2br | bbcode_filter('forum_filter') }}
+                                {{ post.content | bbcode_filter('forum_filter') }}
                             </div>
                         </article>
                     </li>
@@ -31,9 +31,9 @@
         </section>
         {% endif %}
             
-        <h2 id="form">Answer on this topic</h2>
+        <h2 id="form">{% trans %}Answer on this topic{% endtrans %}</h2>
         {{ form(form) }}
 
-        <br /><a href="#">Back to the list</a>
+        <br /><a href="#">{% trans %}Go back to the topic{% endtrans %} "{{ topic_title }}" TODO</a>
     </div>
 {% endblock %}

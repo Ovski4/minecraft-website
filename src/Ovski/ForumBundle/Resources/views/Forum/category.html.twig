@@ -14,43 +14,67 @@
         <h2>Forum - {{ category_name }}</h2>
         {% if pager.currentPageResults is not empty %}
             {% if pager.haveToPaginate %}
-                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
             {% endif %}
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Subject</th>
-                        <th>Author</th>
-                        <th>Posts</th>
-                        <th>Last post</th>
+                        <th></th>
+                        <th>{% trans %}Subject{% endtrans %}</th>
+                        <th>{% trans %}Author{% endtrans %}</th>
+                        <th>{% trans %}Posts{% endtrans %}</th>
+                        <th>{% trans %}Last post{% endtrans %}</th>
+                        {% if is_granted("ROLE_MODERATOR") %}
+                            <th>{% trans %}Actions{% endtrans %}</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 <tbody>
                     {% for topic in pager.currentPageResults %}
                         <tr>
                             <td>
-                                <a href="{{ path('topic', { categorySlug: category_slug, topicSlug: topic.slug }) }}">
+                                {% if topic.closed %}
+                                    <i class="icon-folder-close"></i>
+                                {% else %}
+                                    <i class="icon-folder-open"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path('ovski_forum_forum_topic', { 'categorySlug': category_slug, 'topicSlug': topic.slug }) }}">
                                     {{ topic.title }}
                                 </a>
                             </td>
-                            <td>{{ topic.author }}</td>
+                            <td>
+                                <a{% if topic.author.hasRole("ROLE_MODERATOR") %} class="moderator"{% endif %}>
+                                    {{ topic.author }}
+                                </a>
+                            </td>
                             <td>{{ topic.numPosts }}</td>
-                            <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>    
+                            <td>{{ topic.updatedAt | date("d/m/Y H\\hi") }}</td>
+                            <td>
+                                {% if is_granted("ROLE_MODERATOR") %}
+                                    {% if not topic.closed %}
+                                        {{ render(controller('OvskiForumBundle:Moderation:editTopicStatusForm', {'id': topic.id, 'categorySlug': category_slug, 'status': 'closed' })) }}
+                                    {% else %}
+                                        {{ render(controller('OvskiForumBundle:Moderation:editTopicStatusForm', {'id': topic.id, 'categorySlug': category_slug, 'status': 'open' })) }}
+                                    {% endif %}
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-                There are no topics in this category
+            {% trans %}There are no topics in this category{% endtrans %}
         {% endif %}
 
         {% if pager.currentPageResults|length >= 15 %}
             {% if pager.haveToPaginate %}
-                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
+                {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'ovski_forum_forum_category_paginated', 'routeParams' : { 'categorySlug': category_slug } }) }}
             {% endif %}
         {% endif %}
      
-        <h3>Create a new topic</h3>
+        <h3>{% trans %}Create a new topic{% endtrans %}</h3>
         {{ form(form) }}
 
     </div>

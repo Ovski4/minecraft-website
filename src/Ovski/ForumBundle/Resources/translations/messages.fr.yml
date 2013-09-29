@@ -1,0 +1,62 @@
+open: ouvrir
+close: fermer
+Action: Action
+Actions: Actions
+'Add a new post': 'Ajouter un nouveau message'
+'Administration Panel': 'Administration Panel'   # FIXME
+'Allow you to promote users to the moderator status':
+    ' Disabled users can''t be promoted':
+        "\n        Allow you to demote moderators":
+            '': "Elever les utilisateurs au statut de modérateurs. Le utilisateurs désactivés ne peuvent pas être promus.\n        Vous pouvez aussi rétrograder les modérateurs"
+'Answer on this topic': 'Répondre sur ce sujet'
+Author: Auteur
+Categories: Catégories
+Category: Catégorie
+'Category edit': 'Edition de catégorie'
+'Closed topics': 'Sujets fermés'
+Create: Créer
+'Create a new category': 'Créer une nouvelle catégorie'
+'Create a new topic': 'Créer un nouveau sujet'
+Delete: Supprimer
+Description: Description
+'Disabled users': 'Utilisateurs désactivés'
+Edit: Editer
+Forum: Forum
+Forums: Forums
+'Go back to the category list': 'Revenir à la liste des catégories'
+'Go back to the category': 'Revenir à la catégorie'
+'Go back to the topic': 'Revenir au sujet'
+Language: Language
+'Last post': 'Dernier message'
+'Moderation Panel': 'Panneau de modération'
+Moderators: Modérateurs
+Name: Nom
+'No disabled users': 'Aucun utilisateur désactivé'
+'No enabled users': 'Aucun utiisateur activé'
+Post: Message
+Posts: Messages
+Subject: Sujet
+Submit: Valider
+'The last': 'Le dernier'
+'There are no categories': "Il n'y a aucune catégories"
+'There are no post in this topic': "Il n'y a aucun message sur ce sujet"
+'There are no topics in this category': "Il n'y a aucun sujet dans cette catégorie"
+'This topic is closed': 'Ce sujet est fermé'
+Title: Titre
+Topic: Sujet
+'Topic :': 'Sujet :'
+'Unauthorized post list': 'Liste des messages non autorisés'
+'Unauthorized posts': 'Messages non autorisés'
+Update: MAJ
+Users: Utilisateurs
+authorize: autoriser
+demote: retrograder
+disable: désactiver
+edit: editer
+enable: autoriser
+'on this topic': 'sur ce sujet'
+post: message
+posts: messages
+promote: promouvoir
+remove: supprimer
+show: voir

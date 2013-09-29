@@ -2,16 +2,22 @@ MineWeb
 =======
 
 First
-  * mettre des exceptions avec messages excplicite (check tous les controllers)
+  * tester onetoone player/user (2player 1 user par exemple)
+  * nombre de jours profile user (since/depuis)
+  * tester numPost++ sur user
+  * empecher l'edition du login (profile)
+  * surcharger creation utilisateur
+  * rank system
+  * ajouter un système de news
+  * gerer traduction backoffice
+  * gérer espace utilisateur perso
+  * permettre au leader d'ajouter du texte?
+  * gérer les erreurs fosuser
+  * systeme anti-flood
   * texte sur l'interface admin pour dir a quoi sert chaque page'
-  * gérer tous les cas dans les url ou une entité n'est pas récupérée
+  * gérer toutes les url fausse (404 au lieu de 500)
   * invalid csrf token when false login
-  * tester admin a false enable dans moderation et autres trucs udu genre
-  * css forum dans le bundle
-  * onglet en fonction des langues dans le fichier de conf
-  * renommer fonction dans admincontroller du forumbundle
   * recherche full text forum
-  * pouvoir fermer un topic (attribute -> boolean open?)
   * améliorer l'interface admin
   * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
   * traduire tout
@@ -29,6 +35,7 @@ First
 
 After
   * Plugin registration
+  * forum -> protection language moderators (en mod shouldn't see fr topics ...)
   * Forum bundle to do (As simple as jeuxvideo.com) -> cascade entities
   * News and comments
   * Resizable iframe (dynmap)
@@ -38,12 +45,6 @@ After
 
 Admin peut: assigner des modérateurs
 Moderateur peut: bloquer les gens, fermer les topics.
-
-
-
-
-
-
 
 
 

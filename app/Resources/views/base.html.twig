@@ -10,7 +10,7 @@
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
-    <body>
+    <body class="website">
         {% block header %}
             <div id="header-wrapper">
                 <header class="container">
@@ -44,6 +44,20 @@
             <footer>
                 <div class="content container">
                     <p>To chop, pick an axe, not a pickaxe. Okay. I love english but sometimes this is just too much.</p>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <div>
+                            <a href="{{ path('ovski_forum_administration') }}">
+                                {% trans %}Administration Panel{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
+                    {% if is_granted("ROLE_MODERATOR") %}
+                        <div>
+                            <a href="{{ path('ovski_forum_moderation') }}">
+                                {% trans %}Moderation Panel{% endtrans %}
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
             </footer>
         {% endblock %}
@@ -51,6 +65,6 @@
 </html>
 
 {% block javascripts %}
-    <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.0.min.js'></script>
+    {# <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.0.min.js'></script>#}
     <script type="text/javascript" src="/bundles/ovskiwebsite/js/bootstrap.js"></script>
 {% endblock javascripts %}

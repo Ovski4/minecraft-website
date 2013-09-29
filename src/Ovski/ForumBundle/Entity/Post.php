@@ -36,7 +36,7 @@ class Post
     private $topic;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="posts", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="Ovski\MinecraftUserBundle\Entity\User", inversedBy="posts")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
      */
     private $author;
@@ -49,12 +49,38 @@ class Post
     private $createdAt;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->status = "authorized";
+        $this->createdAt = new \DateTime('now');
+    }
+
+    /**
      * @ORM\PreUpdate()
      * @ORM\PrePersist()
      */
-    public function setCreatedAt()
+    public function incrementTopicNumPost()
     {
-        $this->createdAt = new \DateTime('now');
+        $this->getTopic()->incrementNumPosts();
+    }
+
+    /**
+     * Check if a topic is authorized
+     * 
+     * @return boolean
+     */
+    public function isAuthorized()
+    {
+        return $this->status == "authorized" ? true : false;
     }
 
     /**
@@ -144,5 +170,28 @@ class Post
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Post
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

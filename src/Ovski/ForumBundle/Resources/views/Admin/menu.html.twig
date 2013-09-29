@@ -3,7 +3,7 @@
 {% endif %}
 
 <div class="navbar">
-    <div class="navbar-inner span5">
+    <div class="navbar-inner span12">
         <ul class="nav">
             <li>
                 <a href="{{ path('ovski_forum_moderation') }}">
@@ -11,14 +11,10 @@
                 </a>
             </li>
             <li>
-                <a href="{{ path('forum') }}">
+                <a href="{{ path('ovski_forum_forum') }}">
                     {% trans %}Forum{% endtrans %}
                 </a>
             </li>
-        </ul>
-    </div>
-    <div class="navbar-inner span5">
-        <ul class="nav">
             <li {% if active == 'categories' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_administration_list_categories') }}">
                     {% trans %}Categories{% endtrans %}
@@ -26,7 +22,17 @@
             </li>
             <li {% if active == 'users' %} class="current" {% endif %}>
                 <a href="{{ path('ovski_forum_administration_users') }}">
-                    {% trans %}Users{% endtrans %}
+                    {% trans %}Moderators{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'topics' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_administration_list_closed_topics') }}">
+                    {% trans %}Closed topics{% endtrans %}
+                </a>
+            </li>
+            <li {% if active == 'posts' %} class="current" {% endif %}>
+                <a href="{{ path('ovski_forum_administration_list_unauthorized_posts') }}">
+                    {% trans %}Unauthorized posts{% endtrans %}
                 </a>
             </li>
         </ul>

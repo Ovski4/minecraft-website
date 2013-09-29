@@ -15,14 +15,12 @@ body, html
     width: 1024px;
 }
 
-a
-{
-    color: rgb(69, 168, 30);
-}
+a { color: rgb(69, 168, 30); }
 
-form
+a.moderator
 {
-    margin: 0;
+    color: #882a25;
+    font-weight: bold;
 }
 
 a:hover
@@ -30,6 +28,11 @@ a:hover
     color: #382819;
     text-decoration: none;
     font-weight: bold;
+}
+
+form
+{
+    margin: 0;
 }
 
 h2
@@ -43,8 +46,8 @@ h2
     margin-bottom: 20px;
 }
 
-.forum button,
-input[type="submit"]
+.website button,
+.website input[type="submit"]
 {
     background: #382819;
     color: #fff;
@@ -59,10 +62,15 @@ input[type="submit"]
     transition: background .2s;
 }
 
-.forum button:hover,
-input[type="submit"]:hover
+.website button:hover,
+.website input[type="submit"]:hover
 {
     background: #74b73f;
+}
+
+table form
+{
+    display: inline-block;
 }
 
 ul
@@ -487,6 +495,11 @@ header.stat-list-head > div
     width: 100%;
 }
 
+.forum-category table button
+{
+    padding: 0 20px;
+}
+
 .forum ul li > div
 {
     text-indent: 20px;
@@ -504,7 +517,7 @@ header.stat-list-head > div
     height: 70px;
 }
 
-.forum-category button
+.forum-category #ovski_forumbundle_topic button
 {
     margin: 10px 60px;
 }
@@ -518,6 +531,7 @@ header.stat-list-head > div
 
 .forum-topic article
 {
+    position: relative;
     background: #f9f9f9;
     border: 1px solid #ccc;
     padding: 20px;
@@ -528,6 +542,20 @@ header.stat-list-head > div
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 10px;
+}
+
+.forum-topic article form
+{
+    display: inline-block;
+}
+
+.forum-topic article form button
+{
+    padding: 0 20px;
+    position: absolute;
+    margin: 0;
+    top: 15px;
+    right: 20px;
 }
 
 .forum-topic textarea
@@ -557,6 +585,24 @@ body > footer
 body > footer .content
 {
     color: #FFF;
+}
+
+
+body > footer .content > div
+{
+    text-align: left;
+}
+
+body > footer a
+{
+    font-style: italic;
+    color: #fff;
+}
+
+body > footer a:hover
+{
+    font-weight: bold;
+    color: #fff;
 }
 
  /******************
