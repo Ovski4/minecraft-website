@@ -29,9 +29,10 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $ovski4Player->setFaction($this->getReference("sandpeople-faction"));
         $ovski4Player->setRole("OFFICER");
         $ovski4Player->setPower(2.25);
+        $ovski4Player->setUser($this->getReference('baptiste'));
         $manager->persist($ovski4Player);
 
-        $napyDaWisePlayer = new Player();
+        /*$napyDaWisePlayer = new Player();
         $napyDaWisePlayer->setPseudo("napydawise");
         $napyDaWisePlayer->setBrokenBlocks(8526);
         $napyDaWisePlayer->setKills(126);
@@ -483,17 +484,17 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $RazmaboutePlayer->setPvpDeaths(0);
         $RazmaboutePlayer->setStupidDeaths(0);
         $RazmaboutePlayer->setVerbosity(0);
-        $manager->persist($RazmaboutePlayer);
+        $manager->persist($RazmaboutePlayer);*/
  
-        $this->addReference('razmaboute-player', $RazmaboutePlayer);
+        /*$this->addReference('razmaboute-player', $RazmaboutePlayer);
         $this->addReference('c4mag-player', $C4MagPlayer);
         $this->addReference('emile_1000-player', $emile_1000Player);
         $this->addReference('xx3l3m3nt-player', $xX3l3m3ntPlayer);
         $this->addReference('thelordack-player', $TheLordackPlayer);
         $this->addReference('furaigon-player', $furaigonPlayer);
-        $this->addReference('arnauy-player', $arnauyPlayer);
+        $this->addReference('arnauy-player', $arnauyPlayer);*/
         $this->addReference('ovski4-player', $ovski4Player);
-        $this->addReference('napydawise-player', $napyDaWisePlayer);
+        /*$this->addReference('napydawise-player', $napyDaWisePlayer);
         $this->addReference('grosziznzin-player', $glapinePlayer);
         $this->addReference('glapine-player', $grosziznzinPlayer);
         $this->addReference('factemius-player', $factemiusPlayer);
@@ -519,7 +520,7 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('summumlui-player', $summumluiPlayer);
         $this->addReference('callofburger-player', $CallOfBurgerPlayer);
         $this->addReference('noixdepecan-player', $NoixDePecanPlayer);
-        $this->addReference('aleks-player', $AleksPlayer);
+        $this->addReference('aleks-player', $AleksPlayer);*/
         
         $manager->flush();
     }
@@ -529,6 +530,6 @@ class LoadPlayerData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

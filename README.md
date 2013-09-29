@@ -2,6 +2,7 @@ MineWeb
 =======
 
 First
+  * tester onetoone player/user (2player 1 user par exemple)
   * nombre de jours profile user (since/depuis)
   * tester numPost++ sur user
   * empecher l'edition du login (profile)

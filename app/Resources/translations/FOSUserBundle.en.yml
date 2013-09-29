@@ -31,7 +31,7 @@ profile:
         member_since: Member for
         age: %age% years old
         undefined_age: Undefined age
-        description: Description
+        description: Personal description
         undefined_description: Undefined description
     edit:
         submit: Update

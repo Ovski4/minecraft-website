@@ -14,7 +14,7 @@
                 {% for user in moderators %}
                     <li>
                         {{ user }}
-                        <a href="{{ path('ovski_forum_moderation_promote', { 'id': user.id, 'choice': 0 }) }}">
+                        <a href="{{ path('ovski_forum_administration_promote', { 'id': user.id, 'choice': 0 }) }}">
                             [{% trans %}demote{% endtrans %}]
                         </a
                     </li>
@@ -29,7 +29,7 @@
                 {% for user in users %}
                     <li>
                         {{ user }}
-                        <a href="{{ path('ovski_forum_moderation_promote', { 'id': user.id, 'choice': 1 }) }}">
+                        <a href="{{ path('ovski_forum_administration_promote', { 'id': user.id, 'choice': 1 }) }}">
                             [{% trans %}promote{% endtrans %}]
                         </a>
                     </li>

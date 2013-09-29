@@ -98,6 +98,10 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Ovski\MinecraftUserBundle\Entity\User
+    registration:
+        form:
+            type: ovski_minecraftuser_registration
+    
 
 fm_bbcode:
     #emoticon:

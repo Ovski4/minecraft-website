@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Ovski\MinecraftUserBundle\Repository\UserRepository")
- * @ORM\Table(name="user")
+ * @ORM\Table(name="minecraft_user")
+ * @ORM\HasLifecycleCallbacks
  */
 class User extends BaseUser
 {
@@ -27,6 +28,19 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Post", mappedBy="author")
      */
     private $posts;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ovski\MinecraftStatsBundle\Entity\Player", inversedBy="user", cascade={"persist"})
+     * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $player;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255)
+     */
+    private $serverKey;
 
     /**
      * @var string
@@ -72,6 +86,24 @@ class User extends BaseUser
     }
 
     /**
+     * Set serverKey
+     *
+     * @ORM\PrePersist()
+     */
+    public function setServerKey()
+    {
+        $time = new \DateTime('now');
+        $stringToEncode = sprintf("%so%sv%ss",
+            $this->getCreatedAt()->getTimestamp(),
+            $this->getUsername(),
+            $time->getTimestamp()
+        );
+        $this->serverKey = md5($stringToEncode);
+
+        return $this;
+    }
+
+    /**
      * Convert a dateTime object to a number of days
      * 
      * @param \DateTime $date
@@ -79,7 +111,7 @@ class User extends BaseUser
      */
     public function DateTimeToDays(\DateTime $date)
     {
-        
+        //TODO
     }
 
     /**
@@ -279,5 +311,38 @@ class User extends BaseUser
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set player
+     *
+     * @param \Ovski\MinecraftStatsBundle\Entity\Player $player
+     * @return User
+     */
+    public function setPlayer(\Ovski\MinecraftStatsBundle\Entity\Player $player = null)
+    {
+        $this->player = $player;
+    
+        return $this;
+    }
+
+    /**
+     * Get player
+     *
+     * @return \Ovski\MinecraftStatsBundle\Entity\Player 
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * Get serverKey
+     *
+     * @return string 
+     */
+    public function getServerKey()
+    {
+        return $this->serverKey;
     }
 }

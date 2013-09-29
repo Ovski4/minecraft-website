@@ -31,7 +31,7 @@ profile:
         member_since: Membre depuis
         age: %age% ans
         undefined_age: Age non renseigné
-        description: Description
+        description: Description personnelle
         undefined_description: Description non renseigné
     edit:
         submit: Mettre à jour
