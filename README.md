@@ -2,6 +2,11 @@ MineWeb
 =======
 
 First
+  * nombre de jours profile user (since/depuis)
+  * tester numPost++ sur user
+  * empecher l'edition du login (profile)
+  * surcharger creation utilisateur
+  * rank system
   * ajouter un système de news
   * gerer traduction backoffice
   * gérer espace utilisateur perso
@@ -39,12 +44,6 @@ After
 
 Admin peut: assigner des modérateurs
 Moderateur peut: bloquer les gens, fermer les topics.
-
-
-
-
-
-
 
 
 

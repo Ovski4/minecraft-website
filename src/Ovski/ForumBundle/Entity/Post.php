@@ -61,16 +61,16 @@ class Post
     public function __construct()
     {
         $this->status = "authorized";
+        $this->createdAt = new \DateTime('now');
     }
 
     /**
      * @ORM\PreUpdate()
      * @ORM\PrePersist()
      */
-    public function setCreatedAt()
+    public function incrementTopicNumPost()
     {
         $this->getTopic()->incrementNumPosts();
-        $this->createdAt = new \DateTime('now');
     }
 
     /**

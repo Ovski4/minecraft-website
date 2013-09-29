@@ -80,9 +80,10 @@ class ForumManager
     {
         $em = $this->getEntityManager();
         $post->setAuthor($this->getUser())->setTopic($topic);
+        $this->getUser()->incrementNumPosts();
         $topic->setUpdatedAt(new \DateTime());
         $em->persist($post);
-        $em->persist($topic);
+        //$em->persist($topic); automatically done? todo test
         $em->flush();
         
         return $post;

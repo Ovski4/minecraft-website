@@ -1,15 +1,15 @@
 {% extends '::adminBase.html.twig' %}
 
 {% block body %}
-    <h1>Unauthorized post list</h1>
+    <h1>{% trans %}Unauthorized post list{% endtrans %}</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Topic</th>
-                <th>Post</th>
-                <th>Actions</th>
+                <th>{% trans %}Topic{% endtrans %}</th>
+                <th>{% trans %}Post{% endtrans %}</th>
+                <th>{% trans %}Actions{% endtrans %}</th>
             </tr>
         </thead>
         <tbody>

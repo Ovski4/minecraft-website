@@ -3,19 +3,19 @@
 {% block body %}
 
     <p>
-        Allow you to promote users to the moderator status. Disabled users can't be promoted.
-        Allow you to demote moderators.
+        {% trans %}Allow you to promote users to the moderator status. Disabled users can't be promoted.
+        Allow you to demote moderators.{% endtrans %}
     </p>
 
     <div class="row-fluid enable-form">
         <div class="span6">
-            <h3>Moderators</h3>
+            <h3>{% trans %}Moderators{% endtrans %}</h3>
             <ul>
                 {% for user in moderators %}
                     <li>
                         {{ user }}
                         <a href="{{ path('ovski_forum_moderation_promote', { 'id': user.id, 'choice': 0 }) }}">
-                            [demote]
+                            [{% trans %}demote{% endtrans %}]
                         </a
                     </li>
                 {% else %}
@@ -24,17 +24,17 @@
             </ul>
         </div>
         <div class="span6">
-            <h3>Users</h3>
+            <h3>{% trans %}Users{% endtrans %}</h3>
             <ul>
                 {% for user in users %}
                     <li>
                         {{ user }}
                         <a href="{{ path('ovski_forum_moderation_promote', { 'id': user.id, 'choice': 1 }) }}">
-                            [promote]
+                            [{% trans %}promote{% endtrans %}]
                         </a>
                     </li>
                 {% else %}
-                    No enabled users
+                    {% trans %}No enabled users{% endtrans %}
                 {% endfor %}
             </ul>
         </div>

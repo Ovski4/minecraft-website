@@ -8,7 +8,7 @@
 
 {% block body %}
     <div class="forum content">
-        <h2>Forums</h2>
+        <h2>{% trans %}Forums{% endtrans %}</h2>
         {% if categories %}
         <ul class="category-list">
             {% for category in categories %}
@@ -22,7 +22,7 @@
             {% endfor %}
         </ul>
         {% else %}
-            There are no categories
+            {% trans %}There are no categories{% endtrans %}
         {% endif %}
     </div>
 {% endblock %}

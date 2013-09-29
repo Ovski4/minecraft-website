@@ -20,12 +20,12 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Subject</th>
-                        <th>Author</th>
-                        <th>Posts</th>
-                        <th>Last post</th>
-                        {% if app.user.hasRole("ROLE_MODERATOR") %}
-                            <th>Actions</th>
+                        <th>{% trans %}Subject{% endtrans %}</th>
+                        <th>{% trans %}Author{% endtrans %}</th>
+                        <th>{% trans %}Posts{% endtrans %}</th>
+                        <th>{% trans %}Last post{% endtrans %}</th>
+                        {% if is_granted("ROLE_MODERATOR") %}
+                            <th>{% trans %}Actions{% endtrans %}</th>
                         {% endif %}
                     </tr>
                 </thead>
@@ -65,7 +65,7 @@
                 </tbody>
             </table>
         {% else %}
-                There are no topics in this category
+            {% trans %}There are no topics in this category{% endtrans %}
         {% endif %}
 
         {% if pager.currentPageResults|length >= 15 %}
@@ -74,7 +74,7 @@
             {% endif %}
         {% endif %}
      
-        <h3>Create a new topic</h3>
+        <h3>{% trans %}Create a new topic{% endtrans %}</h3>
         {{ form(form) }}
 
     </div>

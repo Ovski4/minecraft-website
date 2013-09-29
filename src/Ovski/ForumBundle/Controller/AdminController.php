@@ -314,7 +314,7 @@ class AdminController extends Controller
     /**
      * Promotes or demotes a user
      * 
-     * @Route("/{id}/promote/{choice}", name="ovski_forum_moderation_promote")
+     * @Route("/{id}/promote/{choice}", name="ovski_forum_administration_promote")
      * @Method("GET")
      */
     public function promoteAction($id, $choice)
@@ -397,7 +397,7 @@ class AdminController extends Controller
     /**
      * Displays closed topics
      *
-     * @Route("/topics/closed", name="ovski_forum_administration_list_closed_topics")
+     * @Route("/closed-topics", name="ovski_forum_administration_list_closed_topics")
      * @Template()
      */
     public function closedTopicsAction()
@@ -451,8 +451,9 @@ class AdminController extends Controller
      */
     public function deleteTopicFormAction($id)
     {
-        return array('form' => $this->createDeleteTopicForm(
-            $id)->createView()
+        return $this->render(
+            'OvskiForumBundle::form.html.twig',
+            array('form' => $this->createDeleteTopicForm($id)->createView())
         );
     }
 
@@ -479,7 +480,7 @@ class AdminController extends Controller
     /**
      * Displays unauthorized posts
      *
-     * @Route("/posts/unauthorized", name="ovski_forum_administration_list_unauthorized_posts")
+     * @Route("/unauthorized-posts", name="ovski_forum_administration_list_unauthorized_posts")
      * @Template()
      */
     public function unauthorizedPostsAction()

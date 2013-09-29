@@ -46,8 +46,8 @@ h2
     margin-bottom: 20px;
 }
 
-button,
-input[type="submit"]
+.website button,
+.website input[type="submit"]
 {
     background: #382819;
     color: #fff;
@@ -62,8 +62,8 @@ input[type="submit"]
     transition: background .2s;
 }
 
-button:hover,
-input[type="submit"]:hover
+.website button:hover,
+.website input[type="submit"]:hover
 {
     background: #74b73f;
 }

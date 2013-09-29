@@ -11,7 +11,7 @@
 
 {% block body %}
     <div class="players-stats">
-        <h2><i class="icon-bar-chart"></i> Players stats</h2>
+        <h2><i class="icon-bar-chart"></i> {% trans %}Players stats{% endtrans %}</h2>
 
         {% if pager.haveToPaginate %}
             {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
@@ -20,11 +20,22 @@
         <div class="row-fluid content">
             <div class="span12">
                 <header class="stat-list-head row-fluid">
-                    <div class="offset1 span2"><i class="icon-male"></i> Player</div>
-                    <div class="span2"><i class="icon-screenshot"></i> Kills</div>
-                    {# <div class="span2"><i class="icon-trophy"></i> Rank</div> #}
-                    <div class="faction span4"><i class="icon-group"></i> Faction</div>
-                    <div class="span2"><i class="icon-user"></i> Role</div>
+                    <div class="offset1 span2">
+                        <i class="icon-male"></i>
+                        {% trans %}Player{% endtrans %}
+                    </div>
+                    <div class="span2">
+                        <i class="icon-screenshot"></i>
+                        {% trans %}Kills{% endtrans %}
+                    </div>
+                    <div class="faction span4">
+                        <i class="icon-group"></i>
+                        {% trans %}Faction{% endtrans %}
+                    </div>
+                    <div class="span2">
+                        <i class="icon-user"></i>
+                        {% trans %}Role{% endtrans %}
+                    </div>
                 </header>
                 <ul class="stats-list row-fluid">
                     {% for player in pager.currentPageResults %}
@@ -37,21 +48,22 @@
                                 </div>
                                 <div class="span2"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
                                 <div class="span2">{{ player.kills }}</div>
-                                {# <div class="span2">{{ loop.index+((pager.currentPage-1)*pager.maxPerPage) }}</div> #}
                                 <div class="faction span4">
                                     {% if player.faction %}
                                         <span>
                                             <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
                                         </span>
                                     {% else %}
-                                        <span class="loner">without faction</span>
+                                        <span class="loner">
+                                            {% trans %}without faction{% endtrans %}
+                                        </span>
                                     {% endif %}
                                 </div>
                                 <div class="span2">
                                     {% if player.role %}
-                                        {{ player.role | capitalize }}
+                                        {{ player.role | capitalize | trans }}
                                     {% elseif player.faction %}
-                                        Member
+                                        {% trans %}Member{% endtrans %}
                                     {% else %}
                                         /
                                     {% endif %}
@@ -61,9 +73,6 @@
                     {% endfor %}
                 </ul>
             </div>
-            {#<div class="span3">
-                Filter Player
-            </div>#}
         </div>
 
         {% if pager.currentPageResults|length >= 10 %}

@@ -18,7 +18,7 @@ class ModerationController extends Controller
 {
     public static $TOPIC_STATUS_LABEL_MAP = array(
       'closed' => 'close',
-      'open'   => 'open',
+      'open'   => 'open'
     );
 
     /* -----------------------*
@@ -114,7 +114,7 @@ class ModerationController extends Controller
      * When hidden, a topic is not visible. Admins can deleted one permanently
      * 
      * @Method("PUT")
-     * @Route("/forum/moderation/category/{categorySlug}/topic/{id}/{status}", name="ovski_forum_moderation_topic_edit_status")
+     * @Route("/category/{categorySlug}/topic/{id}/{status}", name="ovski_forum_moderation_topic_edit_status")
      */
     public function editTopicStatusAction($id, $categorySlug, $status)
     {

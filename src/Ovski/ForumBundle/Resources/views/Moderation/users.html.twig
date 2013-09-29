@@ -4,17 +4,17 @@
 
     <div class="row-fluid enable-form">
         <div class="span6">
-            <h3>Disabled users</h3>
+            <h3>{% trans %}Disabled users{% endtrans %}</h3>
             <ul>
                 {% for user in disabled_users %}
                     <li>
                         {{ user }}
                         <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 1 }) }}">
-                            [enable]
+                            [{% trans %}enable{% endtrans %}]
                         </a>
                     </li>
                 {% else %}
-                    No disabled users
+                    {% trans %}No disabled users{% endtrans %}
                 {% endfor %}
             </ul>
         </div>
@@ -25,11 +25,11 @@
                     <li>
                         {{ user }}
                         <a href="{{ path('ovski_forum_moderation_enable', { 'id': user.id, 'choice': 0 }) }}">
-                            [disable]
+                            [{% trans %}disable{% endtrans %}]
                         </a
                     </li>
                 {% else %}
-                   No enabled users
+                   {% trans %}No enabled users{% endtrans %}
                 {% endfor %}
             </ul>
         </div>
