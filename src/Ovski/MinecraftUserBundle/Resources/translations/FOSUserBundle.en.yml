@@ -28,7 +28,7 @@ profile:
         email: Email
         last_login: Last login
         country: Country
-        member_since: Member for
+        member_from: Member from %from% days
         age: %age% years old
         undefined_age: Undefined age
         description: Personal description

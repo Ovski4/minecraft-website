@@ -2,16 +2,15 @@ MineWeb
 =======
 
 First
+  * 
+  * changer age en datetime pour avoir la date de naissance
+  * tester les envoie d'email en cas d'oubli d'un mdp
   * tester onetoone player/user (2player 1 user par exemple)
-  * nombre de jours profile user (since/depuis)
   * tester numPost++ sur user
-  * empecher l'edition du login (profile)
-  * surcharger creation utilisateur
   * rank system
   * ajouter un système de news
   * gerer traduction backoffice
   * gérer espace utilisateur perso
-  * permettre au leader d'ajouter du texte?
   * gérer les erreurs fosuser
   * systeme anti-flood
   * texte sur l'interface admin pour dir a quoi sert chaque page'
@@ -20,7 +19,6 @@ First
   * recherche full text forum
   * améliorer l'interface admin
   * catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
-  * traduire tout
   * check all fosuserbundle actions / test/ bugs
   * contact page -> swiftMailerBundle
   * add weapon entity

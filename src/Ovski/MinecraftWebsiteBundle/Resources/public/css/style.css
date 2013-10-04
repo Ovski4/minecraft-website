@@ -46,6 +46,11 @@ h2
     margin-bottom: 20px;
 }
 
+.website input[type="file"]
+{
+    line-height: 0px;
+}
+
 .website button,
 .website input[type="submit"]
 {

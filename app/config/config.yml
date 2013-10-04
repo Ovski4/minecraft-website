@@ -101,6 +101,9 @@ fos_user:
     registration:
         form:
             type: ovski_minecraftuser_registration
+    profile:
+        form:
+            type: ovski_minecraftuser_profile
     
 
 fm_bbcode:

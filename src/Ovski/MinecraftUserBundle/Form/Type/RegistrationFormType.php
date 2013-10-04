@@ -218,12 +218,6 @@ class RegistrationFormType extends BaseType
                 'choices' => $this->countryList,
                 'label' => 'Country :'
             ))
-            ->add('age', null, array(
-                'label' => 'Age :'
-            ))
-            ->add('description', null, array(
-                'label' => 'Description :'
-            ))
         ;
     }
 

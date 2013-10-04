@@ -13,7 +13,8 @@
 
 namespace Ovski\ToolsBundle\Tools;
 
-class Hashids {
+class Hashids
+{
 
 	const VERSION = '0.3.1';
 

@@ -4,3 +4,8 @@ services:
         arguments: [%fos_user.model.user.class%]
         tags:
             - { name: form.type, alias: ovski_minecraftuser_registration }
+    ovski.minecraftuser.profile.form.type:
+        class: Ovski\MinecraftUserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: ovski_minecraftuser_profile }
