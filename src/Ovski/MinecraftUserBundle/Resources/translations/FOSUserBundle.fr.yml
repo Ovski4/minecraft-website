@@ -24,7 +24,8 @@ security:
 # Profile
 profile:
     show:
-        username: Nom d'utilisateur
+        avatar: Avatar
+        username: Profil de %username%
         email: Adresse e-mail
         last_login: Dernier passage
         country: Pays

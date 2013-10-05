@@ -1,0 +1,63 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block fos_user_content %}
+    <div class="fos_user_user_show">
+        <h2>{{ 'profile.show.username'|trans({'%username%': user.username}) }}</h2>
+        <div class="overview row-fluid">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="span4">{{ 'profile.show.avatar'|trans }}</th>
+                        <th class="span8">{{ 'profile.show.description'|trans }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="span4">
+                            {% if user.avatar is defined %}
+                                <img src="/avatars/{{ user.avatarPath }}" width="150px" height="150px">
+                            {% else %}
+                                <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
+                            {% endif %}
+                        </td>
+                        <td class="span8">
+                            {% if user.description %}
+                                {{ user.description | bbcode_filter('forum_filter') }}
+                            {% else %}
+                                {{ 'profile.show.undefined_description'|trans }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>
+            <i class="icon-envelope"></i>
+            <em>{{ 'profile.show.email'|trans }}</em> : {{ user.email }}
+        </p>
+        <p>
+            <i class="icon-fighter-jet"></i>
+            <em>{{ 'profile.show.last_login'|trans }}</em> : {{ user.lastLogin | date("d/m/Y H\\hi") }}
+        </p>
+        <p>
+            <i class="icon-time"></i>
+            {{ 'profile.show.member_from'|trans({'%from%': user.registeredFrom}) }}
+        </p>
+        <p>
+            <i class="icon-arrow-right"></i>
+            {% if user.birthDate %}
+                {{ 'profile.show.age'|trans({'%age%': user.age}) }}
+            {% else %}
+                {{ 'profile.show.undefined_age'|trans }}
+            {% endif %}
+        </p>
+        {% if not user.player %}
+            <p>
+                <i class="icon-key"></i>
+                {{ 'profile.show.server_key'|trans }}: {{ user.serverKey }}
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

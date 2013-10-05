@@ -56,11 +56,11 @@ class User extends BaseUser
     private $country;
 
     /**
-     * @var integer
+     * @var datetime
      *
-     * @ORM\Column(type="integer", length=3, nullable=true)
+     * @ORM\Column(type="datetime", name="birth_date", length=3, nullable=true)
      */
-    private $age;
+    private $birthDate;
 
     /**
      * @var string
@@ -126,9 +126,8 @@ class User extends BaseUser
     }
 
     /**
-     * Convert a dateTime object to a number of days
+     * Get the number of days from when the user registered
      * 
-     * @param \DateTime $date
      * @return string : the number of days
      */
     public function getRegisteredFrom()
@@ -136,6 +135,18 @@ class User extends BaseUser
         $interval = $this->createdAt->diff(new \DateTime('now'));
 
         return $interval->format('%a');
+    }
+
+    /**
+     * Get the age of the user
+     * 
+     * @return string : the number of days
+     */
+    public function getAge()
+    {
+        $interval = $this->birthDate->diff(new \DateTime('now'));
+
+        return $interval->format('%y');
     }
 
     /**
@@ -258,29 +269,6 @@ class User extends BaseUser
     public function getCountry()
     {
         return $this->country;
-    }
-
-    /**
-     * Set age
-     *
-     * @param integer $age
-     * @return User
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-    
-        return $this;
-    }
-
-    /**
-     * Get age
-     *
-     * @return integer 
-     */
-    public function getAge()
-    {
-        return $this->age;
     }
 
     /**
@@ -485,5 +473,28 @@ class User extends BaseUser
     public function getAvatarPath()
     {
         return $this->avatarPath;
+    }
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime 
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
     }
 }

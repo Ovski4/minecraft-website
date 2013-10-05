@@ -17,8 +17,13 @@ class ProfileFormType extends BaseType
 
         // add your custom field
         $builder
-            ->add('avatar', null, array('label' => 'Your avatar (30px*30px)'))
-            ->add('age', null, array('label' => 'Age :'))
+            ->add('avatar', null, array('label' => 'Your avatar :'))
+            ->add('birthDate', 'datetime', array(
+                'label' => 'Age :',
+                'widget' => 'choice',
+                'years' => range(1920, 2008),
+                'with_seconds' => false
+            ))
             ->add('description', null, array('label' => 'Description :'))
             ->add('updated_at', 'datetime', array(
                 'data' => new \DateTime('now'),
@@ -43,7 +48,6 @@ class ProfileFormType extends BaseType
     {
         $builder
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-            ->add('age', null, array('label' => 'Age :'))
             ->add('description', null, array('label' => 'Description :'))
         ;
     }

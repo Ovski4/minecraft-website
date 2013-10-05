@@ -51,6 +51,12 @@ h2
     line-height: 0px;
 }
 
+.website .button
+{
+    display: inline-block;
+}
+
+.website .button:hover,
 .website button,
 .website input[type="submit"]
 {
@@ -67,6 +73,7 @@ h2
     transition: background .2s;
 }
 
+.website .button:hover
 .website button:hover,
 .website input[type="submit"]:hover
 {
@@ -86,6 +93,41 @@ ul
 li
 {
     list-style-type: none;
+}
+
+input:focus:invalid:focus,
+textarea:focus:invalid:focus,
+select:focus:invalid:focus
+{
+    border-color: #e9322d;
+    -webkit-box-shadow: 0 0 6px #f8b9b7;
+    -moz-box-shadow: 0 0 6px #f8b9b7;
+    box-shadow: 0 0 6px #f8b9b7;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus
+{
+    border-color: rgba(66, 117, 37, 0.8);
+    outline: 0;
+    outline: thin dotted 9;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
 }
 
  /*********
@@ -447,6 +489,59 @@ header.stat-list-head > div
 .fos-user-form div.submit
 {
     border-bottom: 1px solid #ccc;
+}
+
+/* Fos user show */
+
+.fos_user_user_show .overview
+{
+    border-top: 2px solid #2e180a;
+    border-bottom: 2px solid #2e180a;
+    padding: 10px 0;
+}
+
+.fos_user_user_show input
+{
+    margin-top: 20px;
+}
+
+
+.fos_user_user_show p
+{
+    padding: 10px 0;
+    margin: 0;
+    border-bottom: 1px dashed #2e180a;
+}
+
+.fos_user_user_show .overview table th:first-child,
+.fos_user_user_show .overview table td:first-child
+{
+    border-right: 2px solid #2e180a;
+}
+
+.fos_user_user_show .overview table td
+{
+    vertical-align: top;
+    padding: 20px;
+    text-align: justify;
+}
+
+.fos_user_user_show .overview table td.span4
+{
+    text-align: center;
+}
+
+/* Fos user edit form */
+
+.edit-profile-form
+{
+    width: 984px;
+}
+
+.edit-profile-form > form textarea
+{
+    width: 650px;
+    height: 150px;
 }
 
 /* Login form */

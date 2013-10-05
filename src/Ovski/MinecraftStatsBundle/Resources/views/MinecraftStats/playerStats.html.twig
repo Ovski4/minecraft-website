@@ -22,6 +22,14 @@
         </h2>
 
         <ul class="stat-list">
+            <li>
+                <i class="icon-user"></i>
+                {% trans %}User{% endtrans %} :
+                <a href="{{ path('ovski_minecraftuser_user_profile', { username: player.user }) }}">
+                    {{ player.user }}
+                </a>
+                
+            </li>
             {% if player.faction %}
                 <li>
                     <i class="icon-group"></i> {% trans %}Faction{% endtrans %} :

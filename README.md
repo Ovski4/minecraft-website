@@ -2,15 +2,13 @@ MineWeb
 =======
 
 First
-  * 
-  * changer age en datetime pour avoir la date de naissance
+  * bouton pour permettre de montrer l'adresse email ou pas
   * tester les envoie d'email en cas d'oubli d'un mdp
   * tester onetoone player/user (2player 1 user par exemple)
   * tester numPost++ sur user
   * rank system
   * ajouter un système de news
   * gerer traduction backoffice
-  * gérer espace utilisateur perso
   * gérer les erreurs fosuser
   * systeme anti-flood
   * texte sur l'interface admin pour dir a quoi sert chaque page'
@@ -32,6 +30,7 @@ First
   * mettre @auhor et licence gpl sur les classes
 
 After
+  * système de messages perso
   * Plugin registration
   * forum -> protection language moderators (en mod shouldn't see fr topics ...)
   * Forum bundle to do (As simple as jeuxvideo.com) -> cascade entities
