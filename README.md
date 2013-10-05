@@ -2,6 +2,8 @@ MineWeb
 =======
 
 First
+  * verifier taille des pages au chargement
+  * formulaire d'edition de profil -> mettre le input password en bas
   * bouton pour permettre de montrer l'adresse email ou pas
   * tester les envoie d'email en cas d'oubli d'un mdp
   * tester onetoone player/user (2player 1 user par exemple)

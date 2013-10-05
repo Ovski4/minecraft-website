@@ -13,17 +13,17 @@
             <tbody>
                 <tr>
                     <td class="span4">
-                        {% if user.avatar is defined %}
-                            <img src="/avatars/{{ user.avatarPath }}" width="150px" height="150px">
+                        {% if user.avatarPath %}
+                            <img src="{{ ('/avatars/' ~ user.avatarPath)  | imagine_filter('avatar_medium_thumb') }}" width="150px" height="150px">
                         {% else %}
-                            <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
+                            <div class="missing-avatar">No avatar uploaded</div>
                         {% endif %}
                     </td>
                     <td class="span8">
                         {% if user.description %}
                             {{ user.description | bbcode_filter('forum_filter') }}
                         {% else %}
-                            {{ 'profile.show.undefined_description'|trans }}
+                            <div class="missing-description">{{ 'profile.show.undefined_description'|trans }}<div>
                         {% endif %}
                     </td>
                 </tr>

@@ -42,8 +42,8 @@
                         <li>
                             <div class="row-fluid">
                                 <div class="span1">
-                                    {% if player.user.avatar is defined %}
-                                        <img src="/avatars/{{ player.user.avatarPath }}" width="30px" height="30px">
+                                    {% if player.user.avatarPath %}
+                                        <img src="{{ ('/avatars/' ~ player.user.avatarPath)  | imagine_filter('avatar_small_thumb') }}" width="30px" height="30px">
                                     {% else %}
                                         <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
                                     {% endif %}

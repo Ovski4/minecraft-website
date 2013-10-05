@@ -122,3 +122,14 @@ ovski_forum:
         posts_on_post_creation: 10
         topics: 4
         posts: 10
+
+liip_imagine:
+    filter_sets:
+        avatar_small_thumb:
+            quality: 70
+            filters:
+                thumbnail: { size: [30, 30], mode: inset }
+        avatar_medium_thumb:
+            quality: 70
+            filters:
+                thumbnail: { size: [150, 150], mode: inset }

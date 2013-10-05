@@ -16,9 +16,11 @@
             <span>
                 {% trans %}Stats of{% endtrans %} {{ player.pseudo|capitalize }}
             </span>
-            <img src="/bundles/ovskiminecraftwebsite/images/minehead.png"{#https://minotar.net/avatar/{{ player.pseudo }}#}
-                 width="30px" height="30px"
-            >
+            {% if player.user.avatarPath %}
+                <img src="{{ ('/avatars/' ~ player.user.avatarPath) | imagine_filter('avatar_small_thumb') }}" width="30px" height="30px">
+            {% else %}
+                <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
+            {% endif %}
         </h2>
 
         <ul class="stat-list">

@@ -555,6 +555,21 @@ header.stat-list-head > div
     text-align: center;
 }
 
+.fos_user_user_show .missing-avatar
+{
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+}
+
+.fos_user_user_show .missing-description
+{
+    height: 150px;
+    line-height: 150px;
+    text-indent: 20px;
+}
+
 /* Fos user edit form */
 
 .edit-profile-form

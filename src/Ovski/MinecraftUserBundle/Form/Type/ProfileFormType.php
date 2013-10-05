@@ -13,8 +13,6 @@ class ProfileFormType extends BaseType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         // add your custom field
         $builder
             ->add('avatar', null, array('label' => 'Your avatar :'))
@@ -31,6 +29,8 @@ class ProfileFormType extends BaseType
                 'label' => false
             ))
         ;
+
+        parent::buildForm($builder, $options);
     }
 
     public function getName()
