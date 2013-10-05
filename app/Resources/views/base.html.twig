@@ -8,7 +8,7 @@
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/style.css") }}"/>
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/font-awesome/css/font-awesome.min.css") }}"/>
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
     </head>
     <body class="website">
         {% block header %}
@@ -26,7 +26,7 @@
                             </a>
                         </li>
                     </ul>
-                    <h1>{#Pick and dig, then kick a pig#}Clash of Factions</h1>
+                    <h1>Clash of Factions</h1>
                     {% block menu %}
                         {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
                     {% endblock %}

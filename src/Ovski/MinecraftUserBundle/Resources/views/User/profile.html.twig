@@ -53,11 +53,5 @@
                 {{ 'profile.show.undefined_age'|trans }}
             {% endif %}
         </p>
-        {% if not user.player %}
-            <p>
-                <i class="icon-key"></i>
-                {{ 'profile.show.server_key'|trans }}: {{ user.serverKey }}
-            </p>
-        {% endif %}
     </div>
 {% endblock %}

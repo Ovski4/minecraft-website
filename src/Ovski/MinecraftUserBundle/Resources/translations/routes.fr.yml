@@ -5,7 +5,7 @@ fos_user_change_password: /profil/changer-mot-de-passe
 fos_user_profile_edit: /profil/editer
 
 # Desc: /profile/
-fos_user_profile_show: /profil
+fos_user_profile_show: /profil/
 
 # Desc: /register/check-email
 fos_user_registration_check_email: /inscription/verifier-email
@@ -17,7 +17,7 @@ fos_user_registration_confirm: '/inscription/confirm/{token}'
 fos_user_registration_confirmed: /inscription/confirme
 
 # Desc: /register/
-fos_user_registration_register: /inscription
+fos_user_registration_register: /inscription/
 
 # Desc: /resetting/check-email
 fos_user_resetting_check_email: /reinitialisation/verifier-email
@@ -39,3 +39,6 @@ fos_user_security_login: /connexion
 
 # Desc: /logout
 fos_user_security_logout: /deconnexion
+
+# Desc: /user/{username}
+ovski_minecraftuser_user_profile: /utilisateur/{username}

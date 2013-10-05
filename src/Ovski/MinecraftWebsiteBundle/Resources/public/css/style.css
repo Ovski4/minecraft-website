@@ -314,6 +314,30 @@ input[type="color"]:focus,
   * MAIN-CONTENT *
   ****************/
 
+ /* Map page */
+#main > iframe
+{
+    border: 10px solid #2e180a;
+}
+
+/* Contact page */
+
+.contact-form h1
+{
+    padding: 30px 0;
+    text-align: center;
+}
+
+.contact-form button
+{
+    margin-top: 5px;
+}
+
+.contact-form textarea
+{
+    width: 330px;
+}
+
 #main
 {
     min-height: 430px;
