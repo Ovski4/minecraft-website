@@ -18,21 +18,21 @@ class LoadTopicsData extends AbstractFixture implements OrderedFixtureInterface
         /* CREATE TOPICS */
 
         $salut = new Topic();
-        $salut->setAuthor($this->getReference('glapine'));
+        $salut->setAuthor($this->getReference('glapine-user'));
         $salut->setCategory($this->getReference('presentation-fr'));
         $salut->setTitle("Je me présente je m'appelle...");
         $salut->setUpdatedAt(new \DateTime());
         $manager->persist($salut);
 
         $salutEncore = new Topic();
-        $salutEncore->setAuthor($this->getReference('glapine'));
+        $salutEncore->setAuthor($this->getReference('glapine-user'));
         $salutEncore->setCategory($this->getReference('presentation-fr'));
         $salutEncore->setTitle("je suis toujours glapine");
         $salutEncore->setUpdatedAt(new \DateTime());
         $manager->persist($salutEncore);
 
         $hello = new Topic();
-        $hello->setAuthor($this->getReference('baptiste'));
+        $hello->setAuthor($this->getReference('ovski4-user'));
         $hello->setCategory($this->getReference('presentation-en'));
         $hello->setTitle("I'm baptiste the artist");
         $hello->setUpdatedAt(new \DateTime());

@@ -79,7 +79,7 @@ class User extends BaseUser
     /**
      * @var string $avatarPath
      *
-     * @ORM\Column(name="avatar_path", type="string", length=255)
+     * @ORM\Column(name="avatar_path", type="string", length=255, nullable=true)
      */
     private $avatarPath;
 
