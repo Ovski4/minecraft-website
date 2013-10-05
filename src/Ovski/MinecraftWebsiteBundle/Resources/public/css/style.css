@@ -73,7 +73,7 @@ h2
     transition: background .2s;
 }
 
-.website .button:hover
+.website .button:hover,
 .website button:hover,
 .website input[type="submit"]:hover
 {
