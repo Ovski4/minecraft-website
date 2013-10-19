@@ -2,10 +2,12 @@ MineWeb
 =======
 
 First
+  * played time en web faux (voir java ok)
+  * pac doctrine:schema:validate
   * verifier taille des pages au chargement
   * formulaire d'edition de profil -> mettre le input password en bas
   * bouton pour permettre de montrer l'adresse email ou pas
-  * tester les envoie d'email en cas d'oubli d'un mdp
+  * tester les envoie d'email en cas d'oubli d'un mdp (demander de reinitialisation de password)
   * tester onetoone player/user (2player 1 user par exemple)
   * tester numPost++ sur user
   * rank system
@@ -23,8 +25,8 @@ First
   * contact page -> swiftMailerBundle
   * add weapon entity
   * add filters
-  * Plugins java to update -> stats entity has been removed.
   * Plugin java -> Add player on first join
+  * Plugin java -> test commande /stats debutdUNOMdujoueur quand il y a deus joueurs qui ont le meme debut.
   * Check on battlelog to find nice stats ideas
   * Check if assets are ok
   * check if remove cascade for relationships (on faction delete) (command load factions)

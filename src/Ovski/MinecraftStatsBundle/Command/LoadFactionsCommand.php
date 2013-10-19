@@ -39,7 +39,7 @@ EOT
         $manager = $this->getContainer()->get('doctrine')->getManager();
  
         //Remove disbanded factions (the json file doesn't exist)
-        $factions = $manager->getRepository('OvskiMineStatsBundle:Faction')
+        $factions = $manager->getRepository('OvskiMinecraftStatsBundle:Faction')
                             ->findAll();
         if($factions) {
             foreach($factions as $faction) {
@@ -64,7 +64,7 @@ EOT
             while (false !== ($file = readdir($handleFactions))) {
                 if ($this->isFactionAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
-                    $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
+                    $faction = $manager->getRepository('OvskiMinecraftStatsBundle:Faction')
                                        ->find($this->getFactionIdFromJson($file))
                     ;
                     if (!$faction) {
@@ -86,7 +86,7 @@ EOT
             while (false !== ($file = readdir($handlePlayers))) {
                 if ($this->isPlayerAllowed($file)) {
                     $output->writeln(sprintf("<info>Handling %s</info>", $file));
-                    $player = $manager->getRepository('OvskiMineStatsBundle:Player')
+                    $player = $manager->getRepository('OvskiMinecraftStatsBundle:Player')
                                        ->findOneByPseudo($this->getPlayerPseudoFromJson($file));
                     ;
                     if($player) {
@@ -138,7 +138,7 @@ EOT
                 if ($player->getFaction() != NULL) {
                     //check if the new and current faction arent the same
                     if($player->getFaction()->getId() != $playerJsonArray['factionId']) {
-                        $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
+                        $faction = $manager->getRepository('OvskiMinecraftStatsBundle:Faction')
                                            ->find($playerJsonArray['factionId']);
                         $output->writeln(sprintf("\tPlayer <comment>%s</comment> changed faction from <comment>%s</comment> to <comment>%s</comment>)",
                                                  $player->getPseudo(),
@@ -174,7 +174,7 @@ EOT
                     }
                 //there is no faction set yet
                 } elseif ($player->getFaction() == NULL) {
-                    $faction = $manager->getRepository('OvskiMineStatsBundle:Faction')
+                    $faction = $manager->getRepository('OvskiMinecraftStatsBundle:Faction')
                                                ->find($playerJsonArray['factionId']);
                     $player->setFaction($faction);
                     if (isset($playerJsonArray['role'])) {
@@ -226,7 +226,7 @@ EOT
     {
         if(isset($relationships)) {
             foreach($relationships as $factionId => $relationship) {
-                $factionWithRelationship = $manager->getRepository('OvskiMineStatsBundle:Faction')
+                $factionWithRelationship = $manager->getRepository('OvskiMinecraftStatsBundle:Faction')
                                    ->find($factionId);
                 ;
                 //is the faction with relationship still exist

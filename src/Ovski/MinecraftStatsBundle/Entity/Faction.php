@@ -217,11 +217,15 @@ class Faction
     /**
      * Get createdAt
      *
-     * @return integer 
+     * @return DateTime 
      */
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        $seconds = $this->createdAt / 1000;
+        $stringDate = date("d-m-Y", $seconds);
+        $dateTime = new \DateTime($stringDate);
+
+        return $dateTime;
     }
 
     /**
