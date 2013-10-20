@@ -39,14 +39,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="server_key", type="string", length=255)
      */
     private $serverKey;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=40)
+     * @ORM\Column(name="num_posts", type="string", length=40)
      */
     private $numPosts;
 
@@ -72,7 +72,7 @@ class User extends BaseUser
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
 

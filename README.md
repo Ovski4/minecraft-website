@@ -2,7 +2,6 @@ MineWeb
 =======
 
 First
-  * played time en web faux (voir java ok)
   * pac doctrine:schema:validate
   * verifier taille des pages au chargement
   * formulaire d'edition de profil -> mettre le input password en bas
@@ -25,8 +24,7 @@ First
   * contact page -> swiftMailerBundle
   * add weapon entity
   * add filters
-  * Plugin java -> Add player on first join
-  * Plugin java -> test commande /stats debutdUNOMdujoueur quand il y a deus joueurs qui ont le meme debut.
+  * TOUT mettre en anglais pour les plugins -> puis faire un systeme de translation
   * Check on battlelog to find nice stats ideas
   * Check if assets are ok
   * check if remove cascade for relationships (on faction delete) (command load factions)
@@ -36,11 +34,9 @@ First
 After
   * système de messages perso
   * Plugin registration
-  * forum -> protection language moderators (en mod shouldn't see fr topics ...)
-  * Forum bundle to do (As simple as jeuxvideo.com) -> cascade entities
+  * Forum bundle -> cascade entities
   * News and comments
   * Resizable iframe (dynmap)
-  * Look at static pages stuff
   * Upgrade to bootsrap 3
 --
 
