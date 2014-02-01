@@ -45,7 +45,10 @@
                                 </a>
                             </td>
                             <td>
-                                <a{% if topic.author.hasRole("ROLE_MODERATOR") %} class="moderator"{% endif %}>
+                                <a
+                                    {% if topic.author.hasRole("ROLE_MODERATOR") %} class="moderator"{% endif %}
+                                    href="{{ path('ovski_minecraftuser_user_profile', { username: topic.author }) }}"
+                                >
                                     {{ topic.author }}
                                 </a>
                             </td>

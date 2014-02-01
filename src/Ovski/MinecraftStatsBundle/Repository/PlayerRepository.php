@@ -20,7 +20,7 @@ class PlayerRepository extends EntityRepository
     public function getAllQueryBuilder()
     {
         $qb = $this->createQueryBuilder('p');
-        $qb->orderBy('p.kills', 'DESC');
+        $qb->orderBy('p.score', 'DESC');
 
         return $qb;
     }

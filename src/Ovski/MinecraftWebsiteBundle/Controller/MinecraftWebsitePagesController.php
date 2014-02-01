@@ -36,7 +36,7 @@ class MinecraftWebsitePagesController extends Controller
     /**
      * Contact page
      *
-     * @Route("/contact", name="contact")
+     * @Route("/contact-us", name="contact")
      * @Template()
      */
     public function contactAction()

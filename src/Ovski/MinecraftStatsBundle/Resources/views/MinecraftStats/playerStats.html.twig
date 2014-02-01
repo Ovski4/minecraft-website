@@ -22,7 +22,6 @@
                 <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
             {% endif %}
         </h2>
-
         <ul class="stat-list">
             <li>
                 <i class="icon-user"></i>
@@ -30,7 +29,6 @@
                 <a href="{{ path('ovski_minecraftuser_user_profile', { username: player.user }) }}">
                     {{ player.user }}
                 </a>
-                
             </li>
             {% if player.faction %}
                 <li>
@@ -43,6 +41,7 @@
                 <li>
                     <i class="icon-group"></i>
                     {% trans %}Faction{% endtrans %} : {{ player }} {% trans %}is a loner{% endtrans %}
+                </li>
             {% endif %}
             <li>
                 <i class="icon-screenshot"></i>
@@ -51,6 +50,10 @@
             <li>
                 <i class="icon-heart"></i>
                 {% trans %}Prestige{% endtrans %} : {{ player.prestige }}
+            </li>
+            <li>
+                <i class="icon-star-half-empty"></i>
+                {% trans %}Score{% endtrans %} : {{ player.score }}
             </li>
             <li>
                 <i class="icon-bolt"></i>

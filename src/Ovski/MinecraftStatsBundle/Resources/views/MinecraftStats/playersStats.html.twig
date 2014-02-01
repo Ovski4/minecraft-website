@@ -25,16 +25,20 @@
                         {% trans %}Player{% endtrans %}
                     </div>
                     <div class="span2">
+                        <i class="icon-trophy"></i>
+                        {% trans %}Rank{% endtrans %}
+                    </div>
+                    <div class="span2">
+                        <i class="icon-star-half-empty"></i>
+                        {% trans %}Score{% endtrans %}
+                    </div>
+                    <div class="span2">
                         <i class="icon-screenshot"></i>
                         {% trans %}Kills{% endtrans %}
                     </div>
-                    <div class="faction span4">
+                    <div class="faction span3">
                         <i class="icon-group"></i>
                         {% trans %}Faction{% endtrans %}
-                    </div>
-                    <div class="span2">
-                        <i class="icon-user"></i>
-                        {% trans %}Role{% endtrans %}
                     </div>
                 </header>
                 <ul class="stats-list row-fluid">
@@ -48,9 +52,17 @@
                                         <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
                                     {% endif %}
                                 </div>
-                                <div class="span2"><a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a></div>
+                                <div class="span2">
+                                    <a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a>
+                                </div>
+                                <div class="span2">
+                                    {{ loop.index + (pager.currentPage-1)*pager.maxPerPage }}
+                                </div>
+                                <div class="span2">
+                                    {{ player.score }}
+                                </div>
                                 <div class="span2">{{ player.kills }}</div>
-                                <div class="faction span4">
+                                <div class="faction span3">
                                     {% if player.faction %}
                                         <span>
                                             <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
@@ -59,15 +71,6 @@
                                         <span class="loner">
                                             {% trans %}without faction{% endtrans %}
                                         </span>
-                                    {% endif %}
-                                </div>
-                                <div class="span2">
-                                    {% if player.role %}
-                                        {{ player.role | capitalize | trans }}
-                                    {% elseif player.faction %}
-                                        {% trans %}Member{% endtrans %}
-                                    {% else %}
-                                        /
                                     {% endif %}
                                 </div>
                             </div>

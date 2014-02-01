@@ -3,3 +3,6 @@ home: /accueil
 
 # Desc: /map
 map: /carte
+
+# Desc: /contact-us
+contact: /contactez-nous

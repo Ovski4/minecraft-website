@@ -3,11 +3,13 @@
 namespace Ovski\MinecraftStatsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Debug\Exception\ContextErrorException;
 
 /**
  * Player
  *
  * @ORM\Table(name="minecraft_player")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\PlayerRepository")
  */
 class Player
@@ -20,6 +22,13 @@ class Player
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $score;
 
     /**
      * @ORM\ManyToOne(targetEntity="Ovski\MinecraftStatsBundle\Entity\Faction", inversedBy="players", cascade={"persist", "remove"})
@@ -131,8 +140,23 @@ class Player
             $hours, $minutes, $seconds
         );
     }
-            
-    
+
+    /**
+     * @ORM\PrePersist()
+     * 
+     * @param string $score
+     */
+    public function setScore()
+    {
+        try {
+            $score = $this->kills / ($this->pvpDeaths + ($this->stupidDeaths*2));
+        } catch (ContextErrorException $e) {
+            $score = $this->kills;
+        }
+
+        $this->score = $score*100;
+    }
+
     /**
      * Get id
      *
@@ -141,6 +165,16 @@ class Player
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**

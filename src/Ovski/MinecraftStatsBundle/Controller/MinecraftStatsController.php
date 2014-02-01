@@ -81,7 +81,7 @@ class MinecraftStatsController extends Controller
         $manager = $this->getDoctrine()->getManager();
         $factions = $manager
             ->getRepository("OvskiMinecraftStatsBundle:Faction")
-            ->findAll()
+            ->findBy(array(), array('score' => 'DESC'))
         ;
 
         $pager = new Pagerfanta(new ArrayAdapter($factions));

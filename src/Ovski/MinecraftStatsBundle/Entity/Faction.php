@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="minecraft_faction")
  * @ORM\Entity(repositoryClass="Ovski\MinecraftStatsBundle\Repository\FactionRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Faction
 { 
@@ -31,6 +32,13 @@ class Faction
      * @ORM\Id
      */
     private $id;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $score;
 
     /**
      * @var string
@@ -110,6 +118,32 @@ class Faction
     }
 
     /**
+     * @ORM\PrePersist()
+     * 
+     * @param string $score
+     */
+    public function setScore()
+    {
+        $score = 0;
+        foreach ($this->players as $player) {
+            $score += $player->getScore();
+        }
+
+        if (count($this->getEnemyFactions()) == 0) {
+            $enemiesScore = 0;
+        } else {
+            $enemiesScore = $score*(count($this->getEnemyFactions())*10/100);
+        }
+        if (count($this->getAllyFactions()) == 0) {
+            $alliesScore = 0;
+        } else {
+            $alliesScore = $score*(count($this->getAllyFactions())*10/100);
+        }
+
+        $this->score = $score + $enemiesScore - $alliesScore;
+    }
+
+    /**
      * Set id
      *
      * @param string $id
@@ -120,6 +154,16 @@ class Faction
         $this->id = $id;
 
         return $this;
+    }
+
+    /**
+     * Get score
+     *
+     * @return integer 
+     */
+    public function getScore()
+    {
+        return $this->score;
     }
 
     /**

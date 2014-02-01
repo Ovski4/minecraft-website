@@ -15,9 +15,22 @@
 
         <h3>{% trans %}Information{% endtrans %}</h3>
         <ul class="stat-list">
-            <li><i class="icon-time"></i> {% trans %}Created at{% endtrans %} : {{ faction.createdAt | date("d/m/Y") }}</li>
-            <li><i class="icon-pencil"></i> {% trans %}Description{% endtrans %} : {{ faction.description }}</li>
-            <li><i class="icon-bolt"></i> {% trans %}Power{% endtrans %} : {{ faction.power }}</li>
+            <li>
+                <i class="icon-time"></i>
+                {% trans %}Created at{% endtrans %} : {{ faction.createdAt | date("d/m/Y") }}
+            </li>
+            <li>
+                <i class="icon-pencil"></i>
+                {% trans %}Description{% endtrans %} : {{ faction.description }}
+            </li>
+            <li>
+                <i class="icon-star-half-empty"></i>
+                {% trans %}Score{% endtrans %} : {{ faction.score }}
+            </li>
+            <li>
+                <i class="icon-bolt"></i>
+                {% trans %}Power{% endtrans %} : {{ faction.power }}
+            </li>
         </ul>
 
         <h3>{% trans %}Players{% endtrans %}</h3>

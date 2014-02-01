@@ -31,7 +31,7 @@ class User extends BaseUser
     private $posts;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ovski\MinecraftStatsBundle\Entity\Player", inversedBy="user", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Ovski\MinecraftStatsBundle\Entity\Player", mappedBy="user", cascade={"persist"})
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $player;
@@ -86,7 +86,7 @@ class User extends BaseUser
     /**
      * The avatar file
      */
-    public $avatar;
+    private $avatar;
 
     /**
      * @var \DateTime $updatedAt
@@ -473,6 +473,29 @@ class User extends BaseUser
     public function getAvatarPath()
     {
         return $this->avatarPath;
+    }
+
+    /**
+     * Set avatar
+     *
+     * @param string $avatar
+     * @return User
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    
+        return $this;
+    }
+
+    /**
+     * Get avatar
+     *
+     * @return string 
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
     }
 
     /**
