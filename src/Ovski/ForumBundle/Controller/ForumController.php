@@ -42,7 +42,7 @@ class ForumController extends Controller
     public function forumAction()
     {
         $locale = $this->getRequest()->getLocale();
-        $categories = $this->get('ovski.manager.forum')->getCategories($locale);
+        $categories = $this->get('ovski.forum.manager')->getCategories($locale);
 
         return array('categories' => $categories);
     }
@@ -57,7 +57,7 @@ class ForumController extends Controller
     public function categoryAction(Request $request, $categorySlug, $page)
     {
         $locale = $request->getLocale();
-        $category = $this->get('ovski.manager.forum')->getCategory($locale, $categorySlug);
+        $category = $this->get('ovski.forum.manager')->getCategory($locale, $categorySlug);
         if (!isset($category)) {
             return $this->redirect($this->generateUrl('ovski_forum_forum_categories'));
         }
@@ -72,7 +72,7 @@ class ForumController extends Controller
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $topic = $this->get('ovski.manager.forum')->handleTopicData($form->getData(), $category);
+                $topic = $this->get('ovski.forum.manager')->handleTopicData($form->getData(), $category);
 
                 return $this->redirect($this->generateUrl(
                     'ovski_forum_forum_topic',
@@ -87,7 +87,7 @@ class ForumController extends Controller
         $form = $this->createForm(new TopicType());
 
         // Topics pagination
-        $topics = $this->get('ovski.manager.forum')->getTopics($category->getId());
+        $topics = $this->get('ovski.forum.manager')->getTopics($category->getId());
         $pager = new Pagerfanta(new ArrayAdapter($topics));
         $pager->setMaxPerPage(
             $this->container->getParameter('ovski_forum.max_per_pages')['topics']
@@ -118,7 +118,7 @@ class ForumController extends Controller
      */
     public function topicAction(Request $request, $categorySlug, $topicSlug, $page)
     {
-        $forumManager = $this->get('ovski.manager.forum');
+        $forumManager = $this->get('ovski.forum.manager');
         $locale = $request->getLocale();
         $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
         if (!$categoryId) {
@@ -168,7 +168,7 @@ class ForumController extends Controller
     public function newPostAction(Request $request, $categorySlug, $topicSlug)
     {       
         $locale = $request->getLocale();
-        $forumManager = $this->get('ovski.manager.forum');
+        $forumManager = $this->get('ovski.forum.manager');
         $maxPosts = $this->container->getParameter('ovski_forum.max_per_pages')['posts_on_post_creation'];
 
         // list 'x' last posts
@@ -206,7 +206,7 @@ class ForumController extends Controller
             throw new AccessDeniedException();
         }
 
-        $forumManager = $this->get('ovski.manager.forum');
+        $forumManager = $this->get('ovski.forum.manager');
         $locale = $request->getLocale();
         $categoryId = $forumManager->getCategoryId($locale, $categorySlug);
         $topic = $forumManager->getTopic($categoryId, $topicSlug);
