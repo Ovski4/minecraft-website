@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Ovski\MinecraftWebsiteBundle\Form\ContactType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Ovski\ToolsBundle\Tools\MinecraftQuery;
 
 class MinecraftWebsitePagesController extends Controller
 {
@@ -20,6 +22,29 @@ class MinecraftWebsitePagesController extends Controller
     public function homeAction()
     {
         return array();
+    }
+
+    /**
+     * Server Info Action
+     *
+     * @Route("/server-info", name="server_info")
+     * @Template()
+     */
+    public function serverInfoAction(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
+            
+            $Query = new MinecraftQuery();
+            try
+            {
+                $Query->Connect('localhost', 25565);
+                return new Response(count($Query->GetPlayers()));
+            } catch(\Exception $e) {
+                throw new \Exception(sprintf("Erreur : %s", $e->getMessage()));
+            }
+        } else {
+            throw new \Exception("Fuck you. You better not try it again, you'll burn your fingers");
+        }
     }
 
     /**

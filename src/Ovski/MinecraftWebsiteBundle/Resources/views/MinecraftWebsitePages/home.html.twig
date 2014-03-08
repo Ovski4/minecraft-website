@@ -11,8 +11,27 @@
 
 {% block body %}
 
-  <p>
-      {% trans %}Hello, this is the home page of my website.{% endtrans %}
-  </p>
+    <p>
+        {% trans %}Hello, this is the home page of my website.{% endtrans %}
+    </p>
+    <h3>{% trans %}Server info{% endtrans %}</h3>
+    <p class="server-info">
+
+    </p>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var url = "server-info";
+            jQuery.ajax({
+                url : url
+            })
+            .success(function(data){
+                jQuery('.server-info').append("Server is online. Number of players : "+data);
+            })
+            .error(function(jqXHR, desc, errorThrown){
+                 jQuery('.server-info').append("Server is offline.")
+            });
+        });
+    </script>
 
 {% endblock body %}
