@@ -48,29 +48,3 @@ Plugins
 =======
 
 Si rien a faire : Mettre en anglais pour les plugins -> puis faire un systeme de translation (demander la langue au départ, et une commande pour la changer)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
