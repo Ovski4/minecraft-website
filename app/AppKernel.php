@@ -15,6 +15,7 @@ class AppKernel extends Kernel
             new Ovski\MinecraftStatsBundle\OvskiMinecraftStatsBundle(),
             new Ovski\MinecraftUserBundle\OvskiMinecraftUserBundle(),
             new Ovski\MinecraftWebsiteBundle\OvskiMinecraftWebsiteBundle(),
+            new Ovski\MinecraftSkinBundle\OvskiMinecraftSkinBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),

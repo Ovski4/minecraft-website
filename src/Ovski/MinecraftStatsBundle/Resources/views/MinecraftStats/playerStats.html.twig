@@ -16,78 +16,80 @@
             <span>
                 {% trans %}Stats of{% endtrans %} {{ player.pseudo|capitalize }}
             </span>
-            {% if player.user.avatarPath %}
-                <img src="{{ ('/avatars/' ~ player.user.avatarPath) | imagine_filter('avatar_small_thumb') }}" width="30px" height="30px">
-            {% else %}
-                <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
-            {% endif %}
         </h2>
-        <ul class="stat-list">
-            <li>
-                <i class="icon-user"></i>
-                {% trans %}User{% endtrans %} :
-                <a href="{{ path('ovski_minecraftuser_user_profile', { username: player.user }) }}">
-                    {{ player.user }}
-                </a>
-            </li>
-            {% if player.faction %}
-                <li>
-                    <i class="icon-group"></i> {% trans %}Faction{% endtrans %} :
-                    <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">
-                        {{ player.faction }}
-                    </a>
-                </li>
-            {% else %}
-                <li>
-                    <i class="icon-group"></i>
-                    {% trans %}Faction{% endtrans %} : {{ player }} {% trans %}is a loner{% endtrans %}
-                </li>
-            {% endif %}
-            <li>
-                <i class="icon-screenshot"></i>
-                {% trans %}Kills{% endtrans %} : {{ player.kills }}
-            </li>
-            <li>
-                <i class="icon-heart"></i>
-                {% trans %}Prestige{% endtrans %} : {{ player.prestige }}
-            </li>
-            <li>
-                <i class="icon-star-half-empty"></i>
-                {% trans %}Score{% endtrans %} : {{ player.score }}
-            </li>
-            <li>
-                <i class="icon-bolt"></i>
-                {% trans %}Power{% endtrans %} :
-                {% if player.power %}
-                    {{ player.power }}
-                {% else %}
-                    0
-                {% endif %}
-            </li>
-            <li>
-                <i class="icon-legal"></i>
-                {% trans %}Broken blocks{% endtrans %} : {{ player.brokenBlocks }}
-            </li>
-            <li>
-                <i class="icon-wrench"></i>
-                {% trans %}Placed blocks{% endtrans %} : {{ player.placedBlocks }}
-            </li>
-            <li>
-                <i class="icon-comments"></i>
-                {% trans %}Verbosity{% endtrans %} : {{ player.verbosity }}
-            </li>
-            <li>
-                <i class="icon-warning-sign"></i>
-                {% trans %}Deaths by accident{% endtrans %} : {{ player.stupidDeaths }}
-            </li>
-            <li>
-                <i class="icon-remove-sign"></i>
-                {% trans %}Pvp deaths{% endtrans %} : {{ player.pvpDeaths }}
-            </li>
-            <li>
-                <i class="icon-time"></i>
-                {% trans %}Played time{% endtrans %} : {{ player.formattedPlayedTime }}
-            </li>
-        </ul>
+        <div class="row">
+            <div class="span6">
+                <ul class="stat-list">
+                    <li>
+                        <i class="icon-user"></i>
+                        {% trans %}User{% endtrans %} :
+                        <a href="{{ path('ovski_minecraftuser_user_profile', { username: player.user }) }}">
+                            {{ player.user }}
+                        </a>
+                    </li>
+                    {% if player.faction %}
+                        <li>
+                            <i class="icon-group"></i> {% trans %}Faction{% endtrans %} :
+                            <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">
+                                {{ player.faction }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <i class="icon-group"></i>
+                            {% trans %}Faction{% endtrans %} : {{ player }} {% trans %}is a loner{% endtrans %}
+                        </li>
+                    {% endif %}
+                    <li>
+                        <i class="icon-screenshot"></i>
+                        {% trans %}Kills{% endtrans %} : {{ player.kills }}
+                    </li>
+                    <li>
+                        <i class="icon-heart"></i>
+                        {% trans %}Prestige{% endtrans %} : {{ player.prestige }}
+                    </li>
+                    <li>
+                        <i class="icon-star-half-empty"></i>
+                        {% trans %}Score{% endtrans %} : {{ player.score }}
+                    </li>
+                    <li>
+                        <i class="icon-bolt"></i>
+                        {% trans %}Power{% endtrans %} :
+                        {% if player.power %}
+                            {{ player.power }}
+                        {% else %}
+                            0
+                        {% endif %}
+                    </li>
+                    <li>
+                        <i class="icon-legal"></i>
+                        {% trans %}Broken blocks{% endtrans %} : {{ player.brokenBlocks }}
+                    </li>
+                    <li>
+                        <i class="icon-wrench"></i>
+                        {% trans %}Placed blocks{% endtrans %} : {{ player.placedBlocks }}
+                    </li>
+                    <li>
+                        <i class="icon-comments"></i>
+                        {% trans %}Verbosity{% endtrans %} : {{ player.verbosity }}
+                    </li>
+                    <li>
+                        <i class="icon-warning-sign"></i>
+                        {% trans %}Deaths by accident{% endtrans %} : {{ player.stupidDeaths }}
+                    </li>
+                    <li>
+                        <i class="icon-remove-sign"></i>
+                        {% trans %}Pvp deaths{% endtrans %} : {{ player.pvpDeaths }}
+                    </li>
+                    <li>
+                        <i class="icon-time"></i>
+                        {% trans %}Played time{% endtrans %} : {{ player.formattedPlayedTime }}
+                    </li>
+                </ul>
+            </div>
+            <div class="span6 full-skin">
+                <img src="{{ path("ovski_minecraftskin_full", { 'user': player.pseudo }) }}">
+            </div>
+        </div>
     </div>
 {% endblock %}

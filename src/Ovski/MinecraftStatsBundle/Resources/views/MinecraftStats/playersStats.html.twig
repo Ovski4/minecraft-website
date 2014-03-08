@@ -46,11 +46,7 @@
                         <li>
                             <div class="row-fluid">
                                 <div class="span1">
-                                    {% if player.user.avatarPath %}
-                                        <img src="{{ ('/avatars/' ~ player.user.avatarPath)  | imagine_filter('avatar_small_thumb') }}" width="30px" height="30px">
-                                    {% else %}
-                                        <img src="/bundles/ovskiminecraftwebsite/images/minehead.png" width="30px" height="30px">
-                                    {% endif %}
+                                    <img src="{{ path("ovski_minecraftskin_head", { 'user': player.pseudo }) }}" width="30px" height="30px">
                                 </div>
                                 <div class="span2">
                                     <a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a>

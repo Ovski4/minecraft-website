@@ -493,6 +493,11 @@ header.stat-list-head > div
     vertical-align: top;
 }
 
+.player-stats .full-skin
+{
+    margin-top: 60px;
+}
+
 /* FOSUser forms */
 
 .fos-user-form

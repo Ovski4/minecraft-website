@@ -1,0 +1,4 @@
+services:
+    ovski.minecraftskin.manager  :
+        class: Ovski\MinecraftSkinBundle\Service\Manager
+        arguments: [%kernel.root_dir%]
