@@ -29,3 +29,27 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+bazinga_faker:
+    orm: doctrine
+    entities:
+        Ovski\PlayerStatsBundle\Entity\Player:
+            number: 15
+            custom_formatters:
+                pseudo:   { method: firstname }
+                brokenBlocks:   { method: randomNumber, parameters: [ 0, 8000 ] }
+                placedBlocks:   { method: randomNumber, parameters: [ 0, 5000 ] }
+                stupidDeaths:   { method: randomNumber, parameters: [ 0, 100 ] }
+                pvpDeaths:   { method: randomNumber, parameters: [ 0, 155 ] }
+                kills:   { method: randomNumber, parameters: [ 0, 255 ] }
+                playedTime:   { method: randomNumber, parameters: [ 0, 10000 ] }
+                verbosity:   { method: randomNumber, parameters: [ 0, 500 ] }
+                prestige:   { method: randomNumber, parameters: [ 0 ] }
+        Ovski\PlayerStatsBundle\Entity\Kill:
+            number: 50
+            custom_formatters:
+                weapon:   { method: randomNumber, parameters [ 252, 278 ] }
+        Ovski\PlayerStatsBundle\Entity\Note:
+            number: 40
+            custom_formatters:
+                value:   { method: randomNumber, parameters: [ -5, 5 ] }
