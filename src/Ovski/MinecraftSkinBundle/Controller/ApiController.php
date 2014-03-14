@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * Api controller
@@ -26,8 +27,9 @@ class ApiController extends Controller
         $parameters = $request->query->all();
         $skinManager = $this->get('ovski.minecraftskin.manager');
 
-        $response = new Response(readfile($skinManager->getFullSkin($parameters)));
-        $response->headers->set('Content-Type', "image/png");
+        $image = new File($skinManager->getFullSkin($parameters));
+        $response = new Response(readfile($image));
+        $response->headers->set('Content-Type', 'image/png');
         $response->setStatusCode(200);
 
         return $response;

@@ -14,10 +14,12 @@ namespace Ovski\MinecraftSkinBundle\Service;
 class Manager
 {
     protected $rootDir;
+    protected $cache;
     
-    public function __construct($rootDir)
+    public function __construct($rootDir, $cache)
     {
         $this->rootDir = $rootDir;
+        $this->cache = $cache;
     }
 
     public function getWebDirectory()
@@ -68,84 +70,117 @@ class Manager
     
     public function getFullSkin($parameters) {
 
-        $user = isset($parameters['user']) ? $parameters['user'] : 'char';
-        $size = isset($parameters['size']) ? max(40, min(800, $parameters['size'])) : 350;
-        $skin = $this->getOriginalSkin($user);
+        $imageName = sprintf("full-skin-%s.png", $parameters['user']);
+        $imagePath = $this->cache->fetch($imageName);
 
-        $g = 4;
-        $p = ($size/100)*5;
-        $s = floor(($size-($p*2))/(48+($g*3)));
-        $p = floor(($size-($s*(48+($g*3))))/2);
-        $h = ($s*32)+($p*2);
+        if (!$imagePath) {
+            $imagePath = sprintf("%s/skins/%s", $this->getWebDirectory(), $imageName);
 
-        $im = imagecreatefromstring($skin);
-        $mi = imagecreatetruecolor(64,32);
-        imagecopyresampled($mi,$im,0,0,64-1,0,64,32,-64,32);
-        $av = imagecreatetruecolor($size,$h);
-        imagesavealpha($av,true);
-        imagefill($av,0,0,imagecolorallocatealpha($av,0,0,0,127));
+            $user = isset($parameters['user']) ? $parameters['user'] : 'char';
+            $size = isset($parameters['size']) ? max(40, min(800, $parameters['size'])) : 350;
+            $skin = $this->getOriginalSkin($user);
 
-        // Front
-        imagecopyresized($av,$im,$p+$s*4,$p,8,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*4,$p+$s*8,20,20,$s*8,$s*12,8,12);
-        imagecopyresized($av,$im,$p,$p+$s*8,44,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$mi,$p+$s*12,$p+$s*8,16,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$im,$p+$s*4,$p+$s*8+$s*12,4,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$mi,$p+$s*8,$p+$s*8+$s*12,56,20,$s*4,$s*12,4,12);
+            $g = 4;
+            $p = ($size/100)*5;
+            $s = floor(($size-($p*2))/(48+($g*3)));
+            $p = floor(($size-($s*(48+($g*3))))/2);
+            $h = ($s*32)+($p*2);
 
-        // Right
-        imagecopyresized($av,$im,$p+$s*$g+$s*16,$p,0,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*$g+$s*18,$p+$s*8,40,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$im,$p+$s*$g+$s*18,$p+$s*8+$s*12,0,20,$s*4,$s*12,4,12);
+            $im = imagecreatefromstring($skin);
+            $mi = imagecreatetruecolor(64,32);
+            imagecopyresampled($mi,$im,0,0,64-1,0,64,32,-64,32);
+            $av = imagecreatetruecolor($size,$h);
+            imagesavealpha($av,true);
+            imagefill($av,0,0,imagecolorallocatealpha($av,0,0,0,127));
 
-        // Back
-        imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p,24,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p+$s*8,32,20,$s*8,$s*12,8,12);
-        imagecopyresized($av,$mi,$p+$s*$g*2+$s*24,$p+$s*8,8,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$im,$p+$s*$g*2+$s*36,$p+$s*8,52,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$mi,$p+$s*$g*2+$s*28,$p+$s*8+$s*12,48,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$im,$p+$s*$g*2+$s*32,$p+$s*8+$s*12,12,20,$s*4,$s*12,4,12);
+            // Front
+            imagecopyresized($av,$im,$p+$s*4,$p,8,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*4,$p+$s*8,20,20,$s*8,$s*12,8,12);
+            imagecopyresized($av,$im,$p,$p+$s*8,44,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$mi,$p+$s*12,$p+$s*8,16,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$im,$p+$s*4,$p+$s*8+$s*12,4,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$mi,$p+$s*8,$p+$s*8+$s*12,56,20,$s*4,$s*12,4,12);
 
-        // Left
-        imagecopyresized($av,$im,$p+$s*$g*3+$s*40,$p,16,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$mi,$p+$s*$g*3+$s*42,$p+$s*8,20,20,$s*4,$s*12,4,12);
-        imagecopyresized($av,$mi,$p+$s*$g*3+$s*42,$p+$s*8+$s*12,60,20,$s*4,$s*12,4,12);
+            // Right
+            imagecopyresized($av,$im,$p+$s*$g+$s*16,$p,0,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*$g+$s*18,$p+$s*8,40,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$im,$p+$s*$g+$s*18,$p+$s*8+$s*12,0,20,$s*4,$s*12,4,12);
 
-        // Black Hat Issue
-        imagecolortransparent($im,imagecolorat($im,63,0));
+            // Back
+            imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p,24,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p+$s*8,32,20,$s*8,$s*12,8,12);
+            imagecopyresized($av,$mi,$p+$s*$g*2+$s*24,$p+$s*8,8,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$im,$p+$s*$g*2+$s*36,$p+$s*8,52,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$mi,$p+$s*$g*2+$s*28,$p+$s*8+$s*12,48,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$im,$p+$s*$g*2+$s*32,$p+$s*8+$s*12,12,20,$s*4,$s*12,4,12);
 
-        // Accessories
-        imagecopyresized($av,$im,$p+$s*4,$p,40,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*$g+$s*16,$p,32,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p,56,8,$s*8,$s*8,8,8);
-        imagecopyresized($av,$im,$p+$s*$g*3+$s*40,$p,48,8,$s*8,$s*8,8,8);
+            // Left
+            imagecopyresized($av,$im,$p+$s*$g*3+$s*40,$p,16,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$mi,$p+$s*$g*3+$s*42,$p+$s*8,20,20,$s*4,$s*12,4,12);
+            imagecopyresized($av,$mi,$p+$s*$g*3+$s*42,$p+$s*8+$s*12,60,20,$s*4,$s*12,4,12);
 
-        $imagePath = sprintf("%s/skins/full-skin-%s.png", $this->getWebDirectory(), $user);
-        imagepng($av, $imagePath);
-        imagedestroy($im);
-        imagedestroy($mi);
-        imagedestroy($av);
+            // Black Hat Issue
+            imagecolortransparent($im,imagecolorat($im,63,0));
+
+            // Accessories
+            imagecopyresized($av,$im,$p+$s*4,$p,40,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*$g+$s*16,$p,32,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*$g*2+$s*28,$p,56,8,$s*8,$s*8,8,8);
+            imagecopyresized($av,$im,$p+$s*$g*3+$s*40,$p,48,8,$s*8,$s*8,8,8);
+
+            // Create the png
+            imagepng($av, $imagePath);
+            imagedestroy($im);
+            imagedestroy($mi);
+            imagedestroy($av);
+
+            // Cache the image
+            $this->cacheImage($imageName, $imagePath);
+        }
 
         return $imagePath;
     }
 
     public function getHeadSkin($parameters)
     {
-        $user = isset($parameters['user']) ? $parameters['user'] : 'char';
-        $size = isset($parameters['size']) ? max(40, min(800, $parameters['size'])) : 48;
-        $skin = $this->getOriginalSkin($user);
+        $imageName = sprintf("head-%s.png", $parameters['user']);
+        $imagePath = $this->cache->fetch($imageName);
+        if (!$imagePath) {
+            $imagePath = sprintf("%s/skins/%s", $this->getWebDirectory(), $imageName);
+        
+            $user = isset($parameters['user']) ? $parameters['user'] : 'char';
+            $size = isset($parameters['size']) ? max(40, min(800, $parameters['size'])) : 48;
+            $skin = $this->getOriginalSkin($user);
 
-        $im = imagecreatefromstring($skin);
-        $av = imagecreatetruecolor($size,$size);
-        imagecopyresized($av,$im,0,0,8,8,$size,$size,8,8);    // Face
-        imagecolortransparent($im,imagecolorat($im,63,0));    // Black Hat Issue
-        imagecopyresized($av,$im,0,0,40,8,$size,$size,8,8);   // Accessories
+            $im = imagecreatefromstring($skin);
+            $av = imagecreatetruecolor($size,$size);
+            imagecopyresized($av,$im,0,0,8,8,$size,$size,8,8);    // Face
+            imagecolortransparent($im,imagecolorat($im,63,0));    // Black Hat Issue
+            imagecopyresized($av,$im,0,0,40,8,$size,$size,8,8);   // Accessories
 
-        $imagePath = sprintf("%s/skins/head-%s.png", $this->getWebDirectory(), $user);
-        imagepng($av, $imagePath);
-        imagedestroy($im);
-        imagedestroy($av);
+            imagepng($av, $imagePath);
+            imagedestroy($im);
+            imagedestroy($av);
+
+            // Cache the image
+            $this->cacheImage($imageName, $imagePath);
+        }
 
         return $imagePath;
+    }
+
+    /**
+     * Cache an image
+     *
+     * @param string $imageName : the id of the cached image
+     * @param string $imageName : the path of the image
+     */
+    protected function cacheImage($imageName, $imagePath)
+    {
+        $this->cache->save(
+            $imageName,
+            $imagePath,
+            3600 //ttl
+        );
     }
 }

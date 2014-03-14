@@ -43,6 +43,7 @@ MinecraftSkinBundle -> Supprimer avatar libre ?
   * Mettre la taille par défaut en paramètre
   * Mettre le chemin des images en paramètre
   * Mettre le bundle sous packagist
+  * Manager -> getters and setters
 
 Plugins
 =======

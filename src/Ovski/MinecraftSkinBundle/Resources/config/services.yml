@@ -1,4 +1,7 @@
 services:
-    ovski.minecraftskin.manager  :
+    ovski_cache:
+        class: Doctrine\Common\Cache\PhpFileCache
+        arguments: [%kernel.cache_dir%]
+    ovski.minecraftskin.manager:
         class: Ovski\MinecraftSkinBundle\Service\Manager
-        arguments: [%kernel.root_dir%]
+        arguments: [%kernel.root_dir%, @ovski_cache]
