@@ -19,12 +19,14 @@ En vrac
   * Ajouter des filtres sur les stats
   * Vérifier si les removes cascades etc sont bien mis partout
   * Vérifier les traductions
-  * mettre @auhor et licence gpl sur les classes
+  * mettre @author et licence gpl sur les classes
   * Voir si on peut rendre une iframe redimensionnable (comme un textarea) pour la dynmap
   * Site responsive ?
+  * http://local.mineweb/app_dev.php/forum/administration/post/2/delete -> bug
+  * Le last login sur la page de profil semble faux
 
 A penser
-----------------
+--------
 
   * Vérifier taille des pages au chargement
   * pac doctrine:schema:validate
@@ -36,7 +38,7 @@ ForumBundle
   * Catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
   * Systeme anti-flood ?
 
-MinecraftSkinBundle -> Supprimer avatar libre ? 
+MinecraftSkinBundle -> Supprimer avatar libre?   
 -------------------
 
   * Mettre les images (skins) générées en cache
@@ -44,6 +46,7 @@ MinecraftSkinBundle -> Supprimer avatar libre ?
   * Mettre le chemin des images en paramètre
   * Mettre le bundle sous packagist
   * Manager -> getters and setters
+  * skin 3d?
 
 Plugins
 =======

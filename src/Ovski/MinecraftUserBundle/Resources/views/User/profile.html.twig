@@ -16,11 +16,12 @@
                 <tbody>
                     <tr>
                         <td class="span4">
-                            {% if user.avatarPath %}
-                                <img src="{{ ('/avatars/' ~ user.avatarPath)  | imagine_filter('avatar_medium_thumb') }}" width="150px" height="150px">
+                            {% if user.player.pseudo is defined %}
+                                {% set pseudo = user.player.pseudo %}
                             {% else %}
-                                <div class="missing-avatar">No avatar uploaded</div>
+                                {% set pseudo = 'char' %}
                             {% endif %}
+                            <img src="{{ path("ovski_minecraftskin_head", { 'user': pseudo }) }}" width="30px" height="30px">
                         </td>
                         <td class="span8">
                             {% if user.description %}

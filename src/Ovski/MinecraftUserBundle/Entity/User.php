@@ -77,18 +77,6 @@ class User extends BaseUser
     private $createdAt;
 
     /**
-     * @var string $avatarPath
-     *
-     * @ORM\Column(name="avatar_path", type="string", length=255, nullable=true)
-     */
-    private $avatarPath;
-
-    /**
-     * The avatar file
-     */
-    private $avatar;
-
-    /**
      * @var \DateTime $updatedAt
      * 
      * @ORM\Column(name="updated_at", type="datetime")
@@ -155,74 +143,6 @@ class User extends BaseUser
     public function incrementNumPosts()
     {
         $this->numPosts++;
-    }
-
-    public function getAbsolutePath()
-    {
-        return null === $this->avatarPath ? null : self::getUploadRootDir().'/'.$this->avatarPath;
-    }
-
-    public function getWebPath()
-    {
-        return null === $this->avatarPath ? null : self::getUploadDir().'/'.$this->avatarPath;
-    }
-
-    public static function getUploadRootDir()
-    {
-        // the absolute directory path where uploaded documents should be saved
-        return __DIR__.'/../../../../web'.self::getUploadDir();
-    }
-
-    public static function getUploadDir()
-    {
-        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-        return '/avatars';
-    }
-
-    /**
-     * @ORM\PreUpdate()
-     * @ORM\PrePersist()
-     */
-    public function preUpload()
-    {
-        $this->setUpdatedAt(new \DateTime('now'));
-
-        if (null !== $this->avatar) {
-            //remove old avatar if exists
-            if ($this->avatarPath) {
-                unlink($this->getAbsolutePath());
-            }
-            // set new path
-            $this->avatarPath = $this->getFileName();
-        }
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->avatar) {
-            return;
-        }
-
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-        // move takes the target directory and then the target filename to move to
-        $this->avatar->move(self::getUploadRootDir(), $this->getFileName());
-        
-        // set the path property to the filename where you'ved saved the file
-        $this->avatarPath = $this->getFileName();
-
-        // clean up the file property as you won't need it anymore
-        $this->avatar = null;
-    }
-
-    public function getFileName()
-    {
-      return sprintf("%s_%s", time(), $this->avatar->getClientOriginalName());
     }
 
     /**
@@ -450,52 +370,6 @@ class User extends BaseUser
     public function getUpdatedAt()
     {
         return $this->updatedAt;
-    }
-
-    /**
-     * Set avatarPath
-     *
-     * @param string $avatarPath
-     * @return User
-     */
-    public function setAvatarPath($avatarPath)
-    {
-        $this->avatarPath = $avatarPath;
-    
-        return $this;
-    }
-
-    /**
-     * Get avatarPath
-     *
-     * @return string 
-     */
-    public function getAvatarPath()
-    {
-        return $this->avatarPath;
-    }
-
-    /**
-     * Set avatar
-     *
-     * @param string $avatar
-     * @return User
-     */
-    public function setAvatar($avatar)
-    {
-        $this->avatar = $avatar;
-    
-        return $this;
-    }
-
-    /**
-     * Get avatar
-     *
-     * @return string 
-     */
-    public function getAvatar()
-    {
-        return $this->avatar;
     }
 
     /**

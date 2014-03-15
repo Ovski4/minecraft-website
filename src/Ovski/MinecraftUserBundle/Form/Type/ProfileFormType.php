@@ -15,7 +15,6 @@ class ProfileFormType extends BaseType
     {
         // add your custom field
         $builder
-            ->add('avatar', null, array('label' => 'Your avatar :'))
             ->add('birthDate', 'datetime', array(
                 'label' => 'Age :',
                 'widget' => 'choice',
