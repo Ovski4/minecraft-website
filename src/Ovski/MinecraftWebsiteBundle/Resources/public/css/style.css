@@ -1,4 +1,24 @@
- /***********
+/* Beta */
+
+.beta
+{
+    position: absolute;
+    top: 35px;
+    right: -70px;
+    background-color: #d2ec13;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 100px 0 130px;
+    color: #2e180a;
+    font-size: 19px;
+    font-weight: bold;
+    -moz-transform: rotate(25deg);
+    -webkit-transform: rotate(25deg);
+    -o-transform: rotate(25deg);
+}
+
+
+/***********
   * GENERAL *
   ***********/
 
