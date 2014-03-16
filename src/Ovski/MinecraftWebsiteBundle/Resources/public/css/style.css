@@ -139,20 +139,18 @@ input[type="color"]:focus,
   **********/
 
 #header-wrapper {
-    height: 176px;
     margin: 0 auto;
-    background: url('../images/earth_header2.png') center -330px no-repeat;
+    background: url('../images/earth_header2.png') center -348px no-repeat;
 }
 
 #header-wrapper > header {
-    height: 180px;
     color: #fff;
     position: relative;
 }
 
 #header-wrapper > header > h1 {
     font-size: 40px;
-    margin-top: 50px;
+    margin-top: 30px;
     text-indent: 0px;
     text-shadow: 0.1em 0.1em 0.2em black;
 }
@@ -193,25 +191,7 @@ input[type="color"]:focus,
     border-top: 1px solid #9ec864;
 }
 
-/* Header & menu for desktop */
-@media (min-width: 768px) {
-    #header-wrapper {
-        height: 440px;
-        background: url('../images/earth_header2.png') center -120px no-repeat;
-    }
-    #header-wrapper > header > .navbar-default {
-        border: none;
-    }
-    #header-wrapper ul {
-        margin-left: 5%;
-    }
-    #header-wrapper > header .navbar-nav {
-        box-shadow: 7px 6px 16px #000;
-    }
-    #header-wrapper ul.nav-right {
-        border-top: none;
-    }
-}
+
 
 #header-wrapper .navbar-header {
     background-color: #9ec864;
@@ -244,25 +224,47 @@ input[type="color"]:focus,
 #header-wrapper ul li.current a { color: #fff; }
 
 /*children*/
-#header-wrapper > header ul.navbar-nav > li.parent:hover ul {
-    box-shadow: 7px 6px 16px #000;
-    display: block;
-    position: absolute;
-    background: #9ec864;
+#header-wrapper > header ul.navbar-nav > li.parent ul {
+    display: none;
     margin: 0;
-    left: 30px;
+    position: relative;
 }
 
-#header-wrapper > header ul.navbar-nav > li.parent ul { display: none; }
+#header-wrapper > header ul.navbar-nav > li.parent:hover ul {
+    display: block;
+}
+
+#header-wrapper > header ul.navbar-nav > li.parent ul li {
+    background: #9ec864;
+    position: absolute;
+    bottom: 0;
+}
+
+#header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: 150px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 250px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li a { display: block; height: 40px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { background: #74b73f; text-decoration: underline; }
+
+
+/*#header-wrapper > header ul.navbar-nav > li.parent:hover ul {
+    box-shadow: 7px 6px 16px #000;
+    display: block;
+    
+    background: #9ec864;
+    margin: 0;
+    
+}*/
+
+/*
 #header-wrapper > header ul.navbar-nav > li.parent:hover ul li a { color: #000; }
 #header-wrapper > header ul.navbar-nav > li.parent:hover ul li:hover { background:  #74b73f; }
-#header-wrapper > header ul.navbar-nav > li.parent:hover ul li:hover a { color: #FFF; }
+#header-wrapper > header ul.navbar-nav > li.parent:hover ul li:hover a { color: #FFF; }*/
 
 /*languages*/
  .lang-menu.desktop {
     position: absolute;
-    left: 325px;
-    top: 55px;
+    left: 440px;
+    top: 45px;
 }
 
 #header-wrapper .navbar-brand {
@@ -299,11 +301,6 @@ input[type="color"]:focus,
 #header-wrapper .flag-fr:hover { background: url('../images/flag-fr-hover.png') no-repeat; }
 
 /* Banner */
-
-#header-wrapper > .banner
-{
-    height: 250px;
-}
 
 #header-wrapper > .banner > img
 {
@@ -777,4 +774,35 @@ body > footer a:hover
 .moderation .enable-form ul li
 {
     padding: 5px 10px;
+}
+
+ /***********
+  * DESKTOP *
+  ***********/
+
+@media (min-width: 768px) {
+    #header-wrapper {
+        height: 440px;
+        background: url('../images/earth_header2.png') center -120px no-repeat;
+    }
+    #header-wrapper > header > h1 {
+        font-size: 60px;
+    }
+    #header-wrapper > header > .navbar-default {
+        border: none;
+    }
+    #header-wrapper ul {
+        margin-left: 5%;
+    }
+    #header-wrapper > header .navbar-nav {
+        box-shadow: 7px 6px 16px #000;
+    }
+    #header-wrapper ul.nav-right {
+        border-top: none;
+    }
+    #header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: -46px; }
+    #header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 33px; }
+    #header-wrapper > header ul.navbar-nav > li.parent ul li { top: 0; }
+    #header-wrapper > header ul.navbar-nav > li.parent ul li a { background-color: #9ec864; }
+    #header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { text-decoration: none; }
 }

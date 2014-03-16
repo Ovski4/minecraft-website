@@ -90,3 +90,17 @@
             {% endif %}
         </div>
     </nav>
+
+    {#<script type="text/javascript">
+          jQuery(document).ready(function() {
+            jQuery(".navigation a").on('click', function(event) {
+              var itemParent = jQuery(this).parent('li');
+              if(itemParent.find('> .children').length == 0) {
+                return true;
+              }
+
+              event.preventDefault();
+              itemParent.toggleClass('active');
+            });
+          });
+    </script>#}
