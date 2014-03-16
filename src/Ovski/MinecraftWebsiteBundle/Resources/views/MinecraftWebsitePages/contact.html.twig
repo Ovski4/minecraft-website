@@ -18,22 +18,23 @@
         {% trans %}Contact us{% endtrans %}
     </h1>
 
-    <div class="row-fluid">
+    <div class="row">
         {% block content %}
             {{ form_start(form) }}
                 {{ form_errors(form) }}
-                <div class="span5">
-                    <div class="pull-right">
+                <div class="col-xs-12 col-sm-5">
+                    <div class="fields">
                     {{ form_row(form.name) }}
                     {{ form_row(form.subject) }}
                     {{ form_row(form.email) }}
-                        <div class="pull-right">
-                            {{ form_row(form.submit) }}
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="span7 message">
+                <div class="col-xs-12 col-sm-5 message">
                     {{ form_row(form.message) }}
+                    <div class="submit">
+                        {{ form_row(form.submit) }}
+                    </div>
                 </div>
             {{ form_end(form) }}
         {% endblock %}

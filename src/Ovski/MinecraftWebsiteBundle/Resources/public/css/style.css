@@ -316,6 +316,10 @@ input[type="color"]:focus,
 
 /* Contact page */
 
+.contact-form {
+    margin-left: 5%;
+}
+
 .contact-form h1
 {
     padding: 30px 0;
@@ -327,10 +331,23 @@ input[type="color"]:focus,
     margin-top: 5px;
 }
 
+.contact-form input {
+    min-width: 200px;
+}
+
 .contact-form textarea
 {
     width: 330px;
 }
+
+.contact-form label {
+    min-width: 70px;
+}
+
+.contact-form label[for="contact_message"] {
+    display: block;
+}
+
 
 #main
 {
@@ -767,28 +784,48 @@ body > footer a:hover
   ***********/
 
 @media (min-width: 768px) {
+
     #header-wrapper {
         height: 440px;
         background: url('../images/earth_header2.png') center -120px no-repeat;
     }
+
     #header-wrapper > header > h1 {
         font-size: 60px;
     }
+
     #header-wrapper > header > .navbar-default {
         border: none;
     }
+
     #header-wrapper ul {
         margin-left: 5%;
     }
+
     #header-wrapper > header .navbar-nav {
         box-shadow: 7px 6px 16px #000;
     }
+
     #header-wrapper ul.nav-right {
         border-top: none;
     }
+
     #header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: -46px; }
     #header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 33px; }
     #header-wrapper > header ul.navbar-nav > li.parent ul li { top: 0; }
     #header-wrapper > header ul.navbar-nav > li.parent ul li a { background-color: #9ec864; }
     #header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { text-decoration: none; }
+
+    .contact-form {
+        margin-left: 0;
+    }
+
+    .contact-form .fields {
+        margin-top: 25px;
+        float: right;
+    }
+
+    .contact-form .submit {
+        float: left;
+    }
 }
