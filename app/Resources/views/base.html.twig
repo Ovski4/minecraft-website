@@ -4,20 +4,20 @@
         <meta charset="UTF-8" />
         <title>{% block title %} | Mineweb{% endblock %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/bootstrap.css") }}"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/bootstrap.min.css") }}"/>
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/css/style.css") }}"/>
             <link rel="stylesheet" type="text/css" href="{{ asset("bundles/ovskiminecraftwebsite/font-awesome/css/font-awesome.min.css") }}"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.png') }}" />
     </head>
     <body class="website">
+        <p class="beta hidden-xs">
+            <strong>/!\ Bêta!</strong>
+        </p>
         {% block header %}
             <div id="header-wrapper">
                 <header class="container">
-                    <p class="beta">
-                        <strong>/!\ Bêta!</strong>
-                    </p>
-                    <ul class="lang-menu">
+                    <ul class="lang-menu desktop hidden-xs">
                         <li class="flag-fr">
                             <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">
                                 Français
@@ -34,7 +34,7 @@
                         {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
                     {% endblock %}
                 </header>
-                <div class="banner container">
+                <div class="banner container hidden-xs">
                     <img src="/bundles/ovskiminecraftwebsite/images/cube.jpg"/>
                 </div>  
             </div>
@@ -64,9 +64,9 @@
                 </div>
             </footer>
         {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset("bundles/ovskiminecraftwebsite/js/jquery-2.1.0.js") }}"></script> 
+            <script type="text/javascript" src="{{ asset("bundles/ovskiminecraftwebsite/js/bootstrap.min.js") }}"></script>
+        {% endblock javascripts %}
     </body>
 </html>
-
-{% block javascripts %}
-    {# <script type="text/javascript" src='http://code.jquery.com/jquery-2.0.0.min.js'></script>#}
-{% endblock javascripts %}
