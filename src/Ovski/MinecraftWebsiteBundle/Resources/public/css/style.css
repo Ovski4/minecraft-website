@@ -42,6 +42,10 @@ form, ul {
     margin: 0;
 }
 
+li {
+    list-style-type: none;
+}
+
 h2 {
     font-size: 31px;
 }
@@ -51,10 +55,9 @@ h2 {
     margin-bottom: 20px;
 }
 
-/*
-.website input[type="file"] {
-    line-height: 0px;
-}*/
+.row {
+    margin: 0;
+}
 
 /* General > button */
 
@@ -82,14 +85,6 @@ h2 {
 .website button:hover,
 .website input[type="submit"]:hover {
     background: #74b73f;
-}
-
-/*table form {
-    display: inline-block;
-}*/
-    
-li {
-    list-style-type: none;
 }
 
 input:focus:invalid:focus,
@@ -240,8 +235,8 @@ input[type="color"]:focus,
     bottom: 0;
 }
 
-#header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: 150px; }
-#header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 250px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: 100px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 200px; }
 #header-wrapper > header ul.navbar-nav > li.parent ul li a { display: block; height: 40px; }
 #header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { background: #74b73f; text-decoration: underline; }
 
@@ -409,40 +404,33 @@ input[type="color"]:focus,
 
 /* Players/Factions Stats page */
 
-header.stat-list-head > div
-{
+header.stat-list-head > div {
     font-weight: bold;
     font-size: 18px;
 }
 
-.stats-list
-{
-    margin: 0;
+ul.stats-list {
+    padding: 0;
 }
 
 .stats-list > li
 {
     border-top: 1px dashed #382819;
-    line-height: 30px;
 }
 
-.stats-list > li > div.row-fluid:hover
-{
+.stats-list > li:hover {
     background: #74B729;
 }
 
-.stats-list > li > div.row-fluid:hover a
-{
+.stats-list > li:hover a {
     color: #fff;
 }
 
-.stats-list > li > div.row-fluid:hover a:hover
-{
+.stats-list > li:hover a:hover {
     color: #382819;
 }
 
-.stats-list > li > div.row-fluid > div
-{
+.stats-list > li > div {
     height: 50px;
     line-height: 50px;
 }
@@ -452,24 +440,22 @@ header.stat-list-head > div
     border-top: 3px solid #382819;
 }
 
-.stats-list > li .loner
-{
+.stats-list > li .loner {
     font-style: italic;
 }
 
 .stats-list span a,
-.stats-list div a
-{
+.stats-list div a {
     display: inline-block;
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
 /* Factions stats page */
 
 .factions-stats .stats-list div > div:first-child,
-.factions-stats .stat-list-head > div:first-child
-{
+.factions-stats .stat-list-head > div:first-child {
     text-indent: 10px;
 }
 
@@ -483,7 +469,7 @@ header.stat-list-head > div
 
 .stat-list > li
 {
-    height: 30px;
+    min-height: 30px;
     line-height: 30px;
 }
 

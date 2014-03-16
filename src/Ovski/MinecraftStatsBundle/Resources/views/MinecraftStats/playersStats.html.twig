@@ -17,63 +17,58 @@
             {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
         {% endif %}
 
-        <div class="row-fluid content">
-            <div class="span12">
-                <header class="stat-list-head row-fluid">
-                    <div class="offset1 span2">
-                        <i class="icon-male"></i>
-                        {% trans %}Player{% endtrans %}
-                    </div>
-                    <div class="span2">
-                        <i class="icon-trophy"></i>
-                        {% trans %}Rank{% endtrans %}
-                    </div>
-                    <div class="span2">
-                        <i class="icon-star-half-empty"></i>
-                        {% trans %}Score{% endtrans %}
-                    </div>
-                    <div class="span2">
-                        <i class="icon-screenshot"></i>
-                        {% trans %}Kills{% endtrans %}
-                    </div>
-                    <div class="faction span3">
-                        <i class="icon-group"></i>
-                        {% trans %}Faction{% endtrans %}
-                    </div>
-                </header>
-                <ul class="stats-list row-fluid">
+        <div class="content">
+            <header class="stat-list-head row">
+                <div class="col-xs-offset-2 col-xs-4 col-sm-offset-1 col-sm-2">
+                    <i class="icon-male"></i>
+                    <span class="hidden-xs">{% trans %}Player{% endtrans %}</span>
+                </div>
+                <div class="col-xs-2 col-sm-1">
+                    <i class="icon-trophy"></i>
+                </div>
+                <div class="col-xs-2 col-sm-2">
+                    <i class="icon-star-half-empty"></i>
+                    <span class="hidden-xs">{% trans %}Score{% endtrans %}</span>
+                </div>
+                <div class="col-xs-2 col-sm-2">
+                    <i class="icon-screenshot"></i>
+                    <span class="hidden-xs">{% trans %}Kills{% endtrans %}</span>
+                </div>
+                <div class="faction hidden-xs col-sm-4">
+                    <i class="icon-group"></i>
+                    <span>{% trans %}Faction{% endtrans %}</span>
+                </div>
+            </header>
+                <ul class="stats-list row">
                     {% for player in pager.currentPageResults %}
-                        <li>
-                            <div class="row-fluid">
-                                <div class="span1">
-                                    <img src="{{ path("ovski_minecraftskin_head", { 'user': player.pseudo }) }}" width="30px" height="30px">
-                                </div>
-                                <div class="span2">
-                                    <a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a>
-                                </div>
-                                <div class="span2">
-                                    {{ loop.index + (pager.currentPage-1)*pager.maxPerPage }}
-                                </div>
-                                <div class="span2">
-                                    {{ player.score }}
-                                </div>
-                                <div class="span2">{{ player.kills }}</div>
-                                <div class="faction span3">
-                                    {% if player.faction %}
-                                        <span>
-                                            <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
-                                        </span>
-                                    {% else %}
-                                        <span class="loner">
-                                            {% trans %}without faction{% endtrans %}
-                                        </span>
-                                    {% endif %}
-                                </div>
+                        <li class="row">
+                            <div class="col-xs-2 col-sm-1">
+                                <img src="{{ path("ovski_minecraftskin_head", { 'user': player.pseudo }) }}" width="30px" height="30px">
+                            </div>
+                            <div class="col-xs-4 col-sm-2">
+                                <a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a>
+                            </div>
+                            <div class="col-xs-2 col-sm-1">
+                                {{ loop.index + (pager.currentPage-1)*pager.maxPerPage }}
+                            </div>
+                            <div class="col-xs-2 col-sm-2">
+                                {{ player.score }}
+                            </div>
+                            <div class="col-xs-2 col-sm-2">{{ player.kills }}</div>
+                            <div class="faction hidden-xs col-sm-4">
+                                {% if player.faction %}
+                                    <span>
+                                        <a href="{{ path('faction_stats', { slug: player.faction.slug }) }}">{{ player.faction }}</a>
+                                    </span>
+                                {% else %}
+                                    <span class="loner">
+                                        {% trans %}without faction{% endtrans %}
+                                    </span>
+                                {% endif %}
                             </div>
                         </li>
                     {% endfor %}
                 </ul>
-            </div>
         </div>
 
         {% if pager.currentPageResults|length >= 10 %}

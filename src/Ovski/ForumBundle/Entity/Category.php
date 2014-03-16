@@ -53,7 +53,7 @@ class Category
      * @ORM\Column(type="text", nullable=true)
      */
     private $description;
-     
+
     /**
      * @ORM\OneToMany(targetEntity="Ovski\ForumBundle\Entity\Topic", mappedBy="category", cascade={"remove"})
      */
@@ -82,7 +82,7 @@ class Category
     {
         $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
