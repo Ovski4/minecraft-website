@@ -1,3 +1,5 @@
+
+
 root:
     pattern: /
     defaults:
@@ -24,6 +26,11 @@ ovski_forum:
     resource: "@OvskiForumBundle/Controller/"
     type:     annotation
     prefix:   /forum
+
+ovski_news:
+    resource: "@OvskiNewsBundle/Controller/"
+    type:     annotation
+    prefix:   /news
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
