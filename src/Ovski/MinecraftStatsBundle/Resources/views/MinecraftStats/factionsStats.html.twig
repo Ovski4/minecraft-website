@@ -30,7 +30,7 @@
                     <i class="icon-star-half-empty"></i>
                     <span class="hidden-xs">{% trans %}Score{% endtrans %}</span>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-1">
                     <i class="icon-male"></i>
                     <span class="hidden-xs">{% trans %}Players{% endtrans %}</span>
                 </div>
@@ -53,7 +53,7 @@
                             <div class="col-xs-2">
                                 {{ faction.score }}
                             </div>
-                            <div class="col-xs-2">{{ faction.players|length }}</div>
+                            <div class="col-xs-1">{{ faction.players|length }}</div>
                             <div class="col-xs-2">{{ faction.power }}</div>
                     </li>
                 {% endfor %}

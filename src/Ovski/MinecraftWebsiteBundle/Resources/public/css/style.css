@@ -309,8 +309,17 @@ input[type="color"]:focus,
   ****************/
 
  /* Map page */
-#main > iframe
+#main .dynmap
 {
+    
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#main .dynmap > iframe
+{
+    width: 100%;
     border: 10px solid #2e180a;
 }
 
@@ -337,7 +346,7 @@ input[type="color"]:focus,
 
 .contact-form textarea
 {
-    width: 330px;
+    width: 90%;
 }
 
 .contact-form label {
@@ -461,11 +470,17 @@ ul.stats-list {
     font-style: italic;
 }
 
+.stats-list > li > div {
+    
+}
+
 .stats-list span a,
 .stats-list div a {
     display: inline-block;
     width: 100%;
     height: 100%;
+    o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
     overflow: hidden;
 }
 
