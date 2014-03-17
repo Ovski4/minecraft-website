@@ -220,7 +220,6 @@ input[type="color"]:focus,
 
 /*children*/
 #header-wrapper > header ul.navbar-nav > li.parent ul {
-    display: none;
     margin: 0;
     position: relative;
 }
@@ -320,6 +319,7 @@ input[type="color"]:focus,
 #main .dynmap > iframe
 {
     width: 100%;
+    height: 380px;
     border: 10px solid #2e180a;
 }
 
@@ -513,6 +513,10 @@ ul.stats-list {
 .player-stats .full-skin
 {
     margin-top: 60px;
+}
+
+.player-stats .full-skin img {
+    width: 300px;
 }
 
 /* FOSUser forms */
@@ -831,6 +835,10 @@ body > footer a:hover
     #header-wrapper > header ul.navbar-nav > li.parent ul li a { background-color: #9ec864; }
     #header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { text-decoration: none; }
 
+    #header-wrapper > header ul.navbar-nav > li.parent ul {
+        display: none;
+    }
+
     .contact-form {
         margin-left: 0;
     }
@@ -842,5 +850,9 @@ body > footer a:hover
 
     .contact-form .submit {
         float: left;
+    }
+
+    #main .dynmap > iframe {
+        height: 650px;
     }
 }
