@@ -14,6 +14,7 @@
     -moz-transform: rotate(25deg);
     -webkit-transform: rotate(25deg);
     -o-transform: rotate(25deg);
+    z-index: 99999;
 }
 
 
@@ -23,6 +24,10 @@
 
 body, html {
     font-family: title;
+}
+
+body {
+    overflow-x: hidden;
 }
 
 a { color: rgb(69, 168, 30); }
