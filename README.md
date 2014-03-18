@@ -3,7 +3,7 @@ MineWeb
 
 En vrac
 -------
-
+  * Faire un AdminBundle pour les vues admin et ajouter layout sur website bundle
   * Trouver un bon algo pour le rang des joueurs/factions
   * Tester onetoone player/user (2player 1 user par exemple)
   * Tester numPost++ sur user

@@ -9,13 +9,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th class="span4">{{ 'profile.show.avatar'|trans }}</th>
-                        <th class="span8">{{ 'profile.show.description'|trans }}</th>
+                        <th class="col-xs-4">{{ 'profile.show.avatar'|trans }}</th>
+                        <th class="col-xs-8">{{ 'profile.show.description'|trans }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="span4">
+                        <td class="col-xs-4">
                             {% if user.player.pseudo is defined %}
                                 {% set pseudo = user.player.pseudo %}
                             {% else %}
@@ -23,7 +23,7 @@
                             {% endif %}
                             <img src="{{ path("ovski_minecraftskin_head", { 'user': pseudo }) }}" width="30px" height="30px">
                         </td>
-                        <td class="span8">
+                        <td class="col-xs-8">
                             {% if user.description %}
                                 {{ user.description | bbcode_filter('forum_filter') }}
                             {% else %}

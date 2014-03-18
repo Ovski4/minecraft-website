@@ -35,7 +35,6 @@ a.moderator {
 a:hover {
     color: #382819;
     text-decoration: none;
-    font-weight: bold;
 }
 
 form, ul {
@@ -150,13 +149,6 @@ input[type="color"]:focus,
     text-shadow: 0.1em 0.1em 0.2em black;
 }
 
-/* Admin & moderation header */
-/*.admin #header-wrapper,
-.moderation #header-wrapper {
-    height: 230px;
-    background: url('../images/earth_header2.png') center -300px no-repeat;
-}*/
-
 /* Header > Menu */
 
 #header-wrapper > header > .navbar-default {
@@ -234,31 +226,17 @@ input[type="color"]:focus,
     bottom: 0;
 }
 
-#header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: 100px; }
-#header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 200px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li:first-child { left: 75px; }
+#header-wrapper > header ul.navbar-nav > li.parent ul li:last-child { left: 165px; }
 #header-wrapper > header ul.navbar-nav > li.parent ul li a { display: block; height: 40px; }
 #header-wrapper > header ul.navbar-nav > li.parent ul li a:hover { background: #74b73f; text-decoration: underline; }
 
-
-/*#header-wrapper > header ul.navbar-nav > li.parent:hover ul {
-    box-shadow: 7px 6px 16px #000;
-    display: block;
-    
-    background: #9ec864;
-    margin: 0;
-    
-}*/
-
-/*
-#header-wrapper > header ul.navbar-nav > li.parent:hover ul li a { color: #000; }
-#header-wrapper > header ul.navbar-nav > li.parent:hover ul li:hover { background:  #74b73f; }
-#header-wrapper > header ul.navbar-nav > li.parent:hover ul li:hover a { color: #FFF; }*/
-
 /*languages*/
- .lang-menu.desktop {
+#header-wrapper .lang-menu.desktop {
     position: absolute;
     left: 440px;
     top: 45px;
+    margin-left: 5%;
 }
 
 #header-wrapper .navbar-brand {
@@ -296,8 +274,7 @@ input[type="color"]:focus,
 
 /* Banner */
 
-#header-wrapper > .banner > img
-{
+#header-wrapper > .banner > img {
     border: 10px solid #2e180a;
     height: 250px;
     width: 100%;
@@ -307,59 +284,7 @@ input[type="color"]:focus,
   * MAIN-CONTENT *
   ****************/
 
- /* Map page */
-#main .dynmap
-{
-    
-    width: 90%;
-    margin: 0 auto;
-    padding: 0;
-}
-
-#main .dynmap > iframe
-{
-    width: 100%;
-    height: 380px;
-    border: 10px solid #2e180a;
-}
-
-/* Contact page */
-
-.contact-form {
-    margin-left: 5%;
-}
-
-.contact-form h1
-{
-    padding: 30px 0;
-    text-align: center;
-}
-
-.contact-form button
-{
-    margin-top: 5px;
-}
-
-.contact-form input {
-    min-width: 200px;
-}
-
-.contact-form textarea
-{
-    width: 90%;
-}
-
-.contact-form label {
-    min-width: 70px;
-}
-
-.contact-form label[for="contact_message"] {
-    display: block;
-}
-
-
-#main
-{
+ #main {
     min-height: 430px;
     margin-top: 10px;
     font-size: 14px;
@@ -372,28 +297,69 @@ input[type="color"]:focus,
     text-align: center;
 }
 
+ /* Map page */
+#main .dynmap {
+    
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+#main .dynmap > iframe {
+    width: 100%;
+    height: 380px;
+    border: 10px solid #2e180a;
+}
+
+/* Contact page */
+
+.contact-form {
+    margin-left: 5%;
+}
+
+.contact-form h1 {
+    padding: 30px 0;
+    text-align: center;
+}
+
+.contact-form button {
+    margin-top: 5px;
+}
+
+.contact-form input {
+    min-width: 200px;
+}
+
+.contact-form textarea {
+    width: 90%;
+}
+
+.contact-form label {
+    min-width: 70px;
+}
+
+.contact-form label[for="contact_message"] {
+    display: block;
+}
+
 /* Pagination */
 
-.pagination
-{
+.pagination {
     margin: 0;
 }
 
-.pagination ul
-{
+.pagination ul {
     box-shadow: none;
     border-radius: 0px;
 }
 
-.pagination ul li
-{
+.pagination ul li {
     display: inline-block;
     margin-left: 5px;
     line-height: 28px;
 }
 
-.pagination ul li a
-{
+.pagination ul li a {
     border: none;
     background: #9ec864;
     color: #000;
@@ -401,19 +367,16 @@ input[type="color"]:focus,
     padding: 5px 5px 0 5px;
 }
 
-.pagination ul li:first-child a
-{
+.pagination ul li:first-child a {
     border: none;
 }
 
 .pagination ul li:first-child a,
-.pagination ul li:last-child a
-{
+.pagination ul li:last-child a {
     border-radius: 0px;
 }
 
-.pagination ul li:hover a
-{
+.pagination ul li:hover a {
     font-weight: normal;
     background: #74b73f;
     color: #fff;
@@ -422,8 +385,7 @@ input[type="color"]:focus,
 .pagination ul .active a,
 .pagination ul .disabled a,
 .pagination ul .active:hover a,
-.pagination ul .disabled:hover a
-{
+.pagination ul .disabled:hover a {
     background: #382819;
     color: #fff;
 }
@@ -439,8 +401,7 @@ ul.stats-list {
     padding: 0;
 }
 
-.stats-list > li
-{
+.stats-list > li {
     border-top: 1px dashed #382819;
 }
 
@@ -461,8 +422,7 @@ ul.stats-list {
     line-height: 50px;
 }
 
-.stats-list > li:first-child
-{
+.stats-list > li:first-child {
     border-top: 3px solid #382819;
 }
 
@@ -493,25 +453,20 @@ ul.stats-list {
 
 /* Player/Faction Stats page */
 
-.stat-list
-{
+.stat-list {
     font-size: 16px;
 }
 
-
-.stat-list > li
-{
+.stat-list > li {
     min-height: 30px;
     line-height: 30px;
 }
 
-.player-stats h2 img
-{
+.player-stats h2 img {
     vertical-align: top;
 }
 
-.player-stats .full-skin
-{
+.player-stats .full-skin {
     margin-top: 60px;
 }
 
@@ -521,8 +476,7 @@ ul.stats-list {
 
 /* FOSUser forms */
 
-.fos-user-form
-{
+.fos-user-form {
     border: 1px solid #ccc;
     padding: 20px;
     text-align: center;
@@ -530,67 +484,57 @@ ul.stats-list {
     width: 300px;
 }
 
-.fos-user-form > form
-{
+.fos-user-form > form {
     border-top: 1px solid #ccc;
     padding-top: 15px;
 }
 
-.fos-user-form div.submit
-{
+.fos-user-form div.submit {
     border-bottom: 1px solid #ccc;
 }
 
 /* Fos user show */
 
-.fos_user_user_show .overview
-{
+.fos_user_user_show .overview {
     border-top: 2px solid #2e180a;
     border-bottom: 2px solid #2e180a;
     padding: 10px 0;
 }
 
-.fos_user_user_show input
-{
+.fos_user_user_show input {
     margin-top: 20px;
 }
 
 
-.fos_user_user_show p
-{
+.fos_user_user_show p {
     padding: 10px 0;
     margin: 0;
     border-bottom: 1px dashed #2e180a;
 }
 
 .fos_user_user_show .overview table th:first-child,
-.fos_user_user_show .overview table td:first-child
-{
+.fos_user_user_show .overview table td:first-child {
     border-right: 2px solid #2e180a;
 }
 
-.fos_user_user_show .overview table td
-{
+.fos_user_user_show .overview table td {
     vertical-align: top;
     padding: 20px;
     text-align: justify;
 }
 
-.fos_user_user_show .overview table td.span4
-{
+.fos_user_user_show .overview table td.span4 {
     text-align: center;
 }
 
-.fos_user_user_show .missing-avatar
-{
+.fos_user_user_show .missing-avatar {
     width: 150px;
     height: 150px;
     line-height: 150px;
     text-align: center;
 }
 
-.fos_user_user_show .missing-description
-{
+.fos_user_user_show .missing-description {
     height: 150px;
     line-height: 150px;
     text-indent: 20px;
@@ -598,48 +542,40 @@ ul.stats-list {
 
 /* Fos user edit form */
 
-.edit-profile-form
-{
+.edit-profile-form {
     width: 984px;
 }
 
-.edit-profile-form > form textarea
-{
+.edit-profile-form > form textarea {
     width: 650px;
     height: 150px;
 }
 
 /* Login form */
 
-.login-form div
-{
+.login-form div {
     width: 100%;
 }
 
-.login-form div > input[type="submit"]
-{
+.login-form div > input[type="submit"] {
     margin: 15px 65px;
 }
 
-.login-form label.remember-me
-{
+.login-form label.remember-me {
     display: inline-block;
 }
 
-.login-form .related-links
-{
+.login-form .related-links {
     padding-top: 15px;
 }
 
 /* Reset form */
 
-.fos_user_resetting_request
-{
+.fos_user_resetting_request {
     text-align: center;
 }
 
-.fos_user_resetting_request #username
-{
+.fos_user_resetting_request #username {
     width: 215px;
 }
 
@@ -647,75 +583,63 @@ ul.stats-list {
 
 /* Forum page */
 
-.forum ul li
-{
+.forum ul li {
     border-top: 1px dashed #382819;
     padding: 10px 0;
 }
 
 /* Forum category page */
 
-.forum-category table
-{
+.forum-category table {
     width: 100%;
 }
 
-.forum-category table button
-{
+.forum-category table button {
     padding: 0 20px;
 }
 
-.forum ul li > div
-{
+.forum ul li > div {
     text-indent: 20px;
     font-style: italic;
 }
 
-.forum-category input
-{
+.forum-category input {
     width: 100%;
 }
 
-.forum-category textarea
-{
+.forum-category textarea {
     width: 100%;
     height: 70px;
 }
 
-.forum-category #ovski_forumbundle_topic button
-{
+.forum-category #ovski_forumbundle_topic button {
     margin: 10px 60px;
 }
 
 /* Forum topic page */
 
-.forum-topic .posts-list li
-{
+.forum-topic .posts-list li {
     margin: 15px 0;
 }
 
-.forum-topic article
-{
+.forum-topic article {
     position: relative;
     background: #f9f9f9;
     border: 1px solid #ccc;
     padding: 20px;
 }
 
-.forum-topic article header
-{
+.forum-topic article header {
     border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
-.forum-topic article form
-{
+.forum-topic article form {
     display: inline-block;
 }
 
-.forum-topic article form button
-{
+.forum-topic article form button {
     padding: 0 20px;
     position: absolute;
     margin: 0;
@@ -723,14 +647,12 @@ ul.stats-list {
     right: 20px;
 }
 
-.forum-topic textarea
-{
+.forum-topic textarea {
     width: 100%;
     height: 70px;
 }
 
-.forum-topic button
-{
+.forum-topic button {
     margin: 10px 60px;
 }
 
@@ -738,8 +660,7 @@ ul.stats-list {
   * FOOTER *
   **********/
 
-body > footer
-{
+body > footer {
     margin-top: 50px;
     height: 500px;
     text-align: center;
@@ -747,25 +668,21 @@ body > footer
     background: url('../images/footer.png') bottom no-repeat;
 }
 
-body > footer .content
-{
+body > footer .content {
     color: #FFF;
 }
 
 
-body > footer .content > div
-{
+body > footer .content > div {
     text-align: left;
 }
 
-body > footer a
-{
+body > footer a {
     font-style: italic;
     color: #fff;
 }
 
-body > footer a:hover
-{
+body > footer a:hover {
     font-weight: bold;
     color: #fff;
 }
@@ -774,18 +691,15 @@ body > footer a:hover
   * ADMINISTRATION *
   ******************/
 
-.admin table
-{
+.admin table {
     width: 100%;
 }
  
-.admin table tr th
-{
+.admin table tr th {
     text-align: left;
 }
  
-.admin table td
-{
+.admin table td {
     padding: 0 10px;
 }
  
@@ -793,8 +707,7 @@ body > footer a:hover
   * MODERATION *
   **************/
  
-.moderation .enable-form ul li
-{
+.moderation .enable-form ul li {
     padding: 5px 10px;
 }
 
@@ -818,7 +731,7 @@ body > footer a:hover
     }
 
     #header-wrapper ul {
-        margin-left: 5%;
+        margin-left: 3%;
     }
 
     #header-wrapper > header .navbar-nav {
@@ -852,6 +765,10 @@ body > footer a:hover
         float: left;
     }
 
+    #main .dynmap {
+        width: 100%;
+    }
+    
     #main .dynmap > iframe {
         height: 650px;
     }
