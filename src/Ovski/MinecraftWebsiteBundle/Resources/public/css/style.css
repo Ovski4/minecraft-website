@@ -134,7 +134,7 @@ input[type="color"]:focus,
 
 #header-wrapper {
     margin: 0 auto;
-    background: url('../images/earth_header2.png') center -348px no-repeat;
+    background: url('../images/earth_header.jpg') center -348px no-repeat;
 }
 
 #header-wrapper > header {
@@ -328,6 +328,7 @@ input[type="color"]:focus,
 
 .contact-form input {
     min-width: 200px;
+    margin-bottom: 5px;
 }
 
 .contact-form textarea {
@@ -678,7 +679,7 @@ body > footer {
     height: 500px;
     text-align: center;
     border-top: 5px solid #2e180a;
-    background: url('../images/footer.png') bottom no-repeat;
+    background: url('../images/footer.jpg') bottom no-repeat;
 }
 
 body > footer .content {
@@ -732,7 +733,7 @@ body > footer a:hover {
 
     #header-wrapper {
         height: 440px;
-        background: url('../images/earth_header2.png') center -120px no-repeat;
+        background: url('../images/earth_header.jpg') center -120px no-repeat;
     }
 
     #header-wrapper > header > h1 {
@@ -770,8 +771,11 @@ body > footer a:hover {
     }
 
     .contact-form .fields {
-        margin-top: 25px;
         float: right;
+    }
+
+    .contact-form .fields input {
+        margin-bottom: 5px;
     }
 
     .contact-form .submit {
