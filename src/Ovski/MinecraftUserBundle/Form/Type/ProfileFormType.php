@@ -7,10 +7,6 @@ use FOS\UserBundle\Form\Type\ProfileFormType as BaseType;
 
 class ProfileFormType extends BaseType
 {
-    /*public function __construct($class) {
-        parent::__construct($class);
-    }*/
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // add your custom field
