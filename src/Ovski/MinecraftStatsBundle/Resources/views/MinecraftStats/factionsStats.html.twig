@@ -19,7 +19,7 @@
 
         <div>
             <header class="stat-list-head row">
-                <div class="col-xs-5">
+                <div class="col-xs-5 col-sm-4">
                     <i class="icon-group"></i>
                     <span class="hidden-xs">{% trans %}Faction{% endtrans %}</span>
                 </div>
@@ -30,7 +30,7 @@
                     <i class="icon-star-half-empty"></i>
                     <span class="hidden-xs">{% trans %}Score{% endtrans %}</span>
                 </div>
-                <div class="col-xs-1">
+                <div class="col-xs-1 col-sm-2">
                     <i class="icon-male"></i>
                     <span class="hidden-xs">{% trans %}Players{% endtrans %}</span>
                 </div>
@@ -42,7 +42,7 @@
             <ul class="stats-list row">
                 {% for faction in pager.currentPageResults %}
                     <li class="row">
-                            <div class="col-xs-5">
+                            <div class="col-xs-5 col-sm-4">
                                 <a href="{{ path('faction_stats', { slug: faction.slug }) }}">
                                     {{ faction }}
                                 </a>
@@ -53,7 +53,7 @@
                             <div class="col-xs-2">
                                 {{ faction.score }}
                             </div>
-                            <div class="col-xs-1">{{ faction.players|length }}</div>
+                            <div class="col-xs-1 col-sm-2">{{ faction.players|length }}</div>
                             <div class="col-xs-2">{{ faction.power }}</div>
                     </li>
                 {% endfor %}

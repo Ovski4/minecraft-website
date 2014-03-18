@@ -1,6 +1,6 @@
 Ovski\MinecraftUserBundle\Entity\User:
     properties:
-        avatar:
-            - File:
-                maxSize: 2048k
-                mimeTypes: [image/jpg, image/jpeg, image/png, image/gif]
+        #avatar:
+        #    - File:
+        #        maxSize: 2048k
+        #        mimeTypes: [image/jpg, image/jpeg, image/png, image/gif]

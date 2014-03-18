@@ -561,10 +561,6 @@ ul.stats-list {
     margin: 15px 65px;
 }
 
-.login-form label.remember-me {
-    display: inline-block;
-}
-
 .login-form .related-links {
     padding-top: 15px;
 }
@@ -577,6 +573,23 @@ ul.stats-list {
 
 .fos_user_resetting_request #username {
     width: 215px;
+}
+
+.fos_user_resetting_request input[type="submit"] {
+    margin-top: 15px;
+}
+
+/* Registration form */
+
+.login-form label,
+#fos_user_registration_form label {
+    display: block;
+    padding: 5px 0;
+    margin: 0;
+}
+
+#fos_user_registration_form select {
+    margin-bottom: 15px;
 }
 
 /* FORUM PAGES */
