@@ -30,6 +30,11 @@ ovski_forum:
     type:     annotation
     prefix:   /forum
 
+ovski_tools:
+    resource: "@OvskiToolsBundle/Controller/"
+    type:     annotation
+    prefix:   /tools
+
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

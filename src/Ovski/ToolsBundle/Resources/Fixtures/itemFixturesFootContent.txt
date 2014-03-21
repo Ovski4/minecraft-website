@@ -1,0 +1,11 @@
+        $manager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 8;
+    }
+}
