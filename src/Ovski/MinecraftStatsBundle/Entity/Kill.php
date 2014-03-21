@@ -5,8 +5,6 @@ namespace Ovski\MinecraftStatsBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-//remove `kill` name (default: kill) (for testing purpose, I guess it's a bundle bug)
-
 /**
  * Kill
  *
@@ -27,9 +25,8 @@ class Kill
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer", name="weapon_id")
+     * @ORM\ManyToOne(targetEntity="Ovski\MinecraftStatsBundle\Entity\Item")
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="weapon_id")
      */
     private $weapon;
 
@@ -65,10 +62,10 @@ class Kill
     /**
      * Set weapon
      *
-     * @param integer $weapon
+     * @param \Ovski\MinecraftStatsBundle\Entity\Item $weapon
      * @return Kill
      */
-    public function setWeapon($weapon)
+    public function setWeapon(\Ovski\MinecraftStatsBundle\Entity\Item $weapon)
     {
         $this->weapon = $weapon;
     
@@ -78,7 +75,7 @@ class Kill
     /**
      * Get weapon
      *
-     * @return integer 
+     * @return \Ovski\MinecraftStatsBundle\Entity\Item 
      */
     public function getWeapon()
     {
