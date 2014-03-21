@@ -49,6 +49,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $admin->setEnabled(true);
         $admin->setCountry("France");
         $admin->setCreatedAt(new \DateTime('now'));
+        $admin->setUpdatedAt(new \DateTime('now'));
         $this->addAdminRoles($admin);
         $userManager->updateUser($admin, false); //false to do not flush
 
@@ -59,6 +60,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $modo->setEnabled(true);
         $modo->setCountry("France");
         $modo->setCreatedAt(new \DateTime('now'));
+        $modo->setUpdatedAt(new \DateTime('now'));
         $modo->addRole("ROLE_MODERATOR");
         $userManager->updateUser($modo, false);
 
@@ -69,6 +71,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setEnabled(true);
         $user->setCountry("France");
         $user->setCreatedAt(new \DateTime('now'));
+        $user->setUpdatedAt(new \DateTime('now'));
         $userManager->updateUser($user, false);
 
         /* USERS WITH PLAYER ASSOCIATION */
@@ -80,6 +83,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $razmaboute->setEnabled(true);
         $razmaboute->setCountry("France");
         $razmaboute->setCreatedAt(new \DateTime('now'));
+        $razmaboute->setUpdatedAt(new \DateTime('now'));
         $this->addReference('razmaboute-user', $razmaboute);
         $userManager->updateUser($razmaboute, false);
 
@@ -90,6 +94,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $c4mag->setEnabled(true);
         $c4mag->setCountry("France");
         $c4mag->setCreatedAt(new \DateTime('now'));
+        $c4mag->setUpdatedAt(new \DateTime('now'));
         $this->addReference('c4mag-user', $c4mag);
         $userManager->updateUser($c4mag, false);
 
@@ -100,6 +105,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $emile_1000->setEnabled(true);
         $emile_1000->setCountry("France");
         $emile_1000->setCreatedAt(new \DateTime('now'));
+        $emile_1000->setUpdatedAt(new \DateTime('now'));
         $this->addReference('emile_1000-user', $emile_1000);
         $userManager->updateUser($emile_1000, false);
 
@@ -110,6 +116,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $xx3l3m3nt->setEnabled(true);
         $xx3l3m3nt->setCountry("France");
         $xx3l3m3nt->setCreatedAt(new \DateTime('now'));
+        $xx3l3m3nt->setUpdatedAt(new \DateTime('now'));
         $this->addReference('xx3l3m3nt-user', $xx3l3m3nt);
         $userManager->updateUser($xx3l3m3nt, false);
 
@@ -120,6 +127,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $thelordack->setEnabled(true);
         $thelordack->setCountry("France");
         $thelordack->setCreatedAt(new \DateTime('now'));
+        $thelordack->setUpdatedAt(new \DateTime('now'));
         $this->addReference('thelordack-user', $thelordack);
         $userManager->updateUser($thelordack, false);
 
@@ -130,6 +138,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $furaigon->setEnabled(true);
         $furaigon->setCountry("France");
         $furaigon->setCreatedAt(new \DateTime('now'));
+        $furaigon->setUpdatedAt(new \DateTime('now'));
         $this->addReference('furaigon-user', $furaigon);
         $userManager->updateUser($furaigon, false);
  
@@ -140,6 +149,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $arnauy->setEnabled(true);
         $arnauy->setCountry("France");
         $arnauy->setCreatedAt(new \DateTime('now'));
+        $arnauy->setUpdatedAt(new \DateTime('now'));
         $this->addReference('arnauy-user', $arnauy);
         $userManager->updateUser($arnauy, false);
 
@@ -150,6 +160,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $ovski4->setEnabled(true);
         $ovski4->setCountry("France");
         $ovski4->setCreatedAt(new \DateTime('now'));
+        $ovski4->setUpdatedAt(new \DateTime('now'));
         $this->addReference('ovski4-user', $ovski4);
         $userManager->updateUser($ovski4, false);
 
@@ -160,6 +171,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $napydawise->setEnabled(true);
         $napydawise->setCountry("France");
         $napydawise->setCreatedAt(new \DateTime('now'));
+        $napydawise->setUpdatedAt(new \DateTime('now'));
         $this->addReference('napydawise-user', $napydawise);
         $userManager->updateUser($napydawise, false);
 
@@ -170,6 +182,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $grosziznzin->setEnabled(true);
         $grosziznzin->setCountry("France");
         $grosziznzin->setCreatedAt(new \DateTime('now'));
+        $grosziznzin->setUpdatedAt(new \DateTime('now'));
         $this->addReference('grosziznzin-user', $grosziznzin);
         $userManager->updateUser($grosziznzin, false);
 
@@ -180,6 +193,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $glapine->setEnabled(true);
         $glapine->setCountry("France");
         $glapine->setCreatedAt(new \DateTime('now'));
+        $glapine->setUpdatedAt(new \DateTime('now'));
         $this->addReference('glapine-user', $glapine);
         $userManager->updateUser($glapine, false);
 
@@ -190,6 +204,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $factemius->setEnabled(true);
         $factemius->setCountry("France");
         $factemius->setCreatedAt(new \DateTime('now'));
+        $factemius->setUpdatedAt(new \DateTime('now'));
         $this->addReference('factemius-user', $factemius);
         $userManager->updateUser($factemius, false);
  
@@ -200,6 +215,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $nobarxo->setEnabled(true);
         $nobarxo->setCountry("France");
         $nobarxo->setCreatedAt(new \DateTime('now'));
+        $nobarxo->setUpdatedAt(new \DateTime('now'));
         $this->addReference('nobarxo-user', $nobarxo);
         $userManager->updateUser($nobarxo, false);
  
@@ -210,6 +226,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $transtax->setEnabled(true);
         $transtax->setCountry("France");
         $transtax->setCreatedAt(new \DateTime('now'));
+        $transtax->setUpdatedAt(new \DateTime('now'));
         $this->addReference('transtax-user', $transtax);
         $userManager->updateUser($transtax, false);
 
@@ -220,6 +237,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $zulnet->setEnabled(true);
         $zulnet->setCountry("France");
         $zulnet->setCreatedAt(new \DateTime('now'));
+        $zulnet->setUpdatedAt(new \DateTime('now'));
         $this->addReference('zulnet-user', $zulnet);
         $userManager->updateUser($zulnet, false);
 
@@ -230,6 +248,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $subelle->setEnabled(true);
         $subelle->setCountry("France");
         $subelle->setCreatedAt(new \DateTime('now'));
+        $subelle->setUpdatedAt(new \DateTime('now'));
         $this->addReference('subelle-user', $subelle);
         $userManager->updateUser($subelle, false);
 
@@ -240,6 +259,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $rekilon->setEnabled(true);
         $rekilon->setCountry("France");
         $rekilon->setCreatedAt(new \DateTime('now'));
+        $rekilon->setUpdatedAt(new \DateTime('now'));
         $this->addReference('rekilon-user', $rekilon);
         $userManager->updateUser($rekilon, false);
 
@@ -250,6 +270,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $bisvilin->setEnabled(true);
         $bisvilin->setCountry("France");
         $bisvilin->setCreatedAt(new \DateTime('now'));
+        $bisvilin->setUpdatedAt(new \DateTime('now'));
         $this->addReference('bisvilin-user', $bisvilin);
         $userManager->updateUser($bisvilin, false);
 
@@ -260,6 +281,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $pounet->setEnabled(true);
         $pounet->setCountry("France");
         $pounet->setCreatedAt(new \DateTime('now'));
+        $pounet->setUpdatedAt(new \DateTime('now'));
         $this->addReference('pounet-user', $pounet);
         $userManager->updateUser($pounet, false);
 
@@ -270,6 +292,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $batys->setEnabled(true);
         $batys->setCountry("France");
         $batys->setCreatedAt(new \DateTime('now'));
+        $batys->setUpdatedAt(new \DateTime('now'));
         $this->addReference('batys-user', $batys);
         $userManager->updateUser($batys, false);
 
@@ -280,6 +303,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $rinerk->setEnabled(true);
         $rinerk->setCountry("France");
         $rinerk->setCreatedAt(new \DateTime('now'));
+        $rinerk->setUpdatedAt(new \DateTime('now'));
         $this->addReference('rinerk-user', $rinerk);
         $userManager->updateUser($rinerk, false);
 
@@ -290,6 +314,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $opak->setEnabled(true);
         $opak->setCountry("France");
         $opak->setCreatedAt(new \DateTime('now'));
+        $opak->setUpdatedAt(new \DateTime('now'));
         $this->addReference('opak-user', $opak);
         $userManager->updateUser($opak, false);
 
@@ -300,6 +325,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $tiria->setEnabled(true);
         $tiria->setCountry("France");
         $tiria->setCreatedAt(new \DateTime('now'));
+        $tiria->setUpdatedAt(new \DateTime('now'));
         $this->addReference('tiria-user', $tiria);
         $userManager->updateUser($tiria, false);
 
@@ -310,6 +336,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $mixcal->setEnabled(true);
         $mixcal->setCountry("France");
         $mixcal->setCreatedAt(new \DateTime('now'));
+        $mixcal->setUpdatedAt(new \DateTime('now'));
         $this->addReference('mixcal-user', $mixcal);
         $userManager->updateUser($mixcal, false);
 
@@ -320,6 +347,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $rinya->setEnabled(true);
         $rinya->setCountry("France");
         $rinya->setCreatedAt(new \DateTime('now'));
+        $rinya->setUpdatedAt(new \DateTime('now'));
         $this->addReference('rinya-user', $rinya);
         $userManager->updateUser($rinya, false);
 
@@ -330,6 +358,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $neoxer->setEnabled(true);
         $neoxer->setCountry("France");
         $neoxer->setCreatedAt(new \DateTime('now'));
+        $neoxer->setUpdatedAt(new \DateTime('now'));
         $this->addReference('neoxer-user', $neoxer);
         $userManager->updateUser($neoxer, false);
 
@@ -340,6 +369,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $pocrala->setEnabled(true);
         $pocrala->setCountry("France");
         $pocrala->setCreatedAt(new \DateTime('now'));
+        $pocrala->setUpdatedAt(new \DateTime('now'));
         $this->addReference('pocrala-user', $pocrala);
         $userManager->updateUser($pocrala, false);
 
@@ -350,6 +380,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $laisore->setEnabled(true);
         $laisore->setCountry("France");
         $laisore->setCreatedAt(new \DateTime('now'));
+        $laisore->setUpdatedAt(new \DateTime('now'));
         $this->addReference('laisore-user', $laisore);
         $userManager->updateUser($laisore, false);
  
@@ -360,6 +391,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $fearhardcore->setEnabled(true);
         $fearhardcore->setCountry("France");
         $fearhardcore->setCreatedAt(new \DateTime('now'));
+        $fearhardcore->setUpdatedAt(new \DateTime('now'));
         $this->addReference('fearhardcore-user', $fearhardcore);
         $userManager->updateUser($fearhardcore, false);
 
@@ -370,6 +402,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $pedopony->setEnabled(true);
         $pedopony->setCountry("France");
         $pedopony->setCreatedAt(new \DateTime('now'));
+        $pedopony->setUpdatedAt(new \DateTime('now'));
         $this->addReference('pedopony-user', $pedopony);
         $userManager->updateUser($pedopony, false);
 
@@ -380,6 +413,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $jaylbralon->setEnabled(true);
         $jaylbralon->setCountry("France");
         $jaylbralon->setCreatedAt(new \DateTime('now'));
+        $jaylbralon->setUpdatedAt(new \DateTime('now'));
         $this->addReference('jaylbralon-user', $jaylbralon);
         $userManager->updateUser($jaylbralon, false);
 
@@ -390,6 +424,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $summumlui->setEnabled(true);
         $summumlui->setCountry("France");
         $summumlui->setCreatedAt(new \DateTime('now'));
+        $summumlui->setUpdatedAt(new \DateTime('now'));
         $this->addReference('summumlui-user', $summumlui);
         $userManager->updateUser($summumlui, false);
 
@@ -400,6 +435,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $callofburger->setEnabled(true);
         $callofburger->setCountry("France");
         $callofburger->setCreatedAt(new \DateTime('now'));
+        $callofburger->setUpdatedAt(new \DateTime('now'));
         $this->addReference('callofburger-user', $callofburger);
         $userManager->updateUser($callofburger, false);
 
@@ -410,6 +446,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $noixdepecan->setEnabled(true);
         $noixdepecan->setCountry("France");
         $noixdepecan->setCreatedAt(new \DateTime('now'));
+        $noixdepecan->setUpdatedAt(new \DateTime('now'));
         $this->addReference('noixdepecan-user', $noixdepecan);
         $userManager->updateUser($noixdepecan, false);
 
@@ -420,6 +457,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $aleks->setEnabled(true);
         $aleks->setCountry("France");
         $aleks->setCreatedAt(new \DateTime('now'));
+        $aleks->setUpdatedAt(new \DateTime('now'));
         $this->addReference('aleks-user', $aleks);
         $userManager->updateUser($aleks, false);
 

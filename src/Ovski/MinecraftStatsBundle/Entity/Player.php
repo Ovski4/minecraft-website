@@ -148,9 +148,10 @@ class Player
      */
     public function setScore()
     {
-        try {
-            $score = $this->kills / ($this->pvpDeaths + ($this->stupidDeaths*2));
-        } catch (ContextErrorException $e) {
+        $div = $this->pvpDeaths + ($this->stupidDeaths*2);
+        if ($div) {
+            $score = $this->kills / $div;
+        } else {
             $score = $this->kills;
         }
 
