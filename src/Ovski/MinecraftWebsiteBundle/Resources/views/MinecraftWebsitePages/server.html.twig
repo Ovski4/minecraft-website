@@ -1,0 +1,54 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {% trans %}Home{% endtrans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'server'} %}
+{% endblock %}
+
+{% block body %}
+
+    <p>
+        {% trans %}Vous voulez plus d'infos sur le serveur? En voici en pagaille..{% endtrans %}
+    </p>
+
+    <h3>{% trans %}Server info{% endtrans %}</h3>
+    <p class="server-info"></p>
+
+{% endblock body %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var url = 'server-info';
+            jQuery.ajax({
+                url : url
+            })
+            .success(function(data){
+                console.log(data);
+                var players = jQuery.parseJSON(data);
+                jQuery('.server-info').append('Server is online.');
+                if (players.length > 0) {
+                    jQuery('.server-info').append(' Number of players: '+players.length+'<br/>');
+                    for(i=0; i<players.length; i++) {
+                        var url = '{{ path("player_stats", {'pseudo': 'player_id'}) }}'; 
+                        url = url.replace("player_id", players[i]);
+                        jQuery('.server-info').append('<a href="'+url+'">'+players[i]+'</a>');
+                    }
+                } else {
+                    jQuery('.server-info').append(' None playing');
+                }
+            })
+            .error(function(jqXHR, desc, errorThrown){
+                 console.log(errorThrown);
+                 console.log(desc);
+                 console.log(jqXHR);
+                 jQuery('.server-info').append('Server is offline.')
+            });
+        });
+    </script>
+{% endblock javascripts %}

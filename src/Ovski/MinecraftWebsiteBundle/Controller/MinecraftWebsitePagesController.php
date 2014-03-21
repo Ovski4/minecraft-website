@@ -33,18 +33,33 @@ class MinecraftWebsitePagesController extends Controller
     public function serverInfoAction(Request $request)
     {
         if ($request->isXmlHttpRequest()) {
-            
             $Query = new MinecraftQuery();
             try
             {
-                $Query->Connect('localhost', 25565);
-                return new Response(count($Query->GetPlayers()));
+                $Query->Connect('94.23.242.93', 25565);
+                //echo $Query->GetPlayers();
+                if (!$Query->GetPlayers() || $Query->GetPlayers() == "0") {
+                    return new Response("0");
+                } else {
+                    return new Response(json_encode($Query->GetPlayers()));
+                }
             } catch(\Exception $e) {
-                throw new \Exception(sprintf("Erreur : %s", $e->getMessage()));
+                return new Response(sprintf("Erreur : %s", $e->getMessage()));
             }
         } else {
             throw new \Exception("Fuck you. You better not try it again, you'll burn your fingers");
         }
+    }
+
+    /**
+     * Server page
+     *
+     * @Route("/server", name="server")
+     * @Template()
+     */
+    public function serverAction()
+    {
+        return array();
     }
 
     /**

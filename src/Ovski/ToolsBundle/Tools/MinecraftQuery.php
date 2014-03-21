@@ -29,7 +29,7 @@ class MinecraftQuery
 
         if( $ErrNo || $this->Socket === false )
         {
-            throw new MinecraftQueryException( 'Could not create socket: ' . $ErrStr );
+            throw new \Exception( 'Could not create socket: ' . $ErrStr );
         }
 
         Stream_Set_Timeout( $this->Socket, $Timeout );
@@ -42,11 +42,11 @@ class MinecraftQuery
             $this->GetStatus( $Challenge );
         }
         // We catch this because we want to close the socket, not very elegant
-        catch( MinecraftQueryException $e )
+        catch( \Exception $e )
         {
             FClose( $this->Socket );
 
-            throw new MinecraftQueryException( $e->getMessage( ) );
+            throw new \Exception( $e->getMessage( ) );
         }
 
         FClose( $this->Socket );
@@ -68,7 +68,7 @@ class MinecraftQuery
 
         if( $Data === false )
         {
-            throw new MinecraftQueryException( 'Failed to receive challenge.' );
+            throw new \Exception( 'Failed to receive challenge.' );
         }
 
         return Pack( 'N', $Data );
@@ -80,7 +80,7 @@ class MinecraftQuery
 
         if( !$Data )
         {
-            throw new MinecraftQueryException( 'Failed to receive status.' );
+            throw new \Exception( 'Failed to receive status.' );
         }
 
         $Last = '';
@@ -91,7 +91,7 @@ class MinecraftQuery
 
         if( Count( $Data ) !== 2 )
         {
-            throw new MinecraftQueryException( 'Failed to parse server\'s response.' );
+            throw new \Exception( 'Failed to parse server\'s response.' );
         }
 
         $Players = SubStr( $Data[ 1 ], 0, -2 );
@@ -168,14 +168,14 @@ class MinecraftQuery
 
         if( $Length !== FWrite( $this->Socket, $Command, $Length ) )
         {
-            throw new MinecraftQueryException( "Failed to write on socket." );
+            throw new \Exception( "Failed to write on socket." );
         }
 
         $Data = FRead( $this->Socket, 2048 );
 
         if( $Data === false )
         {
-            throw new MinecraftQueryException( "Failed to read from socket." );
+            throw new \Exception( "Failed to read from socket." );
         }
 
         if( StrLen( $Data ) < 5 || $Data[ 0 ] != $Command[ 2 ] )

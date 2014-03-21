@@ -11,6 +11,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new FM\BbcodeBundle\FMBbcodeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Ovski\ToolsBundle\OvskiToolsBundle(),
             new Ovski\ForumBundle\OvskiForumBundle(),
             new Ovski\MinecraftStatsBundle\OvskiMinecraftStatsBundle(),
             new Ovski\MinecraftUserBundle\OvskiMinecraftUserBundle(),

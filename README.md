@@ -20,8 +20,6 @@ En vrac
   * Vérifier si les removes cascades etc sont bien mis partout
   * Vérifier les traductions
   * mettre @author et licence gpl sur les classes
-  * Voir si on peut rendre une iframe redimensionnable (comme un textarea) pour la dynmap
-  * Site responsive ?
   * http://local.mineweb/app_dev.php/forum/administration/post/2/delete -> bug
   * Le last login sur la page de profil semble faux
 
@@ -41,7 +39,6 @@ ForumBundle
 MinecraftSkinBundle -> Supprimer avatar libre?   
 -------------------
 
-  * Mettre les images (skins) générées en cache
   * Mettre la taille par défaut en paramètre
   * Mettre le chemin des images en paramètre
   * Mettre le bundle sous packagist
