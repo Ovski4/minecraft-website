@@ -1,0 +1,86 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {% trans %}Home{% endtrans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'server'} %}
+{% endblock %}
+
+{% block body %}
+
+    <h3>Informations sur le serveur</h3>
+
+    <p>Le serveur sur lequel tourne à la fois le site et le serveur minecraft est bla bla bla. Cela fait bientôt un an que j'ai commencé le développement de plugins minecraft sur mon temps libre, en parallèle avec ce site. Si vous voulez supporter mon travail et continuer à voir des améliorations bla bla bla bla, un bon moyen de m'encourager serait de faire un don! (Bitcoins et cafés autorisés)<br/>
+        <br/>Adresse bitcoin: 1267sPukECLNnUcMfsL5oyv855iS7WokLg.
+        <br/>Paypal: .........
+        <br/>IBAN: .......
+    </p>
+
+    <h3>Etat du serveur</h3>
+
+    <p class="server-info"></p>
+    
+    <h3>Les plugins</h3>
+
+    Une liste minimale de plugins est installé. En fonction des attentes de la communauté et des capacités du serveur, il est tout à fait possible que nous soyons amené à en rajouter.
+
+    <ul>
+        <li>Registration</li>
+        <li>Factions</li>
+        <li>Stats</li>
+        <li>Dynmap</li>
+    </ul>
+
+    <h4>Registration</h4>
+
+    <p>Vous ne devriez en entendre parler qu'une seule fois. Ce plugin est utilisé pour lié votre compte utilisateur et vos données du jeu.</p>
+
+    <h5>Commandes</h5>
+
+    /password
+
+    <h4>Factions</h4>
+
+    <p>Ce plugin, développé par MassiveCraft, vous permet de créer des factions et réclamer des territoires. La documentation exhaustive est disponible sur leur site officiel : http://www.massivecraft.com/factions. Pour aller vite, voici la liste des commandes:</p>
+
+    <ul>
+        <li><span>/f create</span><span>Créer une faction</span></li>
+    </ul>
+
+{% endblock body %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var url = 'server-info';
+            jQuery.ajax({
+                url : url
+            })
+            .success(function(data){
+                console.log(data);
+                var players = jQuery.parseJSON(data);
+                jQuery('.server-info').append('Server is online.');
+                if (players.length > 0) {
+                    jQuery('.server-info').append(' Number of players: '+players.length+'<br/>');
+                    for(i=0; i<players.length; i++) {
+                        var url = '{{ path("player_stats", {'pseudo': 'player_id'}) }}'; 
+                        url = url.replace("player_id", players[i]);
+                        jQuery('.server-info').append('<a href="'+url+'">'+players[i]+'</a>');
+                    }
+                } else {
+                    jQuery('.server-info').append(' None playing');
+                }
+            })
+            .error(function(jqXHR, desc, errorThrown){
+                 console.log(errorThrown);
+                 console.log(desc);
+                 console.log(jqXHR);
+                 jQuery('.server-info').append('Server is offline.')
+            });
+        });
+    </script>
+{% endblock javascripts %}

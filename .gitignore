@@ -1,7 +1,7 @@
 *~
 Todo.txt
 /web/bundles/
-/web/avatars/
+/web/skins/*
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml

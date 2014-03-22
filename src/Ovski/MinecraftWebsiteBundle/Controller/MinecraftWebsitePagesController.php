@@ -17,18 +17,18 @@ class MinecraftWebsitePagesController extends Controller
      * Homepage
      *
      * @Route("/home", name="home")
-     * @Template()
      */
-    public function homeAction()
+    public function homeAction(Request $request)
     {
-        return array();
+        $locale = $request->getLocale();
+        $templatePath = sprintf("OvskiMinecraftWebsiteBundle:%s:home.html.twig", $locale);
+        return $this->render($templatePath);
     }
 
     /**
      * Server Info Action
      *
      * @Route("/server-info", name="server_info")
-     * @Template()
      */
     public function serverInfoAction(Request $request)
     {
@@ -55,11 +55,12 @@ class MinecraftWebsitePagesController extends Controller
      * Server page
      *
      * @Route("/server", name="server")
-     * @Template()
      */
-    public function serverAction()
+    public function serverAction(Request $request)
     {
-        return array();
+        $locale = $request->getLocale();
+        $templatePath = sprintf("OvskiMinecraftWebsiteBundle:%s:server.html.twig", $locale);
+        return $this->render($templatePath);
     }
 
     /**
@@ -70,7 +71,7 @@ class MinecraftWebsitePagesController extends Controller
      */
     public function mapAction()
     {
-        return array();
+        return $this->render("OvskiMinecraftWebsiteBundle:mixed:map.html.twig");
     }
 
     /**
@@ -83,7 +84,10 @@ class MinecraftWebsitePagesController extends Controller
     {
         $form = $this->createMailForm();
 
-        return array('form' => $form->createView());
+        return $this->render(
+            "OvskiMinecraftWebsiteBundle:mixed:contact.html.twig",
+            array('form' => $form->createView())
+        );
     }
 
     /**

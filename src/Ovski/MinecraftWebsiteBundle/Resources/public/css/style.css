@@ -59,6 +59,10 @@ h2 {
     margin-bottom: 20px;
 }
 
+#main p {
+    text-align: justify;
+}
+
 .row {
     margin: 0;
 }
@@ -601,6 +605,10 @@ ul.stats-list {
 /* FORUM PAGES */
 
 /* Forum page */
+
+.forum ul {
+    padding: 0;
+}
 
 .forum ul li {
     border-top: 1px dashed #382819;

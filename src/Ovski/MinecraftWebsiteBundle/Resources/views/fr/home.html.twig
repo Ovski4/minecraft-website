@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}
+    {% trans %}Home{% endtrans %}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    {% include "OvskiMinecraftWebsiteBundle::menu.html.twig" with {active: 'home'} %}
+{% endblock %}
+
+{% block body %}
+
+    <h2>Bienvenue sur clash of factions!</h2>
+
+    <p>
+        La terre vous appartient! Rejoignez le continent et créer votre propre histoire sur la planète! Attention: guerres et pillage, alliances et trahisons.. tous les coups sont permis! Protéger vous bien et combattez sans relâche pour espérer devenir la meilleure faction.
+    </p>
+
+    <p>
+        Ce site est actuellement en plein développement. Pendant l'accès à la bêta, vous êtes invité à remonter tous les bugs et problèmes rencontrés, à la fois sur le site et sur le serveur. N'hésitez pas non plus à tester ce site sur vos smartphones! Vous pouvez nous écrire par <a href="#">mail</a> ou écrire sur le sujet dédiée sur le forum.<br/>Une suggestion? Ecrivez-nous également ou bien proposez la sur cette <a href="#">catégorie</a>
+    </p>
+
+    <h3>Let's play!</h3>
+
+    <p>
+        Pour commencer à jouer, vous avez besoin d'un compte utilisateur sur ce site. Grâce à ceci, vous aurez des statistiques complètes sur les joueurs et les factions, des informations concernant les relations entre faction et bien plus encore. Analyser vos ennemis, et choisissez bien vos alliés..
+    </p>
+    <p>
+        Une fois inscrit, naviguez sur la page de votre profil. Vous trouverez une clé en bas de page à utiliser sur le serveur minecraft pour vous authentifier. Vous n'en avez besoin que d'une seule fois! Rejoignez le serveur à l'adresse ovski.net. Il vous suffira de taper la commande suivante : /password cle_du_serveur et le tour est joué!
+    </p>
+    <p>
+        Pour plus d'information, rendez-vous sur la page dédié au <a href="#">serveur</a>
+    </p>
+
+{% endblock body %}
