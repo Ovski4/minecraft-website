@@ -91,6 +91,7 @@ class User extends BaseUser
         parent::__construct();
         $this->numPosts = 0;
         $this->createdAt = new \DateTime('now');
+        $this->updatedAt = new \DateTime('now');
     }
 
     /**

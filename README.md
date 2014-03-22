@@ -22,6 +22,7 @@ En vrac
   * mettre @author et licence gpl sur les classes
   * http://local.mineweb/app_dev.php/forum/administration/post/2/delete -> bug
   * Le last login sur la page de profil semble faux
+  * HasLifeCycleCallbacks sur updated at de user
 
 A penser
 --------
@@ -36,7 +37,7 @@ ForumBundle
   * Catch exception si titre deja créer -> http://symfony.com/doc/current/reference/constraints/UniqueEntity.html
   * Systeme anti-flood ?
 
-MinecraftSkinBundle -> Supprimer avatar libre?   
+MinecraftSkinBundle
 -------------------
 
   * Mettre la taille par défaut en paramètre

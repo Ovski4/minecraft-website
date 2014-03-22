@@ -15,7 +15,7 @@ class ItemFixturesGenerator
      * Generate a file with fixtures for the OvskiMinecraftStatsBundle\Item entity
      * 
      * @param type $filePath
-     * @return response
+     * @return string
      */
     public static function generateFile($filePath)
     {
@@ -70,17 +70,33 @@ class ItemFixturesGenerator
             return implode("", $pieces);
         }
     }
-    
+
+    /**
+     * Get the id of an item
+     * 
+     * @param string $itemText
+     * @return string
+     */
     private static function getItemId($itemText)
     {
         return strtolower($itemText);
     }
 
+    /**
+     * Get the head content for the item fixtures file
+     * 
+     * @return string
+     */
     private static function getHeadContent()
     {
         return file_get_contents(__DIR__.'/../Resources/Fixtures/itemFixturesHeadContent.txt');
     }
 
+    /**
+     * Get the foot content for the item fixtures file
+     * 
+     * @return string
+     */
     private static function getFootContent()
     {
         return file_get_contents(__DIR__.'/../Resources/Fixtures/itemFixturesFootContent.txt');
