@@ -11,27 +11,70 @@
 
 {% block body %}
 
-    <p>
-        {% trans %}Info on the server...{% endtrans %}
-    </p>
+    <div class="server">
+        <h3>Serveur status</h3>
 
-    <h3>{% trans %}Server info{% endtrans %}</h3>
-    <p class="server-info"></p>
+        <p class="server-info"></p>
 
+        <h3>About</h3>
+
+        <p>It has been a year since I started develop this project on my free time. If you want to show support and keep enjoying improvements, a nice way to do it would be to make a donation! (coffees and bitcoins allowed)
+            <br/><br/><strong>Bitcoin address</strong>: 1267sPukECLNnUcMfsL5oyv855iS7WokLg.
+        </p>
+
+        <h3>Plugins</h3>
+
+        
+        Un minimal set of plugin is installed: Registration, Faction, Stats, Dynmap. Dependind of players requests, it might change in the future.
+
+        <h4>Registration</h4>
+        <div class="plugin">
+            <p> This plugin is used once to bind you user account with your player data.</p>
+            <h5>Commands</h5>
+            <span class="command">/password server_key</span>
+        </div>
+
+        <h4>Factions</h4>
+        <div class="plugin">
+            <p>This plugin, developped by MassiveCraft, is used to create factions and claim territories where you buildins stay safe, as long as you have enough power to keep it. You wil find the complete documentation on their website : <a href="http://www.massivecraft.com/factions">http://www.massivecraft.com/factions</a>. Here is the least to start playing</p>
+            <h5>Commands</h5>
+            <span class="command">/f create &lt;nom&gt;</span>Create a faction<br/>
+            <span class="command">/f join &lt;faction&gt;</span>Join a faction<br/>
+            <span class="command">/f sethome</span>Indicate faction spawn<br/>
+            <span class="command">/f inv,invite &lt;player&gt; [yes/no]</span>Invite a player<br/>
+            <span class="command">/f kick &lt;player&gt; </span>Kick a player from the faction<br/>
+            <span class="command">/f claim</span>Claim land<br/>
+            <span class="command">/f unclaim</span>Unclaim<br/>
+            <span class="command">/f disband</span>Disband the faction<br/>
+            <span class="command">/f home</span>Téléporte to spawn<br/>
+            <span class="command">/f ally &lt;faction&gt;</span>Make alliance with a faction<br/>
+            <span class="command">/f neutral &lt;faction&gt;</span>Make a faction neutral<br/>
+            <span class="command">/f ennemy &lt;faction&gt;</span>Make a faction enemy<br/>
+            <span class="command">/f truce &lt;faction&gt;</span>Do the truce with a faction<br/>
+            <span class="command">/f leave</span>Leave his faction<br/>
+        </div>
+
+        <h4>Stats</h4>
+        <div class="plugin">
+            <p>This plugin allows you to get real time statistics on players.</p>
+            <h5>Commands</h5>
+            <span class="command">/stats &lt;joueur&gt;</span>Get a player statistics<br/>
+        </div>
+    </div>
 {% endblock body %}
     
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            var url = 'server-info';
+            var url = '{{ path('server_info') }}';
             jQuery.ajax({
                 url : url
             })
             .success(function(data){
                 console.log(data);
                 var players = jQuery.parseJSON(data);
-                jQuery('.server-info').append('Server is online.');
+                jQuery('.server-info').append('The server is online.');
                 if (players.length > 0) {
                     jQuery('.server-info').append(' Number of players: '+players.length+'<br/>');
                     for(i=0; i<players.length; i++) {
@@ -40,14 +83,14 @@
                         jQuery('.server-info').append('<a href="'+url+'">'+players[i]+'</a>');
                     }
                 } else {
-                    jQuery('.server-info').append(' None playing');
+                    jQuery('.server-info').append(' No player connected');
                 }
             })
             .error(function(jqXHR, desc, errorThrown){
                  console.log(errorThrown);
                  console.log(desc);
                  console.log(jqXHR);
-                 jQuery('.server-info').append('Server is offline.')
+                 jQuery('.server-info').append('The server is offline.');
             });
         });
     </script>

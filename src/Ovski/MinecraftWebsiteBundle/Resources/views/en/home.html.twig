@@ -11,8 +11,28 @@
 
 {% block body %}
 
-    <p>
-        Hello, this is the home page of my website.
-    </p>
+    <h2>Welcome to clash of factions!</h2>
 
+    <div class="home">
+      <img class="weapons" src="{{ asset("bundles/ovskiminecraftwebsite/images/weapons.png") }}"/>
+      <p>
+          Begin your journey on our minecraft server dedicated to faction wars! Be careful: pillage, alliances and betrayals .. everything is allowed! Protect yourself well and fight tirelessly to become the best faction.
+      </p>
+      <p>
+          This website is currently under development. During the beta, do not hesitate to tell us about every bugs you encounter, both on the website and on the minecraft server. You can contact with our <a href="{{ path('contact') }}">contact form</a>. A suggestion? Email us too!
+      </p>
+
+      <h3>Let's play!</h3>
+
+      <img class="key" src="{{ asset("bundles/ovskiminecraftwebsite/images/key.jpg") }}"/>
+      <p>
+          To start playing, you need a user account on this website. With it, you will have comprehensive statistics on players and factions, information on relationships between factions and even more. Analyze your enemies, and choose well your allies ..
+      </p>
+      <p>
+          Once registered, visit the page of your profile. You will find a key at the bottom of the page to use on the minecraft server for authentication. You will need it only once! Join the server at <strong>ovski.net</strong>. You just need to type the following command: / password server_key and voila!
+      </p>
+      <p>
+          For more information, please visit the dedicated <a href="{{ path('server') }}">server page</a>.
+      </p>
+    </div>
 {% endblock body %}

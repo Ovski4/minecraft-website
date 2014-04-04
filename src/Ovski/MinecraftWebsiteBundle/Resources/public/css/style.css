@@ -134,7 +134,7 @@ input[type="color"]:focus,
 
 @font-face {
   font-family: title;
-  src: url('../fonts/Merula Regular.otf');
+  src: url('../fonts/merula-regular.otf');
 }
 
  /**********
@@ -299,11 +299,49 @@ input[type="color"]:focus,
     font-size: 14px;
 }
 
-#main h2
-{
+#main h2 {
     color: #382819;
     margin: 20px 0;
     text-align: center;
+}
+
+/* Home page */
+#main .home img.weapons {
+    float: right;
+    padding: 0 0 20px 20px;
+    width: 220px;
+}
+
+#main .home img.key {
+    float: left;
+    padding: 0 20px 20px 0;
+    width: 120px;
+}
+
+/* Server page */
+#main .server h3 {
+    text-decoration: underline;
+}
+
+#main .server h4 {
+    font-weight: bold;
+}
+
+#main .server h5 {
+    text-decoration: underline;
+}
+
+#main .server .plugin {
+    margin-left: 30px;
+}
+
+
+#main .server .plugin .command {
+    display: inline-block;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    margin: 2px 5px 2px 0;
+    padding: 2px 5px;
 }
 
  /* Map page */

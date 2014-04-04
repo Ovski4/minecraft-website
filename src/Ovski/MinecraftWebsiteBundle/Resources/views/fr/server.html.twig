@@ -11,75 +11,85 @@
 
 {% block body %}
 
-    <h3>Informations sur le serveur</h3>
+    <div class="server">
+        <h3>Etat du serveur</h3>
 
-    <p>Le serveur sur lequel tourne à la fois le site et le serveur minecraft est bla bla bla. Cela fait bientôt un an que j'ai commencé le développement de plugins minecraft sur mon temps libre, en parallèle avec ce site. Si vous voulez supporter mon travail et continuer à voir des améliorations bla bla bla bla, un bon moyen de m'encourager serait de faire un don! (Bitcoins et cafés autorisés)<br/>
-        <br/>Adresse bitcoin: 1267sPukECLNnUcMfsL5oyv855iS7WokLg.
-        <br/>Paypal: .........
-        <br/>IBAN: .......
-    </p>
+        <p class="server-info"></p>
 
-    <h3>Etat du serveur</h3>
+        <h3>A propos</h3>
 
-    <p class="server-info"></p>
-    
-    <h3>Les plugins</h3>
+        <p>Cela fait plus d'un an que j'ai commencé le développement de plugins minecraft sur mon temps libre, en parallèle avec ce site. Si vous voulez supporter mon travail et continuer à voir des améliorations, un bon moyen de m'encourager serait de faire un don! (Bitcoins et cafés autorisés)
+            <br/><br/><strong>Adresse bitcoin</strong>: 1267sPukECLNnUcMfsL5oyv855iS7WokLg.
+        </p>
 
-    Une liste minimale de plugins est installé. En fonction des attentes de la communauté et des capacités du serveur, il est tout à fait possible que nous soyons amené à en rajouter.
+        <h3>Les plugins</h3>
 
-    <ul>
-        <li>Registration</li>
-        <li>Factions</li>
-        <li>Stats</li>
-        <li>Dynmap</li>
-    </ul>
+        Une liste minimale de plugins est installée: Registration, Faction, Stats, Dynmap. En fonction des attentes de la communauté et des capacités du serveur, il est tout à fait possible que nous soyons amené à en enlever/rajouter.
 
-    <h4>Registration</h4>
+        <h4>Registration</h4>
+        <div class="plugin">
+            <p>Vous ne devriez en entendre parler qu'une seule fois. Ce plugin est utilisé pour lié votre compte utilisateur et vos données du jeu.</p>
+            <h5>Commandes</h5>
+            <span class="command">/password server_key</span>
+        </div>
 
-    <p>Vous ne devriez en entendre parler qu'une seule fois. Ce plugin est utilisé pour lié votre compte utilisateur et vos données du jeu.</p>
+        <h4>Factions</h4>
+        <div class="plugin">
+            <p>Ce plugin, développé par MassiveCraft, vous permet de créer des factions et réclamer des territoires pour protéger vos constructions tant que vous avec suffisamment de pouvoir. La documentation exhaustive est disponible sur leur site officiel : <a href="http://www.massivecraft.com/factions">http://www.massivecraft.com/factions</a>. Voici le mimimum pour débuter</p>
+            <h5>Commandes</h5>
+            <span class="command">/f create &lt;nom&gt;</span>Créer une faction<br/>
+            <span class="command">/f join &lt;faction&gt;</span>Rejoindre une faction<br/>
+            <span class="command">/f sethome</span>Indiquer le point de spawn de la faction<br/>
+            <span class="command">/f inv,invite &lt;joueur&gt; [yes/no]</span>Inviter un joueur<br/>
+            <span class="command">/f kick &lt;joueur&gt; </span>Kicker un joueur de la faction<br/>
+            <span class="command">/f claim</span>Prendre du terrain (un chunck de 16*16 blocs)<br/>
+            <span class="command">/f unclaim</span>Enlever du terrain<br/>
+            <span class="command">/f disband</span>Dissoudre la faction<br/>
+            <span class="command">/f home</span>Se téléporter au spawn<br/>
+            <span class="command">/f ally &lt;faction&gt;</span>Faire alliance avec une faction<br/>
+            <span class="command">/f neutral &lt;faction&gt;</span>Se mettre en position neutre par rapport à une faction<br/>
+            <span class="command">/f ennemy &lt;faction&gt;</span>Faire ennemi avec une faction<br/>
+            <span class="command">/f truce &lt;faction&gt;</span>Faire une trêve avec une faction<br/>
+            <span class="command">/f leave</span>Quitter sa faction<br/>
+        </div>
 
-    <h5>Commandes</h5>
-
-    /password
-
-    <h4>Factions</h4>
-
-    <p>Ce plugin, développé par MassiveCraft, vous permet de créer des factions et réclamer des territoires. La documentation exhaustive est disponible sur leur site officiel : http://www.massivecraft.com/factions. Pour aller vite, voici la liste des commandes:</p>
-
-    <ul>
-        <li><span>/f create</span><span>Créer une faction</span></li>
-    </ul>
-
+        <h4>Stats</h4>
+        <div class="plugin">
+            <p>Ce plugin vous permet d'obtenir des statistiques sur les joueurs en temps réel.</p>
+            <h5>Commandes</h5>
+            <span class="command">/stats &lt;joueur&gt;</span>Obtenir les statistiques du joueur.<br/>
+        </div>
+    </div>
 {% endblock body %}
     
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            var url = 'server-info';
+            var url = '{{ path('server_info') }}';
             jQuery.ajax({
                 url : url
             })
             .success(function(data){
                 console.log(data);
                 var players = jQuery.parseJSON(data);
-                jQuery('.server-info').append('Server is online.');
+                jQuery('.server-info').append('Le serveur est en ligne.');
                 if (players.length > 0) {
-                    jQuery('.server-info').append(' Number of players: '+players.length+'<br/>');
+                    jQuery('.server-info').append(' Nombre de joueurs: '+players.length+'<br/>');
                     for(i=0; i<players.length; i++) {
                         var url = '{{ path("player_stats", {'pseudo': 'player_id'}) }}'; 
                         url = url.replace("player_id", players[i]);
                         jQuery('.server-info').append('<a href="'+url+'">'+players[i]+'</a>');
                     }
                 } else {
-                    jQuery('.server-info').append(' None playing');
+                    jQuery('.server-info').append(' Il n\'y a aucun joueur connecté');
                 }
             })
             .error(function(jqXHR, desc, errorThrown){
                  console.log(errorThrown);
                  console.log(desc);
                  console.log(jqXHR);
-                 jQuery('.server-info').append('Server is offline.')
+                 jQuery('.server-info').append('Le serveur est en hors ligne.');
             });
         });
     </script>
