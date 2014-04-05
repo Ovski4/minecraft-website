@@ -23,11 +23,8 @@
   ***********/
 
 body, html {
+    overflow: hidden;
     font-family: title;
-}
-
-body {
-    overflow-x: hidden;
 }
 
 a { color: rgb(69, 168, 30); }
