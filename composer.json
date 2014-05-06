@@ -27,7 +27,8 @@
         "jms/i18n-routing-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "dev-master",
         "sgrodzicki/fm-bbcode-bundle": "dev-master",
-        "liip/imagine-bundle": "dev-master"
+        "lexik/form-filter-bundle": "v2.0.0"
+
     },
     "scripts": {
         "post-install-cmd": [

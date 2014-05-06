@@ -2,6 +2,8 @@
 
 namespace Ovski\MinecraftStatsBundle\Controller;
 
+use Ovski\MinecraftStatsBundle\Form\PlayersStatsFilterType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -19,11 +21,21 @@ class MinecraftStatsController extends Controller
      * @Route("/players/{page}", name="players_stats_paginated")
      * @Template()
      */
-    public function playersStatsAction($page)
+    public function playersStatsAction(Request $request, $page)
     {
         $em = $this->getDoctrine()->getManager();
-        $players = $em->getRepository("OvskiMinecraftStatsBundle:Player")->getAll();
 
+        $form = $this->get('form.factory')->create(new PlayersStatsFilterType());
+        $form->bind($request);
+        $qb = $em
+            ->getRepository('OvskiMinecraftStatsBundle:Player')
+            ->createQueryBuilder('e')
+            ->addOrderBy('e.score', 'DESC');
+        ;
+        $this->get('lexik_form_filter.query_builder_updater')->addFilterConditions($form, $qb);
+
+        $parameters = $request->query->all();
+        $players = $qb->getQuery()->getResult();
         $pager = new Pagerfanta(new ArrayAdapter($players));
         $pager->setMaxPerPage($this->container->getParameter('max_players_per_page'));
 
@@ -38,7 +50,9 @@ class MinecraftStatsController extends Controller
         }
 
         return array(
-            "pager"       => $pager,
+            "pager" => $pager,
+            "form"  => $form->createView(),
+            "parameters" => $parameters
         );
     }
 

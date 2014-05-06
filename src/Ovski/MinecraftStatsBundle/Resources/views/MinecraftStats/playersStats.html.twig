@@ -13,8 +13,13 @@
     <div class="players-stats">
         <h2><i class="icon-bar-chart"></i> {% trans %}Players stats{% endtrans %}</h2>
 
+        <form class="filter" method="get" action="{{ path("players_stats") }}">
+            {{ form_rest(form) }}
+            <input type="submit" value="filter" />
+        </form>
+
         {% if pager.haveToPaginate %}
-            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated'}) }}
+            {{ pagerfanta(pager, 'twitter_bootstrap', {'routeName': 'players_stats_paginated', 'routeParams' : parameters}) }}
         {% endif %}
 
         <div class="content">
@@ -49,7 +54,7 @@
                                 <a href="{{ path('player_stats', { pseudo: player.pseudo }) }}">{{ player.pseudo }}</a>
                             </div>
                             <div class="col-xs-2 col-sm-1">
-                                {{ loop.index + (pager.currentPage-1)*pager.maxPerPage }}
+                                / todo
                             </div>
                             <div class="col-xs-2 col-sm-2">
                                 {{ player.score }}

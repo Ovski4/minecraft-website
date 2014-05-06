@@ -134,6 +134,7 @@ class Faction
         } else {
             $enemiesScore = $score*(count($this->getEnemyFactions())*10/100);
         }
+
         if (count($this->getAllyFactions()) == 0) {
             $alliesScore = 0;
         } else {

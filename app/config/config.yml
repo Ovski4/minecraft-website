@@ -91,7 +91,7 @@ fm_bbcode:
             filters: [ default ]
             whitelist: [ b, i ]
 
-#to put in the bundle config after
+# to put in the bundle config after
 ovski_forum:
     locales: [fr, en]
     max_per_pages:
@@ -99,13 +99,8 @@ ovski_forum:
         topics: 4
         posts: 10
 
-liip_imagine:
-    filter_sets:
-        avatar_small_thumb:
-            quality: 70
-            filters:
-                thumbnail: { size: [30, 30], mode: inset }
-        avatar_medium_thumb:
-            quality: 70
-            filters:
-                thumbnail: { size: [150, 150], mode: inset }
+# lexik configuration
+twig:
+    form:
+        resources:
+            - LexikFormFilterBundle:Form:form_div_layout.html.twig

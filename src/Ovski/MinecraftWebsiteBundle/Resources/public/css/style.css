@@ -23,7 +23,7 @@
   ***********/
 
 body, html {
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: title;
 }
 
@@ -475,10 +475,6 @@ ul.stats-list {
     font-style: italic;
 }
 
-.stats-list > li > div {
-    
-}
-
 .stats-list span a,
 .stats-list div a {
     display: inline-block;
@@ -487,6 +483,25 @@ ul.stats-list {
     o-text-overflow: ellipsis;
     text-overflow: ellipsis;
     overflow: hidden;
+}
+
+/* Form filter */
+
+form.filter label {
+    float: left;
+    min-width: 70px;
+}
+
+form.filter > div {
+    margin: 5px 0;
+}
+
+form.filter .filter-number-range input {
+    margin-right: 5px;
+}
+
+form.filter input[type="submit"] {
+    margin: 10px 0 20px 0;
 }
 
 /* Factions stats page */
